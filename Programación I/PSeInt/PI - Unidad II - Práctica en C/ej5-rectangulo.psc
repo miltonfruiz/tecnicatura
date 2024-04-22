@@ -1,13 +1,14 @@
-Algoritmo rectangulo
-	Definir lado1, lado2, superficie, perimetro, diagonal como real
-	Escribir "Ingrese primer lado"
+Algoritmo triangulo
+	Definir lado1, lado2 Como Entero
+	Definir hipotenusa, perimetro, superficie Como Real
+	Escribir 'Ingrese primer lado'
 	Leer lado1
-	Escribir "Ingrese segundo lado"
+	Escribir 'Ingrese segundo lado'
 	Leer lado2
-	superficie = lado1 * lado2
-	perimetro = (lado1 + lado2) * 2
-	diagonal = raiz(lado1^2 + lado2^2)
-	Escribir "La superficie es ",superficie
-	Escribir "El perimetro es ",perimetro
-	Escribir "La diagonal es ",diagonal
+	hipotenusa <- raiz(lado1^2+lado2^2)
+	perimetro <- lado1+lado2+hipotenusa
+	superficie <- (lado1*lado2)/2
+	Escribir 'La hipotenusa es ', hipotenusa
+	Escribir 'El perímetro es ', perimetro
+	Escribir 'La superficie es ', superficie
 FinAlgoritmo
