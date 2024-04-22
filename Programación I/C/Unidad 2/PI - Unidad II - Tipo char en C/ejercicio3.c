@@ -5,6 +5,7 @@
 
 void main(){
     char caracterMayuscula, caracterMinuscula;
+    caracterMinuscula = 0;
     
     printf("Ingrese un caracter en mayuscula: ");
     scanf(" %c", &caracterMayuscula);
