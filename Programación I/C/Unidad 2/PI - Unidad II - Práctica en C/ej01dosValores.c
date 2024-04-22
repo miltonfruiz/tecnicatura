@@ -7,9 +7,9 @@ void main() {
     int val1, val2, suma;
     suma = 0;
 
-    printf("Ingrese el primer valor: \n");
+    printf("Ingrese el primer valor: ");
     scanf("%i", &val1);
-    printf("Ingrese el segundo valor: \n");
+    printf("Ingrese el segundo valor: ");
     scanf("%i", &val2);
 
     suma = val1 + val2;
