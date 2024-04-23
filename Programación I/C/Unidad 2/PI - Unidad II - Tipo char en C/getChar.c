@@ -7,7 +7,7 @@ void main(){
     printf("Ingrese un caracter: ");
     caracter = getchar();
     
-    printf("El caracter ingresado es: %c\n", caracter);
+    printf("El caracter ingresado es: %c, valor ASCII %d\n", caracter, caracter);
 
     system("pause");
 }
