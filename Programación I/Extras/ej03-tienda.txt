@@ -1,0 +1,9 @@
+Una tienda de ropa desea llevar un registro de las ventas diarias. Para ello, el programa debe permitir ingresar los datos de cada venta a medida que se realizan. Por cada venta, se debe ingresar:
+El código de la prenda (validar que sea un código válido de 4 caracteres)
+El precio de la prenda en pesos
+La talla de la prenda (S, M, L, XL)
+La cantidad de prendas vendidas
+Luego, se calculará el monto final de la venta aplicando los siguientes recargos:
+Si la talla es XL, se aplica un 5% de recargo sobre el precio de la prenda.
+Si se compran más de 3 prendas del mismo código, se aplica un 10% de descuento sobre el monto total.
+Al finalizar el día, el programa mostrará un resumen con la cantidad total de ventas realizadas y el monto total recaudado.
