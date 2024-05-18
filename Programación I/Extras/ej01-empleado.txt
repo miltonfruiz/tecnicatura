@@ -1,0 +1,24 @@
+Un empleado de un comercio debe registrar las ventas del día. Para ello, realizar un programa que permita ingresar los datos de las ventas mientras se realizan.
+Por cada venta deberá ingresar:
+1. El DNI del cliente (validar que la cadena posea longitud mayor a 7)
+2. El monto de la venta en pesos sin IVA.
+3. El medio de pago (mostrar la siguiente lista y validar el ingreso)
+	1 - Efectivo
+	2 - Débito
+	3 - Crédito (1 pago)
+	4. Si el medio de pago seleccionado fué Crédito se debe mostrar una lista con las tarjetas aceptadas por el comercio.
+	5. Es cliente frecuente SI/NO (Muestra al empleado una tarjeta de “la casa” que lo identifica como cliente frecuente y el empleado ingresa la respuesta correspondiente).
+Luego se calculará el monto final dependiendo de los datos ingresados. Al monto de la venta se
+le efectúan los siguientes recargos/descuentos, a saber:
+● Si el medio de pago es efectivo: Se realiza un 15% de descuento.
+● Si el medio de pago es Débito: Se realiza un 10% de descuento.
+● Si el medio de pago es Crédito: No se realiza descuento.
+● Se adiciona el IVA al monto de la venta.
+Al finalizar el cálculo del monto total se muestra al empleado un resumen como sigue:
+DNI: 38.456.123
+Medio de pago: Crédito
+Total: $4784
+Llegada la hora de cierre del comercio, el empleado indica que “no desea ingresar más ventas”
+(finaliza el bucle). y el programa muestra un resumen como sigue:
+Cantidad de ventas: 10
+Monto total de las ventas: $10865

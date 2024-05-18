@@ -1,0 +1,9 @@
+Una librería desea llevar un registro de las ventas diarias. Para ello, el programa debe permitir ingresar los datos de cada venta a medida que se realizan. Por cada venta, se debe ingresar:
+El nombre del cliente
+El monto de la compra en pesos
+La cantidad de libros comprados
+Si el cliente es socio de la librería (S/N)
+Luego, se calculará el monto final de la venta aplicando los siguientes descuentos:
+Si el cliente es socio, se aplica un 10% de descuento sobre el monto total.
+Si se compran más de 5 libros, se aplica un 5% de descuento adicional.
+Al finalizar el día, el programa mostrará un resumen con la cantidad total de ventas realizadas y el monto total recaudado.
