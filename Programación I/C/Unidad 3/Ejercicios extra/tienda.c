@@ -52,7 +52,6 @@ void main(){
             totalVentas = totalVentas + 1;
             totalRecaudado = totalRecaudado + precioVenta;
         }
-        
     } while (opc1 != 'n');
     printf("\nTotal ventas: %d\n", totalVentas);
     printf("Total recaudado: $%.2f\n\n", totalRecaudado);
