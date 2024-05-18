@@ -7,20 +7,20 @@ Si el cliente es socio de la librería (S/N)
 Luego, se calculará el monto final de la venta aplicando los siguientes descuentos:
 Si el cliente es socio, se aplica un 10% de descuento sobre el monto total.
 Si se compran más de 5 libros, se aplica un 5% de descuento adicional.
-Al finalizar el día, el programa mostrará un resumen con la cantidad total de ventas realizadas y el
- monto total recaudado. */
+Al finalizar el día, el programa mostrará un resumen con la cantidad total de ventas realizadas y el monto
+ total recaudado. */
 
- #include <stdio.h>
- #include <stdlib.h>
- #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
- void main(){
+void main(){
     char opc1, nombre[50], socio;
     float monto, montoVenta, totalRecaudado;
-    int libros, totalVenta;
+    int libros, totalVentas;
     montoVenta = 0;
     totalRecaudado = 0;
-    totalVenta = 0;
+    totalVentas = 0;
 
     do
     {
@@ -46,11 +46,11 @@ Al finalizar el día, el programa mostrará un resumen con la cantidad total de 
             {
                 montoVenta = monto * 0.90;
             }
-            totalVenta = totalVenta + 1;
+            totalVentas = totalVentas + 1;
             totalRecaudado = totalRecaudado + montoVenta;
         }
     } while (opc1 !='n');
-    printf("\nTotal ventas: %d\n", totalVenta);
+    printf("\nTotal ventas: %d\n", totalVentas);
     printf("Total recaudado: $%.2f\n\n", totalRecaudado);
 
     system("pause");

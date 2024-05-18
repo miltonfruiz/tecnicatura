@@ -41,7 +41,7 @@ void main(){
             {
                 precioVenta = precio +(precio*0.05);
             }
-            printf("Ingres cantidad prendas: ");
+            printf("Ingrese cantidad prendas: ");
             scanf("%d", &prendas);
             if (prendas>3)
             {
