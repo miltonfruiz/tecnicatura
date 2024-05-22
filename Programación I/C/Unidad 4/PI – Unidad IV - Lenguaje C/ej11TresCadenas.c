@@ -13,11 +13,11 @@ void main(){
     scanf("%s", &cadenaUno);
     printf("Longitud: %d\n",strlen(cadenaUno));
 
-    printf("Ingrese la primer cadena: ");
+    printf("Ingrese la segunda cadena: ");
     scanf("%s", &cadenaDos);
     printf("Longitud: %d\n",strlen(cadenaDos));
 
-    printf("Ingrese la primer cadena: ");
+    printf("Ingrese la tercer cadena: ");
     scanf("%s", &cadenaTres);
     printf("Longitud: %d\n",strlen(cadenaTres));
 

@@ -8,17 +8,29 @@ de la forma "nombre apellido" para cada uno, y mostrar por consola. */
 void main(){
     char nombre[10][100];
     char apellido[10][100];
+    char concatenar[10][100];
 
     for (int i = 0; i < 10; i++)
     {
         printf("Ingrese nombre: ");
         fgets(nombre[i], sizeof(nombre[i]), stdin);
+        nombre[i][strcspn(nombre[i], "\n")] = '\0';
     }
     for (int j = 0; j < 10; j++)
     {
-        printf("Ingrese nombre: ");
+        printf("Ingrese apellido: ");
         fgets(apellido[j], sizeof(apellido[j]), stdin);
+        apellido[j][strcspn(apellido[j], "\n")] = '\0';
     }
+
+    for (int k = 0; k < 10; k++)
+    {
+        strcat(concatenar[k], nombre[k]);
+        strcat(concatenar[k], " ");
+        strcat(concatenar[k], apellido[k]);
+        printf("%s\n", &concatenar[k]);
+    }
+    
 
     system("pause");
 }
