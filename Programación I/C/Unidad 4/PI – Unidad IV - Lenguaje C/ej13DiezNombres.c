@@ -14,13 +14,11 @@ void main(){
     {
         printf("Ingrese nombre: ");
         fgets(nombre[i], sizeof(nombre[i]), stdin);
-        nombre[i][strcspn(nombre[i], "\n")] = '\0';
     }
     for (int j = 0; j < 10; j++)
     {
         printf("Ingrese apellido: ");
         fgets(apellido[j], sizeof(apellido[j]), stdin);
-        apellido[j][strcspn(apellido[j], "\n")] = '\0';
     }
 
     for (int k = 0; k < 10; k++)
