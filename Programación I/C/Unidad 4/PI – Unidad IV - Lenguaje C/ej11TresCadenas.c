@@ -5,21 +5,20 @@
 #include <string.h>
 
 void main(){
-    char cadenaUno[50];
-    char cadenaDos[50];
-    char cadenaTres[50];
+    char cadenas[3][50];
 
-    printf("Ingrese la primer cadena: ");
-    scanf("%s", &cadenaUno);
-    printf("Longitud: %d\n",strlen(cadenaUno));
+    for (int i = 0; i < 3; i++)
+    {
+        printf("Ingrese cadena %d: ",i+1);
+        fgets(cadenas[i], sizeof(cadenas[i]), stdin);
+        cadenas[i][strcspn(cadenas[i], "\n")] = '\0';
 
-    printf("Ingrese la segunda cadena: ");
-    scanf("%s", &cadenaDos);
-    printf("Longitud: %d\n",strlen(cadenaDos));
+    }
 
-    printf("Ingrese la tercer cadena: ");
-    scanf("%s", &cadenaTres);
-    printf("Longitud: %d\n",strlen(cadenaTres));
+    for (int i = 0; i < 3; i++)
+    {
+        printf("Longitud cadena %d: %d\n", i+1, strlen(cadenas[i]));
+    }
 
     system("pause");
 }
