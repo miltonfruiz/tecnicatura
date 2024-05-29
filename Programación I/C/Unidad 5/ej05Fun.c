@@ -1,0 +1,1 @@
+/* Crear una función que devuelva la primera letra de una cadena de texto. */
