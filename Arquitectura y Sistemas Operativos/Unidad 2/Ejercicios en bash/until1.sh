@@ -4,7 +4,7 @@ termina=10
 
 
 
-until [ $termina -ge $contador ]
+until [ $termina -le $contador ]
 
 do
 
