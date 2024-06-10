@@ -7,5 +7,5 @@ Algoritmo ej03_suma
 		Leer dato[i]
 		suma <- suma+dato[i]
 	FinPara
-	Escribir 'Total datos ingresados: ', suma
+	Escribir 'Suma de datos ingresados: ', suma
 FinAlgoritmo
