@@ -1,11 +1,11 @@
 Algoritmo ej01_arreglo
-	definir i, A, val como entero
-	dimension A[7]
+	Definir i, arreglo, val Como Entero
+	Dimensionar arreglo(7)
 	Para i<-1 Hasta 7 Con Paso 1 Hacer
 		Escribir 'Ingrese un valor: '
-		Leer A[i]
+		Leer arreglo[i]
 	FinPara
 	Para i<-1 Hasta 7 Con Paso 1 Hacer
-		Escribir 'Valor ',A[i],' posicion ',i
+		Escribir 'Valor ', arreglo[i], ' posicion ', i
 	FinPara
 FinAlgoritmo
