@@ -6,9 +6,7 @@
 #define FIL 5
 
 void main(){
-    int auno[FIL];
-    int ados[FIL];
-    int atres[FIL*2];
+    int auno[FIL], ados[FIL], atres[FIL*2];
     for (int i = 0; i < FIL; i++)
     {
         printf("Ingrese numero array1: ");
