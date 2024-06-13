@@ -11,24 +11,10 @@ inflación de diciembre. Se pide:
 #define FIL 12
 
 void main(){
-    float inflacion[FIL];
-    float anual = 0;
+    float inflacion[FIL] = {0.8,0.1,0.3,0.4,0.3,0.6,0.5,0.3,0.7,0.3,0.2,0.9};
+    float anual, alta = 0;
     float baja = 10;
-    int mesBaja = 0;
-    float alta = 0;
-    int mesAlta = 0;
-    inflacion[0] = 0.8;
-    inflacion[1] = 0.1;
-    inflacion[2] = 0.3;
-    inflacion[3] = 0.4;
-    inflacion[4] = 0.3;
-    inflacion[5] = 0.6;
-    inflacion[6] = 0.5;
-    inflacion[7] = 0.3;
-    inflacion[8] = 0.7;
-    inflacion[9] = 0.3;
-    inflacion[10] = 0.2;
-    inflacion[11] = 0.9;
+    int mesBaja, mesAlta = 0;
     for (int i = 0; i < FIL; i++)
     {
         anual += inflacion[i];
@@ -42,7 +28,6 @@ void main(){
             alta = inflacion[i];
             mesAlta = i;
         }
-        
     }
     printf("Inflacion anual %.1f\n",anual);
     printf("Inflacion mas baja: %.1f, mes %d\n",baja,mesBaja+1);
