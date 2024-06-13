@@ -11,17 +11,10 @@
 #define FIL 6
 
 void main(){
-    int vector[FIL];
+    int vector[FIL] = {10,20,5,15,30,20};
     float total = 0;
     int mayor = 0;
     int contador = 0;
-    vector[0] = 10;
-    vector[1] = 20;
-    vector[2] = 5;
-    vector[3] = 15;
-    vector[4] = 30;
-    vector[5] = 20;
-
     for (int i = 0; i < FIL; i++)
     {
         printf("Indice %d, valor %d\n",i, vector[i]);
