@@ -6,8 +6,7 @@ multiplicados por 2 y muestre el segundo array. */
 #define FIL 5
 
 void main(){
-    int numeros[FIL];
-    int multiplicado[FIL];
+    int numeros[FIL], multiplicado[FIL];
 
     for (int i = 0; i < FIL; i++)
     {
