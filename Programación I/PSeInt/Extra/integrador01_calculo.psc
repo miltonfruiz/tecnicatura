@@ -1,9 +1,8 @@
-Algoritmo ej01integrador_comercio
+Algoritmo integrador01_calculo
 	Definir productos Como Cadena
 	Dimensionar productos(4,4)
 	cargaDatos(productos)
 	registrarVentas(productos)
-	mostrarDatos(productos)
 	calculoMontos(productos)
 FinAlgoritmo
 
@@ -42,23 +41,24 @@ FinSubProceso
 
 SubProceso calculoMontos(arreglo)
 	Definir i Como Entero
-	Definir precio, cantidad, ivaProducto, totalProducto, totalNeto, totalConIva, totalIva Como Real
-	totalNeto <- 0
-	totalIva <- 0
-	totalConIva <- 0
+	Definir precio, cantidad, ivaProducto, adicional, total,montoProducto Como Real
+	ivaProducto <- 0
+	total <- 0
+	montoProducto <- 0
 	Para i<-1 Hasta 4 Hacer
-		precio <- ConvertirANumero(arreglo[i,1])
+		precio <- ConvertirANumero(arreglo[i,2])
 		cantidad <- ConvertirANumero(arreglo[i,4])
-		totalProducto <- precio*cantidad
-		totalNeto <- totalNeto+totalProducto
-		ivaProducto <- totalProducto*1.21
-		totalConIva <- totalConIva+ivaProducto
+		montoProducto <- calculo(precio,cantidad)
+		ivaProducto <- montoProducto*0.21
+		totalProducto <- montoProducto+ivaProducto
+		totalVendido <- totalVendido + totalProducto
+		ivaTotal <- ivaTotal+ivaProducto
 	FinPara
-	Escribir 'El monto total neto es: ', totalNeto
-	Escribir 'El iva total es: ', totalConIva-totalNeto
+	Escribir 'El monto total neto es: ', totalVendido
+	Escribir 'El iva total es: ', ivaTotal
 FinSubProceso
 
-SubProceso totalProd <- calculoTotal(precio,cantidad)
-	Definir totalProd Como Real
-	totalProd <- precio*cantidad
+Funcion  total <- calculo(valor1,valor2)
+	Definir total Como Real
+	total <- valor1*valor2
 FinSubProceso
