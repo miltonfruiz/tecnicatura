@@ -8,7 +8,7 @@ Algoritmo ej01_buscar
 	pos <- buscar(pacientes,dni)
 	encontrado(pacientes,pos)
 	Repetir
-		menu
+		menu()
 		Leer opc
 	Mientras Que opc<>1 Y opc<>2
 	opciones(pacientes,opc)
@@ -144,4 +144,3 @@ SubProceso menu
 	Escribir '2- Lista ordenada por apellido'
 	Escribir 'Ingrese opcion'
 FinSubProceso
-	
