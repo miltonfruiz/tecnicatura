@@ -41,7 +41,7 @@ FinSubProceso
 
 SubProceso calculoMontos(arreglo)
 	Definir i Como Entero
-	Definir precio, cantidad, ivaProducto, adicional, total,montoProducto Como Real
+	Definir precio, cantidad, ivaProducto, adicional, total, montoProducto Como Real
 	ivaProducto <- 0
 	total <- 0
 	montoProducto <- 0
@@ -51,14 +51,14 @@ SubProceso calculoMontos(arreglo)
 		montoProducto <- calculo(precio,cantidad)
 		ivaProducto <- montoProducto*0.21
 		totalProducto <- montoProducto+ivaProducto
-		totalVendido <- totalVendido + totalProducto
+		totalVendido <- totalVendido+totalProducto
 		ivaTotal <- ivaTotal+ivaProducto
 	FinPara
 	Escribir 'El monto total neto es: ', totalVendido
 	Escribir 'El iva total es: ', ivaTotal
 FinSubProceso
 
-Funcion  total <- calculo(valor1,valor2)
+SubProceso total <- calculo(valor1,valor2)
 	Definir total Como Real
 	total <- valor1*valor2
 FinSubProceso
