@@ -3,17 +3,31 @@ Algoritmo tp
 FinAlgoritmo
 
 SubProceso programa
-	Definir i, n Como Entero
+	Definir i Como Entero
+	Definir n Como Cadena
 	Repetir
 		Escribir ''
 		Escribir '>> Ferreteria: El Tornillo Loco <<'
 		Escribir ''
 		Escribir '   Ingrese cantidad articulos: '
 		Leer n
-		Si n<=0 Entonces
+		cantidad <- validoEntero(n)
+		Si cantidad=='-1' O cantidad=='' Entonces
 			incorrecto()
 		FinSi
-	Mientras Que n<=0
+	Mientras Que cantidad=='-1' O cantidad==''
+FinSubProceso
+
+SubProceso verifico <- validoEntero(ingresado)
+	Definir i Como Entero
+	Definir car, verifico Como Cadena
+	verifico <- ingresado
+	Para i<-1 Hasta Longitud(ingresado) Hacer
+		car <- Subcadena(ingresado,i,i)
+		Si (car<>'0' Y car<>'1' Y car<>'2' Y car<>'3' Y car<>'4' Y car<>'5' Y car<>'6' Y car<>'7' Y car<>'8' Y car<>'9') Entonces
+			verifico <- '-1'
+		FinSi
+	FinPara
 FinSubProceso
 
 SubProceso incorrecto
