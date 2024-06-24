@@ -3,7 +3,7 @@ Algoritmo tp
 	ingreso()
 FinAlgoritmo
 
-//Proceso Ingreso cantidad de articulos
+// Proceso Ingreso Cantidad de Artículos
 SubProceso ingreso
 	Definir i Como Entero
 	Definir n, articulos, rubro Como Cadena
@@ -22,10 +22,10 @@ SubProceso ingreso
 	Mientras Que cantidad=='-1' O cantidad==''
 	fil <- ConvertirANumero(cantidad)
 	Dimensionar articulos(fil,6)
-	cargaArticulos(articulos,fil)
+	cargaArticulos(articulos,fil,rubro)
 FinSubProceso
 
-// Proceso de carga de rubros
+// Proceso de Carga de Rubros
 SubProceso cargaRubros(arreglo)
 	arreglo[1,1]<-'100'
 	arreglo[1,2]<-'Tornillos y Tuercas'
@@ -39,25 +39,50 @@ SubProceso cargaRubros(arreglo)
 	arreglo[5,2]<-'Electricidad'
 FinSubProceso
 
-// Proceso de carga de datos articulos
-SubProceso cargaArticulos(arreglo,total)
-	Definir i Como Entero
+// Proceso de Carga de Datos Artículos
+SubProceso cargaArticulos(arreglo1,total,arreglo2)
 	Para i<-1 Hasta total Con Paso 1 Hacer
-		Repetir
-			Limpiar Pantalla
-			Escribir ''
-			Escribir '>>> Carga de datos: Artículo N°', i
-			Escribir ''
-			Escribir '    Ingrese código:'
-			Leer arreglo[i,1]
-			Si Longitud(arreglo[i,1])<>3 Entonces
-				incorrecto('¡Código ingresado incorrecto!')
-			FinSi
-		Mientras Que Longitud(arreglo[1,1])<>3
+		ingresoCodigo(arreglo1,arreglo2,i)
 	FinPara
 FinSubProceso
 
-// Función verificación de valores enteros ingresados
+// Proceso Ingreso de Código
+SubProceso ingresoCodigo(arreglo1,arreglo2,f)
+	Definir codigo, subCodigo Como Cadena
+	Repetir
+		Repetir
+			Limpiar Pantalla
+			Escribir ''
+			Escribir '>>> Carga de datos: Artículo N°', f
+			Escribir ''
+			Escribir '    Ingrese código:'
+			Leer arreglo1[f,1]
+			Si Longitud(arreglo1[f,1])<>8 Entonces
+				incorrecto('¡Código ingresado incorrecto!')
+			FinSi
+		Mientras Que Longitud(arreglo1[f,1])<>8
+		subCodigo <- Subcadena(arreglo1[f,1],1,3)
+		codigo <- buscoCodigo(subCodigo,arreglo2)
+		Si codigo=='-1' Entonces
+			incorrecto('¡Ese codigo no existe!')
+		SiNo
+			Segun codigo Hacer
+				'100':
+					correcto(codigo,'Tornillos y Tuercas')
+				'300':
+					correcto(codigo,'Adhesivos')
+				'450':
+					correcto(codigo,'Herrajes')
+				'680':
+					correcto(codigo,'Pinturas')
+				'720':
+					correcto(codigo,'Electricidad')
+			FinSegun
+		FinSi
+	Mientras Que cod=='-1'
+FinSubProceso
+
+// Función Verificación de Valores Enteros Ingresados
 SubProceso verifico <- validoEntero(ingresado)
 	Definir i Como Entero
 	Definir car, verifico Como Cadena
@@ -70,7 +95,7 @@ SubProceso verifico <- validoEntero(ingresado)
 	FinPara
 FinSubProceso
 
-// Proceso opción ingresada incorrecta
+// Proceso Opción Ingresada Incorrecta
 SubProceso incorrecto(texto)
 	Limpiar Pantalla
 	Escribir ''
@@ -79,4 +104,33 @@ SubProceso incorrecto(texto)
 	Escribir ' * Pulse una tecla para reintentar...'
 	Esperar Tecla
 	Limpiar Pantalla
+FinSubProceso
+
+// Proceso Búsqueda de Código
+SubProceso encontrado <- buscoCodigo(codigo,arreglo)
+	Definir i Como Entero
+	Definir encontrado Como Cadena
+	i <- 0
+	Repetir
+		i <- i+1
+	Mientras Que codigo<>arreglo[i,1] Y i<>5
+	Si codigo==arreglo[i,1] Entonces
+		encontrado <- codigo
+	SiNo
+		encontrado <- '-1'
+	FinSi
+FinSubProceso
+
+// Proceso Opción Ingresada Correcta
+SubProceso correcto(codigo,texto)
+	Limpiar Pantalla
+	Escribir ''
+	Escribir ' ¡Dato Ingresado Correctamente!'
+	Escribir ''
+	Escribir '     Codigo     |        Rubro            '
+	Escribir ' ------------------------------------------'
+	Escribir '       ', codigo, '      |      ', texto
+	Escribir ''
+	Escribir ' * Pulse una tecla para continuar...'
+	Esperar Tecla
 FinSubProceso
