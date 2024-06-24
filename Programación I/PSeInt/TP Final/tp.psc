@@ -55,31 +55,41 @@ SubProceso ingresoCodigo(arreglo1,arreglo2,f)
 			Escribir ''
 			Escribir '>>> Carga de datos: Artículo N°', f
 			Escribir ''
-			Escribir '    Ingrese código:'
+			Escribir '    # Ingrese código: (3 digitos )'
 			Leer arreglo1[f,1]
-			Si Longitud(arreglo1[f,1])<>8 Entonces
+			Si Longitud(arreglo1[f,1])<>3 Entonces
 				incorrecto('¡Código ingresado incorrecto!')
 			FinSi
-		Mientras Que Longitud(arreglo1[f,1])<>8
-		subCodigo <- Subcadena(arreglo1[f,1],1,3)
-		codigo <- buscoCodigo(subCodigo,arreglo2)
+		Mientras Que Longitud(arreglo1[f,1])<>3
+		codigo <- buscoCodigo(arreglo1[f,1],arreglo2)
 		Si codigo=='-1' Entonces
 			incorrecto('¡Ese codigo no existe!')
 		SiNo
+			Repetir
+				Limpiar Pantalla
+				Escribir ''
+				Escribir '>>> Carga de datos: Artículo N°', f
+				Escribir ''
+				Escribir '    # Ingrese numero de articulo: (5 digitos)'
+				Leer nArticulo
+				Si Longitud(nArticulo) <> 5 Entonces
+					incorrecto('¡Numero de Artículo Ingresado Incorrecto!')
+				FinSi
+			Mientras Que Longitud(nArticulo)<>5
 			Segun codigo Hacer
 				'100':
-					correcto(codigo,'Tornillos y Tuercas')
+					correcto(codigo,'T/Tuercas',nArticulo)
 				'300':
-					correcto(codigo,'Adhesivos')
+					correcto(codigo,'Adhesivos',nArticulo)
 				'450':
-					correcto(codigo,'Herrajes')
+					correcto(codigo,'Herrajes',nArticulo)
 				'680':
-					correcto(codigo,'Pinturas')
+					correcto(codigo,'Pinturas',nArticulo)
 				'720':
-					correcto(codigo,'Electricidad')
+					correcto(codigo,'Electricidad',nArticulo)
 			FinSegun
 		FinSi
-	Mientras Que cod=='-1'
+	Mientras Que codigo=='-1'
 FinSubProceso
 
 // Función Verificación de Valores Enteros Ingresados
@@ -122,14 +132,14 @@ SubProceso encontrado <- buscoCodigo(codigo,arreglo)
 FinSubProceso
 
 // Proceso Opción Ingresada Correcta
-SubProceso correcto(codigo,texto)
+SubProceso correcto(codigo,texto,numero)
 	Limpiar Pantalla
 	Escribir ''
 	Escribir ' ¡Dato Ingresado Correctamente!'
 	Escribir ''
-	Escribir '     Codigo     |        Rubro            '
-	Escribir ' ------------------------------------------'
-	Escribir '       ', codigo, '      |      ', texto
+	Escribir '     Codigo   |        Rubro          |     N° Artículo    |'
+	Escribir ' -----------------------------------------------------------'
+	Escribir '       ', codigo, '           ', texto, '               ', numero
 	Escribir ''
 	Escribir ' * Pulse una tecla para continuar...'
 	Esperar Tecla
