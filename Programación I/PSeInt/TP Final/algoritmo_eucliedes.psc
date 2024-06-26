@@ -1,7 +1,5 @@
 Algoritmo algoritmo_eucliedes
-	Definir desea Como Cadena
 	bienvenida()
-	Limpiar Pantalla
 	menu()
 FinAlgoritmo
 
@@ -20,7 +18,8 @@ SubProceso mcd
 			incorrecto('¡Valor Ingresado Incorrecto!')
 		FinSi
 	Mientras Que num1=='-1' O num1==''
-	valor1Convertido <- ConvertirANumero(num1)
+	valor1Entero <- ConvertirANumero(num1)
+	valor1Positivo <- abs(valor1Entero)
 	Repetir
 		Limpiar Pantalla
 		Escribir ''
@@ -33,8 +32,14 @@ SubProceso mcd
 			incorrecto('¡Valor Ingresado Incorrecto!')
 		FinSi
 	Mientras Que num2=='-1' O num2==''
-	valor2Convertido <- ConvertirANumero(num2)
-	resolucionMCD(valor1Convertido,valor2Convertido)
+	valor2Entero <- ConvertirANumero(num2)
+	valor2Positivo <- abs(valor2Entero)
+	Si valor1Positivo<valor2Positivo Entonces
+		aux <- valor1Positivo
+		valor1Positivo <- valor2Positivo
+		valor2Positivo <- aux
+	FinSi
+	resolucionMCD(valor1Positivo,valor2Positivo)
 FinSubProceso
 
 // Proceso calculo mcm
@@ -52,7 +57,8 @@ SubProceso mcm
 			incorrecto('¡Valor Ingresado Incorrecto!')
 		FinSi
 	Mientras Que num1=='-1' O num1==''
-	valor1Convertido <- ConvertirANumero(num1)
+	valor1Entero <- ConvertirANumero(num1)
+	valor1Positivo <- abs(valor1Entero)
 	Repetir
 		Limpiar Pantalla
 		Escribir ''
@@ -65,8 +71,14 @@ SubProceso mcm
 			incorrecto('¡Valor Ingresado Incorrecto!')
 		FinSi
 	Mientras Que num2=='-1' O num2==''
-	valor2Convertido <- ConvertirANumero(num2)
-	resolucionMCM(valor1Convertido,valor2Convertido)
+	valor2Entero <- ConvertirANumero(num2)
+	valor2Positivo <- abs(valor2Entero)
+	Si valor1Positivo<valor2Positivo Entonces
+		aux <- valor1Positivo
+		valor1Positivo <- valor2Positivo
+		valor2Positivo <- aux
+	FinSi
+	resolucionMCM(valor1Positivo,valor2Positivo)
 FinSubProceso
 
 // Proceso de Resolucion MCM
@@ -99,7 +111,7 @@ SubProceso verifico <- validoEntero(ingresado)
 	verifico <- ingresado
 	Para i<-1 Hasta Longitud(ingresado) Hacer
 		car <- Subcadena(ingresado,i,i)
-		Si (car<>'0' Y car<>'1' Y car<>'2' Y car<>'3' Y car<>'4' Y car<>'5' Y car<>'6' Y car<>'7' Y car<>'8' Y car<>'9') Entonces
+		Si (car<>'-' Y car<>'0' Y car<>'1' Y car<>'2' Y car<>'3' Y car<>'4' Y car<>'5' Y car<>'6' Y car<>'7' Y car<>'8' Y car<>'9') Entonces
 			verifico <- '-1'
 		FinSi
 	FinPara
@@ -140,9 +152,13 @@ FinSubProceso
 SubProceso bienvenida
 	Limpiar Pantalla
 	Escribir ''
-	Escribir '# Trabajo Práctico Final de Matemática'
+	Escribir ' # Trabajo Práctico Final de Matemática'
 	Escribir ''
-	Escribir '* Pulse una tecla para empezar...'
+	Escribir ' # Alumnos: Milton F. Ruiz'
+	Escribir ' # Comisión: 2'
+	Escribir ' # Turno: Mañana'
+	Escribir ''
+	Escribir ' * Pulse una tecla para empezar... :)'
 	Esperar Tecla
 FinSubProceso
 
@@ -150,11 +166,11 @@ FinSubProceso
 SubProceso opciones
 	Limpiar Pantalla
 	Escribir ''
-	Escribir ' >> Bienvenido al Menu Principal <<'
+	Escribir '  >> Bienvenido al Menu Principal <<'
 	Escribir ''
-	Escribir ' 1. Hallar MCD'
-	Escribir ' 2. Hallar MCM'
-	Escribir ' 3. Salir'
+	Escribir '  1. Hallar MCD'
+	Escribir '  2. Hallar MCM'
+	Escribir '  3. Salir'
 	Escribir ''
 FinSubProceso
 
@@ -162,10 +178,11 @@ FinSubProceso
 SubProceso menu
 	Definir opcion Como Cadena
 	Definir rsp Como Cadena
+	Limpiar Pantalla
 	Repetir
 		Repetir
 			opciones()
-			Escribir ' * Ingrese una opción: '
+			Escribir '  * Ingrese una opción: '
 			Leer opcion
 			Si opcion<>'1' Y opcion<>'2' Y opcion<>'3' Entonces
 				incorrecto('¡Opción Ingresada Incorrecta!')

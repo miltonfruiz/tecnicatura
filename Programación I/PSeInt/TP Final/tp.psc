@@ -48,8 +48,9 @@ SubProceso cargaArticulos(arreglo1,total,arreglo2)
 		cantidadExistente(arreglo1,i)
 		quincenaUno(arreglo1,i)
 		quincenaDos(arreglo1,i)
-		menu()
+		ordenoPorDescripcion(arreglo1,i)
 	FinPara
+	menu(arreglo1,total)
 FinSubProceso
 
 // Proceso Ingreso de Código
@@ -240,11 +241,49 @@ SubProceso opciones
 FinSubProceso
 
 // Proceso de Menu Principal
-SubProceso menu
+// ------------------------------------------------------------------------------------------
+SubProceso menu(arreglo,total)
 	Definir opcion Como Entero
 	Repetir
 		opciones()
 		Escribir '* Ingrese una opción: '
 		Leer opcion
 	Mientras Que opcion<0 O opcion>6
+	Segun opcion Hacer
+		1:
+			muestraDescripcion(arreglo,total)
+		2:
+		3:
+		4:
+	FinSegun
+FinSubProceso
+
+// Proceso de Muestra por Descripcioón
+// ------------------------------------------------------------------------------------------
+SubProceso muestraDescripcion(arreglo,total)
+	Limpiar Pantalla
+	Escribir ''
+	Escribir '1. Mostrar lista de artículos ordenada por descripción '
+	Escribir ''
+	Escribir 'Aca muestra el ornamiento...'
+	Para i<-1 Hasta total Con Paso 1 Hacer
+		Escribir 'Codigo ',arreglo[i,1],' descripcion ',arreglo[i,2],' precio ',arreglo[i,3],' stock ',arreglo[i,4],'1ra quincena',arreglo[i,5],'2da quincena ',arreglo[i,6]
+	FinPara
+FinSubProceso
+
+// Proceso de Ordenamiento por Descripcion
+// ------------------------------------------------------------------------------------------
+SubProceso ordenoPorDescripcion(arreglo,fila)
+	Definir i, j, k Como Entero
+	Para i<-1 Hasta fila-1 Con Paso 1 Hacer
+		Para j<-i+1 Hasta fila Con Paso 1 Hacer
+			Si arreglo[i,2]>arreglo[j,2] Entonces
+				Para k<-1 Hasta 6 Con Paso 1 Hacer
+					aux <- arreglo[i,k]
+					arreglo[i,k]<-arreglo[j,k]
+					arreglo[j,k]<-aux
+				FinPara
+			FinSi
+		FinPara
+	FinPara
 FinSubProceso
