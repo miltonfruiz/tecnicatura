@@ -43,6 +43,12 @@ FinSubProceso
 SubProceso cargaArticulos(arreglo1,total,arreglo2)
 	Para i<-1 Hasta total Con Paso 1 Hacer
 		ingresoCodigo(arreglo1,arreglo2,i)
+		descripcion(arreglo1,i)
+		precioVenta(arreglo1,i)
+		cantidadExistente(arreglo1,i)
+		quincenaUno(arreglo1,i)
+		quincenaDos(arreglo1,i)
+		menu()
 	FinPara
 FinSubProceso
 
@@ -72,22 +78,10 @@ SubProceso ingresoCodigo(arreglo1,arreglo2,f)
 				Escribir ''
 				Escribir '    # Ingrese numero de articulo: (5 digitos)'
 				Leer nArticulo
-				Si Longitud(nArticulo) <> 5 Entonces
+				Si Longitud(nArticulo)<>5 Entonces
 					incorrecto('¡Numero de Artículo Ingresado Incorrecto!')
 				FinSi
 			Mientras Que Longitud(nArticulo)<>5
-			Segun codigo Hacer
-				'100':
-					correcto(codigo,'T/Tuercas',nArticulo)
-				'300':
-					correcto(codigo,'Adhesivos',nArticulo)
-				'450':
-					correcto(codigo,'Herrajes',nArticulo)
-				'680':
-					correcto(codigo,'Pinturas',nArticulo)
-				'720':
-					correcto(codigo,'Electricidad',nArticulo)
-			FinSegun
 		FinSi
 	Mientras Que codigo=='-1'
 FinSubProceso
@@ -135,12 +129,122 @@ FinSubProceso
 SubProceso correcto(codigo,texto,numero)
 	Limpiar Pantalla
 	Escribir ''
-	Escribir ' ¡Dato Ingresado Correctamente!'
+	Escribir ' ¡Datos Ingresados Correctamente!'
 	Escribir ''
-	Escribir '     Codigo   |        Rubro          |     N° Artículo    |'
-	Escribir ' -----------------------------------------------------------'
+	Escribir '     Codigo   |  Descripción  |  Precio de Venta  |  Cantidad Existente  |  Ventas 1ra Quincena  |  Ventas 2da Quincena  |'
+	Escribir ' ------------------------------------------------------------------------------------------------------------------------'
 	Escribir '       ', codigo, '           ', texto, '               ', numero
 	Escribir ''
 	Escribir ' * Pulse una tecla para continuar...'
 	Esperar Tecla
+FinSubProceso
+
+// Proceso de ingreso de descripcion
+SubProceso descripcion(arreglo,f)
+	Limpiar Pantalla
+	Repetir
+		Escribir ''
+		Escribir '>>> Carga de datos: Artículo N°', f
+		Escribir ''
+		Escribir 'Ingrese una descripcion: '
+		Leer arreglo[f,2]
+		Si Longitud(arreglo[f,2])==0 Entonces
+			incorrecto('!Descripcion incorrecta!')
+		FinSi
+	Mientras Que Longitud(arreglo[f,2])==0
+FinSubProceso
+
+SubProceso precioVenta(arreglo,f)
+	Limpiar Pantalla
+	Repetir
+		Escribir ''
+		Escribir '>>> Carga de datos: Artículo N°', f
+		Escribir ''
+		Escribir 'Ingrese el precio de los articulos: '
+		Leer arreglo[f,3]
+		precio <- validoEntero(arreglo[f,3])
+		Si precio=='-1' O precio=='' Entonces
+			incorrecto('datos incorrectos')
+		FinSi
+	Mientras Que precio=='-1' O precio==''
+	precioEntero <- ConvertirANumero(precio)
+FinSubProceso
+
+// Proceso de cantidad total
+SubProceso cantidadExistente(arreglo,f)
+	Limpiar Pantalla
+	Repetir
+		Escribir ''
+		Escribir '>>> Carga de datos: Artículo N°', f
+		Escribir ''
+		Escribir 'Ingrese la cantidad de articulos de un mismo producto:  '
+		Leer arreglo[f,4]
+		cantidad <- validoEntero(arreglo[f,4])
+		Si cantidad=='-1' O cantidad=='' Entonces
+			incorrecto('datos incorrectos')
+		FinSi
+	Mientras Que cantidad=='-1' O cantidad==''
+	cantidadEntero <- ConvertirANumero(cantidad)
+FinSubProceso
+
+// Proceso de ingreso de 1ra quincena
+SubProceso quincenaUno(arreglo,f)
+	Limpiar Pantalla
+	Repetir
+		Escribir ''
+		Escribir '>>> Carga de datos: Artículo N°', f
+		Escribir ''
+		Escribir 'ingrese la cantidad de articulos vendidos en la primera quincena: '
+		Leer arreglo[f,5]
+		quincena1 <- validoEntero(arreglo[f,5])
+		Si quincena1=='-1' O quincena1=='' Entonces
+			incorrecto('datos incorrectos')
+		FinSi
+	Mientras Que quincena1=='-1' O quincena1==''
+	quincena1Entero <- ConvertirANumero(quincena1)
+FinSubProceso
+
+// Proceso de ingreso de 2da quincena
+SubProceso quincenaDos(arreglo,f)
+	Limpiar Pantalla
+	Repetir
+		Escribir ''
+		Escribir '>>> Carga de datos: Artículo N°', f
+		Escribir ''
+		Escribir 'Ingrese la cantidad de articulos vendidos en la segunda quincena: '
+		Leer arreglo[f,6]
+		quincena2 <- validoEntero(arreglo[f,6])
+		Si quincena2=='-1' O quincena2=='' Entonces
+			incorrecto('datos incorrectos')
+		FinSi
+	Mientras Que quincena2=='-1' O quincena2==''
+	quincena2Entero <- ConvertirANumero(quincena2)
+	Escribir ''
+	Escribir '!Datos ingresados correctamente!'
+	Esperar Tecla
+FinSubProceso
+
+// Proceso de opciones de menu
+SubProceso opciones
+	Limpiar Pantalla
+	Escribir ''
+	Escribir '>>> Bienvenido al Menú Principal <<<'
+	Escribir ''
+	Escribir '1. Mostrar lista de artículos ordenada por descripción '
+	Escribir '2. Mostrar lista de artículos ordenada por cantidad vendida'
+	Escribir '3. Mostrar stock actual de artículos '
+	Escribir '4. Buscar artículo por código'
+	Escribir '5. Mostrar estadísticas'
+	Escribir '6. Salir '
+	Escribir ''
+FinSubProceso
+
+// Proceso de Menu Principal
+SubProceso menu
+	Definir opcion Como Entero
+	Repetir
+		opciones()
+		Escribir '* Ingrese una opción: '
+		Leer opcion
+	Mientras Que opcion<0 O opcion>6
 FinSubProceso
