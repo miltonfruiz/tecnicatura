@@ -1,4 +1,4 @@
-Algoritmo algoritmo_eucliedes
+Algoritmo algoritmo_euclides
 	bienvenida()
 	menu()
 FinAlgoritmo
@@ -97,6 +97,8 @@ SubProceso resolucionMCM(valor1,valor2)
 	resultado <- valor1
 	mac <- (aux1*aux2)/resultado
 	Escribir ''
+	Escribir ' ( ',aux1,' ; ',aux2,' ) = ( ',aux1,'.',aux2,' ) / ',resultado
+	Escribir ''
 	Escribir ' # El MCM es: ', mac
 	Escribir ''
 	Escribir ' * Presione una tecla para continuar...'
@@ -130,7 +132,9 @@ FinSubProceso
 
 // Proceso de Resolucion MCD
 SubProceso resolucionMCD(valor1,valor2)
-	Definir resto Como Real
+	Definir resto,aux1,aux2 Como Real
+	aux1 <- valor1
+	aux2 <- valor2
 	Repetir
 		resto <- valor1 MOD valor2
 		valor1 <- valor2
@@ -140,6 +144,8 @@ SubProceso resolucionMCD(valor1,valor2)
 	Limpiar Pantalla
 	Escribir ''
 	Escribir ' >>  RESPUESTA  <<'
+	Escribir ''
+	Escribir ' ( ',aux1,' ; ',aux2,' ) = ', resultado
 	Escribir ''
 	Escribir ' # El MCD es: ', resultado
 	Escribir ''
@@ -154,7 +160,7 @@ SubProceso bienvenida
 	Escribir ''
 	Escribir ' # Trabajo Práctico Final de Matemática'
 	Escribir ''
-	Escribir ' # Alumnos: Milton F. Ruiz'
+	Escribir ' # Alumnos: Gonzalo Martinez Zinny, Milton F. Ruiz'
 	Escribir ' # Comisión: 2'
 	Escribir ' # Turno: Mañana'
 	Escribir ''
@@ -165,6 +171,8 @@ FinSubProceso
 // Proceso de opciones
 SubProceso opciones
 	Limpiar Pantalla
+	Escribir ''
+	Escribir '      # Algoritmo de Euclídes #'
 	Escribir ''
 	Escribir '  >> Bienvenido al Menu Principal <<'
 	Escribir ''

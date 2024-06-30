@@ -4,6 +4,7 @@ Algoritmo tp
 FinAlgoritmo
 
 // Proceso Ingreso Cantidad de Artículos
+// ------------------------------------------------------------------------------------------
 SubProceso ingreso
 	Definir i Como Entero
 	Definir n, articulos, rubro Como Cadena
@@ -26,6 +27,7 @@ SubProceso ingreso
 FinSubProceso
 
 // Proceso de Carga de Rubros
+// ------------------------------------------------------------------------------------------
 SubProceso cargaRubros(arreglo)
 	arreglo[1,1]<-'100'
 	arreglo[1,2]<-'Tornillos y Tuercas'
@@ -40,6 +42,7 @@ SubProceso cargaRubros(arreglo)
 FinSubProceso
 
 // Proceso de Carga de Datos Artículos
+// ------------------------------------------------------------------------------------------
 SubProceso cargaArticulos(arreglo1,total,arreglo2)
 	Para i<-1 Hasta total Con Paso 1 Hacer
 		ingresoCodigo(arreglo1,arreglo2,i)
@@ -48,12 +51,12 @@ SubProceso cargaArticulos(arreglo1,total,arreglo2)
 		cantidadExistente(arreglo1,i)
 		quincenaUno(arreglo1,i)
 		quincenaDos(arreglo1,i)
-		ordenoPorDescripcion(arreglo1,i)
 	FinPara
 	menu(arreglo1,total)
 FinSubProceso
 
 // Proceso Ingreso de Código
+// ------------------------------------------------------------------------------------------
 SubProceso ingresoCodigo(arreglo1,arreglo2,f)
 	Definir codigo, subCodigo Como Cadena
 	Repetir
@@ -68,7 +71,7 @@ SubProceso ingresoCodigo(arreglo1,arreglo2,f)
 				incorrecto('¡Código ingresado incorrecto!')
 			FinSi
 		Mientras Que Longitud(arreglo1[f,1])<>3
-		codigo <- buscoCodigo(arreglo1[f,1],arreglo2)
+		codigo <- buscoCodigo(arreglo1[f,1],arreglo2,5)
 		Si codigo=='-1' Entonces
 			incorrecto('¡Ese codigo no existe!')
 		SiNo
@@ -88,6 +91,7 @@ SubProceso ingresoCodigo(arreglo1,arreglo2,f)
 FinSubProceso
 
 // Función Verificación de Valores Enteros Ingresados
+// ------------------------------------------------------------------------------------------
 SubProceso verifico <- validoEntero(ingresado)
 	Definir i Como Entero
 	Definir car, verifico Como Cadena
@@ -101,6 +105,7 @@ SubProceso verifico <- validoEntero(ingresado)
 FinSubProceso
 
 // Proceso Opción Ingresada Incorrecta
+// ------------------------------------------------------------------------------------------
 SubProceso incorrecto(texto)
 	Limpiar Pantalla
 	Escribir ''
@@ -112,13 +117,14 @@ SubProceso incorrecto(texto)
 FinSubProceso
 
 // Proceso Búsqueda de Código
-SubProceso encontrado <- buscoCodigo(codigo,arreglo)
+// ------------------------------------------------------------------------------------------
+SubProceso encontrado <- buscoCodigo(codigo,arreglo,limite)
 	Definir i Como Entero
 	Definir encontrado Como Cadena
 	i <- 0
 	Repetir
 		i <- i+1
-	Mientras Que codigo<>arreglo[i,1] Y i<>5
+	Mientras Que codigo<>arreglo[i,1] Y i<>limite
 	Si codigo==arreglo[i,1] Entonces
 		encontrado <- codigo
 	SiNo
@@ -127,6 +133,7 @@ SubProceso encontrado <- buscoCodigo(codigo,arreglo)
 FinSubProceso
 
 // Proceso Opción Ingresada Correcta
+// ------------------------------------------------------------------------------------------
 SubProceso correcto(codigo,texto,numero)
 	Limpiar Pantalla
 	Escribir ''
@@ -141,6 +148,7 @@ SubProceso correcto(codigo,texto,numero)
 FinSubProceso
 
 // Proceso de ingreso de descripcion
+// ------------------------------------------------------------------------------------------
 SubProceso descripcion(arreglo,f)
 	Limpiar Pantalla
 	Repetir
@@ -154,7 +162,8 @@ SubProceso descripcion(arreglo,f)
 		FinSi
 	Mientras Que Longitud(arreglo[f,2])==0
 FinSubProceso
-
+// Proceso de ingreso de precio
+// ------------------------------------------------------------------------------------------
 SubProceso precioVenta(arreglo,f)
 	Limpiar Pantalla
 	Repetir
@@ -172,6 +181,7 @@ SubProceso precioVenta(arreglo,f)
 FinSubProceso
 
 // Proceso de cantidad total
+// ------------------------------------------------------------------------------------------
 SubProceso cantidadExistente(arreglo,f)
 	Limpiar Pantalla
 	Repetir
@@ -189,6 +199,7 @@ SubProceso cantidadExistente(arreglo,f)
 FinSubProceso
 
 // Proceso de ingreso de 1ra quincena
+// ------------------------------------------------------------------------------------------
 SubProceso quincenaUno(arreglo,f)
 	Limpiar Pantalla
 	Repetir
@@ -206,6 +217,7 @@ SubProceso quincenaUno(arreglo,f)
 FinSubProceso
 
 // Proceso de ingreso de 2da quincena
+// ------------------------------------------------------------------------------------------
 SubProceso quincenaDos(arreglo,f)
 	Limpiar Pantalla
 	Repetir
@@ -226,10 +238,11 @@ SubProceso quincenaDos(arreglo,f)
 FinSubProceso
 
 // Proceso de opciones de menu
+// ------------------------------------------------------------------------------------------
 SubProceso opciones
 	Limpiar Pantalla
 	Escribir ''
-	Escribir '>>> Bienvenido al Menú Principal <<<'
+	Escribir '         >>> Bienvenido al Menú Principal <<<'
 	Escribir ''
 	Escribir '1. Mostrar lista de artículos ordenada por descripción '
 	Escribir '2. Mostrar lista de artículos ordenada por cantidad vendida'
@@ -243,37 +256,40 @@ FinSubProceso
 // Proceso de Menu Principal
 // ------------------------------------------------------------------------------------------
 SubProceso menu(arreglo,total)
-	Definir opcion Como Entero
+	Definir opcion Como Cadena
+	Definir rsp Como Cadena
 	Repetir
-		opciones()
-		Escribir '* Ingrese una opción: '
-		Leer opcion
-	Mientras Que opcion<0 O opcion>6
-	Segun opcion Hacer
-		1:
-			muestraDescripcion(arreglo,total)
-		2:
-		3:
-		4:
-	FinSegun
-FinSubProceso
-
-// Proceso de Muestra por Descripcioón
-// ------------------------------------------------------------------------------------------
-SubProceso muestraDescripcion(arreglo,total)
+		Repetir
+			opciones()
+			Escribir '[*] Ingrese una opción: '
+			Leer opcion
+		Mientras Que opcion<>'1' Y opcion<>'2' Y opcion<>'3' Y opcion<>'4' Y opcion<>'5' Y opcion<>'6' 
+		Segun opcion Hacer
+			'1':
+				muestraDescripcion(arreglo,total)
+				rsp <- pregunta(desea,'Desea volver al menu principal')
+			'2':
+				muestraCantidad(arreglo,total)
+				rsp <- pregunta(desea,'Desea volver al menu principal')
+			'3':
+				muestraStock(arreglo,total)
+				rsp <- pregunta(desea,'Desea volver al menu principal')
+			'4':
+				muestraCodigo(arreglo,total)
+				rsp <- pregunta(desea,'Desea volver al menu principal')
+			'5':
+				muestraEstadisticas(arreglo,total)
+		FinSegun
+	Mientras Que opcion<>'6' Y rsp<>'n'
 	Limpiar Pantalla
 	Escribir ''
-	Escribir '1. Mostrar lista de artículos ordenada por descripción '
+	Escribir ' ¡Hasta Pronto!'
 	Escribir ''
-	Escribir 'Aca muestra el ornamiento...'
-	Para i<-1 Hasta total Con Paso 1 Hacer
-		Escribir 'Codigo ',arreglo[i,1],' descripcion ',arreglo[i,2],' precio ',arreglo[i,3],' stock ',arreglo[i,4],'1ra quincena',arreglo[i,5],'2da quincena ',arreglo[i,6]
-	FinPara
 FinSubProceso
 
-// Proceso de Ordenamiento por Descripcion
+// Proceso de Ordenamiento menor a mayor
 // ------------------------------------------------------------------------------------------
-SubProceso ordenoPorDescripcion(arreglo,fila)
+SubProceso ordenAscendente(arreglo,fila)
 	Definir i, j, k Como Entero
 	Para i<-1 Hasta fila-1 Con Paso 1 Hacer
 		Para j<-i+1 Hasta fila Con Paso 1 Hacer
@@ -286,4 +302,198 @@ SubProceso ordenoPorDescripcion(arreglo,fila)
 			FinSi
 		FinPara
 	FinPara
+FinSubProceso
+
+// Proceso de Muestra por Descripcioón
+// ------------------------------------------------------------------------------------------
+SubProceso muestraDescripcion(arreglo,total)
+	ordenAscendente(arreglo,total)
+	Limpiar Pantalla
+	Escribir ''
+	Escribir '1. Mostrar lista de artículos ordenada por descripción '
+	Escribir ''
+	Escribir ' |      Codigo      |      Descripción      |      Precio de Venta     |'
+	Escribir ' ----------------------------------------------------------------------'
+	Para i<-1 Hasta total Con Paso 1 Hacer
+		Escribir '         ', arreglo[i,1], '                   ', arreglo[i,2], '                     ', arreglo[i,3]
+	FinPara
+	Escribir ''
+	Escribir ' * Pulse una tecla para continuar...'
+	Escribir ''
+	Esperar Tecla
+FinSubProceso
+
+// Proceso deseaa
+// ------------------------------------------------------------------------------------------
+SubProceso respuesta <- pregunta(opcDesea,texto)
+	Repetir
+		Limpiar Pantalla
+		Escribir ''
+		Escribir ' ¿', texto, '? [s/n]'
+		Leer opcDesea
+		Si opcDesea<>'n' Y opcDesea<>'s' Entonces
+			incorrecto('¡Opción Ingresada Incorrecta!')
+		FinSi
+	Mientras Que opcDesea<>'s' Y opcDesea<>'n'
+	respuesta <- opcDesea
+FinSubProceso
+
+// Proceso de Ordenamiento mayor a menor
+// ------------------------------------------------------------------------------------------
+SubProceso ordenDescendente(arreglo,fila)
+	Definir i, j, k, q1, q2, q3, q4 Como Entero
+	Para i<-1 Hasta fila-1 Con Paso 1 Hacer
+		Para j<-i+1 Hasta fila Con Paso 1 Hacer
+			q1 <- ConvertirANumero(arreglo[i,5])
+			q2 <- ConvertirANumero(arreglo[i,6])
+			q3 <- ConvertirANumero(arreglo[j,5])
+			q4 <- ConvertirANumero(arreglo[j,5])
+			Si (q1+q2)<(q3+q4) Entonces
+				Para k<-1 Hasta 6 Con Paso 1 Hacer
+					aux <- arreglo[i,k]
+					arreglo[i,k]<-arreglo[j,k]
+					arreglo[j,k]<-aux
+				FinPara
+			FinSi
+		FinPara
+	FinPara
+FinSubProceso
+
+// Proceso de Muestra por cantidad vendida
+// ------------------------------------------------------------------------------------------
+SubProceso muestraCantidad(arreglo,total)
+	Definir q1, q2, mes, precio, importe, monto Como Real
+	ordenDescendente(arreglo,total)
+	Limpiar Pantalla
+	Escribir ''
+	Escribir '2. Mostrar lista de artículos ordenada por cantidad vendida '
+	Escribir ''
+	Escribir ' |    Codigo    |      Descripción     |    Total Vendido Mes   |    Importe Total   |'
+	Escribir ' ------------------------------------------------------------------------------------'
+	Para i<-1 Hasta total Con Paso 1 Hacer
+		q1 <- ConvertirANumero(arreglo[i,5])
+		q2 <- ConvertirANumero(arreglo[i,6])
+		mes <- q1+q2
+		precio <- ConvertirANumero(arreglo[i,3])
+		importe <- mes*precio
+		monto <- monto+importe
+		Escribir '       ', arreglo[i,1], '                ', arreglo[i,2], '                    ', mes, '                     $ ', importe
+	FinPara
+	Escribir ''
+	Escribir ' # Monto total de ventas realizadas en el mes: $', monto
+	Escribir ''
+	Escribir ' * Pulse una tecla para continuar...'
+	Escribir ''
+	Esperar Tecla
+FinSubProceso
+
+// Proceso de Muestra por Stock
+// ------------------------------------------------------------------------------------------
+SubProceso muestraStock(arreglo,total)
+	Definir i, q1, q2, mes, stock, actual Como Real
+	Limpiar Pantalla
+	Escribir ''
+	Escribir '3. Mostrar stock actual de artículos '
+	Escribir ''
+	Escribir ' |      Codigo      |      Descripción      |      Stock Actual     |'
+	Escribir ' -------------------------------------------------------------------'
+	Para i<-1 Hasta total Con Paso 1 Hacer
+		q1 <- ConvertirANumero(arreglo[i,5])
+		q2 <- ConvertirANumero(arreglo[i,6])
+		mes <- q1+q2
+		stock <- ConvertirANumero(arreglo[i,4])
+		actual <- stock-mes
+		Escribir '         ', arreglo[i,1], '                   ', arreglo[i,2], '                     ', actual
+	FinPara
+	Escribir ''
+	Escribir ' * Pulse una tecla para continuar...'
+	Escribir ''
+	Esperar Tecla
+FinSubProceso
+
+// Proceso de Muestra por Codigo
+// ------------------------------------------------------------------------------------------
+SubProceso muestraCodigo(arreglo1,total)
+	Definir cod, busco, rsp Como Cadena
+	Repetir
+		Repetir
+			Limpiar Pantalla
+			Escribir ''
+			Escribir '4. Buscar artículo por código '
+			Escribir ''
+			Escribir '    # Ingrese código: (3 digitos )'
+			Leer cod
+			Si Longitud(cod)<>3 Entonces
+				incorrecto('¡Código ingresado incorrecto!')
+			FinSi
+		Mientras Que Longitud(cod)<>3
+		busco <- buscoCodigo(cod,arreglo1,total)
+		Si busco=='-1' Entonces
+			incorrecto('¡Ese codigo no existe!')
+		SiNo
+			Limpiar Pantalla
+			q1 <- ConvertirANumero(arreglo1[1,5])
+			q2 <- ConvertirANumero(arreglo1[1,6])
+			precio <- ConvertirANumero(arreglo1[1,3])
+			stock <- ConvertirANumero(arreglo1[1,4])
+			mes <- q1+q2
+			actual <- stock-mes
+			importe <- mes*precio
+			Escribir ''
+			Escribir '4. Buscar artículo por código '
+			Escribir ''
+			Escribir ' |    1ra Quiencena    |    2da Quincena    |    Stock Actual   | Importe Total Mes  |'
+			Escribir ' ------------------------------------------------------------------------------------'
+			Escribir '            ', q1, '                   ', q2, '                    ', actual, '                 ', importe
+			Escribir ''
+			Escribir ' * Pulse una tecla para continuar...'
+			Escribir ''
+			Esperar Tecla
+		FinSi
+		rsp <- pregunta(desea,'Desea realizar otra busqueda')
+	Mientras Que rsp<>'n'
+FinSubProceso
+
+// Proceso de Muestra por Estadísticas
+// ------------------------------------------------------------------------------------------
+SubProceso muestraEstadisticas(arreglo,total)
+	Limpiar Pantalla
+	Repetir
+		Repetir
+			subOpciones()
+			Escribir '[*] Ingrese una opción: '
+			Leer subOpcion
+		Mientras Que subOpcion<>'a' Y subOpcion<>'b' Y subOpcion<>'c' Y subOpcion<>'x' 
+		letra <- Minusculas(subOpcion)
+		Segun letra Hacer
+			'a':
+				Escribir 'Opcion A'
+				Esperar Tecla
+				rsp <- pregunta(desea,'Desea volver al menu principal')
+			'b':
+				Escribir 'Opcion B'
+				Esperar Tecla
+				rsp <- pregunta(desea,'Desea volver al menu principal')
+			'c':
+				Escribir 'Opcion C'
+				Esperar Tecla
+				rsp <- pregunta(desea,'Desea volver al menu principal')
+			'x':
+				Escribir 'Opcion X'
+		FinSegun
+	Mientras Que letra<>'x' Y rsp<>'s'
+FinSubProceso
+
+// Proceso de Sub Menu Estadisticas
+// ------------------------------------------------------------------------------------------
+SubProceso subOpciones
+	Limpiar Pantalla
+	Escribir ''
+	Escribir '	5. Mostrar Estadísticas'
+	Escribir ''
+	Escribir '			a) Porcentaje Cantidad Artículos Vendidos de Cada Rubro'
+	Escribir '			b) Porcentaje Venta Cada Quincena por Rubro'
+	Escribir '			c) Rubro Mayor Importe Total Ventas Cada Quincena'
+	Escribir '			x) Volver al Menu Principal'
+	Escribir ''
 FinSubProceso
