@@ -16,8 +16,8 @@
     <title>Creación de una Página Web de Portafolio Personal</title>
   </head>
   <body>
+    <header><h1>Milton F. Ruiz</h1></header>
     <main>
-      <header><h1>Milton F. Ruiz</h1></header>
       <nav>
         <ul>
           <li><a href="#sobre-mi">Sobre Mí</a></li>
@@ -74,5 +74,33 @@
         </article>
       </section>
     </main>
+    <footer>
+      <h2>Footer</h2>
+      <form action="Link">
+        <label for="name">Nombre:</label>
+        <input
+          type="text"
+          name="name"
+          placeholder="ingrese nombre..."
+          required
+        />
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="ingrese email..."
+          required
+        />
+        <label for="coments">Mensaje:</label>
+        <textarea
+          name="coments"
+          id="coments"
+          placeholder="ingrese mensaje..."
+          required
+        ></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </footer>
   </body>
 </html>
