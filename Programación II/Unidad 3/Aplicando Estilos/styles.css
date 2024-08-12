@@ -32,3 +32,7 @@ li {
 a {
   color: black;
 }
+/*7. Los links dentro de la lista deben ser color naranja y estar subrayados.*/
+ul li a {
+  color: orange;
+}
