@@ -1,0 +1,8 @@
+/*---------------------- U N I V E R S A L -----------------------*/
+/*1. Todos los elementos deben tener fuente de familia sans-serif.*/
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
