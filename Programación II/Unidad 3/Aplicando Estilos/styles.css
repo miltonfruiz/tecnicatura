@@ -23,3 +23,8 @@ h2 {
 p {
   font-size: 14px;
 }
+/*5. Los elementos de la lista deben tener fuente de familia monospace y tamaño 18px.*/
+li {
+  font-family: monospace;
+  font-size: 18px;
+}
