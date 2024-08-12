@@ -35,8 +35,16 @@ a {
 /*7. Los links dentro de la lista deben ser color naranja y estar subrayados.*/
 ul li a {
   color: orange;
+  text-decoration: underline;
 }
 /*8. Los párrafos deben tener un margen superior e inferior de 30px.*/
 p {
   margin: 30px 0px 30px 0px;
+}
+/*9. La lista entera debe tener un margen a la izquierda de 100px y un padding de 20px.
+Además, agregarle un borde sólido de 2 pixeles, color azul.*/
+ul {
+  margin-left: 100px;
+  padding: 20px;
+  border: 2px solid blue;
 }
