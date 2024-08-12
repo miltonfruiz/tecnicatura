@@ -48,3 +48,13 @@ ul {
   padding: 20px;
   border: 2px solid blue;
 }
+/*10. Todos elementos dentro del elemento de lista de las provincias de Nequen y Rio
+Negro deben tener color verde (texto y link).*/
+li:nth-child(2),
+li:nth-child(6) {
+  color: green;
+}
+li:nth-child(2) a,
+li:nth-child(6) a {
+  color: green;
+}
