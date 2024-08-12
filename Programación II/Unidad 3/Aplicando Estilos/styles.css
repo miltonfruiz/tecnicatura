@@ -28,3 +28,7 @@ li {
   font-family: monospace;
   font-size: 18px;
 }
+/*6. Todos los links deben estar en negrita*/
+a {
+  color: black;
+}
