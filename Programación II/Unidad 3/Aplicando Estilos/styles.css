@@ -13,3 +13,9 @@ h1 {
   color: #242424;
   font-weight: 900;
 }
+/*3. Titulo h2 con tamaño 20px, color #606060 y grosor 800.*/
+h2 {
+  font-size: 20px;
+  color: #606060;
+  font-weight: 800;
+}
