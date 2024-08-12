@@ -6,3 +6,10 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
+/*2. Titulo h1 con tamaño 24px, color #242424 y grosor 900.*/
+h1 {
+  font-size: 34px;
+  color: #242424;
+  font-weight: 900;
+}
