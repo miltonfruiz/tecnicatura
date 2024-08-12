@@ -19,3 +19,7 @@ h2 {
   color: #606060;
   font-weight: 800;
 }
+/*4. Los párrafos tamaño 14px.*/
+p {
+  font-size: 14px;
+}
