@@ -1,0 +1,73 @@
+/*---------- Selector Universal ----------*/
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/*------------------ Nav ----------------*/
+header {
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 1;
+}
+.banner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 110px;
+  background: url(./banner2.jpg);
+  background-size: cover;
+  background-position: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.nav-list {
+  text-align: center;
+  padding: 10px;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+li {
+  margin: 0px 20px 0px 20px;
+  text-decoration: none;
+}
+a {
+  color: aliceblue;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  color: red;
+}
+.profile-pic {
+  border-radius: 100%;
+  width: 135px;
+  height: auto;
+  margin: 20px 0px 0px 20px;
+  border: 2px solid whitesmoke;
+  box-shadow: rgba(133, 205, 253, 0.959) 0px 5px 15px;
+}
+h1 {
+  font-size: 30px;
+}
+.mern {
+  font-size: 17px;
+}
+.student {
+  font-size: 12px;
+}
+h1,
+.mern,
+.student {
+  color: black;
+}
+.profile-container {
+  position: relative;
+  top: 130px;
+  right: 5px;
+}
