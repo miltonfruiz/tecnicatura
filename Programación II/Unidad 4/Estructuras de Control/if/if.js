@@ -101,3 +101,12 @@ while (i < 5) {
   console.log("Valor de i:", i);
   i = i + 1; // Incrementamos el valor de i
 }
+
+// Ejemplo for
+
+for (var i = 1; i <= 10; i++) {
+  console.log(i);
+}
+for (var i = 2; i <= 100; i += 2) {
+  console.log(i);
+}
