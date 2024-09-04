@@ -85,10 +85,19 @@ if (altura > 1.3 && edad > 14) {
 }*/
 
 // Ejemplo If con ||(OR)
-var color;
+/* var color;
 color = prompt("Ingrese el color del auto");
 if (color == "Rojo" || color == "Verde") {
   console.log("El auto pertenece a la categoría A");
 } else {
   console.log("El auto pertenece a la categoría B");
+} */
+
+// Ejemplo while
+
+i = 0; // Inicialización de la variable contador
+// Condición: Mientras la variable contador sea menor de
+while (i < 5) {
+  console.log("Valor de i:", i);
+  i = i + 1; // Incrementamos el valor de i
 }
