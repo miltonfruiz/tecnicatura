@@ -23,3 +23,19 @@ console.log("Estoy", calificacion);
 // Operador ternario: (condición ? verdadero : falso)
 var calificacion = nota < 5 ? "suspendido" : "aprobado";
 console.log("Estoy", calificacion);
+
+// Ejemplo if multiple
+var nota = 7;
+var calificacion = "";
+console.log("He realizado mi examen.");
+// Condición
+if (nota < 5) {
+  calificacion = "Insuficiente";
+} else if (nota < 6) {
+  calificacion = "Suficiente";
+} else if (nota < 8) {
+  calificacion = "Bien";
+} else {
+  calificacion = "Sobresaliente";
+}
+console.log("He obtenido un", calificacion);
