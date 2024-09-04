@@ -1,14 +1,11 @@
 /* Solicitar al usuario ingresar una contraseña.
-El programa verificara si la clave ingresada coincide con una
-clave predefinida, 
+El programa verificara si la clave ingresada coincide con una clave predefinida,
 Si la clave es incorrecta, se le permitira al usuario intentarlo nuevamente
-pero se le informara despues de tres intentos fallidos.
-*/
+pero se le informara despues de tres intentos fallidos. */
 
 intentos = 1;
-
 do {
-  var clave = parseInt(prompt("Ingrese contraseña"));
+  let clave = parseInt(prompt("Ingrese contraseña"));
   if (clave === 1234) {
     alert("¡Contraseña correcta!");
     break;
