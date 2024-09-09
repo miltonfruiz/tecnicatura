@@ -111,3 +111,13 @@ if (a === 5) {
 }
 console.log(a); // 5, por alcance global
 console.log(b); // 15, por alcance global
+
+//Callbacks(devolución de llamada)
+function saludar(nombre) {
+  alert("Hola " + nombre);
+}
+function procesarEntradaUsuario(callback) {
+  var nombre = prompt("Por favor ingresa tu nombre.");
+  callback(nombre);
+}
+procesarEntradaUsuario(saludar);
