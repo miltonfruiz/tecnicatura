@@ -50,3 +50,28 @@ var numeroMaximo = function (valor1, valor2) {
 var v1 = parseInt(prompt("Ingrese un número entero"));
 var v2 = parseInt(prompt("Ingrese otro número entero"));
 console.log("El número máximo es:", numeroMaximo(v1, v2));
+
+//Funciones |Función flecha (arrowFunction)
+//Función tradicional
+function cuadrado(x) {
+  return x * x;
+}
+console.log(cuadrado(2));
+
+// Función Flecha (Arrow)
+var aCuadrado = (x) => x * x;
+console.log(aCuadrado(2));
+
+// Función tradicional (con 2 parametros)
+function multiplicar(num1, num2) {
+  producto = num1 * num2;
+  return producto;
+}
+console.log(multiplicar(2, 3));
+
+// Función Arrow (con 2 parametros)
+var aMultiplicar = (num1, num2) => {
+  producto = num1 * num2;
+  return producto;
+};
+console.log(aMultiplicar(6, 7));
