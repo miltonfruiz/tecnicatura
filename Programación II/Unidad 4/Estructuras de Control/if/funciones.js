@@ -34,3 +34,19 @@ function contarCaracteres(cadena) {
 let texto = "Ejemplo de cadena";
 let longitudTexto = contarCaracteres(texto);
 console.log("La frase", texto, "tiene", longitudTexto, "caracteres.");
+
+//Funciones | Devolución de valores
+var suma = function sumarTres(numero1, numero2) {
+  return numero1 + numero2;
+};
+console.log(suma(40, 15));
+
+var numeroMaximo = function (valor1, valor2) {
+  if (valor1 > valor2) {
+    return valor1;
+  }
+  return valor2;
+};
+var v1 = parseInt(prompt("Ingrese un número entero"));
+var v2 = parseInt(prompt("Ingrese otro número entero"));
+console.log("El número máximo es:", numeroMaximo(v1, v2));
