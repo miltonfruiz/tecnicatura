@@ -89,3 +89,13 @@ function a(a) {
 (a) => a + 100;
 // 3. Suprime los paréntesis de los argumentos
 (a) => a + 100;
+
+// Función anónima "saludo"
+const saludo1 = function () {
+  return "Hola";
+};
+// Función anónima "saludo"
+const saludo2 = function (nombre) {
+  var mensaje = "Hola " + nombre;
+  return mensaje;
+};
