@@ -75,3 +75,17 @@ var aMultiplicar = (num1, num2) => {
   return producto;
 };
 console.log(aMultiplicar(6, 7));
+
+// Función flecha válida
+function a(a) {
+  return a + 100;
+}
+// Desglose de la función flecha
+// 1. Elimina la palabra "function" y coloca la flecha entre el argumento y las llaves de apertura.
+(a) => {
+  return a + 100;
+};
+// 2. Quita los llaves{} del cuerpo y la palabra "return" (el return está implícito).
+(a) => a + 100;
+// 3. Suprime los paréntesis de los argumentos
+(a) => a + 100;
