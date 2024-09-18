@@ -1,3 +1,4 @@
+//Objetos |¿Cómo se crean?
 // Creamos el objeto
 var miAuto = new Object();
 
@@ -13,6 +14,7 @@ console.log(
   miAuto.modelo
 );
 
+//Objetos
 var persona = {
   nombre: "Juan", //variable del objeto. Par variable: valor,
   apellido: "Paz",
@@ -40,7 +42,25 @@ var persona2 = {
   genero: "F",
 };
 console.log("El nombre de la persona1:", persona1.nombre);
-console.log("El nombre de la persona2:", persona2.edad);
+console.log("El nombre de la persona2:", persona2.nombre);
 console.log(
   `Nombre de la primer persona: ${persona1.nombre},nombre de la segunda persona ${persona2.nombre}`
 );
+
+//Objetos |Métodos
+var perro = {
+  nombre: "Milo",
+  edad: 12,
+  vivo: true,
+  quienSoy() {
+    return "Soy " + this.nombre;
+  },
+  ladrar() {
+    return this.nombre + " dice guau!";
+  },
+};
+console.log(perro.nombre, "tiene", perro.edad, "años");
+console.log(perro.quienSoy());
+if (perro.vivo) {
+  console.log(perro.ladrar());
+}
