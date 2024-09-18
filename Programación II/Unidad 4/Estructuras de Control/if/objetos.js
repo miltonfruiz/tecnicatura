@@ -41,3 +41,6 @@ var persona2 = {
 };
 console.log("El nombre de la persona1:", persona1.nombre);
 console.log("El nombre de la persona2:", persona2.edad);
+console.log(
+  `Nombre de la primer persona: ${persona1.nombre},nombre de la segunda persona ${persona2.nombre}`
+);
