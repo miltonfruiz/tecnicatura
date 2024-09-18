@@ -98,3 +98,23 @@ console.log(`El interes que mas le gusta al usuario ${usuario.intereses[1]}`);
 //Mostrar Saludo
 console.log(usuario.saludar());
 usuario.saludar();
+
+// Clase Perro, con su constructor:
+class Perro {
+  constructor(nombre, edad, vivo) {
+    this.nombre = nombre;
+    this.edad = edad;
+    this.vivo = vivo;
+  }
+}
+// Instanciamos dos objetos clase Perro:
+var perro1 = new Perro("Lola", 4, true);
+var perro2 = new Perro("Lassie", 10, false);
+
+// Modificamos alguna de sus PROPIEDADES:
+perro1.nombre = "Toby";
+perro2.edad = 6;
+
+console.log(perro1);
+console.log(perro2);
+console.log(Perro);
