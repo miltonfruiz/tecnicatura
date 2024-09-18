@@ -64,3 +64,37 @@ console.log(perro.quienSoy());
 if (perro.vivo) {
   console.log(perro.ladrar());
 }
+
+//
+var usuario = {
+  nombre: "Ana García",
+  edad: 25,
+  correo: "ana@example.com",
+  direccion: {
+    calle: "Calle Principal",
+    ciudad: "Rosario",
+    codigoPostal: "2000",
+  },
+  intereses: ["Programacion", "Viajes", "Bailar"],
+  saludar: function () {
+    console.log("Hola!! Soy: " + this.nombre + ". Como estas?");
+  },
+};
+
+console.log("Nombre del usuario:", usuario.nombre);
+console.log("Edad del Usuario:", usuario.edad);
+console.log("Correo del usuario:", usuario.correo);
+
+// Mostrar Dirección
+console.log(
+  `Dirección del usuario: ${usuario.direccion.calle}, ${usuario.direccion.ciudad}`
+);
+console.log(usuario.direccion);
+
+//Mostrar Intereses
+console.log("Intereses del usuario: ", usuario.intereses);
+console.log(`El interes que mas le gusta al usuario ${usuario.intereses[1]}`);
+
+//Mostrar Saludo
+console.log(usuario.saludar());
+usuario.saludar();

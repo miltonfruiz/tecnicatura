@@ -1,1 +1,1 @@
-texto
+console.log(usuario.dirreccion);
