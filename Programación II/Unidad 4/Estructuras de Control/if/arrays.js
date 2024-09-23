@@ -10,3 +10,10 @@ console.log(vectorDos);
 console.log(vectorDos[1]);
 console.log(vectorTres[2]);
 console.log(vectorTres[6]);
+
+//Ejemplo: Array | Bucle For
+const vectorDoss = new Array("a", "b", "c");
+console.log("Elementos del vector 2:");
+for (i = 0; i < vectorDoss.length; i++) {
+  console.log(vectorDoss[i]);
+}
