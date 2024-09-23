@@ -35,3 +35,19 @@ console.log(concateno);
 // Ejemplo: String |charAt(pos)
 var palabra = "Programación";
 console.log(palabra.charAt(3));
+
+//Ejemplo: String |.indexOf() y .lastIndexOf()
+var frase = "Aprender a Programar JavaScript";
+console.log(frase.indexOf("JavaScript"));
+
+//Buscar un subcadena desde una posicion específica
+var js = "Estoy aprendiendo JavaScript, el JavaScipt me gusta";
+console.log(js.indexOf("JavaScript", 15));
+console.log(js.indexOf("JavaScript", 20));
+
+var encanta = "Me encanta Javascript, el JavaScript es genial, y tb JavaScript";
+console.log(encanta.lastIndexOf("JavaScript"));
+//lastIndefOf() devuelve la ultima posicion de una subcadena
+
+var frase = "Hoy es un buen día para aprender algo nuevo";
+console.log(frase.lastIndexOf("un", 10));
