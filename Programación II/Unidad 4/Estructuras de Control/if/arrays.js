@@ -64,3 +64,38 @@ var posA = letras.lastIndexOf("A");
 console.log("La última 'A' tiene indice", posA);
 var posB = letras.lastIndexOf("B");
 console.log("La última 'B' tiene indice", posB);
+
+//Ejemplo: Array | Otros métodos
+
+//Ejemplo: Array | Métodos | Splice y Slice
+const arreglo = ["a", "b", "c", "d", "e", "f"];
+let trozo1 = arreglo.slice(1, 3); // ['b','c']
+let trozo2 = arreglo.slice(5); // ['f']
+console.log(trozo1);
+console.log(trozo2);
+
+const arreglosplice = ["a", "b", "c", "d"];
+// Insertamos un elemento en la pos. 2:
+arreglosplice.splice(2, 0, "n");
+console.log(arreglo); //['a','b','n','c','d']
+// Reemplazamos un elemento en la pos. 1:
+arreglosplice.splice(1, 1, "t");
+console.log(arreglosplice); //['a','t','n','c','d' ]
+
+//Ejemplo: Array | Métodos | Sort y Reverse
+// Arreglo de cadenas: Orden alfabético
+const arregloSort = ["c", "d", "a", "b", "e"];
+arregloSort.sort();
+console.log(arregloSort); //['a','b','c','d','e']
+const a = ["3", "10", "1", "31", "5"];
+a.sort();
+console.log(a); //['1','10','3','31','5']
+
+// Arreglo de números: Orden "alfabético"
+const arregloSort2 = [4, 45, 5, 59, 1, 2];
+arregloSort2.sort();
+console.log(arregloSort2); //[1,2,4,45,5,59]
+// Arreglos mixtos: cuidado
+const cuidado = ["a", 2, "b", 1, true];
+cuidado.sort();
+console.log(cuidado); //[1,2,'a','b',true]
