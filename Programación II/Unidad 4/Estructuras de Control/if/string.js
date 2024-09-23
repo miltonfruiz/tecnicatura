@@ -31,3 +31,7 @@ console.log(mensaje);
 var hola = "Hola ";
 var concateno = hola.concat("Milton");
 console.log(concateno);
+
+// Ejemplo: String |charAt(pos)
+var palabra = "Programación";
+console.log(palabra.charAt(3));
