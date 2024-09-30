@@ -1,1 +1,1 @@
-console.log(usuario.dirreccion);
+datos

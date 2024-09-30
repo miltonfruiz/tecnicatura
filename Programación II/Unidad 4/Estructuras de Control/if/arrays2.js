@@ -89,3 +89,10 @@ var objectValue = {
 for (let i of Object.values(objectValue)) {
   console.log(i);
 }
+
+//Guardar datos en localstorage
+localStorage.setItem("nombre", "juan");
+
+//Obtener datos en localstorage
+var nombreGuardado = localStorage.getItem("nombre");
+console.log(nombreGuardado);
