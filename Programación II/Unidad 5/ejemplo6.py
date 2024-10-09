@@ -11,5 +11,6 @@ def ordenar_nombres():
         print('\nLista de nombres ordenados:\n')
         for nombre in  nombres:
             print(nombre)
-
-ordenar_nombres()
+    return nombres
+n = ordenar_nombres()
+print(f'La segunda persona ordenada es {n[1]}')
