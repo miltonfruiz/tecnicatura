@@ -120,3 +120,12 @@ cad1 = "---Hola-Mundo----"
 cad1 = cad1.strip('-')
 print(cad1)
 # Hola-Mundo
+
+#Cadenas de caracteres | Búsquedas
+cad="Codo a Codo"
+pos= cad.find("Codo")
+print(pos) # 0
+
+cad="Codo a Codo"
+pos= cad.rfind("Codo")
+print(pos) # 7
