@@ -58,7 +58,6 @@ print(cadena[::2]) # ¡oamno
 print(cadena[::-1]) # !odnum aloH¡
 
 #Cadenas de caracteres | for ,min() y max()
-
 cadena = "Python"
 for letra in cadena:
     print(letra)
@@ -66,3 +65,20 @@ for letra in cadena:
 cadena2 = "Programador"
 print(max(cadena))
 print(min(cadena))
+
+#Cadenas de caracteres |.join(), .split() y .replace()
+cadena = "12345"
+cadena = '-'.join(cadena)
+print(cadena)
+#1-2-3-4-5
+
+cadena = "Codo a Codo"
+lista = cadena.split(' ')
+print(lista)
+#['Codo', 'a', 'Codo']
+
+cadena = "Codo a Codo"
+cadena = cadena.replace('Codo',
+'Mano')
+print(cadena)
+# Mano a Mano
