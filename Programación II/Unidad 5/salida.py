@@ -82,3 +82,25 @@ cadena = cadena.replace('Codo',
 'Mano')
 print(cadena)
 # Mano a Mano
+
+#Cadenas de caracteres |Detección de tipos
+cad1 = "Python"
+cad2 = "Python3"
+print(cad1.isalpha())
+# True
+print(cad2.isalpha())
+# False
+
+cad1 = "1234"
+cad2 = "1234a"
+print(cad1.isdigit())
+# True
+print(cad2.isdigit())
+# False
+
+cad1 = "12Ab"
+cad2 = "12Ab%"
+print(cad1.isalnum())
+# True
+print(cad2.isalnum())
+# False
