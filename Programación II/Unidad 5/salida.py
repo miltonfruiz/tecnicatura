@@ -104,3 +104,19 @@ print(cad1.isalnum())
 # True
 print(cad2.isalnum())
 # False
+
+#Cadenas de caracteres | Recorte
+cad1 = "---Hola-Mundo----"
+cad1 = cad1.lstrip('-')
+print(cad1)
+# Hola-Mundo----
+
+cad1 = "---Hola-Mundo----"
+cad1 = cad1.rstrip('-')
+print(cad1)
+# ---Hola-Mundo
+
+cad1 = "---Hola-Mundo----"
+cad1 = cad1.strip('-')
+print(cad1)
+# Hola-Mundo
