@@ -56,3 +56,13 @@ print(cadena[:5]) # ¡Hola
 print(cadena[:]) # ¡Hola mundo!
 print(cadena[::2]) # ¡oamno
 print(cadena[::-1]) # !odnum aloH¡
+
+#Cadenas de caracteres | for ,min() y max()
+
+cadena = "Python"
+for letra in cadena:
+    print(letra)
+
+cadena2 = "Programador"
+print(max(cadena))
+print(min(cadena))
