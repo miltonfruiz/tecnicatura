@@ -129,3 +129,10 @@ print(pos) # 0
 cad="Codo a Codo"
 pos= cad.rfind("Codo")
 print(pos) # 7
+
+#Cadenas de caracteres | f-Strings
+legajo = 12212
+nombre = "María"
+nota = 10
+print(f"Legajo: {legajo} Nombre: {nombre} Nota: {nota}") 
+# Legajo: 12212 Nombre: María Nota: 10
