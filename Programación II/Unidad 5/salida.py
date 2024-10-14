@@ -40,3 +40,9 @@ print(cadena1 < cadena2)
 cadena1 = "Hola" 
 cadena2 = "hola"
 print(cadena1 == cadena2) 
+
+#Cadenas de caracteres |Métodos
+cadena = "Codo a Codo" 
+print(cadena.upper()) # CODO A CODO 
+print(cadena.lower()) # codo a codo 
+print(cadena.capitalize()) # Codo a codo
