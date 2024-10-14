@@ -30,3 +30,13 @@ var3 = 3 + "5" # TypeError
 var4 = str(3) + "5" # 35 (cadena)
 var5 = 3 + int("5") # 8 (entero)
 
+#Cadenas de caracteres |Comparación
+cadena1 = "Hola"
+cadena2 = "Codo a Codo"
+print(cadena1 > cadena2)
+print(cadena1 == cadena2)
+print(cadena1 < cadena2)
+
+cadena1 = "Hola" 
+cadena2 = "hola"
+print(cadena1 == cadena2) 
