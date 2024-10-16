@@ -19,9 +19,16 @@ print(juan.edad) # 34
 
 class Persona:
     piernas = 2 # Atributo de clase
-juan = Persona() # Instanciamos un objeto 
+juan = Persona() # Instanciamos un objeto
 juan.edad = 34 # creamos un atributo
-# Mostramos el atributo de instancia (objeto) 
+# Mostramos el atributo de instancia (objeto)
 print(juan.edad) # 34
-# Mostramos el atributo de clase 
+# Mostramos el atributo de clase
 print(Persona.piernas) # 2
+
+class Persona():
+    piernas = 2 # Atributo DE CLASE
+def caminar(self): # Definimos un método
+    print("Está caminando.")
+juan = Persona() # Instanciamos un objeto
+juan.caminar() # Invocamos el método caminar()
