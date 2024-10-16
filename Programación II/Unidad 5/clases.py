@@ -85,3 +85,14 @@ alumno1 = Alumno("Pedro", 7)
 print(alumno1) # La nota de Pedro es 7
 alumno1.nota = 10
 print(alumno1) # La nota de Pedro es 10
+
+class Perro:
+    def __init__ (self, nombre, raza):
+        self.nombre = nombre
+        self.raza = raza
+    def __del__ (self):
+        print('Objeto eliminado.')
+perro1 = Perro("Lassie", "Collie")
+print(perro1.nombre) # Lassie
+print(perro1.raza) # Collie
+del perro1 # Objeto eliminado.
