@@ -46,3 +46,17 @@ juan.caminar() # Estoy caminando
 print(juan.caminando) # True
 juan.detener() # Estoy detenido
 print(juan.caminando) # False
+
+class Persona():
+# Método constructor
+    def constructor(self, nombre, edad):
+     self.nombre = nombre
+     self.edad = edad
+def identificarse(self): # Método normal
+    print(f"Hola. Soy {self.nombre} y
+tengo {self.edad} años.")
+persona1 = Persona() # Instanciamos
+persona1.constructor("Juan", 42)
+persona1.identificarse()
+persona1.edad = 43 # Modificamos la edad
+persona1.identificarse()
