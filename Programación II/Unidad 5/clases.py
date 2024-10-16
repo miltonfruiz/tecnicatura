@@ -32,3 +32,17 @@ def caminar(self): # Definimos un método
     print("Está caminando.")
 juan = Persona() # Instanciamos un objeto
 juan.caminar() # Invocamos el método caminar()
+
+class Persona():
+    caminando = False # Atributo
+def caminar(self): # Método caminar
+    self.caminando = True
+print("Estoy caminando.")
+def detener(self): # Método detener
+    self.caminando = False
+print("Estoy detenido.")
+juan = Persona() # Instanciamos
+juan.caminar() # Estoy caminando
+print(juan.caminando) # True
+juan.detener() # Estoy detenido
+print(juan.caminando) # False
