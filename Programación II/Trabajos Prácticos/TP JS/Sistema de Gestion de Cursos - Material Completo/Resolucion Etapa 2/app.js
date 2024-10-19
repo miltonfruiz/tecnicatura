@@ -25,6 +25,7 @@ const guardarEdicion = document.getElementById("guardar-edicion");
 const cancelarEdicion = document.getElementById("cancelar-edicion");
 const nombreEstudiante = document.getElementById("nombre-estudiante");
 const busquedaIngresada = document.getElementById("busqueda-ingresada");
+const filtroEstudiantes = document.getElementById("filtro-estudiantes");
 
 //---------------------------- Clase Estudiante -------------------------------------//
 
@@ -68,10 +69,12 @@ class Curso {
   }
 }
 
-//--------------------- Arreglo para almacenar los cursos ----------------------//
+//----------------------- Arreglo y Variables  -------------------------//
 
 export let cursos = [];
 export let cursoActual = null;
+let ordenarPorEdad = false;
+let ordenarPorNota = false;
 
 //------------------ Evento para agregar un curso ----------------------//
 
@@ -140,7 +143,6 @@ formEstudiante.addEventListener("submit", (e) => {
     mostrarMensaje("¡Estudiante agregado correctamente!", "success");
   }
 });
-
 //------------------- Función para actualizar el select de cursos --------------//
 
 export function actualizarCursosSelect() {
@@ -152,7 +154,7 @@ export function actualizarCursosSelect() {
     cursoEstudianteSelect.appendChild(option);
   });
 }
-//------------------ Función para mostrar los cursos y estudiantes -------------------//
+//------------------- Función para mostrar los cursos y estudiantes -------------------//
 
 export function mostrarCursos(busqueda = "") {
   listaCursos.innerHTML = "";
@@ -173,13 +175,20 @@ export function mostrarCursos(busqueda = "") {
     <tbody>
   `;
   let resultadosEncontrados = false;
+
   cursos.forEach((curso) => {
     if (
       curso.nombre.toLowerCase().includes(busqueda) ||
       curso.profesor.toLowerCase().includes(busqueda)
     ) {
       resultadosEncontrados = true;
-      const cantidadEstudiantes = curso.estudiantes.length;
+      let estudiantesAFiltrar = [...curso.estudiantes];
+      if (ordenarPorEdad) {
+        estudiantesAFiltrar.sort((a, b) => a.edad - b.edad);
+      } else if (ordenarPorNota) {
+        estudiantesAFiltrar.sort((a, b) => a.nota - b.nota);
+      }
+      const cantidadEstudiantes = estudiantesAFiltrar.length;
       const filaCurso = document.createElement("tr");
       filaCurso.innerHTML = `
         <td rowspan="${cantidadEstudiantes || 1}">${curso.nombre}</td>
@@ -189,11 +198,15 @@ export function mostrarCursos(busqueda = "") {
         }">${curso.obtenerPromedio()}</td>
         <td>${
           cantidadEstudiantes > 0
-            ? curso.estudiantes[0].nombre
+            ? estudiantesAFiltrar[0].nombre
             : "No hay estudiantes"
         }</td>
-        <td>${cantidadEstudiantes > 0 ? curso.estudiantes[0].edad : "N/A"}</td>
-        <td>${cantidadEstudiantes > 0 ? curso.estudiantes[0].nota : "N/A"}</td>
+        <td>${
+          cantidadEstudiantes > 0 ? estudiantesAFiltrar[0].edad : "N/A"
+        }</td>
+        <td>${
+          cantidadEstudiantes > 0 ? estudiantesAFiltrar[0].nota : "N/A"
+        }</td>
         <td class="td-contenedor-botones" rowspan="${cantidadEstudiantes || 1}">
           <div class="botones-acciones">
             <button id="boton-editar-curso" class="editar-curso btn btn-warning" nombre="${
@@ -210,12 +223,13 @@ export function mostrarCursos(busqueda = "") {
         </td>
       `;
       tabla.querySelector("tbody").appendChild(filaCurso);
+
       for (let i = 1; i < cantidadEstudiantes; i++) {
         const filaEstudiante = document.createElement("tr");
         filaEstudiante.innerHTML = `
-          <td>${curso.estudiantes[i].nombre}</td>
-          <td>${curso.estudiantes[i].edad}</td>
-          <td>${curso.estudiantes[i].nota}</td>
+          <td>${estudiantesAFiltrar[i].nombre}</td>
+          <td>${estudiantesAFiltrar[i].edad}</td>
+          <td>${estudiantesAFiltrar[i].nota}</td>
         `;
         tabla.querySelector("tbody").appendChild(filaEstudiante);
       }
@@ -225,18 +239,24 @@ export function mostrarCursos(busqueda = "") {
       );
       if (estudiantesFiltrados.length > 0) {
         resultadosEncontrados = true;
+        let estudiantesAFiltrar = [...estudiantesFiltrados];
+        if (ordenarPorEdad) {
+          estudiantesAFiltrar.sort((a, b) => a.edad - b.edad);
+        } else if (ordenarPorNota) {
+          estudiantesAFiltrar.sort((a, b) => a.nota - b.nota);
+        }
         const filaCurso = document.createElement("tr");
         filaCurso.innerHTML = `
-          <td rowspan="${estudiantesFiltrados.length}">${curso.nombre}</td>
-          <td rowspan="${estudiantesFiltrados.length}">${curso.profesor}</td>
+          <td rowspan="${estudiantesAFiltrar.length}">${curso.nombre}</td>
+          <td rowspan="${estudiantesAFiltrar.length}">${curso.profesor}</td>
           <td rowspan="${
-            estudiantesFiltrados.length
+            estudiantesAFiltrar.length
           }">${curso.obtenerPromedio()}</td>
-          <td>${estudiantesFiltrados[0].nombre}</td>
-          <td>${estudiantesFiltrados[0].edad}</td>
-          <td>${estudiantesFiltrados[0].nota}</td>
+          <td>${estudiantesAFiltrar[0].nombre}</td>
+          <td>${estudiantesAFiltrar[0].edad}</td>
+          <td>${estudiantesAFiltrar[0].nota}</td>
           <td class="td-contenedor-botones" rowspan="${
-            estudiantesFiltrados.length
+            estudiantesAFiltrar.length
           }">
             <div class="botones-acciones">
               <button id="boton-editar-curso" class="editar-curso btn btn-warning" nombre="${
@@ -253,18 +273,19 @@ export function mostrarCursos(busqueda = "") {
           </td>
         `;
         tabla.querySelector("tbody").appendChild(filaCurso);
-        for (let i = 1; i < estudiantesFiltrados.length; i++) {
+        for (let i = 1; i < estudiantesAFiltrar.length; i++) {
           const filaEstudiante = document.createElement("tr");
           filaEstudiante.innerHTML = `
-            <td>${estudiantesFiltrados[i].nombre}</td>
-            <td>${estudiantesFiltrados[i].edad}</td>
-            <td>${estudiantesFiltrados[i].nota}</td>
+            <td>${estudiantesAFiltrar[i].nombre}</td>
+            <td>${estudiantesAFiltrar[i].edad}</td>
+            <td>${estudiantesAFiltrar[i].nota}</td>
           `;
           tabla.querySelector("tbody").appendChild(filaEstudiante);
         }
       }
     }
   });
+
   if (!resultadosEncontrados) {
     const mensajeNoEncontrado = document.createElement("tr");
     mensajeNoEncontrado.innerHTML = `
@@ -274,6 +295,9 @@ export function mostrarCursos(busqueda = "") {
   }
   tabla.innerHTML += `</tbody></table>`;
   listaCursos.appendChild(tabla);
+
+  //------------------------------------ Botones   ------------------------------------//
+
   const botonEditar = document.querySelectorAll(".editar-curso");
   botonEditar.forEach((boton) => {
     boton.addEventListener("click", () => {
@@ -350,7 +374,6 @@ export function mostrarCursos(busqueda = "") {
     });
   });
 }
-
 //------------------------------- Guardar edición --------------------------------//
 
 guardarEdicion.addEventListener("click", () => {
@@ -363,7 +386,7 @@ guardarEdicion.addEventListener("click", () => {
     formularioEdicion.style.display = "none";
   }
 });
-//------------------------------- Cancelar edición ------------------------------//
+//------------------------------- Cancelar edición ----------------------------//
 
 cancelarEdicion.addEventListener("click", () => {
   formularioEdicion.style.display = "none";
@@ -373,4 +396,17 @@ cancelarEdicion.addEventListener("click", () => {
 busquedaIngresada.addEventListener("input", () => {
   const valorBusqueda = busquedaIngresada.value.toLowerCase();
   mostrarCursos(valorBusqueda);
+});
+//---------------------------------- Filtro ----------------------------------//
+
+filtroEstudiantes.addEventListener("change", () => {
+  const valorFiltro = filtroEstudiantes.value;
+  ordenarPorEdad = false;
+  ordenarPorNota = false;
+  if (valorFiltro === "edad") {
+    ordenarPorEdad = true;
+  } else if (valorFiltro === "nota") {
+    ordenarPorNota = true;
+  }
+  mostrarCursos(busquedaIngresada.value.toLowerCase());
 });

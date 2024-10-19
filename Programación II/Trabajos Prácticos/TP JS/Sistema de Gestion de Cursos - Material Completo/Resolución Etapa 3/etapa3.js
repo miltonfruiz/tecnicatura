@@ -56,7 +56,6 @@ export function edicionEstudiantes() {
       const estudiante = cursoActual.estudiantes.find(
         (est) => est.nombre === nombreEstudiante
       );
-
       const formularioEdicionEstudiante = crearFormularioEdicion(estudiante);
       const listaEstudiantesEdicion = document.getElementById(
         "lista-estudiantes-edicion"
@@ -119,12 +118,8 @@ function crearFormularioEdicion(estudiante) {
       estudiante.nombre = primeraMayuscula(nuevoNombre);
       estudiante.edad = nuevaEdad;
       estudiante.nota = nuevaNota;
-
-      // Mostrar la tabla de estudiantes nuevamente
       mostrarTablaEstudiantesEdicion(cursoActual);
-
-      // Limpiar el formulario
-      listaEstudiantesEdicion.innerHTML = ""; // Ocultar el formulario de edición
+      listaEstudiantesEdicion.innerHTML = "";
     } else {
       alert("Por favor, introduce valores válidos.");
     }
@@ -144,7 +139,6 @@ export function mostrarTablaEstudiantesEdicion(curso) {
       .getElementById("lista-estudiantes-edicion")
       .appendChild(tablaEstudiantes);
   }
-
   tablaEstudiantes.innerHTML = "";
 }
 //------------------------- Función mostrar mensaje de creado -----------------------//
@@ -154,7 +148,6 @@ export function mostrarMensaje(mensaje, tipo) {
   mensajeDiv.textContent = mensaje;
   mensajeDiv.className = `mensaje ${tipo}`;
   document.body.appendChild(mensajeDiv);
-
   setTimeout(() => {
     mensajeDiv.classList.add("oculto");
     setTimeout(() => {
