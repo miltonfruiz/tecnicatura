@@ -6,6 +6,7 @@ import {
   primeraMayuscula,
   mostrarMensaje,
   cadenaValida,
+  guardarDatosEnLocalStorage,
 } from "../Resolución Etapa 3/etapa3.js";
 
 //---------------------------------- Captura de ID's --------------------------------//
@@ -40,7 +41,6 @@ class Estudiante {
     return `${this.nombre} (${this.edad} años) - Nota: ${this.nota}`;
   }
 }
-
 //----------------------------- Clase Curso ----------------------------------------//
 
 class Curso {
@@ -68,13 +68,31 @@ class Curso {
       : "N/A";
   }
 }
-
 //----------------------- Arreglo y Variables  -------------------------//
 
 export let cursos = [];
 export let cursoActual = null;
 let ordenarPorEdad = false;
 let ordenarPorNota = false;
+
+//------------------ Cargar datos desde localStorage al cargar la página ------------------//
+
+document.addEventListener("DOMContentLoaded", () => {
+  const cursosGuardados = JSON.parse(localStorage.getItem("cursos"));
+  if (cursosGuardados) {
+    cursos = cursosGuardados.map((curso) => {
+      const nuevoCurso = new Curso(curso.nombre, curso.profesor);
+      curso.estudiantes.forEach((est) => {
+        nuevoCurso.agregarEstudiante(
+          new Estudiante(est.nombre, est.edad, est.nota)
+        );
+      });
+      return nuevoCurso;
+    });
+  }
+  actualizarCursosSelect();
+  mostrarCursos();
+});
 
 //------------------ Evento para agregar un curso ----------------------//
 
@@ -84,7 +102,12 @@ formCurso.addEventListener("submit", (e) => {
   const profesorCorregido = primeraMayuscula(profesorCurso.value);
   const nombreValido = cadenaValida(cursoCorregido);
   const profesorValido = cadenaValida(profesorCorregido);
-  if (!nombreValido && !profesorValido) {
+  const cursoExistente = cursos.find(
+    (curso) => curso.nombre.toLowerCase() === cursoCorregido.toLowerCase()
+  );
+  if (cursoExistente) {
+    mostrarMensaje("¡Ese curso ya existe!", "error");
+  } else if (!nombreValido && !profesorValido) {
     mostrarMensaje("¡Valores ingresados incorrectos!", "error");
   } else if (!nombreValido) {
     mostrarMensaje("¡Nombre de curso incorrecto!", "error");
@@ -97,6 +120,7 @@ formCurso.addEventListener("submit", (e) => {
     actualizarCursosSelect();
     mostrarCursos();
     mostrarMensaje("¡Curso creado correctamente!", "success");
+    guardarDatosEnLocalStorage();
   }
 });
 //------------------ Evento para agregar un estudiante --------------------//
@@ -108,7 +132,13 @@ formEstudiante.addEventListener("submit", (e) => {
   const notaEstudianteValor = parseFloat(notaEstudiante.value);
   const cursoIndex = cursoEstudianteSelect.value;
   const nombreValido = cadenaValida(nombreEstudianteValor);
-  if (
+  const cursoActual = cursos[cursoIndex];
+  const estudianteExistente = cursoActual.estudiantes.find(
+    (est) => est.nombre.toLowerCase() === nombreEstudianteValor.toLowerCase()
+  );
+  if (estudianteExistente) {
+    mostrarMensaje("¡Ese alumno ya existe!", "error");
+  } else if (
     (!nombreValido && edadEstudianteValor <= 0 && notaEstudianteValor < 0) ||
     notaEstudianteValor > 10
   ) {
@@ -137,10 +167,11 @@ formEstudiante.addEventListener("submit", (e) => {
       edadEstudianteValor,
       notaEstudianteValor
     );
-    cursos[cursoIndex].agregarEstudiante(nuevoEstudiante);
+    cursoActual.agregarEstudiante(nuevoEstudiante);
     formEstudiante.reset();
     mostrarCursos();
     mostrarMensaje("¡Estudiante agregado correctamente!", "success");
+    guardarDatosEnLocalStorage();
   }
 });
 //------------------- Función para actualizar el select de cursos --------------//
@@ -211,170 +242,56 @@ export function mostrarCursos(busqueda = "") {
           <div class="botones-acciones">
             <button id="boton-editar-curso" class="editar-curso btn btn-warning" nombre="${
               curso.nombre
-            }">
-              <i class="fa-solid fa-pen-to-square"></i> Editar
-            </button>
-            <button id="boton-eliminar-curso" class="eliminar-curso btn btn-danger" nombre="${
-              curso.nombre
-            }">
-              <i class="fa-solid fa-minus"></i> Eliminar
-            </button>
+            }">Editar</button>
+            <button class="btn btn-danger" id="boton-eliminar-curso">Eliminar</button>
           </div>
         </td>
       `;
       tabla.querySelector("tbody").appendChild(filaCurso);
-
-      for (let i = 1; i < cantidadEstudiantes; i++) {
-        const filaEstudiante = document.createElement("tr");
-        filaEstudiante.innerHTML = `
-          <td>${estudiantesAFiltrar[i].nombre}</td>
-          <td>${estudiantesAFiltrar[i].edad}</td>
-          <td>${estudiantesAFiltrar[i].nota}</td>
-        `;
-        tabla.querySelector("tbody").appendChild(filaEstudiante);
-      }
-    } else {
-      const estudiantesFiltrados = curso.estudiantes.filter((est) =>
-        est.nombre.toLowerCase().includes(busqueda)
-      );
-      if (estudiantesFiltrados.length > 0) {
-        resultadosEncontrados = true;
-        let estudiantesAFiltrar = [...estudiantesFiltrados];
-        if (ordenarPorEdad) {
-          estudiantesAFiltrar.sort((a, b) => a.edad - b.edad);
-        } else if (ordenarPorNota) {
-          estudiantesAFiltrar.sort((a, b) => a.nota - b.nota);
-        }
-        const filaCurso = document.createElement("tr");
-        filaCurso.innerHTML = `
-          <td rowspan="${estudiantesAFiltrar.length}">${curso.nombre}</td>
-          <td rowspan="${estudiantesAFiltrar.length}">${curso.profesor}</td>
-          <td rowspan="${
-            estudiantesAFiltrar.length
-          }">${curso.obtenerPromedio()}</td>
-          <td>${estudiantesAFiltrar[0].nombre}</td>
-          <td>${estudiantesAFiltrar[0].edad}</td>
-          <td>${estudiantesAFiltrar[0].nota}</td>
-          <td class="td-contenedor-botones" rowspan="${
-            estudiantesAFiltrar.length
-          }">
-            <div class="botones-acciones">
-              <button id="boton-editar-curso" class="editar-curso btn btn-warning" nombre="${
-                curso.nombre
-              }">
-                <i class="fa-solid fa-pen-to-square"></i> Editar
-              </button>
-              <button id="boton-eliminar-curso" class="eliminar-curso btn btn-danger" nombre="${
-                curso.nombre
-              }">
-                <i class="fa-solid fa-minus"></i> Eliminar
-              </button>
-            </div>
-          </td>
-        `;
-        tabla.querySelector("tbody").appendChild(filaCurso);
-        for (let i = 1; i < estudiantesAFiltrar.length; i++) {
-          const filaEstudiante = document.createElement("tr");
-          filaEstudiante.innerHTML = `
-            <td>${estudiantesAFiltrar[i].nombre}</td>
-            <td>${estudiantesAFiltrar[i].edad}</td>
-            <td>${estudiantesAFiltrar[i].nota}</td>
-          `;
-          tabla.querySelector("tbody").appendChild(filaEstudiante);
-        }
-      }
-    }
-  });
-
-  if (!resultadosEncontrados) {
-    const mensajeNoEncontrado = document.createElement("tr");
-    mensajeNoEncontrado.innerHTML = `
-      <td colspan="7" class="text-center fst-italic">¡No hay resultados para la búsqueda!</td>
-    `;
-    tabla.querySelector("tbody").appendChild(mensajeNoEncontrado);
-  }
-  tabla.innerHTML += `</tbody></table>`;
-  listaCursos.appendChild(tabla);
-
-  //------------------------------------ Botones   ------------------------------------//
-
-  const botonEditar = document.querySelectorAll(".editar-curso");
-  botonEditar.forEach((boton) => {
-    boton.addEventListener("click", () => {
-      const nombreCurso = boton.getAttribute("nombre");
-      cursoActual = cursos.find((c) => c.nombre === nombreCurso);
-      nuevoNombreCurso.value = primeraMayuscula(cursoActual.nombre);
-      nuevoNombreProfesor.value = primeraMayuscula(cursoActual.profesor);
-      const tablaEstudiantesEdicion = document.createElement("table");
-      tablaEstudiantesEdicion.classList.add("tabla-estudiantes");
-      tablaEstudiantesEdicion.innerHTML = `
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Edad</th>
-          <th>Nota</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-    `;
-      if (cursoActual.estudiantes.length > 0) {
-        cursoActual.estudiantes.forEach((est) => {
+      estudiantesAFiltrar.forEach((est, index) => {
+        if (index > 0) {
           const filaEstudiante = document.createElement("tr");
           filaEstudiante.innerHTML = `
             <td>${est.nombre}</td>
             <td>${est.edad}</td>
             <td>${est.nota}</td>
-            <td class="td-contenedor-botones">
-              <button id="boton-editar-estudiante" class="btn btn-warning btn-sm editar-estudiante" data-nombre="${est.nombre}"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
-              <button id="boton-eliminar-estudiante" class="btn btn-danger btn-sm eliminar-estudiante" data-nombre="${est.nombre}"><i class="fa-solid fa-minus"></i> Eliminar</button>
-            </td>
           `;
-          tablaEstudiantesEdicion
-            .querySelector("tbody")
-            .appendChild(filaEstudiante);
-        });
-      } else {
-        const mensajeSinEstudiantes = document.createElement("tr");
-        mensajeSinEstudiantes.innerHTML = `
-          <td colspan="4" class="text-center">No hay estudiantes en este curso</td>
-        `;
-        tablaEstudiantesEdicion
-          .querySelector("tbody")
-          .appendChild(mensajeSinEstudiantes);
-      }
-      const listaEstudiantesEdicion = document.getElementById(
-        "lista-estudiantes-edicion"
-      );
-      listaEstudiantesEdicion.innerHTML = "";
-      listaEstudiantesEdicion.appendChild(tablaEstudiantesEdicion);
-      edicionEstudiantes();
-      formularioEdicion.style.display = "block";
-    });
+          tabla.querySelector("tbody").appendChild(filaEstudiante);
+        }
+      });
+    }
   });
-  document
-    .getElementById("lista-estudiantes-edicion")
-    .addEventListener("click", (e) => {
-      if (e.target.classList.contains("eliminar-estudiante")) {
-        const nombreEstudiante = e.target.getAttribute("data-nombre");
-        cursoActual.estudiantes = cursoActual.estudiantes.filter(
-          (est) => est.nombre !== nombreEstudiante
-        );
-        mostrarCursos();
-      }
-    });
-  const botonEliminar = document.querySelectorAll(".eliminar-curso");
-  botonEliminar.forEach((boton) => {
-    boton.addEventListener("click", () => {
-      const cursoIndex = boton.getAttribute("data-index");
-      if (confirm("¿Estás seguro de que deseas eliminar este curso?")) {
-        cursos.splice(cursoIndex, 1);
-        mostrarCursos();
-      }
-    });
-  });
+  if (!resultadosEncontrados) {
+    const filaVacía = document.createElement("tr");
+    filaVacía.innerHTML = `
+      <td colspan="7">No se encontraron resultados</td>
+    `;
+    tabla.querySelector("tbody").appendChild(filaVacía);
+  }
+  listaCursos.appendChild(tabla);
 }
-//------------------------------- Guardar edición --------------------------------//
+//------------------- Eventos para filtrar estudiantes -------------------//
+
+filtroEstudiantes.addEventListener("change", () => {
+  const valorFiltro = filtroEstudiantes.value;
+  if (valorFiltro === "edad") {
+    ordenarPorEdad = true;
+    ordenarPorNota = false;
+  } else if (valorFiltro === "nota") {
+    ordenarPorEdad = false;
+    ordenarPorNota = true;
+  } else {
+    ordenarPorEdad = false;
+    ordenarPorNota = false;
+  }
+  mostrarCursos(busquedaIngresada.value.toLowerCase());
+});
+//----------------------------- Eventos de búsqueda -------------------------//
+
+busquedaIngresada.addEventListener("input", () => {
+  mostrarCursos(busquedaIngresada.value.toLowerCase());
+});
+//------------------- Eventos de edición de curso ---------------------------//
 
 guardarEdicion.addEventListener("click", () => {
   if (nuevoNombreCurso.value && nuevoNombreProfesor.value) {
@@ -383,30 +300,45 @@ guardarEdicion.addEventListener("click", () => {
       primeraMayuscula(nuevoNombreCurso.value),
       primeraMayuscula(nuevoNombreProfesor.value)
     );
+    guardarDatosEnLocalStorage();
     formularioEdicion.style.display = "none";
   }
 });
-//------------------------------- Cancelar edición ----------------------------//
+//------------------- Eventos de cancelación de edición -------------------//
 
 cancelarEdicion.addEventListener("click", () => {
   formularioEdicion.style.display = "none";
 });
-//--------------------------------- Búsqueda ----------------------------------//
+//---------------------- Eventos de eliminar curso -----------------------//
 
-busquedaIngresada.addEventListener("input", () => {
-  const valorBusqueda = busquedaIngresada.value.toLowerCase();
-  mostrarCursos(valorBusqueda);
-});
-//---------------------------------- Filtro ----------------------------------//
-
-filtroEstudiantes.addEventListener("change", () => {
-  const valorFiltro = filtroEstudiantes.value;
-  ordenarPorEdad = false;
-  ordenarPorNota = false;
-  if (valorFiltro === "edad") {
-    ordenarPorEdad = true;
-  } else if (valorFiltro === "nota") {
-    ordenarPorNota = true;
+listaCursos.addEventListener("click", (e) => {
+  if (e.target.id === "boton-eliminar-curso") {
+    const cursoNombre = e.target.closest("tr").querySelector("td").textContent;
+    const confirmacion = confirm(
+      `¿Estás seguro de que deseas eliminar el curso "${cursoNombre}"?`
+    );
+    if (confirmacion) {
+      const indiceCurso = cursos.findIndex(
+        (curso) => curso.nombre === cursoNombre
+      );
+      if (indiceCurso !== -1) {
+        cursos.splice(indiceCurso, 1);
+        mostrarCursos();
+        guardarDatosEnLocalStorage();
+      }
+    }
   }
-  mostrarCursos(busquedaIngresada.value.toLowerCase());
+});
+
+//----------------------- Eventos de edición de curso -------------------//
+
+listaCursos.addEventListener("click", (e) => {
+  if (e.target.classList.contains("editar-curso")) {
+    cursoActual = cursos.find(
+      (curso) => curso.nombre === e.target.getAttribute("nombre")
+    );
+    nuevoNombreCurso.value = cursoActual.nombre;
+    nuevoNombreProfesor.value = cursoActual.profesor;
+    formularioEdicion.style.display = "block";
+  }
 });

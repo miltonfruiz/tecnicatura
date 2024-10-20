@@ -162,3 +162,8 @@ export function cadenaValida(cadena) {
     typeof cadena === "string" && cadena.trim() !== "" && !/\d/.test(cadena)
   );
 }
+//------------------ Función para guardar en localStorage ------------------//
+
+export function guardarDatosEnLocalStorage() {
+  localStorage.setItem("cursos", JSON.stringify(cursos));
+}
