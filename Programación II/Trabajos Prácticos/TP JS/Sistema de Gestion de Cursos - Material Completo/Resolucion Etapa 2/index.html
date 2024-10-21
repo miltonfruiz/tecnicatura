@@ -105,8 +105,44 @@
                 </div>
                 <div class="col-12">
                   <h4 class="texto-h4">Estudiantes</h4>
+                  <!-- Formulario de edición de estudiante -->
+                  <div id="formulario-edicion-estudiante" style="display: none">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="nombre-estudiante-editar"
+                      placeholder="Nombre"
+                    />
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="edad-estudiante-editar"
+                      placeholder="Edad"
+                    />
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="nota-estudiante-editar"
+                      placeholder="Nota"
+                      step="0.1"
+                      min="0"
+                      max="10"
+                    />
+                    <button
+                      id="guardar-edicion-estudiante"
+                      class="btn btn-info"
+                    >
+                      <i class="fa-solid fa-floppy-disk"></i> Guardar
+                    </button>
+                    <button
+                      id="cancelar-edicion-estudiante"
+                      class="btn btn-secondary"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
                   <div id="lista-estudiantes-edicion"></div>
-                  <!-- Nueva área para estudiantes -->
+                  <!-- Aquí se mostrará la tabla -->
                 </div>
                 <div class="col-12">
                   <button id="guardar-edicion" class="btn btn-info">
@@ -118,6 +154,17 @@
                 </div>
               </div>
             </div>
+            <!-- Modal de Confirmación -->
+            <div id="modal-confirmacion" class="modal">
+              <div class="modal-content" id="contenedor-modal">
+                <p id="mensaje-confirmacion"></p>
+                <button id="btn-confirmar" class="btn btn-danger">Sí</button>
+                <button id="btn-cancelar" class="btn btn-secondary">No</button>
+              </div>
+            </div>
+
+            <div id="lista-estudiantes-edicion"></div>
+
             <div id="lista-cursos">
               <!-- Cursos y estudiantes se mostrarán aquí -->
             </div>
