@@ -1,13 +1,13 @@
 from datetime import date
 
 class Usuario:
-    def __init__(self, user_name: str, nombre: str, apellido: str, password: str, email: str, estado: bool, fecha_baja: date, fecha_alta: date) -> None:
+    def __init__(self, user_name: str, nombre: str, apellido: str, password: str, email: str) -> None:
         self.__user_name:str = user_name
         self.__nombre:str = nombre
         self.__apellido:str = apellido
         self.__password:str = password
         self.__email:str = email
-        self.__estado:bool = estado
+        self.__estado:bool = True
         self.__fecha_alta:date = date.today()
         self.__fecha_baja:date = None
 
@@ -60,5 +60,9 @@ def baja_usuario(self)->None:
     self.__estado = False
     self.__fecha_baja = date.today()
 
+def vuelta_usuario(self)->None:
+    self.__estado = True
+    self.__fecha_baja = None
+
 def validar_credenciales(self, usuario:str, password:str)->bool:
-    return usuario == self.__user_name and password == self.password
+    return usuario == self.__user_name and password == self.__password
