@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestión de Cursos</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../Resolución Etapa 3/styles/styles.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -16,18 +16,55 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Babylonica&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <main>
-      <div class="banner-container">
-        <img
-          src="../Resolución Etapa 3/images/Banner.png"
-          alt="Sistema de Gestión de Cursos"
-          class="banner-image"
-        />
+      <div class="contenedor-banner">
+        <div class="banner-text text-center">
+          <div class="contenedor-texto-plataforma">
+            <h1 class="texto-plataforma">
+              <i class="fa-solid fa-bars-progress"></i> PLATAFORMA DE GESTIÓN
+              EDUCATIVA
+            </h1>
+          </div>
+          <div class="text-center col-6">
+            <p class="texto-solucion">
+              ¡Bienvenido al sistema de gestión de cursos y estudiantes!. Este
+              sistema te permitirá gestionar de manera eficiente la información
+              de tus cursos y estudiantes, utilizando clases y objetos para
+              simplificar el proceso. Explora el proyecto que prepare para
+              optimizar tu experiencia académica. ¡Disfruta!
+            </p>
+          </div>
+          <div class="col-6">
+            <button title="Empezar" id="link-empezar" class="btn btn-success">
+              <a
+                id="boton-empezar"
+                href="#main-section"
+                style="color: white; text-decoration: none"
+                ><i class="fa-solid fa-play"></i> Empezar</a
+              >
+            </button>
+          </div>
+          <div class="contendor-texto-diseño">
+            <p title="Diseño: Milton F. Ruiz" class="texto-diseño text-center">
+              Diseño: Milton F. Ruiz <i class="fa-solid fa-pen-nib"></i>
+            </p>
+          </div>
+        </div>
       </div>
-      <div id="contenedor-cursos" class="container">
-        <div class="row">
+      <div class="container">
+        <div id="main-section" class="row">
           <div class="main-container col-10">
             <!-- Formulario para agregar cursos -->
             <h2 class="texto-h2">
@@ -49,6 +86,7 @@
                 required
               />
               <button
+                title="Agregar Curso"
                 id="boton-agregar-curso"
                 type="submit"
                 class="btn btn-success"
@@ -87,6 +125,7 @@
                 <!-- Opciones de curso dinámicamente -->
               </select>
               <button
+                title="Agregar Estudiante"
                 id="boton-agregar-estudiante"
                 type="submit"
                 class="btn btn-success"
@@ -98,11 +137,15 @@
             <h2 class="texto-h2">
               <i class="fa-solid fa-list"></i> Listado de Cursos y Estudiantes
             </h2>
-            <div class="input-container mb-3 container">
+            <div class="input-container mb-5 container">
               <div class="row">
                 <div class="col">
                   <div class="json">
-                    <button id="exportar-json" class="btn btn-success">
+                    <button
+                      title="Exportar a JSON"
+                      id="exportar-json"
+                      class="btn btn-success"
+                    >
                       <i class="fa-solid fa-download"></i> Exportar a JSON
                     </button>
                   </div>
@@ -189,12 +232,14 @@
                     </div>
                     <div class="col-12">
                       <button
+                        title="Guardar"
                         id="guardar-edicion-estudiante"
                         class="btn btn-info"
                       >
                         <i class="fa-solid fa-floppy-disk"></i> Guardar
                       </button>
                       <button
+                        title="Cancelar"
                         id="cancelar-edicion-estudiante"
                         class="btn btn-secondary"
                       >
@@ -206,10 +251,18 @@
                   <!-- Aquí se mostrará la tabla -->
                 </div>
                 <div class="col-12">
-                  <button id="guardar-edicion" class="btn btn-info">
+                  <button
+                    title="Guardar"
+                    id="guardar-edicion"
+                    class="btn btn-info"
+                  >
                     <i class="fa-solid fa-floppy-disk"></i> Guardar
                   </button>
-                  <button id="cancelar-edicion" class="btn btn-secondary">
+                  <button
+                    title="Cancelar"
+                    id="cancelar-edicion"
+                    class="btn btn-secondary"
+                  >
                     <i class="fa-solid fa-x"></i> Cancelar
                   </button>
                 </div>
@@ -268,23 +321,73 @@
         </div>
       </div>
       <footer class="footer">
-        <div class="footer-redes">
-          <h3>¡Seguinos en nuestras redes!</h3>
-          <a href="https://www.facebook.com" target="_blank">
-            <i class="fa-brands fa-facebook"></i>
-          </a>
-          <a href="https://www.instagram.com" target="_blank">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://www.youtube.com" target="_blank">
-            <i class="fa-brands fa-youtube"></i>
-          </a>
+        <div class="footer-content col-10">
+          <div class="footer-redes col">
+            <h3 class="h3-mis-redes">
+              <i class="fa-solid fa-share-nodes"></i> Mis redes
+            </h3>
+            <a
+              title="LinkedIn"
+              href="https://www.linkedin.com/in/miltonfruiz/"
+              target="_blank"
+              class="social-link"
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
+            <a
+              title="GitHub"
+              href="https://github.com/miltonfruiz"
+              target="_blank"
+              class="social-link"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+            <a
+              title="Instagram"
+              href="https://www.instagram.com/miltonfrdev/"
+              target="_blank"
+              class="social-link"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a
+              title="Twitter"
+              href="https://x.com/mfrok24"
+              target="_blank"
+              class="social-link"
+              ><i class="fa-brands fa-x-twitter"></i
+            ></a>
+            <a
+              title="Discord"
+              href="https://discord.gg/evVPHr7h"
+              target="_blank"
+              class="social-link"
+              ><i class="fa-brands fa-discord"></i
+            ></a>
+            <a
+              href="https://wa.me/3413245896"
+              target="_blank"
+              class="boton-whatsapp"
+              title="Enviar WhatsApp"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+          <div class="footer-contacto col">
+            <h3 class="texto-contacto">
+              <i class="fa-regular fa-address-book"></i> Contacto
+            </h3>
+            <p class="info-redes">
+              <i class="fa-solid fa-envelope"></i> E-mail:
+              miltonfruizok@outlook.es
+            </p>
+            <p class="info-redes">
+              <i class="fa-solid fa-phone"></i> Celular: 341-3245896
+            </p>
+          </div>
         </div>
-        <div class="container">
-          <p class="politica_privacicad">
-            Contáctanos: info@utncursos.com | Tel: (123) 456-7890
+        <div>
+          <p class="copyright">
+            <i class="fa-regular fa-copyright"></i> 2024 Milton Franco Ruiz /
+            Sistema de Gestión de Cursos. All rights reserved
           </p>
-          <p class="politica_privacicad">© 2024 Sistema de Gestión de Cursos</p>
         </div>
       </footer>
     </main>

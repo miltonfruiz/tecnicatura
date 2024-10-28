@@ -57,6 +57,7 @@ const totalEstudiantesElem = document.getElementById("total-estudiantes");
 const promedioGeneralElem = document.getElementById("promedio-general");
 const totalCursosElem = document.getElementById("total-cursos");
 const mejorCursoElem = document.getElementById("mejor-curso");
+const botonEmpezar = document.getElementById("boton-empezar");
 //---------------------------- Clase Estudiante -------------------------------------//
 
 class Estudiante {
@@ -295,10 +296,10 @@ export function mostrarCursos(busqueda = "") {
         }</td>
         <td class="td-contenedor-botones" rowspan="${cantidadEstudiantes || 1}">
           <div class="botones-acciones">
-            <button id="boton-editar-curso" class="editar-curso btn btn-warning" nombre="${
+            <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning" nombre="${
               curso.nombre
             }"><i class="fa-regular fa-pen-to-square"></i> Editar</button>
-            <button class="btn btn-danger" id="boton-eliminar-curso"><i class="fa-solid fa-trash"></i> Eliminar</button>
+            <button title="Boton Eliminar" class="btn btn-danger" id="boton-eliminar-curso"><i class="fa-solid fa-trash"></i> Eliminar</button>
           </div>
         </td>
       `;
@@ -493,3 +494,11 @@ window.onload = function () {
 
   graficaCanvas.style.display = "block";
 };
+//------------------------------- Evento para desplazar a elemento -----------------------//
+
+botonEmpezar.addEventListener("click", function (event) {
+  event.preventDefault();
+  const target = document.getElementById("nombre-curso");
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  target.focus();
+});
