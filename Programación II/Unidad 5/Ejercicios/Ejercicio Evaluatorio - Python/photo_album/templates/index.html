@@ -1,14 +1,15 @@
 {% extends "base.html" %} {% block content %}
-<h1>Portal de Usuarios</h1>
-<button
-  class="btn btn-primary"
-  hx-get="{{ url_for{'user_bp_new_user_form'}}}"
-  hx-target="#modal"
->
-  Administrar
-</button>
-<div id="user-list">
-  {% for user in users %} {% include "photo_form.html %"} {% endfor %}
+<h2>Photo Gallery</h2>
+<div class="gallery">
+  {% for photo in photos %}
+  <div class="photo">
+    <img
+      src="{{ url_for('static', filename='uploads/' + photo.image) }}"
+      alt="{{ photo.title }}"
+    />
+    <h3>{{ photo.title }}</h3>
+    <p>{{ photo.description }}</p>
+  </div>
+  {% endfor %}
 </div>
-<div id="modal"></div>
 {% endblock %}
