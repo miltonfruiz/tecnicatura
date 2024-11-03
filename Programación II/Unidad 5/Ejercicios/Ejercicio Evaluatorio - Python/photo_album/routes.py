@@ -1,7 +1,38 @@
+import os
+from flask import Blueprint, render_template, redirect, url_for, request, flash
+from werkzeug.utils import secure_filename
+from models import db, Photo
+from forms import PhotoForm
 
-#------------------------------> Funcion Crear Foto <---------------------------------
+main = Blueprint('main', __name__)
 
-def create_photo(self, image, title, description):
-    self.image = image
-    self.title = title
-    self.description = description
+UPLOAD_FOLDER = 'static/uploads/'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@main.route('/')
+def index():
+    photos = Photo.query.all()
+    return render_template('index.html', photos=photos)
+
+@main.route('/add', methods=['GET', 'POST'])
+def add_photo():
+    form = PhotoForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        description = form.description.data
+        image_file = form.image.data
+
+        if image_file and allowed_file(image_file.filename):
+            filename = secure_filename(image_file.filename)
+            image_file.save(os.path.join(UPLOAD_FOLDER, filename))
+
+            photo = Photo(title=title, description=description, image=filename)
+            db.session.add(photo)
+            db.session.commit()
+            flash('Photo added successfully!', 'success')
+            return redirect(url_for('main.index'))
+
+    return render_template('photo_form.html', form=form)
