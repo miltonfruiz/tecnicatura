@@ -32,7 +32,7 @@ def add_photo():
             photo = Photo(title=title, description=description, image=filename)
             db.session.add(photo)
             db.session.commit()
-            flash('Photo added successfully!', 'success')
+            flash('Foto agregada con Éxito!', 'success')
             return redirect(url_for('main.index'))
 
     return render_template('photo_form.html', form=form)
@@ -42,5 +42,5 @@ def delete_photo(photo_id):
     photo = Photo.query.get_or_404(photo_id)
     db.session.delete(photo)
     db.session.commit()
-    flash('Photo deleted successfully!', 'success')
+    flash('Foto borrada con Éxito!', 'success')
     return redirect(url_for('main.index'))
