@@ -8,10 +8,8 @@ app.config.from_object(Config)
 
 db.init_app(app)
 
-# Registrar blueprint de rutas
 app.register_blueprint(main)
 
-# Crear la base de datos si no existe
 with app.app_context():
     db.create_all()
 
