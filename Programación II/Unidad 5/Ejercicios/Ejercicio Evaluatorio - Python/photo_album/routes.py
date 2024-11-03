@@ -36,3 +36,11 @@ def add_photo():
             return redirect(url_for('main.index'))
 
     return render_template('photo_form.html', form=form)
+
+@main.route('/delete/<int:photo_id>', methods=['POST'])
+def delete_photo(photo_id):
+    photo = Photo.query.get_or_404(photo_id)
+    db.session.delete(photo)
+    db.session.commit()
+    flash('Photo deleted successfully!', 'success')
+    return redirect(url_for('main.index'))

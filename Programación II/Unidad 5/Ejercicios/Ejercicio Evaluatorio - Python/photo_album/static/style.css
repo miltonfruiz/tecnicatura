@@ -32,3 +32,17 @@ h2 {
   max-width: 100%;
   height: auto;
 }
+#delete-button,
+#add-button {
+  font-size: 14px;
+  border-radius: 3px;
+  padding: 5px 30px 5px 30px;
+}
+.image-contianer {
+  padding: 10px;
+  border: 1px solid red;
+}
+.gallery {
+  display: flex;
+  justify-content: center;
+}

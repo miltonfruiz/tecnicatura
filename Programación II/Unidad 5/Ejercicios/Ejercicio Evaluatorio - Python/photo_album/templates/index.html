@@ -1,14 +1,29 @@
 {% extends "base.html" %} {% block content %}
-<h2>Galería de Fotos</h2>
+<h2 class="text-center py-3">Galería de Fotos</h2>
 <div class="gallery">
   {% for photo in photos %}
-  <div class="photo">
+  <div class="image-contianer">
     <img
+      width="200"
       src="{{ url_for('static', filename='uploads/' + photo.image) }}"
       alt="{{ photo.title }}"
     />
-    <h3>{{ photo.title }}</h3>
-    <p>{{ photo.description }}</p>
+    <form
+      action="{{ url_for('main.delete_photo', photo_id=photo.id) }}"
+      method="post"
+      style="display: inline"
+    >
+      <h4 class="h5-text">Título: {{ photo.title }}</h4>
+      <p>Descripción: {{ photo.description }}</p>
+      <button
+        id="delete-button"
+        class="btn btn-danger"
+        type="submit"
+        onclick="return confirm('¿Estás seguro de que quieres eliminar esta foto?');"
+      >
+        Borrar
+      </button>
+    </form>
   </div>
   {% endfor %}
 </div>
