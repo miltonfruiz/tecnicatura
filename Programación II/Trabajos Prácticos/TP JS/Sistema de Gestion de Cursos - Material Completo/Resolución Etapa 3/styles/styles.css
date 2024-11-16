@@ -538,7 +538,8 @@ td {
   filter: drop-shadow(0 0 5px #23b37c);
   font-size: 30px;
   color: white;
-  animation: fadeIn 4s forwards, blink 2s infinite 4s;
+  animation: fadeIn 4s forwards, blinkGreen 2s infinite 3s;
+  transition: filter 0.5s ease, color 0.5s ease;
 }
 @keyframes fadeIn {
   0% {
@@ -550,7 +551,7 @@ td {
     filter: drop-shadow(0 0 5px #23b37c);
   }
 }
-@keyframes blink {
+@keyframes blinkGreen {
   0%, 100% {
     opacity: 1;
     filter: drop-shadow(0 0 5px #23b37c);
@@ -558,6 +559,31 @@ td {
   50% {
     opacity: 0.2;
     filter: drop-shadow(0 0 10px #23b37c);
+  }
+}
+.fa-bars-progress:hover {
+  transition: 3s;
+  filter: drop-shadow(0 0 5px red);
+  animation: fadeInRed 4s infinite, blinkRed 2s forwards infinite 3s;
+}
+@keyframes blinkRed {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px red);
+  }
+  50% {
+    opacity: 0.2;
+    filter: drop-shadow(0 0 10px red);
+  }
+}
+@keyframes fadeInRed {
+  0% {
+    opacity: 0;
+    filter: drop-shadow(0 0 0px red);
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px red);
   }
 }
 .social-link {
