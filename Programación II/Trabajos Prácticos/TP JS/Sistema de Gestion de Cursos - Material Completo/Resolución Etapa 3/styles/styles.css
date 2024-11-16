@@ -607,7 +607,7 @@ label {
   z-index: 1000;
   text-decoration: none;
   transition: background-color 1s, border-color 1s;
-  animation: fadeIn 3s forwards; /* Animación para aparecer */
+  animation: fadeIn 3s forwards;
 }
 
 .boton-whatsapp:hover {
