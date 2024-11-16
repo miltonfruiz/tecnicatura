@@ -16,6 +16,8 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   height: 607px;
+  margin: 0;
+  padding: 0;
 }
 .banner-text{
   display: flex;
@@ -25,10 +27,12 @@
   height: 100%;
 }
 .texto-plataforma,
+.texto-gestion,
 .texto-solucion,
 .texto-diseño{
   color: white;
 }
+.texto-gestion,
 .texto-plataforma{
   font-size: 31px;
 }
@@ -38,16 +42,20 @@
   width: 100%;
 }
 #link-empezar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 13px;
   color: white;
-  padding: 9px 1px 9px 1px;
+  padding: 3px 0px 3px 0px;
   width: 20%;
   border-radius: 3px;
-  margin-top: 10px;
 }
 #boton-empezar{
+  display: flex;
+  align-items: center;
   font-size: 11px;
-  padding: 10px 33px;
+  padding: 7px 43px;
 }
 #link-empezar:hover{
   border: 1px solid white;
@@ -386,6 +394,9 @@ td {
 .fa-users{
   font-size: 15px;
 }
+.fa-solid {
+  font-size: 13px;
+}
 #tabla-estadisticas {
   width: 100%;
   border-collapse: collapse;
@@ -465,6 +476,8 @@ td {
 }
 .fa-bars-progress{
   filter: drop-shadow(0 0 5px #23b37c);
+  font-size: 30px;
+  color: white;
 }
 .social-link {
   display: inline-block;
@@ -535,4 +548,97 @@ label {
   transition: 1s;
   border: 1px solid white;
   background-color: #128C7E;
+}
+.email-link{
+  font-size: 11px;
+  color: whitesmoke;
+  transition: 1s;
+  text-decoration: none;
+}
+.email-link:hover {
+  transition: 1s;
+  color: #23b37c;
+}
+@media (max-width: 317px) {
+  .main-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+.texto-empezar{
+  margin-left: 5px;
+}
+/* ------------------------ Diseño Responsive 442px ------------------------*/
+@media (max-width: 443px) {
+  .contenedor-banner,
+  .main-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+/*------------------------ Diseño Responsive 575px ------------------------*/
+@media (max-width: 575px) {
+  #link-empezar {
+    padding: 10px 30px;
+  }
+  .texto-sistema,
+  .texto-empezar,
+  .texto-gestion,
+  .texto-agregar-curso,
+  .texto-agregar-estudiante,
+  .texto-exportar-json {
+    display: none;
+  }
+  #busqueda-ingresada::placeholder {
+    color: transparent;
+  }
+  #busqueda-ingresada {
+    width: 180px;
+    padding-left: 30px;
+  }
+  .fa-magnifying-glass {
+    left: 80%;
+    transform: translate(-50%, -50%);
+  }
+  .fa-play {
+    margin-left: 5px;
+    font-size: 15px;
+  }
+  .font-size{
+    font-size: 30px;
+  }
+  .texto-solucion{
+    font-size: 25px;
+    text-align: center;
+  }
+}
+/*-------------------------------------------------*/
+.container {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+body {
+  overflow-x: hidden;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+footer {
+  width: 100%;
+}
+.container,
+.main-container,
+.contenedor-banner {
+  width: 100%;
+  max-width: 100%;
 }
