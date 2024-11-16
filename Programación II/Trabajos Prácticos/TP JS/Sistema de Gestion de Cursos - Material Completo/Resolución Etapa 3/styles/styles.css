@@ -474,11 +474,24 @@ td {
   margin: auto;
   letter-spacing: 1px;
 }
-.fa-bars-progress{
+.fa-bars-progress {
   filter: drop-shadow(0 0 5px #23b37c);
   font-size: 30px;
   color: white;
+  animation: blink 3s infinite;
 }
+
+@keyframes blink {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px #23b37c);
+    opacity: 100%;
+  }
+  50% {
+    filter: drop-shadow(0 0 0px #23b37c);
+    opacity: 20%;
+  }
+}
+
 .social-link {
   display: inline-block;
   width: 30px;
