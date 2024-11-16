@@ -26,12 +26,14 @@
   align-items: center;
   height: 100%;
 }
+.texto-educativa,
 .texto-plataforma,
 .texto-gestion,
 .texto-solucion,
 .texto-diseño{
   color: white;
 }
+.texto-educativa,
 .texto-gestion,
 .texto-plataforma{
   font-size: 31px;
@@ -40,11 +42,15 @@
   animation: slide-down 1s forwards;
 }
 .texto-plataforma{
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 7px;
+  margin-right: 7px;
 }
 .texto-gestion {
   animation-delay: 0.5s;
+}
+.texto-educativa {
+  margin-left: 7px;
+  animation-delay: 1s;
 }
 @keyframes slide-down {
   to {
