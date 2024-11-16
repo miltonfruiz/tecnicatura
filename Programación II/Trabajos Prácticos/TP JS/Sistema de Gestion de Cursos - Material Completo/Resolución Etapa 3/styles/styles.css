@@ -68,9 +68,8 @@
   opacity: 0;
   transform: translateX(-100%);
   animation: slide-in-left 1s forwards;
-
 }
-#link-empezar{
+#link-empezar {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,16 +78,29 @@
   padding: 3px 0px 3px 0px;
   width: 20%;
   border-radius: 3px;
+  opacity: 0;
+  animation: fadeIn 4s forwards;
+  transition: 1s;
+}
+#link-empezar:hover {
+  border: 1px solid white;
+  transition: 1s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 #boton-empezar{
   display: flex;
   align-items: center;
   font-size: 11px;
   padding: 7px 43px;
-}
-#link-empezar:hover{
-  border: 1px solid white;
-  transition: 1s;
 }
 .contendor-texto-diseño{
   margin-top: 180px;
@@ -97,7 +109,6 @@
   margin-top: 170px;
   display: flex;
   align-items: center;
-
 }
 .texto-diseño{
   font-size: 17px;
@@ -510,20 +521,28 @@ td {
   filter: drop-shadow(0 0 5px #23b37c);
   font-size: 30px;
   color: white;
-  animation: blink 3s infinite;
+  animation: fadeIn 4s forwards, blink 2s infinite 4s;
 }
-
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    filter: drop-shadow(0 0 0px #23b37c);
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px #23b37c);
+  }
+}
 @keyframes blink {
   0%, 100% {
-    filter: drop-shadow(0 0 15px #23b37c);
-    opacity: 100%;
+    opacity: 1;
+    filter: drop-shadow(0 0 5px #23b37c);
   }
   50% {
-    filter: drop-shadow(0 0 0px #23b37c);
-    opacity: 20%;
+    opacity: 0.2;
+    filter: drop-shadow(0 0 10px #23b37c);
   }
 }
-
 .social-link {
   display: inline-block;
   width: 30px;
@@ -588,6 +607,7 @@ label {
   z-index: 1000;
   text-decoration: none;
   transition: background-color 1s, border-color 1s;
+  animation: fadeIn 3s forwards; /* Animación para aparecer */
 }
 
 .boton-whatsapp:hover {
