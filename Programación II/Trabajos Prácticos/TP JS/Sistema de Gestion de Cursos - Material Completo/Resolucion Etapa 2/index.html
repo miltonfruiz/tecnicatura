@@ -59,10 +59,7 @@
             class="col-sm-12 col-lg-8 col-xl-7 d-flex justify-content-center"
           >
             <button title="Empezar" id="link-empezar" class="btn btn-success">
-              <a
-                id="boton-empezar"
-                href="#main-section"
-                style="color: white; text-decoration: none"
+              <a id="boton-empezar" href="#main-section"
                 ><i class="fa-solid fa-play"></i>
                 <span class="texto-empezar">Empezar</span></a
               >
@@ -78,7 +75,6 @@
       <div class="container">
         <div id="main-section" class="row">
           <div class="main-container col-10">
-            <!-- Formulario para agregar cursos -->
             <h2 class="texto-h2">
               <i class="fa-solid fa-book-medical"></i> Agregar Curso
             </h2>
@@ -107,7 +103,6 @@
                 <span class="texto-agregar-curso">Agregar Curso</span>
               </button>
             </form>
-            <!-- Formulario para agregar estudiantes -->
             <h2 class="texto-h2">
               <i class="fa-solid fa-user-plus"></i> Agregar Estudiante
             </h2>
@@ -134,9 +129,7 @@
                 required
               />
               <label for="curso-estudiante">Curso</label>
-              <select class="form-control" id="curso-estudiante">
-                <!-- Opciones de curso dinámicamente -->
-              </select>
+              <select class="form-control" id="curso-estudiante"></select>
               <button
                 title="Agregar Estudiante"
                 id="boton-agregar-estudiante"
@@ -147,7 +140,6 @@
                 <span class="texto-agregar-estudiante">Agregar Estudiante</span>
               </button>
             </form>
-            <!-- Listado de cursos y estudiantes -->
             <h2 class="texto-h2">
               <i class="fa-solid fa-list"></i> Listado de Cursos y Estudiantes
             </h2>
@@ -209,7 +201,6 @@
                   <h4 class="texto-h4-estudiante">
                     <i class="fa-solid fa-users"></i> Estudiantes
                   </h4>
-                  <!-- Formulario de edición de estudiante -->
                   <div
                     class="row"
                     id="formulario-edicion-estudiante"
@@ -263,7 +254,6 @@
                     </div>
                   </div>
                   <div id="lista-estudiantes-edicion"></div>
-                  <!-- Aquí se mostrará la tabla -->
                 </div>
                 <div class="col-12">
                   <button
@@ -283,7 +273,6 @@
                 </div>
               </div>
             </div>
-            <!-- Modal de Confirmación -->
             <div id="modal-confirmacion" class="modal">
               <div class="modal-content" id="contenedor-modal">
                 <p id="mensaje-confirmacion"></p>
@@ -291,12 +280,8 @@
                 <button id="btn-cancelar" class="btn btn-secondary">No</button>
               </div>
             </div>
-            <!-- Lista estudiantes a editar -->
             <div id="lista-estudiantes-edicion"></div>
-            <div id="lista-cursos" class="table table-responsive">
-              <!-- Lista de Cursos y estudiantes -->
-            </div>
-            <!-- Estadísticas Generales -->
+            <div id="lista-cursos" class="table table-responsive"></div>
             <h2 class="texto-h2-estadisticas">
               <i class="fa-solid fa-chart-simple"></i> Estadísticas Generales
               del Curso

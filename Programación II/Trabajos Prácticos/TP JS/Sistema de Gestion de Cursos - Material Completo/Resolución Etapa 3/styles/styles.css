@@ -97,6 +97,8 @@
   }
 }
 #boton-empezar{
+  color: white;
+  text-decoration: none;
   display: flex;
   align-items: center;
   font-size: 11px;
@@ -737,4 +739,8 @@ footer {
 .contenedor-banner {
   width: 100%;
   max-width: 100%;
+}
+::selection {
+  background-color: #198754;
+  color: white;
 }
