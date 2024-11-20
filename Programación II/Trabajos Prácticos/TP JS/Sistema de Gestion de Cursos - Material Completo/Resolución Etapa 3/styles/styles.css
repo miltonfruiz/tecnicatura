@@ -207,7 +207,6 @@ select {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   transition: 1s;
 }
-#form-edicion:hover,
 #contenedor-estadisticas:hover,
 #lista-cursos:hover,
 #form-estudiante:hover,
