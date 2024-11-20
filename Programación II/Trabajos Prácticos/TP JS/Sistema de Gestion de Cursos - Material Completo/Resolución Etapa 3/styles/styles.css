@@ -245,6 +245,7 @@ select {
   width: 17%;
   border-radius: 3px;
   margin-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #boton-agregar-estudiante {
   font-size: 11px;
@@ -255,6 +256,7 @@ select {
   width: 21%;
   border-radius: 3px;
   margin-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #boton-eliminar-curso,
 #boton-editar-curso {
@@ -263,6 +265,7 @@ select {
   width: 50%;
   border-radius: 3px;
   color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #boton-editar-estudiante,
 #boton-eliminar-estudiante {
@@ -272,6 +275,7 @@ select {
   border-radius: 3px;
   width: 22%;
   margin-right: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .botones-acciones {
   display: flex;
@@ -285,6 +289,7 @@ select {
   width: 13%;
   border-radius: 3px;
   margin: 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #guardar-edicion-estudiante,
 #cancelar-edicion-estudiante {
@@ -294,6 +299,7 @@ select {
   width: 13%;
   border-radius: 3px;
   margin: 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #lista-cursos {
   margin-top: 20px;
@@ -443,6 +449,7 @@ td {
   border-radius: 3px;
   margin: 2px;
   width: 30%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #contenedor-modal{
   border-radius: 5px;
@@ -500,6 +507,7 @@ td {
   font-size: 11px;
   border-radius: 4px;
   padding: 7px 25px 7px 25px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .banner-image{
   width: 100%;
