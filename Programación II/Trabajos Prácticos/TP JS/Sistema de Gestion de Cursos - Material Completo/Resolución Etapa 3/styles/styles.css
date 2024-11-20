@@ -199,6 +199,22 @@ select {
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+#form-edicion,
+#contenedor-estadisticas,
+#lista-cursos,
+#form-estudiante,
+#form-curso{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: 1s;
+}
+#form-edicion:hover,
+#contenedor-estadisticas:hover,
+#lista-cursos:hover,
+#form-estudiante:hover,
+#form-curso:hover{
+  border: 1px solid #23b37c;
+  transition: 1s;
+}
 #form-edicion {
   border: 1px solid #0dcaf0;
   margin: auto;
