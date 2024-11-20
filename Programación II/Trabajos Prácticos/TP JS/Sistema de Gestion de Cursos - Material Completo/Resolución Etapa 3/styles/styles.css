@@ -25,7 +25,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
 }
 .banner-text{
   display: flex;
@@ -288,7 +287,6 @@ select {
   padding: 7px 1px;
   width: 13%;
   border-radius: 3px;
-  margin: 10px 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #guardar-edicion-estudiante,
@@ -298,7 +296,7 @@ select {
   padding: 7px 1px;
   width: 13%;
   border-radius: 3px;
-  margin: 10px 0px;
+  margin: 15px 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #lista-cursos {
