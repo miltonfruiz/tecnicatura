@@ -26,6 +26,19 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+#form-estudiante,
+#form-curso{
+  background: url(../images/agregados.jpg);
+  background-size: cover;
+  background-position: center;
+}
+#form-edicion,
+#contenedor-estadisticas,
+#lista-cursos{
+  background: url(../images/edicion.jpg);
+  background-size: cover;
+  background-position: center;
+}
 .banner-text{
   display: flex;
   flex-direction: column;
