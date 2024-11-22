@@ -298,8 +298,8 @@ export function mostrarCursos(busqueda = "") {
           <div class="botones-acciones">
             <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning" nombre="${
               curso.nombre
-            }"><i class="fa-regular fa-pen-to-square"></i> Editar</button>
-            <button title="Boton Eliminar" class="btn btn-danger" id="boton-eliminar-curso"><i class="fa-solid fa-trash"></i> Eliminar</button>
+            }"><i class="fa-regular fa-pen-to-square"></i><span class="texto-editar-curso">Editar</span></button>
+            <button title="Boton Eliminar" class="btn btn-danger" id="boton-eliminar-curso"><i class="fa-solid fa-trash"></i> <span class="texto-eliminar-curso">Eliminar</span></button>
           </div>
         </td>
       `;

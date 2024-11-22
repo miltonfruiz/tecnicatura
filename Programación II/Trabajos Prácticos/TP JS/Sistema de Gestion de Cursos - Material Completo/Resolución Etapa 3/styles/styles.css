@@ -245,7 +245,7 @@ select {
 #curso-estudiante,
 #nuevo-nombre-curso,
 #nuevo-nombre-profesor{
-  font-size: 14px;
+  font-size: 13px;
   width: 100%;
   padding: 6px;
   border: 1px solid rgba(128, 128, 128, 0.5);
@@ -309,7 +309,7 @@ select {
   padding: 7px 15px 7px 15px;
   color: white;
   border-radius: 3px;
-  width: 22%;
+  width: 25%;
   margin-right: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
@@ -781,6 +781,14 @@ label {
   #link-empezar {
     padding: 10px 30px;
   }
+  .texto-eliminar-estudiante,
+  .texto-editar-estudiante,
+  .texto-cancelar-edicion-estudiante,
+  .texto-guardar-edicion-estudiante,
+  .texto-eliminar-curso,
+  .texto-editar-curso,
+  .texto-cancelar-edicion,
+  .texto-guardar-edicion,
   .texto-sistema,
   .texto-empezar,
   .texto-gestion,
@@ -806,6 +814,9 @@ label {
   }
   .font-size{
     font-size: 30px;
+  }
+  #boton-eliminar-estudiante .fa-trash{
+    margin-right: 100px;
   }
 }
 /*----------------------- Extras --------------------------*/
