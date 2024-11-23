@@ -20,12 +20,12 @@
   margin: 0;
   padding: 0;
 }
-.contenedor-formularios{
+/*.contenedor-formularios{
   background: url(../images/main.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
+}*/
 #form-estudiante,
 #form-curso{
   background: url(../images/agregados.jpg);
@@ -185,7 +185,7 @@ h2 {
 }
 .texto-h2 {
   font-size: 17px;
-  margin: 50px 0px 20px 0px;
+  margin: 70px 0px 20px 0px;
 }
 .texto-h2-estadisticas{
   font-size: 17px;
@@ -848,4 +848,13 @@ footer {
 ::selection {
   background-color: #198754;
   color: white;
+}
+.oculto {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-in-out;
+}
+.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

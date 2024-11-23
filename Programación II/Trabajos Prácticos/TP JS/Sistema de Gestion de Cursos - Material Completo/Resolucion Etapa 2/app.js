@@ -501,3 +501,20 @@ botonEmpezar.addEventListener("click", function (event) {
   target.scrollIntoView({ behavior: "smooth", block: "start" });
   target.focus();
 });
+
+//-------------------------------- Evento efecto aparicion Scroll ------------------------//
+
+const elementos = document.querySelectorAll(".oculto");
+const esVisible = (elemento) => {
+  const rect = elemento.getBoundingClientRect();
+  return rect.top < window.innerHeight - 100;
+};
+const manejarScroll = () => {
+  elementos.forEach((elemento) => {
+    if (esVisible(elemento)) {
+      elemento.classList.add("visible");
+    }
+  });
+};
+window.addEventListener("scroll", manejarScroll);
+document.addEventListener("DOMContentLoaded", manejarScroll);
