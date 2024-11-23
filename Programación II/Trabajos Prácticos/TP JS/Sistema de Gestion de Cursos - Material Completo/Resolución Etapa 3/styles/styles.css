@@ -20,12 +20,12 @@
   margin: 0;
   padding: 0;
 }
-/*.contenedor-formularios{
+.contenedor-formularios{
   background: url(../images/main.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}*/
+}
 #form-estudiante,
 #form-curso{
   background: url(../images/agregados.jpg);
@@ -189,7 +189,7 @@ h2 {
 }
 .texto-h2-estadisticas{
   font-size: 17px;
-  margin: 50px 0px 20px 0px;
+  margin: 70px 0px 20px 0px;
 }
 .texto-h2-informacion{
   font-weight: 600;
@@ -275,24 +275,53 @@ select {
 #boton-agregar-curso {
   font-size: 11px;
   color: white;
-  border: none;
   cursor: pointer;
   padding: 9px 1px 9px 1px;
   width: 17%;
   border-radius: 3px;
   margin-top: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid transparent;
+  transition: transform 1s ease;
+  transition: 1s;
+}
+#cancelar-edicion-estudiante:hover,
+#guardar-edicion-estudiante:hover,
+#cancelar-edicion:hover,
+#guardar-edicion:hover,
+#boton-eliminar-estudiante:hover,
+#boton-editar-estudiante:hover,
+#boton-eliminar-curso:hover,
+#boton-editar-curso:hover,
+#exportar-json:hover,
+#boton-agregar-estudiante:hover,
+#boton-agregar-curso:hover{
+  transition: 1s;
+  animation: pulsar 1s ease infinite;
+}
+@keyframes pulsar {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 #boton-agregar-estudiante {
   font-size: 11px;
   color: white;
-  border: none;
   cursor: pointer;
   padding: 9px 1px 9px 1px;
   width: 21%;
   border-radius: 3px;
   margin-top: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid transparent;
+  transition: transform 1s ease;
+  transition: 1s;
 }
 #boton-eliminar-curso,
 #boton-editar-curso {
@@ -302,6 +331,9 @@ select {
   border-radius: 3px;
   color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid transparent;
+  transition: transform 1s ease;
+  transition: 1s;
 }
 #boton-editar-estudiante,
 #boton-eliminar-estudiante {
@@ -312,6 +344,9 @@ select {
   width: 25%;
   margin-right: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid transparent;
+  transition: transform 1s ease;
+  transition: 1s;
 }
 .botones-acciones {
   display: flex;
@@ -325,6 +360,9 @@ select {
   width: 13%;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid transparent;
+  transition: transform 1s ease;
+  transition: 1s;
 }
 #guardar-edicion-estudiante,
 #cancelar-edicion-estudiante {
@@ -335,6 +373,9 @@ select {
   border-radius: 3px;
   margin: 15px 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid transparent;
+  transition: transform 1s ease;
+  transition: 1s;
 }
 #lista-cursos {
   margin-top: 20px;
@@ -545,6 +586,9 @@ td {
   border-radius: 4px;
   padding: 7px 25px 7px 25px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid transparent;
+  transition: transform 1s ease;
+  transition: 1s;
 }
 .banner-image{
   width: 100%;
