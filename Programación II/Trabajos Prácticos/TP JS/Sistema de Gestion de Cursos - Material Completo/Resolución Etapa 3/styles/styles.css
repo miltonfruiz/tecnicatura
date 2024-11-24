@@ -59,54 +59,18 @@
 .texto-diseño{
   color: white;
 }
-.texto-educativa,
-.texto-gestion,
-.texto-plataforma{
-  font-size: 31px;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: slide-down 1s forwards;
-}
-.texto-plataforma{
-  margin-left: 7px;
-  margin-right: 7px;
-}
-.texto-gestion {
-  animation-delay: 0.5s;
-}
-.texto-educativa {
-  margin-left: 7px;
-  animation-delay: 1s;
-}
-@keyframes slide-down {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.texto-solucion{
-  font-size: 12px;
-  font-weight: 300;
-  text-align: center;
-  padding: 10px;
-  width: 100%;
-  display: inline-block;
-  opacity: 0;
-  transform: translateX(-100%);
-  animation: slide-in-left 1s forwards;
-}
 #link-empezar {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 13px;
   color: white;
-  padding: 3px 0px 3px 0px;
+  padding: 3px 0;
   width: 20%;
   border-radius: 3px;
   opacity: 0;
-  animation: fadeIn 4s forwards;
-  transition: 1s;
+  transform: translateY(20px);
+  transition: opacity 1s, transform 1s;
 }
 #link-empezar:hover {
   border: 1px solid white;
@@ -146,7 +110,7 @@
   color: white;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(-20px);
   animation: slideUp 1.5s ease-out forwards;
 }
 @keyframes slideUp {
@@ -640,8 +604,14 @@ td {
   filter: drop-shadow(0 0 5px #23b37c);
   font-size: 30px;
   color: white;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s, transform 0.5s, filter 0.5s ease, color 0.5s ease;
+}
+.fa-bars-progress.visible {
+  opacity: 1;
+  transform: translateY(0);
   animation: fadeIn 4s forwards, blinkGreen 2s infinite 3s;
-  transition: filter 0.5s ease, color 0.5s ease;
 }
 @keyframes fadeIn {
   0% {
@@ -653,6 +623,7 @@ td {
     filter: drop-shadow(0 0 5px #23b37c);
   }
 }
+
 @keyframes blinkGreen {
   0%, 100% {
     opacity: 1;
@@ -663,11 +634,13 @@ td {
     filter: drop-shadow(0 0 10px #23b37c);
   }
 }
+
 .fa-bars-progress:hover {
   transition: 3s;
   filter: drop-shadow(0 0 5px red);
   animation: fadeInRed 4s infinite, blinkRed 2s forwards infinite 3s;
 }
+
 @keyframes blinkRed {
   0%, 100% {
     opacity: 1;
@@ -678,6 +651,7 @@ td {
     filter: drop-shadow(0 0 10px red);
   }
 }
+
 @keyframes fadeInRed {
   0% {
     opacity: 0;
@@ -688,6 +662,7 @@ td {
     filter: drop-shadow(0 0 5px red);
   }
 }
+
 .social-link {
   display: inline-block;
   width: 30px;
@@ -956,8 +931,66 @@ footer {
 .texto-arriba3.visible,
 .texto-arriba2.visible,
 .texto-arriba1.visible {
-  transition: 1s;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s, transform 1s;
+}
+.texto-educativa,
+.texto-gestion,
+.texto-plataforma {
+  font-size: 31px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 1s, transform 1s;
+}
+.texto-educativa.visible {
+  animation: slide-down 1s forwards;
+  animation-delay: 1.5s;
+}
+.texto-gestion.visible {
+  animation: slide-down 1s forwards;
+  animation-delay: 1s;
+}
+.texto-plataforma.visible {
+  animation: slide-down 1s forwards;
+  animation-delay: 0.5s;
+}
+.texto-plataforma {
+  margin-left: 7px;
+  margin-right: 7px;
+}
+.texto-educativa {
+  margin-left: 7px;
+}
+@keyframes slide-down {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.texto-solucion {
+  font-size: 12px;
+  font-weight: 300;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-20%);
+  transition: opacity 1s, transform 1s;
+}
+.texto-solucion.visible {
+  opacity: 0;
+  animation: slide-in-left 2s forwards;
+}
+@keyframes slide-in-left {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+#link-empezar.visible {
+  transition: 2s;
   opacity: 1;
   transform: translateY(0);
 }
-

@@ -503,10 +503,9 @@ botonEmpezar.addEventListener("click", function (event) {
 });
 //----------------------------- Evento efecto aparicion Scroll ---------------------------//
 
-document.addEventListener("DOMContentLoaded", manejarScroll);
-window.addEventListener("scroll", manejarScroll);
-function manejarScroll() {
-  const ventanaAltura = window.innerHeight;
+//----------------------------- Evento efecto aparición Scroll ---------------------------//
+
+document.addEventListener("DOMContentLoaded", () => {
   const elementos = [
     ...document.querySelectorAll(".oculto"),
     document.getElementById("boton-agregar-curso"),
@@ -524,14 +523,43 @@ function manejarScroll() {
     document.querySelector(".texto-arriba2"),
     document.querySelector(".texto-arriba3"),
     document.querySelector(".texto-h2-estadisticas"),
+    ...document.querySelectorAll(
+      ".texto-educativa, .texto-gestion, .texto-plataforma, .texto-solucion, .fa-bars-progress"
+    ),
+    document.querySelector("#link-empezar"), // Agregar aquí el ID del elemento
   ].filter((el) => el !== null);
-  elementos.forEach((elemento) => {
-    const rect = elemento.getBoundingClientRect();
-    if (rect.top < ventanaAltura - 100) {
-      elemento.classList.add("visible");
-    }
-    if (rect.bottom < 0 || rect.top > ventanaAltura) {
-      elemento.classList.remove("visible");
+
+  const ventanaAltura = window.innerHeight;
+
+  // Función para manejar la visibilidad
+  function manejarScroll() {
+    elementos.forEach((elemento) => {
+      const rect = elemento.getBoundingClientRect();
+
+      // Si el elemento está dentro de la vista
+      if (rect.top < ventanaAltura - 100) {
+        elemento.classList.add("visible");
+      }
+
+      // Si el elemento está fuera de la vista
+      if (rect.bottom < 0 || rect.top > ventanaAltura) {
+        elemento.classList.remove("visible");
+      }
+    });
+  }
+
+  // Usar `requestAnimationFrame` para optimizar el scroll
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        manejarScroll();
+        ticking = false;
+      });
+      ticking = true;
     }
   });
-}
+
+  // Ejecutar al cargar para los elementos visibles inicialmente
+  manejarScroll();
+});
