@@ -501,8 +501,6 @@ botonEmpezar.addEventListener("click", function (event) {
   target.scrollIntoView({ behavior: "smooth", block: "start" });
   target.focus();
 });
-//----------------------------- Evento efecto aparicion Scroll ---------------------------//
-
 //----------------------------- Evento efecto aparición Scroll ---------------------------//
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -526,29 +524,20 @@ document.addEventListener("DOMContentLoaded", () => {
     ...document.querySelectorAll(
       ".texto-educativa, .texto-gestion, .texto-plataforma, .texto-solucion, .fa-bars-progress"
     ),
-    document.querySelector("#link-empezar"), // Agregar aquí el ID del elemento
+    document.querySelector("#link-empezar"),
   ].filter((el) => el !== null);
-
   const ventanaAltura = window.innerHeight;
-
-  // Función para manejar la visibilidad
   function manejarScroll() {
     elementos.forEach((elemento) => {
       const rect = elemento.getBoundingClientRect();
-
-      // Si el elemento está dentro de la vista
       if (rect.top < ventanaAltura - 100) {
         elemento.classList.add("visible");
       }
-
-      // Si el elemento está fuera de la vista
       if (rect.bottom < 0 || rect.top > ventanaAltura) {
         elemento.classList.remove("visible");
       }
     });
   }
-
-  // Usar `requestAnimationFrame` para optimizar el scroll
   let ticking = false;
   window.addEventListener("scroll", () => {
     if (!ticking) {
@@ -559,7 +548,5 @@ document.addEventListener("DOMContentLoaded", () => {
       ticking = true;
     }
   });
-
-  // Ejecutar al cargar para los elementos visibles inicialmente
   manejarScroll();
 });
