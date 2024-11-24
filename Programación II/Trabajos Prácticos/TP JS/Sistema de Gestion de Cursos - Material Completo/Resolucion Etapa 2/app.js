@@ -501,6 +501,8 @@ botonEmpezar.addEventListener("click", function (event) {
   target.scrollIntoView({ behavior: "smooth", block: "start" });
   target.focus();
 });
+//----------------------------- Evento efecto aparicion Scroll ---------------------------//
+
 document.addEventListener("DOMContentLoaded", manejarScroll);
 window.addEventListener("scroll", manejarScroll);
 function manejarScroll() {
