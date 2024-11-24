@@ -624,6 +624,7 @@ td {
   color: #23b37c;
   transition: 1s;
 }
+.info-redes-cel,
 .info-redes{
   font-weight: 300;
   font-size: 11px;
@@ -901,4 +902,41 @@ footer {
 .visible {
   opacity: 1;
   transform: translateY(0);
+}
+/*-------------- Evento efecto aparicion Scroll ----------------*/
+.info-redes-cel,
+.footer-subredes,
+.texto-contacto,
+.boton-eliminar-curso,
+#boton-agregar-curso,
+#boton-agregar-estudiante,
+#exportar-json {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+.info-redes-cel.visible,
+.footer-subredes.visible,
+.texto-contacto.visible,
+.boton-eliminar-curso.visible,
+#boton-agregar-curso.visible,
+#boton-agregar-estudiante.visible,
+#exportar-json.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.info-redes,
+.h3-mis-redes,
+.boton-editar-curso,
+#filtro-estudiantes {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+.info-redes.visible,
+.h3-mis-redes.visible,
+.boton-editar-curso.visible,
+#filtro-estudiantes.visible {
+  opacity: 1;
+  transform: translateX(0);
 }

@@ -296,10 +296,10 @@ export function mostrarCursos(busqueda = "") {
         }</td>
         <td class="td-contenedor-botones" rowspan="${cantidadEstudiantes || 1}">
           <div class="botones-acciones">
-            <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning" nombre="${
+            <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning boton-editar-curso" nombre="${
               curso.nombre
             }"><i class="fa-regular fa-pen-to-square"></i><span class="texto-editar-curso">Editar</span></button>
-            <button title="Boton Eliminar" class="btn btn-danger" id="boton-eliminar-curso"><i class="fa-solid fa-trash"></i> <span class="texto-eliminar-curso">Eliminar</span></button>
+            <button title="Boton Eliminar" class="btn btn-danger boton-eliminar-curso" id="boton-eliminar-curso"><i class="fa-solid fa-trash"></i> <span class="texto-eliminar-curso">Eliminar</span></button>
           </div>
         </td>
       `;
@@ -504,17 +504,28 @@ botonEmpezar.addEventListener("click", function (event) {
 
 //-------------------------------- Evento efecto aparicion Scroll ------------------------//
 
-const elementos = document.querySelectorAll(".oculto");
-const esVisible = (elemento) => {
-  const rect = elemento.getBoundingClientRect();
-  return rect.top < window.innerHeight - 100;
-};
-const manejarScroll = () => {
+document.addEventListener("DOMContentLoaded", manejarScroll);
+window.addEventListener("scroll", manejarScroll);
+function manejarScroll() {
+  const elementos = [
+    ...document.querySelectorAll(".oculto"),
+    document.getElementById("boton-agregar-curso"),
+    document.getElementById("boton-agregar-estudiante"),
+    document.getElementById("exportar-json"),
+    document.getElementById("filtro-estudiantes"),
+    ...document.querySelectorAll(".boton-editar-curso"),
+    ...document.querySelectorAll(".boton-eliminar-curso"),
+    ...document.querySelectorAll(".h3-mis-redes"),
+    ...document.querySelectorAll(".texto-contacto"),
+    ...document.querySelectorAll(".footer-subredes"),
+    ...document.querySelectorAll(".info-redes"),
+    ...document.querySelectorAll(".info-redes-cel"),
+  ].filter((el) => el !== null);
+  const ventanaAltura = window.innerHeight;
   elementos.forEach((elemento) => {
-    if (esVisible(elemento)) {
+    const rect = elemento.getBoundingClientRect();
+    if (rect.top < ventanaAltura - 100) {
       elemento.classList.add("visible");
     }
   });
-};
-window.addEventListener("scroll", manejarScroll);
-document.addEventListener("DOMContentLoaded", manejarScroll);
+}
