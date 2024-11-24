@@ -607,6 +607,7 @@ td {
   transition: opacity 0.5s, transform 0.5s, filter 0.5s ease, color 0.5s ease;
 }
 .fa-bars-progress.visible {
+  transition: 2s;
   opacity: 1;
   transform: translateY(0);
   animation: fadeIn 4s forwards, blinkGreen 2s infinite 3s;
