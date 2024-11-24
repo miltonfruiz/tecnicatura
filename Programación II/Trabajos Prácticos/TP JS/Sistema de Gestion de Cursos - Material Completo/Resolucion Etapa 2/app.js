@@ -501,12 +501,10 @@ botonEmpezar.addEventListener("click", function (event) {
   target.scrollIntoView({ behavior: "smooth", block: "start" });
   target.focus();
 });
-
-//-------------------------------- Evento efecto aparición Scroll ------------------------//
-
 document.addEventListener("DOMContentLoaded", manejarScroll);
 window.addEventListener("scroll", manejarScroll);
 function manejarScroll() {
+  const ventanaAltura = window.innerHeight;
   const elementos = [
     ...document.querySelectorAll(".oculto"),
     document.getElementById("boton-agregar-curso"),
@@ -520,8 +518,11 @@ function manejarScroll() {
     ...document.querySelectorAll(".footer-subredes"),
     ...document.querySelectorAll(".info-redes"),
     ...document.querySelectorAll(".info-redes-cel"),
+    document.querySelector(".texto-arriba1"),
+    document.querySelector(".texto-arriba2"),
+    document.querySelector(".texto-arriba3"),
+    document.querySelector(".texto-h2-estadisticas"),
   ].filter((el) => el !== null);
-  const ventanaAltura = window.innerHeight;
   elementos.forEach((elemento) => {
     const rect = elemento.getBoundingClientRect();
     if (rect.top < ventanaAltura - 100) {

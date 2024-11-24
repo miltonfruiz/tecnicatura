@@ -185,11 +185,11 @@ h2 {
 }
 .texto-h2 {
   font-size: 17px;
-  margin: 70px 0px 20px 0px;
+  margin: 90px 0px 20px 0px;
 }
 .texto-h2-estadisticas{
   font-size: 17px;
-  margin: 70px 0px 20px 0px;
+  margin: 90px 0px 20px 0px;
 }
 .texto-h2-informacion{
   font-weight: 600;
@@ -232,6 +232,9 @@ select {
 #form-curso:hover{
   border: 1px solid #23b37c;
   transition: 1s;
+}
+#contenedor-estadisticas{
+  margin-bottom: 50px;
 }
 #form-edicion {
   border: 1px solid #0dcaf0;
@@ -941,3 +944,21 @@ footer {
   opacity: 1;
   transform: translateX(0);
 }
+
+.texto-h2-estadisticas,
+.texto-arriba3,
+.texto-arriba2,
+.texto-arriba1 {
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+.texto-h2-estadisticas.visible,
+.texto-arriba3.visible,
+.texto-arriba2.visible,
+.texto-arriba1.visible {
+  transition: 1s;
+  opacity: 1;
+  transform: translateY(0);
+}
+
