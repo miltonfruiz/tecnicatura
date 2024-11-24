@@ -623,6 +623,7 @@ td {
 .fa-discord:hover {
   color: #23b37c;
   transition: 1s;
+  animation: pulsar 1s ease infinite;
 }
 .info-redes-cel,
 .info-redes{
