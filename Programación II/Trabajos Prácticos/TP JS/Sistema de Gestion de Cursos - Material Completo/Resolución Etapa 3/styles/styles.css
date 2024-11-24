@@ -279,7 +279,7 @@ select {
   padding: 9px 1px 9px 1px;
   width: 17%;
   border-radius: 3px;
-  margin-top: 10px;
+  margin-top: 18px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border: 1px solid transparent;
   transition: transform 1s ease;
@@ -317,7 +317,7 @@ select {
   padding: 9px 1px 9px 1px;
   width: 21%;
   border-radius: 3px;
-  margin-top: 10px;
+  margin-top: 18px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border: 1px solid transparent;
   transition: transform 1s ease;
@@ -913,7 +913,7 @@ footer {
 #boton-agregar-estudiante,
 #exportar-json {
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(24%);
   transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
 .info-redes-cel.visible,
@@ -931,7 +931,7 @@ footer {
 .boton-editar-curso,
 #filtro-estudiantes {
   opacity: 0;
-  transform: translateX(-100%);
+  transform: translateX(-24%);
   transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
 .info-redes.visible,

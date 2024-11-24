@@ -502,7 +502,7 @@ botonEmpezar.addEventListener("click", function (event) {
   target.focus();
 });
 
-//-------------------------------- Evento efecto aparicion Scroll ------------------------//
+//-------------------------------- Evento efecto aparición Scroll ------------------------//
 
 document.addEventListener("DOMContentLoaded", manejarScroll);
 window.addEventListener("scroll", manejarScroll);
@@ -526,6 +526,9 @@ function manejarScroll() {
     const rect = elemento.getBoundingClientRect();
     if (rect.top < ventanaAltura - 100) {
       elemento.classList.add("visible");
+    }
+    if (rect.bottom < 0 || rect.top > ventanaAltura) {
+      elemento.classList.remove("visible");
     }
   });
 }
