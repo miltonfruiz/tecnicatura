@@ -453,7 +453,7 @@ cancelarEdicionEstudiante.addEventListener("click", () => {
   edadEstudianteEditar.value = "";
   notaEstudianteEditar.value = "";
 });
-//------------------------------- Función para mostrar estadísticas -----------------------//
+//----------------------------- Función para mostrar estadísticas -------------------------//
 
 window.onload = function () {
   const { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso } =
@@ -510,6 +510,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("boton-agregar-estudiante"),
     document.getElementById("exportar-json"),
     document.getElementById("filtro-estudiantes"),
+    document.getElementById("tabla-estadisticas-tr"),
+    document.getElementById("tabla-estadisticas-subtr"),
+    document.getElementById("graficaEstudiantes"),
     ...document.querySelectorAll(".boton-editar-curso"),
     ...document.querySelectorAll(".boton-eliminar-curso"),
     ...document.querySelectorAll(".h3-mis-redes"),
@@ -521,6 +524,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".texto-arriba2"),
     document.querySelector(".texto-arriba3"),
     document.querySelector(".texto-h2-estadisticas"),
+    document.querySelector(".texto-h2-informacion"),
+
     ...document.querySelectorAll(
       ".texto-educativa, .texto-gestion, .texto-plataforma, .texto-solucion, .fa-bars-progress"
     ),

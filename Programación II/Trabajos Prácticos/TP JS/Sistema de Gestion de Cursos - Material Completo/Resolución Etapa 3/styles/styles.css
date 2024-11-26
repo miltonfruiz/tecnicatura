@@ -198,7 +198,7 @@ select {
   transition: 1s;
 }
 #contenedor-estadisticas{
-  margin-bottom: 50px;
+  margin-bottom: 130px;
 }
 #form-edicion {
   border: 1px solid #0dcaf0;
@@ -887,6 +887,7 @@ footer {
   opacity: 1;
   transform: translateX(0);
 }
+.texto-h2-informacion,
 .info-redes,
 .h3-mis-redes,
 .boton-editar-curso,
@@ -895,6 +896,7 @@ footer {
   transform: translateX(-24%);
   transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
+.texto-h2-informacion.visible,
 .info-redes.visible,
 .h3-mis-redes.visible,
 .boton-editar-curso.visible,
@@ -902,6 +904,8 @@ footer {
   opacity: 1;
   transform: translateX(0);
 }
+#graficaEstudiantes,
+#tabla-estadisticas-tr,
 .texto-h2-estadisticas,
 .texto-arriba3,
 .texto-arriba2,
@@ -910,6 +914,8 @@ footer {
   transform: translateY(-50px);
   transition: transform 0.8s ease, opacity 0.8s ease;
 }
+#graficaEstudiantes.visible,
+#tabla-estadisticas-tr.visible,
 .texto-h2-estadisticas.visible,
 .texto-arriba3.visible,
 .texto-arriba2.visible,
@@ -972,8 +978,15 @@ footer {
     transform: translateX(0);
   }
 }
+#tabla-estadisticas-subtr{
+  opacity: 0;
+  transform: translateY(40%);
+  transition: opacity 1s, transform 1s;
+}
+#tabla-estadisticas-subtr.visible,
 #link-empezar.visible {
   transition: 2s;
   opacity: 1;
   transform: translateY(0);
 }
+
