@@ -212,7 +212,7 @@ select {
 #curso-estudiante,
 #nuevo-nombre-curso,
 #nuevo-nombre-profesor{
-  font-size: 13px;
+  font-size: 12px;
   width: 100%;
   padding: 6px;
   border: 1px solid rgba(128, 128, 128, 0.5);
@@ -224,17 +224,8 @@ select {
 #edad-estudiante-editar,
 #nota-estudiante-editar,
 #nombre-estudiante-editar{
-  width: 42%;
-  font-size: 14px;
-  padding: 6px;
-  border: 1px solid rgba(128, 128, 128, 0.5);
-  border-radius: 2px;
-}
-#edad-estudiante-editar,
-#nota-estudiante-editar,
-#nombre-estudiante-editar{
   width: 100%;
-  font-size: 14px;
+  font-size: 12px;
   padding: 6px;
   border: 1px solid rgba(128, 128, 128, 0.5);
   border-radius: 2px;
@@ -374,7 +365,7 @@ select {
 .tabla-cursos td,
 .tabla-estudiante th,
 .tabla-estudiante td {
-  font-size: 13px;
+  font-size: 12px;
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
@@ -441,7 +432,7 @@ td {
   align-items: center;
 }
 #filtro-estudiantes {
-  font-size: 13px;
+  font-size: 12px;
   margin-left: auto;
   width: 70%;
 }
@@ -451,7 +442,7 @@ td {
 #busqueda-ingresada {
   width: 100%;
   border-radius: 24px;
-  font-size: 13px;
+  font-size: 12px;
   padding: 7px 30px;
 }
 .fa-magnifying-glass {
@@ -525,7 +516,7 @@ td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
 }
 #tabla-estadisticas th {
   background-color: #f2f2f2;
@@ -536,7 +527,7 @@ td {
   background-color: #f9f9f9;
 }
 #tabla-estadisticas td {
-  font-size: 13px;
+  font-size: 12px;
 }
 #graficaEstudiantes {
   width: 100% !important;
@@ -883,7 +874,7 @@ footer {
 #boton-agregar-estudiante,
 #exportar-json {
   opacity: 0;
-  transform: translateX(24%);
+  transform: translateX(23%);
   transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
 .info-redes-cel.visible,
