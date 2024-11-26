@@ -904,7 +904,6 @@ footer {
   opacity: 1;
   transform: translateX(0);
 }
-#graficaEstudiantes,
 #tabla-estadisticas-tr,
 .texto-h2-estadisticas,
 .texto-arriba3,
@@ -914,7 +913,6 @@ footer {
   transform: translateY(-50px);
   transition: transform 0.8s ease, opacity 0.8s ease;
 }
-#graficaEstudiantes.visible,
 #tabla-estadisticas-tr.visible,
 .texto-h2-estadisticas.visible,
 .texto-arriba3.visible,
@@ -986,6 +984,24 @@ footer {
 #tabla-estadisticas-subtr.visible,
 #link-empezar.visible {
   transition: 2s;
+  opacity: 1;
+  transform: translateY(0);
+}
+#contenedor-grafica {
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+#contenedor-grafica.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+#graficaEstudiantes {
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+#graficaEstudiantes.visible {
   opacity: 1;
   transform: translateY(0);
 }

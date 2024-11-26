@@ -455,44 +455,67 @@ cancelarEdicionEstudiante.addEventListener("click", () => {
 });
 //----------------------------- Función para mostrar estadísticas -------------------------//
 
-window.onload = function () {
-  const { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso } =
-    calcularEstadisticas();
-
-  totalEstudiantesElem.textContent = totalEstudiantes;
-  promedioGeneralElem.textContent = promedioGeneral;
-  totalCursosElem.textContent = totalCursos;
-  mejorCursoElem.textContent = mejorCurso || "N/A";
-  const ctx = graficaCanvas.getContext("2d");
-  const graficaEstudiantes = new Chart(ctx, {
-    type: "pie",
-    data: {
-      labels: ["Total de Estudiantes", "Promedio General", "Total de Cursos"],
-      datasets: [
-        {
-          label: "Estadísticas",
-          data: [totalEstudiantes, promedioGeneral, totalCursos],
-          backgroundColor: ["#36a2eb", "#ff6384", "#ffce56"],
-          hoverOffset: 4,
+let graficaEstudiantesInstance = null;
+document.addEventListener("DOMContentLoaded", () => {
+  const graficaCanvas = document.getElementById("graficaEstudiantes");
+  const contenedorGrafica = document.getElementById("contenedor-grafica");
+  const cargarGrafica = () => {
+    const { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso } =
+      calcularEstadisticas();
+    totalEstudiantesElem.textContent = totalEstudiantes;
+    promedioGeneralElem.textContent = promedioGeneral;
+    totalCursosElem.textContent = totalCursos;
+    mejorCursoElem.textContent = mejorCurso || "N/A";
+    const ctx = graficaCanvas.getContext("2d");
+    if (graficaEstudiantesInstance) {
+      graficaEstudiantesInstance.destroy();
+    }
+    graficaEstudiantesInstance = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Total de Estudiantes", "Promedio General", "Total de Cursos"],
+        datasets: [
+          {
+            label: "Estadísticas",
+            data: [totalEstudiantes, promedioGeneral, totalCursos],
+            backgroundColor: ["#36a2eb", "#ff6384", "#ffce56"],
+            hoverOffset: 4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          title: {
+            display: true,
+            text: "Estadísticas de Estudiantes",
+          },
         },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: "top",
-        },
-        title: {
-          display: true,
-          text: "Estadísticas de Estudiantes",
+        animation: {
+          duration: 2000,
+          easing: "easeOutQuart",
         },
       },
+    });
+    graficaCanvas.style.display = "block";
+  };
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          contenedorGrafica.classList.add("visible");
+          cargarGrafica();
+        }
+      });
     },
-  });
-  graficaCanvas.style.display = "block";
-};
+    { threshold: 0.5 }
+  );
+  observer.observe(contenedorGrafica);
+});
 //------------------------------- Evento para desplazar a elemento -----------------------//
 
 botonEmpezar.addEventListener("click", function (event) {
@@ -512,7 +535,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("filtro-estudiantes"),
     document.getElementById("tabla-estadisticas-tr"),
     document.getElementById("tabla-estadisticas-subtr"),
+    document.getElementById("contenedor-grafica"),
     document.getElementById("graficaEstudiantes"),
+    document.querySelector(".texto-arriba1"),
+    document.querySelector(".texto-arriba2"),
+    document.querySelector(".texto-arriba3"),
+    document.querySelector(".texto-h2-estadisticas"),
+    document.querySelector(".texto-h2-informacion"),
+    document.querySelector("#link-empezar"),
     ...document.querySelectorAll(".boton-editar-curso"),
     ...document.querySelectorAll(".boton-eliminar-curso"),
     ...document.querySelectorAll(".h3-mis-redes"),
@@ -520,16 +550,9 @@ document.addEventListener("DOMContentLoaded", () => {
     ...document.querySelectorAll(".footer-subredes"),
     ...document.querySelectorAll(".info-redes"),
     ...document.querySelectorAll(".info-redes-cel"),
-    document.querySelector(".texto-arriba1"),
-    document.querySelector(".texto-arriba2"),
-    document.querySelector(".texto-arriba3"),
-    document.querySelector(".texto-h2-estadisticas"),
-    document.querySelector(".texto-h2-informacion"),
-
     ...document.querySelectorAll(
       ".texto-educativa, .texto-gestion, .texto-plataforma, .texto-solucion, .fa-bars-progress"
     ),
-    document.querySelector("#link-empezar"),
   ].filter((el) => el !== null);
   const ventanaAltura = window.innerHeight;
   function manejarScroll() {
