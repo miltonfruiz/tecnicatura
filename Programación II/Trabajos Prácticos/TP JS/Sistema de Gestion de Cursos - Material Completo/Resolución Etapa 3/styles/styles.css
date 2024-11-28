@@ -432,6 +432,10 @@ td {
   display: flex;
   align-items: center;
 }
+form input:hover{
+  transition: 1s;
+  background-color: #23b37c1f;
+}
 #filtro-estudiantes {
   font-size: 12px;
   margin-left: auto;
