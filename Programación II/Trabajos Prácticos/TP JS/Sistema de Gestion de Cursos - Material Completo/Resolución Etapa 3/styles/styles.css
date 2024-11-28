@@ -420,10 +420,6 @@ td {
 .mensaje.oculto {
   opacity: 0;
 }
-#busqueda-ingresada:hover{
-  border: 1px solid #23b37c;
-  transition: 1s;
-}
 .input-container {
   width: 100%;
   margin: 25px 0;
@@ -432,9 +428,38 @@ td {
   display: flex;
   align-items: center;
 }
-input:hover{
-  transition: 1s;
-  background-color: #23b37c1f;
+input:hover {
+  transition: background-color 1s, color 1s, text-shadow 1s, border 1s;
+  background-color: #85ce9f;
+  color: white;
+}
+#busqueda-ingresada {
+  color: black;
+  transition: all 1s ease;
+}
+#busqueda-ingresada:hover {
+  background-color: white;
+  color: grey;
+  border: 1px solid #23b37c;
+}
+#busqueda-ingresada:focus {
+  color: black;
+  border: 1px solid #23b37c;
+  outline: none;
+}
+#busqueda-ingresada:hover::placeholder {
+  color: #23b37c;
+}
+#busqueda-ingresada:focus::placeholder {
+  color: grey;
+}
+#busqueda-ingresada:hover + .fa-magnifying-glass {
+  color: #23b37c;
+  transition: color 1s ease;
+}
+#busqueda-ingresada:focus + .fa-magnifying-glass {
+  color: #999;
+  transition: color 1s ease;
 }
 #filtro-estudiantes {
   font-size: 12px;
