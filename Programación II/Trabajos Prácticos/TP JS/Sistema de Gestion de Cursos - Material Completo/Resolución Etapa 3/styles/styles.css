@@ -421,7 +421,8 @@ td {
   opacity: 0;
 }
 #busqueda-ingresada:hover{
-  border: 1px solid blue;
+  border: 1px solid #23b37c;
+  transition: 1s;
 }
 .input-container {
   width: 100%;
@@ -435,6 +436,10 @@ td {
   font-size: 12px;
   margin-left: auto;
   width: 70%;
+}
+#filtro-estudiantes:hover{
+  border: 1px solid #23b37c;
+  transition: 1s;
 }
 .contenedor-select{
   width: 50%;
