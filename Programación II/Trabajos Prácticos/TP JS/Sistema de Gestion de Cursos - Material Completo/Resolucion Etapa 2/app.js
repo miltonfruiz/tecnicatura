@@ -262,7 +262,6 @@ export function mostrarCursos(busqueda = "") {
     <tbody>
   `;
   let resultadosEncontrados = false;
-
   cursos.forEach((curso) => {
     if (
       curso.nombre.toLowerCase().includes(busqueda) ||
@@ -304,6 +303,8 @@ export function mostrarCursos(busqueda = "") {
         </td>
       `;
       tabla.querySelector("tbody").appendChild(filaCurso);
+      filaCurso.querySelector(".boton-editar-curso").classList.add("visible");
+      filaCurso.querySelector(".boton-eliminar-curso").classList.add("visible");
       estudiantesAFiltrar.forEach((est, index) => {
         if (index > 0) {
           const filaEstudiante = document.createElement("tr");
