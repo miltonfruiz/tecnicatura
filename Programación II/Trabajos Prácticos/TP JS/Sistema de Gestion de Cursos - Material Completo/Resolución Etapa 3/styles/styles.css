@@ -151,6 +151,9 @@ h2 {
   font-size: 17px;
   margin: 90px 0px 20px 0px;
 }
+.texto-h2-edicion{
+  font-size: 17px;
+}
 .texto-h2-estadisticas{
   font-size: 17px;
   margin: 90px 0px 20px 0px;
@@ -201,7 +204,6 @@ select {
   margin-bottom: 130px;
 }
 #form-edicion {
-  border: 1px solid #0dcaf0;
   margin: auto;
 }
 #nombre-curso,
@@ -482,16 +484,6 @@ input:hover {
   background-color: rgba(0, 0, 0, 0.63);
   transition: opacity 3s;
 }
-.modal-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  border-radius: 100%;
-}
 #btn-confirmar,
 #btn-cancelar{
   font-size: 13px;
@@ -501,6 +493,12 @@ input:hover {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #contenedor-modal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
   border-radius: 5px;
   width: 50%;
   background-color: white;
@@ -1019,4 +1017,10 @@ footer {
 #graficaEstudiantes.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+
+
+.modal-dialog.custom-width {
+  max-width: 71%;
 }

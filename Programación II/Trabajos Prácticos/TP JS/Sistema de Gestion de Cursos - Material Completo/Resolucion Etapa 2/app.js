@@ -295,7 +295,7 @@ export function mostrarCursos(busqueda = "") {
         }</td>
         <td class="td-contenedor-botones" rowspan="${cantidadEstudiantes || 1}">
           <div class="botones-acciones">
-            <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning boton-editar-curso" nombre="${
+            <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning boton-editar-curso" data-bs-toggle="modal" data-bs-target="#formulario-edicion" nombre="${
               curso.nombre
             }"><i class="fa-regular fa-pen-to-square"></i><span class="texto-editar-curso">Editar</span></button>
             <button title="Boton Eliminar" class="btn btn-danger boton-eliminar-curso" id="boton-eliminar-curso"><i class="fa-solid fa-trash"></i> <span class="texto-eliminar-curso">Eliminar</span></button>
@@ -363,9 +363,13 @@ guardarEdicion.addEventListener("click", () => {
 });
 //--------------------- Eventos de cancelación de edición -------------------//
 
-cancelarEdicion.addEventListener("click", () => {
-  formularioEdicion.style.display = "none";
+cancelarEdicion.addEventListener("click", function () {
+  const modal = bootstrap.Modal.getInstance(
+    document.getElementById("formulario-edicion")
+  );
+  modal.hide();
 });
+
 //------------------------- Eventos de eliminar curso -----------------------//
 
 listaCursos.addEventListener("click", (e) => {

@@ -198,114 +198,135 @@
                 </div>
                 <div id="lista-cursos" class="table table-responsive"></div>
               </div>
-              <div id="formulario-edicion" style="display: none">
-                <h2 class="texto-h2">
-                  <i class="fa-regular fa-pen-to-square"></i> Edición
-                </h2>
-                <div id="form-edicion" class="row">
-                  <h4 class="texto-h4-curso">
-                    <i class="fa-solid fa-graduation-cap"></i> Curso
-                  </h4>
-                  <div class="col-md-6">
-                    <label for="nuevo-nombre-curso">Nuevo Curso</label>
-                    <input
-                      type="text"
-                      id="nuevo-nombre-curso"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="nuevo-nombre-profesor">Nuevo Profesor</label>
-                    <input
-                      type="text"
-                      id="nuevo-nombre-profesor"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col-12">
-                    <h4 class="texto-h4-estudiante">
-                      <i class="fa-solid fa-users"></i> Estudiantes
-                    </h4>
-                    <div
-                      class="row"
-                      id="formulario-edicion-estudiante"
-                      style="display: none"
-                    >
-                      <div class="col">
-                        <label for="nombre-estudiante-editar">Nombre</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          id="nombre-estudiante-editar"
-                          placeholder="Nombre"
-                        />
-                      </div>
-                      <div class="col">
-                        <label for="edad-estudiante-editar">Edad</label>
-                        <input
-                          class="form-control"
-                          type="number"
-                          id="edad-estudiante-editar"
-                          placeholder="Edad"
-                        />
-                      </div>
-                      <div class="col">
-                        <label for="nota-estudiante-editar">Nota</label>
-                        <input
-                          class="form-control"
-                          type="number"
-                          id="nota-estudiante-editar"
-                          placeholder="Nota"
-                          step="0.1"
-                          min="0"
-                          max="10"
-                        />
-                      </div>
-                      <div class="col-12">
-                        <button
-                          title="Guardar"
-                          id="guardar-edicion-estudiante"
-                          class="btn btn-info"
-                        >
-                          <i class="fa-solid fa-floppy-disk"></i
-                          ><span class="texto-guardar-edicion-estudiante">
-                            Guardar</span
+              <!-- Modal de Edición -->
+              <div
+                id="formulario-edicion"
+                class="modal fade"
+                tabindex="-1"
+                aria-labelledby="formulario-edicion-label"
+                aria-hidden="true"
+              >
+                <div
+                  class="modal-dialog modal-lg modal-dialog-centered custom-width"
+                >
+                  <!-- Tamaño más grande y centrado -->
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <h2 class="texto-h2-edicion">
+                        <i class="fa-regular fa-pen-to-square"></i> Edición
+                      </h2>
+                      <div id="form-edicion" class="row">
+                        <h4 class="texto-h4-curso">
+                          <i class="fa-solid fa-graduation-cap"></i> Curso
+                        </h4>
+                        <div class="col-md-6">
+                          <label for="nuevo-nombre-curso">Nuevo Curso</label>
+                          <input
+                            type="text"
+                            id="nuevo-nombre-curso"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label for="nuevo-nombre-profesor"
+                            >Nuevo Profesor</label
                           >
-                        </button>
-                        <button
-                          title="Cancelar"
-                          id="cancelar-edicion-estudiante"
-                          class="btn btn-secondary"
-                        >
-                          <i class="fa-solid fa-x"></i>
-                          <span class="texto-cancelar-edicion-estudiante"
-                            >Cancelar</span
+                          <input
+                            type="text"
+                            id="nuevo-nombre-profesor"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="col-12">
+                          <h4 class="texto-h4-estudiante">
+                            <i class="fa-solid fa-users"></i> Estudiantes
+                          </h4>
+                          <div
+                            class="row"
+                            id="formulario-edicion-estudiante"
+                            style="display: none"
                           >
-                        </button>
+                            <div class="col">
+                              <label for="nombre-estudiante-editar"
+                                >Nombre</label
+                              >
+                              <input
+                                class="form-control"
+                                type="text"
+                                id="nombre-estudiante-editar"
+                                placeholder="Nombre"
+                              />
+                            </div>
+                            <div class="col">
+                              <label for="edad-estudiante-editar">Edad</label>
+                              <input
+                                class="form-control"
+                                type="number"
+                                id="edad-estudiante-editar"
+                                placeholder="Edad"
+                              />
+                            </div>
+                            <div class="col">
+                              <label for="nota-estudiante-editar">Nota</label>
+                              <input
+                                class="form-control"
+                                type="number"
+                                id="nota-estudiante-editar"
+                                placeholder="Nota"
+                                step="0.1"
+                                min="0"
+                                max="10"
+                              />
+                            </div>
+                            <div class="col-12">
+                              <button
+                                title="Guardar"
+                                id="guardar-edicion-estudiante"
+                                class="btn btn-info"
+                              >
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                <span class="texto-guardar-edicion-estudiante"
+                                  >Guardar</span
+                                >
+                              </button>
+                              <button
+                                title="Cancelar"
+                                id="cancelar-edicion-estudiante"
+                                class="btn btn-secondary"
+                              >
+                                <i class="fa-solid fa-x"></i>
+                                <span class="texto-cancelar-edicion-estudiante"
+                                  >Cancelar</span
+                                >
+                              </button>
+                            </div>
+                          </div>
+                          <div id="lista-estudiantes-edicion"></div>
+                        </div>
+                        <div class="col-12">
+                          <button
+                            title="Guardar"
+                            id="guardar-edicion"
+                            class="btn btn-info"
+                          >
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span class="texto-guardar-edicion">Guardar</span>
+                          </button>
+                          <button
+                            title="Cancelar"
+                            id="cancelar-edicion"
+                            class="btn btn-secondary"
+                          >
+                            <i class="fa-solid fa-x"></i>
+                            <span class="texto-cancelar-edicion">Cancelar</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
-                    <div id="lista-estudiantes-edicion"></div>
-                  </div>
-                  <div class="col-12">
-                    <button
-                      title="Guardar"
-                      id="guardar-edicion"
-                      class="btn btn-info"
-                    >
-                      <i class="fa-solid fa-floppy-disk"></i
-                      ><span class="texto-guardar-edicion"> Guardar</span>
-                    </button>
-                    <button
-                      title="Cancelar"
-                      id="cancelar-edicion"
-                      class="btn btn-secondary"
-                    >
-                      <i class="fa-solid fa-x"></i>
-                      <span class="texto-cancelar-edicion">Cancelar</span>
-                    </button>
                   </div>
                 </div>
               </div>
+
               <div id="modal-confirmacion" class="modal">
                 <div class="modal-content" id="contenedor-modal">
                   <p id="mensaje-confirmacion"></p>
