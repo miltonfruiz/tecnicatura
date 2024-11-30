@@ -211,10 +211,10 @@
                 >
                   <div id="container-editar-curso" class="modal-content">
                     <div class="modal-body">
-                      <h2 class="texto-h2-edicion">
-                        <i class="fa-regular fa-pen-to-square"></i> Edición
-                      </h2>
                       <div id="form-edicion" class="row">
+                        <h2 class="texto-h2-edicion">
+                          <i class="fa-regular fa-pen-to-square"></i> Edición
+                        </h2>
                         <h4 class="texto-h4-curso">
                           <i class="fa-solid fa-graduation-cap"></i> Curso
                         </h4>
@@ -254,79 +254,80 @@
                                 id="container-editar-estudiante"
                                 class="modal-content"
                               >
-                                <div class="modal-header">
-                                  <h5
-                                    class="modal-title"
-                                    id="formulario-edicion-estudiante-label"
-                                  >
-                                    <i class="fa-solid fa-user"></i> Editar
-                                    Estudiante
-                                  </h5>
-                                  <button
-                                    type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                  ></button>
-                                </div>
                                 <div class="modal-body">
-                                  <div class="row">
-                                    <div class="col">
-                                      <label for="nombre-estudiante-editar"
-                                        >Nombre</label
+                                  <div id="form-editar-estudiante">
+                                    <div class="modal-header">
+                                      <h5
+                                        class="modal-title"
+                                        id="formulario-edicion-estudiante-label"
                                       >
-                                      <input
-                                        class="form-control"
-                                        type="text"
-                                        id="nombre-estudiante-editar"
-                                        placeholder="Nombre"
-                                      />
+                                        <i class="fa-solid fa-user"></i> Editar
+                                        Estudiante
+                                      </h5>
+                                      <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                      ></button>
                                     </div>
-                                    <div class="col">
-                                      <label for="edad-estudiante-editar"
-                                        >Edad</label
-                                      >
-                                      <input
-                                        class="form-control"
-                                        type="number"
-                                        id="edad-estudiante-editar"
-                                        placeholder="Edad"
-                                      />
+                                    <div class="row">
+                                      <div class="col">
+                                        <label for="nombre-estudiante-editar"
+                                          >Nombre</label
+                                        >
+                                        <input
+                                          class="form-control"
+                                          type="text"
+                                          id="nombre-estudiante-editar"
+                                          placeholder="Nombre"
+                                        />
+                                      </div>
+                                      <div class="col">
+                                        <label for="edad-estudiante-editar"
+                                          >Edad</label
+                                        >
+                                        <input
+                                          class="form-control"
+                                          type="number"
+                                          id="edad-estudiante-editar"
+                                          placeholder="Edad"
+                                        />
+                                      </div>
+                                      <div class="col">
+                                        <label for="nota-estudiante-editar"
+                                          >Nota</label
+                                        >
+                                        <input
+                                          class="form-control"
+                                          type="number"
+                                          id="nota-estudiante-editar"
+                                          placeholder="Nota"
+                                          step="0.1"
+                                          min="0"
+                                          max="10"
+                                        />
+                                      </div>
                                     </div>
-                                    <div class="col">
-                                      <label for="nota-estudiante-editar"
-                                        >Nota</label
+                                    <div id="modal-footer" class="modal-footer">
+                                      <button
+                                        id="guardar-edicion-estudiante"
+                                        class="btn btn-info me-1"
+                                        title="Guardar"
                                       >
-                                      <input
-                                        class="form-control"
-                                        type="number"
-                                        id="nota-estudiante-editar"
-                                        placeholder="Nota"
-                                        step="0.1"
-                                        min="0"
-                                        max="10"
-                                      />
+                                        <i class="fa-solid fa-floppy-disk"></i>
+                                        Guardar
+                                      </button>
+                                      <button
+                                        id="cancelar-edicion-estudiante"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal"
+                                        title="Cancelar"
+                                      >
+                                        <i class="fa-solid fa-x"></i> Cancelar
+                                      </button>
                                     </div>
                                   </div>
-                                </div>
-
-                                <div id="modal-footer" class="modal-footer">
-                                  <button
-                                    id="guardar-edicion-estudiante"
-                                    class="btn btn-info me-1"
-                                    title="Guardar"
-                                  >
-                                    <i class="fa-solid fa-floppy-disk"></i>
-                                    Guardar
-                                  </button>
-                                  <button
-                                    id="cancelar-edicion-estudiante"
-                                    class="btn btn-secondary"
-                                    data-bs-dismiss="modal"
-                                    title="Cancelar"
-                                  >
-                                    <i class="fa-solid fa-x"></i> Cancelar
-                                  </button>
                                 </div>
                               </div>
                             </div>

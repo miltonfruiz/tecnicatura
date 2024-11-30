@@ -32,7 +32,7 @@
   background-size: cover;
   background-position: center;
 }
-#container-editar-estudiante,
+#form-editar-estudiante,
 #form-edicion,
 #contenedor-estadisticas,
 #lista-cursos{
@@ -179,6 +179,7 @@ select {
   padding: 3px;
   margin-bottom: 10px;
 }
+#form-editar-estudiante,
 #contenedor-estadisticas,
 #form-curso,
 #form-estudiante,
@@ -190,6 +191,7 @@ select {
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+#form-editar-estudiante,
 #form-edicion,
 #contenedor-estadisticas,
 #lista-cursos,
