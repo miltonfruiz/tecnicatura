@@ -358,7 +358,12 @@ guardarEdicion.addEventListener("click", () => {
       primeraMayuscula(nuevoNombreProfesor.value)
     );
     guardarDatos();
-    formularioEdicion.style.display = "none";
+    const modal = bootstrap.Modal.getInstance(
+      document.getElementById("formulario-edicion")
+    );
+    modal.hide();
+  } else {
+    alert("Por favor, completa todos los campos antes de guardar.");
   }
 });
 //--------------------- Eventos de cancelación de edición -------------------//
