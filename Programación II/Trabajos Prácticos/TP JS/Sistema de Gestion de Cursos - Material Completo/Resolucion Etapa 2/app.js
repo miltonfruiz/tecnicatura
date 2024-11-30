@@ -446,7 +446,10 @@ guardarEdicionEstudiante.addEventListener("click", () => {
         primeraMayuscula(nombreNuevo);
       cursoActual.estudiantes[estudianteActualIndex].edad = edadNueva;
       cursoActual.estudiantes[estudianteActualIndex].nota = notaNueva;
-      formEdicionEstudiante.style.display = "none";
+      const modal = bootstrap.Modal.getInstance(
+        document.getElementById("formulario-edicion-estudiante")
+      );
+      modal.hide();
       mostrarEstudiantes();
       mostrarMensaje("¡Estudiante actualizado correctamente!", "success");
       guardarDatos();

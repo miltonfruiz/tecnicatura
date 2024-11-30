@@ -198,7 +198,7 @@
                 </div>
                 <div id="lista-cursos" class="table table-responsive"></div>
               </div>
-              <!-- Modal de Edición -->
+
               <div
                 id="formulario-edicion"
                 class="modal fade"
@@ -209,7 +209,6 @@
                 <div
                   class="modal-dialog modal-lg modal-dialog-centered custom-width"
                 >
-                  <!-- Tamaño más grande y centrado -->
                   <div class="modal-content">
                     <div class="modal-body">
                       <h2 class="texto-h2-edicion">
@@ -241,66 +240,94 @@
                           <h4 class="texto-h4-estudiante">
                             <i class="fa-solid fa-users"></i> Estudiantes
                           </h4>
+
+                          <!-- Modal para Edición de Estudiantes -->
                           <div
-                            class="row"
                             id="formulario-edicion-estudiante"
-                            style="display: none"
+                            class="modal fade"
+                            tabindex="-1"
+                            aria-labelledby="formulario-edicion-estudiante-label"
+                            aria-hidden="true"
                           >
-                            <div class="col">
-                              <label for="nombre-estudiante-editar"
-                                >Nombre</label
-                              >
-                              <input
-                                class="form-control"
-                                type="text"
-                                id="nombre-estudiante-editar"
-                                placeholder="Nombre"
-                              />
-                            </div>
-                            <div class="col">
-                              <label for="edad-estudiante-editar">Edad</label>
-                              <input
-                                class="form-control"
-                                type="number"
-                                id="edad-estudiante-editar"
-                                placeholder="Edad"
-                              />
-                            </div>
-                            <div class="col">
-                              <label for="nota-estudiante-editar">Nota</label>
-                              <input
-                                class="form-control"
-                                type="number"
-                                id="nota-estudiante-editar"
-                                placeholder="Nota"
-                                step="0.1"
-                                min="0"
-                                max="10"
-                              />
-                            </div>
-                            <div class="col-12">
-                              <button
-                                title="Guardar"
-                                id="guardar-edicion-estudiante"
-                                class="btn btn-info"
-                              >
-                                <i class="fa-solid fa-floppy-disk"></i>
-                                <span class="texto-guardar-edicion-estudiante"
-                                  >Guardar</span
-                                >
-                              </button>
-                              <button
-                                title="Cancelar"
-                                id="cancelar-edicion-estudiante"
-                                class="btn btn-secondary"
-                              >
-                                <i class="fa-solid fa-x"></i>
-                                <span class="texto-cancelar-edicion-estudiante"
-                                  >Cancelar</span
-                                >
-                              </button>
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title"
+                                    id="formulario-edicion-estudiante-label"
+                                  >
+                                    <i class="fa-solid fa-users"></i> Editar
+                                    Estudiante
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col">
+                                      <label for="nombre-estudiante-editar"
+                                        >Nombre</label
+                                      >
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="nombre-estudiante-editar"
+                                        placeholder="Nombre"
+                                      />
+                                    </div>
+                                    <div class="col">
+                                      <label for="edad-estudiante-editar"
+                                        >Edad</label
+                                      >
+                                      <input
+                                        class="form-control"
+                                        type="number"
+                                        id="edad-estudiante-editar"
+                                        placeholder="Edad"
+                                      />
+                                    </div>
+                                    <div class="col">
+                                      <label for="nota-estudiante-editar"
+                                        >Nota</label
+                                      >
+                                      <input
+                                        class="form-control"
+                                        type="number"
+                                        id="nota-estudiante-editar"
+                                        placeholder="Nota"
+                                        step="0.1"
+                                        min="0"
+                                        max="10"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button
+                                    id="guardar-edicion-estudiante"
+                                    class="btn btn-info"
+                                    title="Guardar"
+                                  >
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    Guardar
+                                  </button>
+                                  <button
+                                    id="cancelar-edicion-estudiante"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                    title="Cancelar"
+                                  >
+                                    <i class="fa-solid fa-x"></i> Cancelar
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
+
                           <div
                             id="lista-estudiantes-edicion"
                             class="tabla-contenedor"
