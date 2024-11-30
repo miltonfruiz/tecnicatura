@@ -32,12 +32,17 @@
   background-size: cover;
   background-position: center;
 }
+#container-editar-estudiante,
 #form-edicion,
 #contenedor-estadisticas,
 #lista-cursos{
   background: url(../images/edicion.jpg);
   background-size: cover;
   background-position: center;
+}
+#container-editar-estudiante,
+#container-editar-curso{
+  border-radius: 3px;
 }
 #graficaEstudiantes{
   background: url(../images/grafico.jpg);
@@ -329,13 +334,17 @@ select {
   color: white;
   font-size: 11px;
   padding: 7px 1px;
-  width: 13%;
+  width: 25%;
   border-radius: 3px;
   margin: 15px 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border: 1px solid transparent;
   transition: transform 1s ease;
   transition: 1s;
+}
+#modal-footer{
+  display: flex;
+  justify-content: start;
 }
 #lista-cursos {
   margin-top: 20px;
@@ -383,6 +392,11 @@ select {
 }
 label {
   font-size: 13px;
+}
+#formulario-edicion-estudiante-label{
+  font-size: 17px;
+  display: flex;
+  align-items: center;
 }
 .texto-h4-curso,
 .texto-h4-estudiante {
@@ -520,8 +534,12 @@ input:hover {
 .fa-users{
   font-size: 15px;
 }
+.fa-user,
 .fa-solid {
   font-size: 13px;
+}
+.fa-user{
+  margin-right: 5px;
 }
 #tabla-estadisticas {
   width: 100%;

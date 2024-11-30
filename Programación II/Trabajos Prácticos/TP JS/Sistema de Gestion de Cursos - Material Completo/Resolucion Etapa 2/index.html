@@ -209,7 +209,7 @@
                 <div
                   class="modal-dialog modal-lg modal-dialog-centered custom-width"
                 >
-                  <div class="modal-content">
+                  <div id="container-editar-curso" class="modal-content">
                     <div class="modal-body">
                       <h2 class="texto-h2-edicion">
                         <i class="fa-regular fa-pen-to-square"></i> Edición
@@ -250,13 +250,16 @@
                             aria-hidden="true"
                           >
                             <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
+                              <div
+                                id="container-editar-estudiante"
+                                class="modal-content"
+                              >
                                 <div class="modal-header">
                                   <h5
                                     class="modal-title"
                                     id="formulario-edicion-estudiante-label"
                                   >
-                                    <i class="fa-solid fa-users"></i> Editar
+                                    <i class="fa-solid fa-user"></i> Editar
                                     Estudiante
                                   </h5>
                                   <button
@@ -306,10 +309,11 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="modal-footer">
+
+                                <div id="modal-footer" class="modal-footer">
                                   <button
                                     id="guardar-edicion-estudiante"
-                                    class="btn btn-info"
+                                    class="btn btn-info me-1"
                                     title="Guardar"
                                   >
                                     <i class="fa-solid fa-floppy-disk"></i>
