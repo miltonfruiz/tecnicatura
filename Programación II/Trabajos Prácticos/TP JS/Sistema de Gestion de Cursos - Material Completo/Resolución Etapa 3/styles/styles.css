@@ -347,6 +347,7 @@ select {
 #modal-footer{
   display: flex;
   justify-content: start;
+  height: 60px;
 }
 #lista-cursos {
   margin-top: 20px;
@@ -399,6 +400,7 @@ label {
   font-size: 17px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .texto-h4-curso,
 .texto-h4-estudiante {
@@ -536,12 +538,12 @@ input:hover {
 .fa-users{
   font-size: 15px;
 }
-.fa-user,
 .fa-solid {
   font-size: 13px;
 }
 .fa-user{
   margin-right: 5px;
+  font-size: 12px;
 }
 #tabla-estadisticas {
   width: 100%;
