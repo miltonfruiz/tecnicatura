@@ -271,6 +271,12 @@ select {
   transition: 1s;
   animation: pulsar 1s ease infinite;
 }
+#btn-cancelar:hover,
+#btn-confirmar:hover{
+  transition: 1s;
+  animation: pulsar 1s ease infinite;
+  border: 1px solid white;
+}
 @keyframes pulsar {
   0% {
     transform: scale(1);
@@ -512,21 +518,32 @@ input:hover {
 }
 #btn-confirmar,
 #btn-cancelar{
+  transition: 1s;
   padding: 7px 30px;
-  font-size: 13px;
+  font-size: 12px;
   border-radius: 3px;
   margin: 2px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
+#contenedor-modal{
+  background: url(../images/precuacion.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 150px;
+}
+#mensaje-confirmacion{
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: white;
+}
 #contenedor-modal{
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
-  border-radius: 5px;
+  border: 1px solid white;
+  border-radius: 3px;
   width: 50%;
   background-color: white;
 }
@@ -552,8 +569,12 @@ input:hover {
 }
 .fa-triangle-exclamation{
   font-size: 17px;
-  color: red;
+  color: yellow;
   margin-right: 8px
+}
+.fa-x,
+.fa-skull-crossbones{
+  font-size: 12px;
 }
 #tabla-estadisticas {
   width: 100%;

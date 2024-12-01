@@ -212,7 +212,7 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
   if (e.target.id === "boton-eliminar-estudiante") {
     const index = e.target.dataset.index;
     const estudiante = cursoActual.estudiantes[index];
-    mensajeConfirmacion.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color: red; margin-right: 8px;"></i>
+    mensajeConfirmacion.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>
     ¿Estás seguro de que deseas eliminar al estudiante "<strong>${estudiante.nombre}</strong>"? 
     <i class="fa-solid fa-triangle-exclamation"></i> `;
     modalConfirmacion.style.display = "block";
