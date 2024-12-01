@@ -301,7 +301,7 @@ export function mostrarCursos(busqueda = "") {
             <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning boton-editar-curso" data-bs-toggle="modal" data-bs-target="#formulario-edicion" nombre="${
               curso.nombre
             }"><i class="fa-regular fa-pen-to-square"></i><span class="texto-editar-curso">Editar</span></button>
-            <button title="Boton Eliminar" class="btn btn-danger boton-eliminar-curso" id="boton-eliminar-curso"><i class="fa-solid fa-trash"></i> <span class="texto-eliminar-curso">Eliminar</span></button>
+            <button title="Boton Eliminar" class="btn btn-danger boton-eliminar-curso" data-bs-toggle="modal" data-bs-target="#modal-confirmacion"  id="boton-eliminar-curso"><i class="fa-solid fa-trash"></i> <span class="texto-eliminar-curso">Eliminar</span></button>
           </div>
         </td>
       `;
@@ -401,10 +401,16 @@ listaCursos.addEventListener("click", (e) => {
           "success"
         );
       }
-      modalConfirmacion.style.display = "none";
+      const cerrar = bootstrap.Modal.getInstance(
+        document.getElementById("modal-confirmacion")
+      );
+      cerrar.hide();
     };
     botonCancelar.onclick = () => {
-      modalConfirmacion.style.display = "none";
+      const cerrar = bootstrap.Modal.getInstance(
+        document.getElementById("modal-confirmacion")
+      );
+      cerrar.hide();
     };
   }
 });

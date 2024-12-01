@@ -529,7 +529,6 @@ input:hover {
   background: url(../images/precuacion.jpg);
   background-size: cover;
   background-position: center;
-  height: 150px;
 }
 #mensaje-confirmacion{
   margin-bottom: 20px;
@@ -544,8 +543,8 @@ input:hover {
   padding: 20px;
   border: 1px solid white;
   border-radius: 3px;
-  width: 50%;
   background-color: white;
+  height: 150px;
 }
 .form-control {
   margin-right: 10px;

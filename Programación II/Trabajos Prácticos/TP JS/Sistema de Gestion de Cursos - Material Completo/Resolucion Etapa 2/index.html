@@ -364,19 +364,30 @@
                   </div>
                 </div>
               </div>
-              <div id="modal-confirmacion" class="modal">
-                <div class="modal-content" id="contenedor-modal">
-                  <p id="mensaje-confirmacion"></p>
-                  <div id="container-estas-seguro">
-                    <button id="btn-confirmar" class="btn btn-danger">
-                      <i class="fa-solid fa-skull-crossbones"></i> Aceptar
-                    </button>
-                    <button id="btn-cancelar" class="btn btn-secondary">
-                      <i class="fa-solid fa-x"></i> Cancelar
-                    </button>
+
+              <!-- Modal con fade de Bootstrap -->
+              <div
+                id="modal-confirmacion"
+                class="modal fade"
+                tabindex="-1"
+                aria-labelledby="modalConfirmacionLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content" id="contenedor-modal">
+                    <p id="mensaje-confirmacion"></p>
+                    <div id="container-estas-seguro">
+                      <button id="btn-confirmar" class="btn btn-danger">
+                        <i class="fa-solid fa-skull-crossbones"></i> Aceptar
+                      </button>
+                      <button id="btn-cancelar" class="btn btn-secondary">
+                        <i class="fa-solid fa-x"></i> Cancelar
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
+
               <div id="lista-estudiantes-edicion"></div>
               <div class="oculto">
                 <h2 class="texto-h2-estadisticas">
