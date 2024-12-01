@@ -209,27 +209,35 @@ formEstudiante.addEventListener("submit", (e) => {
 //------------------------- Eventos de eliminar estudiante -----------------------//
 
 listaEstudiantesEdicion.addEventListener("click", (e) => {
-  if (e.target.id === "boton-eliminar-estudiante") {
-    const index = e.target.dataset.index;
+  const botonEliminar = e.target.closest("#boton-eliminar-estudiante");
+  if (botonEliminar) {
+    const index = botonEliminar.dataset.index;
     const estudiante = cursoActual.estudiantes[index];
-    mensajeConfirmacion.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>
-    ¿Estás seguro de que deseas eliminar al estudiante "<strong>${estudiante.nombre}</strong>"? 
-    <i class="fa-solid fa-triangle-exclamation"></i> `;
-    modalConfirmacion.style.display = "block";
+    mensajeConfirmacion.innerHTML = `
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      ¿Estás seguro de que deseas eliminar al estudiante "<strong>${estudiante.nombre}</strong>"? 
+      <i class="fa-solid fa-triangle-exclamation"></i>`;
+    const bootstrapModal = new bootstrap.Modal(modalConfirmacion);
+    bootstrapModal.show();
     botonConfirmar.onclick = () => {
       cursoActual.estudiantes.splice(index, 1);
       mostrarEstudiantes();
       guardarDatos();
       mostrarMensaje(
-        `<i class="fa-solid fa-triangle-exclamation" style="color: green; margin-right: 8px;"></i>
-        Se ha eliminado al estudiante "<strong>${estudiante.nombre}</strong>"`,
+        `Se ha eliminado al estudiante ${estudiante.nombre}"`,
         "success"
       );
-      modalConfirmacion.style.display = "none";
+      const cerrar = bootstrap.Modal.getInstance(
+        document.getElementById("modal-confirmacion")
+      );
+      cerrar?.hide();
       actualizarEstadisticas();
     };
     botonCancelar.onclick = () => {
-      modalConfirmacion.style.display = "none";
+      const cerrar = bootstrap.Modal.getInstance(
+        document.getElementById("modal-confirmacion")
+      );
+      cerrar?.hide();
     };
   }
 });
@@ -384,7 +392,7 @@ listaCursos.addEventListener("click", (e) => {
   if (e.target.id === "boton-eliminar-curso") {
     const cursoNombre = e.target.closest("tr").querySelector("td").textContent;
     mensajeConfirmacion.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 
-    ¿Estás seguro de que deseas eliminar el curso "${cursoNombre}"? 
+    ¿Estás seguro de que deseas eliminar el curso "<strong>${cursoNombre}</strong>"? 
     <i class="fa-solid fa-triangle-exclamation"></i>`;
     modalConfirmacion.style.display = "block";
     const cursoAEliminar = cursoNombre;
