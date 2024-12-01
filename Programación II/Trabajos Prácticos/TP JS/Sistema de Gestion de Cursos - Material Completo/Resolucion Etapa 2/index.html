@@ -313,7 +313,7 @@
                                         />
                                       </div>
                                     </div>
-                                    <div id="modal-footer" class="modal-footer">
+                                    <div id="modal-footer">
                                       <button
                                         id="guardar-edicion-estudiante"
                                         class="btn btn-info me-1"
@@ -339,7 +339,7 @@
 
                           <div
                             id="lista-estudiantes-edicion"
-                            class="tabla-contenedor"
+                            class="tabla-contenedor table table-responsive"
                           ></div>
                         </div>
                         <div class="col-12">
@@ -369,10 +369,14 @@
               <div id="modal-confirmacion" class="modal">
                 <div class="modal-content" id="contenedor-modal">
                   <p id="mensaje-confirmacion"></p>
-                  <button id="btn-confirmar" class="btn btn-danger">Sí</button>
-                  <button id="btn-cancelar" class="btn btn-secondary">
-                    No
-                  </button>
+                  <div id="container-estas-seguro">
+                    <button id="btn-confirmar" class="btn btn-danger">
+                      <i class="fa-solid fa-skull-crossbones"></i> Aceptar
+                    </button>
+                    <button id="btn-cancelar" class="btn btn-secondary">
+                      <i class="fa-solid fa-x"></i> Cancelar
+                    </button>
+                  </div>
                 </div>
               </div>
               <div id="lista-estudiantes-edicion"></div>

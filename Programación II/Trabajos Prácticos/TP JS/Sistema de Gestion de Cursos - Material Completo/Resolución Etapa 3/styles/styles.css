@@ -200,6 +200,11 @@ select {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   transition: 1s;
 }
+#form-editar-estudiante{
+  height: 175px;
+}
+#form-editar-estudiante:hover,
+#form-edicion:hover,
 #contenedor-estadisticas:hover,
 #lista-cursos:hover,
 #form-estudiante:hover,
@@ -336,7 +341,7 @@ select {
   color: white;
   font-size: 11px;
   padding: 7px 1px;
-  width: 25%;
+  width: 27%;
   border-radius: 3px;
   margin: 15px 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -347,7 +352,6 @@ select {
 #modal-footer{
   display: flex;
   justify-content: start;
-  height: 60px;
 }
 #lista-cursos {
   margin-top: 20px;
@@ -508,12 +512,13 @@ input:hover {
 }
 #btn-confirmar,
 #btn-cancelar{
+  padding: 7px 30px;
   font-size: 13px;
   border-radius: 3px;
   margin: 2px;
-  width: 30%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 #contenedor-modal{
   display: flex;
   justify-content: center;
@@ -544,6 +549,11 @@ input:hover {
 .fa-user{
   margin-right: 5px;
   font-size: 12px;
+}
+.fa-triangle-exclamation{
+  font-size: 17px;
+  color: red;
+  margin-right: 8px
 }
 #tabla-estadisticas {
   width: 100%;
