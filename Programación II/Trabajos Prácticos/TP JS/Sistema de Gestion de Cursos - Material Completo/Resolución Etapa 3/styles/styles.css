@@ -973,7 +973,7 @@ footer {
   opacity: 1;
   transform: translateX(0);
 }
-#tabla-estadisticas-tr,
+#tabla-estadisticas,
 .texto-h2-estadisticas,
 .texto-arriba3,
 .texto-arriba2,
@@ -982,7 +982,7 @@ footer {
   transform: translateY(-50px);
   transition: transform 0.8s ease, opacity 0.8s ease;
 }
-#tabla-estadisticas-tr.visible,
+#tabla-estadisticas.visible,
 .texto-h2-estadisticas.visible,
 .texto-arriba3.visible,
 .texto-arriba2.visible,
@@ -1045,12 +1045,6 @@ footer {
     transform: translateX(0);
   }
 }
-#tabla-estadisticas-subtr {
-  opacity: 0;
-  transform: translateY(40%);
-  transition: opacity 1s, transform 1s;
-}
-#tabla-estadisticas-subtr.visible,
 #link-empezar.visible {
   transition: 2s;
   opacity: 1;
