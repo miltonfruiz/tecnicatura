@@ -402,6 +402,7 @@ listaCursos.addEventListener("click", (e) => {
       );
       if (indiceCurso !== -1) {
         cursos.splice(indiceCurso, 1);
+        actualizarCursosSelect();
         mostrarCursos();
         guardarDatos();
         mostrarMensaje(
