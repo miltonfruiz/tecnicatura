@@ -5,7 +5,7 @@
   scroll-behavior: smooth;
   font-family: "Montserrat", sans-serif;
 }
-#main-section{
+#main-section {
   padding-top: 100px;
   padding-bottom: 100px;
 }
@@ -20,14 +20,14 @@
   margin: 0;
   padding: 0;
 }
-.contenedor-formularios{
+.contenedor-formularios {
   background: url(../images/main.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 #form-estudiante,
-#form-curso{
+#form-curso {
   background: url(../images/agregados.jpg);
   background-size: cover;
   background-position: center;
@@ -35,22 +35,22 @@
 #form-editar-estudiante,
 #form-edicion,
 #contenedor-estadisticas,
-#lista-cursos{
+#lista-cursos {
   background: url(../images/edicion.jpg);
   background-size: cover;
   background-position: center;
 }
 #container-editar-estudiante,
-#container-editar-curso{
+#container-editar-curso {
   border-radius: 3px;
 }
-#graficaEstudiantes{
+#graficaEstudiantes {
   background: url(../images/grafico.jpg);
   background-size: cover;
   background-position: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0px -30px 36px -28px inset;
 }
-.banner-text{
+.banner-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -61,7 +61,7 @@
 .texto-plataforma,
 .texto-gestion,
 .texto-solucion,
-.texto-diseño{
+.texto-diseño {
   color: white;
 }
 #link-empezar {
@@ -91,7 +91,7 @@
     transform: translateY(0);
   }
 }
-#boton-empezar{
+#boton-empezar {
   color: white;
   text-decoration: none;
   display: flex;
@@ -99,10 +99,10 @@
   font-size: 11px;
   padding: 7px 43px;
 }
-.contendor-texto-diseño{
+.contendor-texto-diseño {
   margin-top: 180px;
 }
-.contenedor-texto-plataforma{
+.contenedor-texto-plataforma {
   margin-top: 170px;
   display: flex;
   align-items: center;
@@ -140,7 +140,7 @@ body {
   border-radius: 2px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-#contenedor-cursos{
+#contenedor-cursos {
   margin-top: 50px;
   margin-bottom: 100px;
 }
@@ -156,14 +156,14 @@ h2 {
   font-size: 17px;
   margin: 90px 0px 20px 0px;
 }
-.texto-h2-edicion{
+.texto-h2-edicion {
   font-size: 17px;
 }
-.texto-h2-estadisticas{
+.texto-h2-estadisticas {
   font-size: 17px;
   margin: 90px 0px 20px 0px;
 }
-.texto-h2-informacion{
+.texto-h2-informacion {
   font-weight: 600;
   font-size: 12px;
 }
@@ -196,11 +196,11 @@ select {
 #contenedor-estadisticas,
 #lista-cursos,
 #form-estudiante,
-#form-curso{
+#form-curso {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   transition: 1s;
 }
-#form-editar-estudiante{
+#form-editar-estudiante {
   height: 175px;
 }
 #form-editar-estudiante:hover,
@@ -208,11 +208,11 @@ select {
 #contenedor-estadisticas:hover,
 #lista-cursos:hover,
 #form-estudiante:hover,
-#form-curso:hover{
+#form-curso:hover {
   border: 1px solid #23b37c;
   transition: 1s;
 }
-#contenedor-estadisticas{
+#contenedor-estadisticas {
   margin-bottom: 130px;
 }
 #form-edicion {
@@ -225,19 +225,19 @@ select {
 #nota-estudiante,
 #curso-estudiante,
 #nuevo-nombre-curso,
-#nuevo-nombre-profesor{
+#nuevo-nombre-profesor {
   font-size: 12px;
   width: 100%;
   padding: 6px;
   border: 1px solid rgba(128, 128, 128, 0.5);
   border-radius: 2px;
 }
-#curso-estudiante{
+#curso-estudiante {
   font-size: 12px;
 }
 #edad-estudiante-editar,
 #nota-estudiante-editar,
-#nombre-estudiante-editar{
+#nombre-estudiante-editar {
   width: 100%;
   font-size: 12px;
   padding: 6px;
@@ -267,12 +267,12 @@ select {
 #boton-editar-curso:hover,
 #exportar-json:hover,
 #boton-agregar-estudiante:hover,
-#boton-agregar-curso:hover{
+#boton-agregar-curso:hover {
   transition: 1s;
   animation: pulsar 1s ease infinite;
 }
 #btn-cancelar:hover,
-#btn-confirmar:hover{
+#btn-confirmar:hover {
   transition: 1s;
   animation: pulsar 1s ease infinite;
   border: 1px solid white;
@@ -331,7 +331,7 @@ select {
   gap: 10px;
 }
 #guardar-edicion,
-#cancelar-edicion{
+#cancelar-edicion {
   color: white;
   font-size: 11px;
   padding: 7px 1px;
@@ -355,7 +355,7 @@ select {
   transition: transform 1s ease;
   transition: 1s;
 }
-#modal-footer{
+#modal-footer {
   display: flex;
   justify-content: start;
 }
@@ -394,7 +394,6 @@ select {
   padding: 8px;
   text-align: center;
   vertical-align: middle;
-
 }
 .tabla-cursos th {
   background-color: #f2f2f2;
@@ -406,7 +405,7 @@ select {
 label {
   font-size: 13px;
 }
-#formulario-edicion-estudiante-label{
+#formulario-edicion-estudiante-label {
   font-size: 17px;
   display: flex;
   align-items: center;
@@ -417,7 +416,7 @@ label {
   font-size: 17px;
   margin: auto;
 }
-.texto-h4-estudiante{
+.texto-h4-estudiante {
   padding: 20px 0px 5px 0px;
 }
 td {
@@ -433,23 +432,24 @@ td {
   z-index: 1000;
 }
 .success {
+  font-size: 14px;
   border-radius: 3px;
-  border: 1px solid green;
-  background-color: #d4edda;
-  color: #155724;
-  font-style: oblique;
+  border: 1px solid white;
+  background-color: #198754;
+  color: white;
   transition: 1s;
 }
 .error {
+  font-size: 14px;
   border-radius: 3px;
-  border: 1px solid red;
-  font-style: oblique;
-  background-color: #f8d7da;
-  color: #721c24; /
+  border: 1px solid white;
+  background-color: #dc3545;
+  color: white;
+  transition: 1s;
 }
 .mensaje {
   opacity: 1;
-  transition: opacity 2s ease;
+  transition: opacity 3s ease;
 }
 .mensaje.oculto {
   opacity: 0;
@@ -464,7 +464,7 @@ td {
 }
 input:hover {
   transition: background-color 1s, color 1s, text-shadow 1s, border 1s;
-  background-color: #C7C8CC;
+  background-color: #c7c8cc;
   color: white;
 }
 #busqueda-ingresada {
@@ -481,11 +481,11 @@ input:hover {
   margin-left: auto;
   width: 70%;
 }
-#filtro-estudiantes:hover{
+#filtro-estudiantes:hover {
   border: 1px solid #23b37c;
   transition: 1s;
 }
-.contenedor-select{
+.contenedor-select {
   width: 50%;
 }
 #busqueda-ingresada {
@@ -517,7 +517,7 @@ input:hover {
   transition: opacity 3s;
 }
 #btn-confirmar,
-#btn-cancelar{
+#btn-cancelar {
   transition: 1s;
   padding: 7px 30px;
   font-size: 12px;
@@ -525,17 +525,17 @@ input:hover {
   margin: 2px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-#contenedor-modal{
+#contenedor-modal {
   background: url(../images/precuacion.jpg);
   background-size: cover;
   background-position: center;
 }
-#mensaje-confirmacion{
+#mensaje-confirmacion {
   margin-bottom: 20px;
   font-size: 14px;
   color: white;
 }
-#contenedor-modal{
+#contenedor-modal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -557,23 +557,23 @@ input:hover {
 .fa-user-plus,
 .fa-list,
 .fa-graduation-cap,
-.fa-users{
+.fa-users {
   font-size: 15px;
 }
 .fa-solid {
   font-size: 13px;
 }
-.fa-user{
+.fa-user {
   margin-right: 5px;
   font-size: 12px;
 }
-.fa-triangle-exclamation{
+.fa-triangle-exclamation {
   font-size: 17px;
   color: yellow;
-  margin-right: 8px
+  margin-right: 8px;
 }
 .fa-x,
-.fa-skull-crossbones{
+.fa-skull-crossbones {
   font-size: 12px;
 }
 #tabla-estadisticas {
@@ -602,12 +602,11 @@ input:hover {
 #graficaEstudiantes {
   width: 100% !important;
   height: 800px;
-
 }
-.contenedor-boton-grafica{
+.contenedor-boton-grafica {
   padding: 20px;
 }
-#exportar-json{
+#exportar-json {
   font-size: 11px;
   border-radius: 4px;
   padding: 7px 25px 7px 25px;
@@ -616,7 +615,7 @@ input:hover {
   transition: transform 1s ease;
   transition: 1s;
 }
-.banner-image{
+.banner-image {
   width: 100%;
   height: 560px;
 }
@@ -638,10 +637,10 @@ input:hover {
 .fa-github,
 .fa-instagram,
 .fa-x-twitter,
-.fa-discord{
-    font-size: 22px;
-    color: white;
-  }
+.fa-discord {
+  font-size: 22px;
+  color: white;
+}
 .fa-linkedin:hover,
 .fa-github:hover,
 .fa-instagram:hover,
@@ -652,7 +651,7 @@ input:hover {
   animation: pulsar 1s ease infinite;
 }
 .info-redes-cel,
-.info-redes{
+.info-redes {
   font-weight: 300;
   font-size: 11px;
   color: white;
@@ -684,7 +683,8 @@ input:hover {
   }
 }
 @keyframes blinkGreen {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     filter: drop-shadow(0 0 5px #23b37c);
   }
@@ -699,7 +699,8 @@ input:hover {
   animation: fadeInRed 4s infinite, blinkRed 2s forwards infinite 3s;
 }
 @keyframes blinkRed {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     filter: drop-shadow(0 0 5px red);
   }
@@ -726,7 +727,7 @@ input:hover {
   line-height: 40px;
   overflow: hidden;
 }
-.texto-contacto{
+.texto-contacto {
   letter-spacing: 5px;
   font-size: 19px;
   font-weight: 300;
@@ -756,7 +757,7 @@ input:hover {
   margin-top: auto;
   text-align: center;
 }
-.h3-mis-redes{
+.h3-mis-redes {
   letter-spacing: 5px;
   font-size: 19px;
   font-weight: 300;
@@ -789,7 +790,7 @@ label {
   border-color: white;
 }
 
-.email-link{
+.email-link {
   font-size: 11px;
   color: whitesmoke;
   transition: 1s;
@@ -807,7 +808,7 @@ label {
     box-sizing: border-box;
   }
 }
-.texto-empezar{
+.texto-empezar {
   margin-left: 5px;
 }
 .texto-sistema {
@@ -841,7 +842,6 @@ label {
   font-size: 11px;
   font-weight: 400;
   color: white !important;
-
 }
 /* ------------------------ Diseño Responsive 442px ------------------------*/
 @media (max-width: 443px) {
@@ -889,10 +889,10 @@ label {
     margin-left: 5px;
     font-size: 15px;
   }
-  .font-size{
+  .font-size {
     font-size: 30px;
   }
-  #boton-eliminar-estudiante .fa-trash{
+  #boton-eliminar-estudiante .fa-trash {
     margin-right: 100px;
   }
 }
@@ -1046,7 +1046,7 @@ footer {
     transform: translateX(0);
   }
 }
-#tabla-estadisticas-subtr{
+#tabla-estadisticas-subtr {
   opacity: 0;
   transform: translateY(40%);
   transition: opacity 1s, transform 1s;
