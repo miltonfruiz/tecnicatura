@@ -210,11 +210,14 @@ export function mostrarMensaje(mensaje, tipo) {
   mensajeDiv.className = `mensaje ${tipo}`;
   document.body.appendChild(mensajeDiv);
   setTimeout(() => {
+    mensajeDiv.classList.add("mostrar");
+  }, 10);
+  setTimeout(() => {
     mensajeDiv.classList.add("oculto");
     setTimeout(() => {
       mensajeDiv.remove();
     }, 2000);
-  }, 3000);
+  }, 4000);
 }
 //------------------------------- Función validar cadena ----------------------------//
 
