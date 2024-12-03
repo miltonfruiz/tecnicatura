@@ -294,7 +294,7 @@ export function mostrarCursos(busqueda = "") {
       } else if (ordenarPorNota) {
         estudiantesAMostrar.sort((a, b) => a.nota - b.nota);
       } else if (ordenarPorNombre) {
-        estudiantesAMostrar.sort((a, b) => a.nombre.localeCompare(b.nombre)); // Ordenar por nombre alfabéticamente
+        estudiantesAMostrar.sort((a, b) => a.nombre.localeCompare(b.nombre));
       }
       const cantidadEstudiantes = estudiantesAMostrar.length;
       const filaCurso = document.createElement("tr");
@@ -384,7 +384,6 @@ filtroEstudiantes.addEventListener("change", () => {
   }
   mostrarCursos(busquedaIngresada.value.toLowerCase());
 });
-
 //----------------------------- Eventos de búsqueda -------------------------//
 
 busquedaIngresada.addEventListener("input", () => {
