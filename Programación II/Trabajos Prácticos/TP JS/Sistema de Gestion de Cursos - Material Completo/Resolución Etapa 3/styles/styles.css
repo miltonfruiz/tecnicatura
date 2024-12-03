@@ -1071,3 +1071,18 @@ footer {
 .modal-dialog.custom-width {
   max-width: 61%;
 }
+.fade-in {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeInAnimation 0.7s ease-out forwards;
+}
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

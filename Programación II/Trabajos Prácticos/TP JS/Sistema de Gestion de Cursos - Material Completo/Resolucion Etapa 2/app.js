@@ -298,6 +298,7 @@ export function mostrarCursos(busqueda = "") {
       }
       const cantidadEstudiantes = estudiantesAMostrar.length;
       const filaCurso = document.createElement("tr");
+      filaCurso.classList.add("fade-in");
       filaCurso.innerHTML = `
         <td rowspan="${cantidadEstudiantes || 1}">${curso.nombre}</td>
         <td rowspan="${cantidadEstudiantes || 1}">${curso.profesor}</td>
@@ -336,6 +337,7 @@ export function mostrarCursos(busqueda = "") {
       estudiantesAMostrar.forEach((est, index) => {
         if (index > 0) {
           const filaEstudiante = document.createElement("tr");
+          filaEstudiante.classList.add("fade-in");
           filaEstudiante.innerHTML = `
             <td>${est.nombre}</td>
             <td>${est.edad}</td>
@@ -348,6 +350,7 @@ export function mostrarCursos(busqueda = "") {
   });
   if (!resultadosEncontrados) {
     const filaVacía = document.createElement("tr");
+    filaVacía.classList.add("fade-in");
     filaVacía.innerHTML = `
       <td colspan="7">No se encontraron resultados</td>
     `;
