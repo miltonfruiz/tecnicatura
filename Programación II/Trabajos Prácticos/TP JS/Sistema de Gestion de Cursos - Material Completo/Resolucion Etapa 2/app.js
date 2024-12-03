@@ -102,8 +102,6 @@ class Curso {
 
 export let cursos = [];
 export let cursoActual = null;
-let ordenarPorEdad = false;
-let ordenarPorNota = false;
 
 //------------------ Cargar datos desde localStorage al cargar la página ------------------//
 
@@ -295,6 +293,8 @@ export function mostrarCursos(busqueda = "") {
         estudiantesAMostrar.sort((a, b) => a.edad - b.edad);
       } else if (ordenarPorNota) {
         estudiantesAMostrar.sort((a, b) => a.nota - b.nota);
+      } else if (ordenarPorNombre) {
+        estudiantesAMostrar.sort((a, b) => a.nombre.localeCompare(b.nombre)); // Ordenar por nombre alfabéticamente
       }
       const cantidadEstudiantes = estudiantesAMostrar.length;
       const filaCurso = document.createElement("tr");
@@ -360,20 +360,31 @@ export function mostrarCursos(busqueda = "") {
 }
 //---------------------- Eventos para filtrar estudiantes -------------------//
 
+let ordenarPorEdad = false;
+let ordenarPorNota = false;
+let ordenarPorNombre = false;
 filtroEstudiantes.addEventListener("change", () => {
   const valorFiltro = filtroEstudiantes.value;
   if (valorFiltro === "edad") {
     ordenarPorEdad = true;
     ordenarPorNota = false;
+    ordenarPorNombre = false;
   } else if (valorFiltro === "nota") {
     ordenarPorEdad = false;
     ordenarPorNota = true;
+    ordenarPorNombre = false;
+  } else if (valorFiltro === "nombre") {
+    ordenarPorEdad = false;
+    ordenarPorNota = false;
+    ordenarPorNombre = true;
   } else {
     ordenarPorEdad = false;
     ordenarPorNota = false;
+    ordenarPorNombre = false;
   }
   mostrarCursos(busquedaIngresada.value.toLowerCase());
 });
+
 //----------------------------- Eventos de búsqueda -------------------------//
 
 busquedaIngresada.addEventListener("input", () => {
