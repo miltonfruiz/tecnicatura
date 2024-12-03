@@ -274,18 +274,29 @@ export function mostrarCursos(busqueda = "") {
   `;
   let resultadosEncontrados = false;
   cursos.forEach((curso) => {
+    const coincideBusquedaCurso = curso.nombre.toLowerCase().includes(busqueda);
+    const coincideBusquedaProfesor = curso.profesor
+      .toLowerCase()
+      .includes(busqueda);
+    const estudiantesFiltrados = curso.estudiantes.filter((est) =>
+      est.nombre.toLowerCase().includes(busqueda)
+    );
     if (
-      curso.nombre.toLowerCase().includes(busqueda) ||
-      curso.profesor.toLowerCase().includes(busqueda)
+      coincideBusquedaCurso ||
+      coincideBusquedaProfesor ||
+      estudiantesFiltrados.length > 0
     ) {
       resultadosEncontrados = true;
-      let estudiantesAFiltrar = [...curso.estudiantes];
+      const estudiantesAMostrar =
+        estudiantesFiltrados.length > 0
+          ? estudiantesFiltrados
+          : curso.estudiantes;
       if (ordenarPorEdad) {
-        estudiantesAFiltrar.sort((a, b) => a.edad - b.edad);
+        estudiantesAMostrar.sort((a, b) => a.edad - b.edad);
       } else if (ordenarPorNota) {
-        estudiantesAFiltrar.sort((a, b) => a.nota - b.nota);
+        estudiantesAMostrar.sort((a, b) => a.nota - b.nota);
       }
-      const cantidadEstudiantes = estudiantesAFiltrar.length;
+      const cantidadEstudiantes = estudiantesAMostrar.length;
       const filaCurso = document.createElement("tr");
       filaCurso.innerHTML = `
         <td rowspan="${cantidadEstudiantes || 1}">${curso.nombre}</td>
@@ -295,28 +306,34 @@ export function mostrarCursos(busqueda = "") {
         }">${curso.obtenerPromedio()}</td>
         <td>${
           cantidadEstudiantes > 0
-            ? estudiantesAFiltrar[0].nombre
+            ? estudiantesAMostrar[0].nombre
             : "No hay estudiantes"
         }</td>
         <td>${
-          cantidadEstudiantes > 0 ? estudiantesAFiltrar[0].edad : "N/A"
+          cantidadEstudiantes > 0 ? estudiantesAMostrar[0].edad : "N/A"
         }</td>
         <td>${
-          cantidadEstudiantes > 0 ? estudiantesAFiltrar[0].nota : "N/A"
+          cantidadEstudiantes > 0 ? estudiantesAMostrar[0].nota : "N/A"
         }</td>
         <td class="td-contenedor-botones" rowspan="${cantidadEstudiantes || 1}">
           <div class="botones-acciones">
-            <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning boton-editar-curso" data-bs-toggle="modal" data-bs-target="#formulario-edicion" nombre="${
-              curso.nombre
-            }"><i class="fa-regular fa-pen-to-square"></i><span class="texto-editar-curso">Editar</span></button>
-            <button title="Boton Eliminar" class="btn btn-danger boton-eliminar-curso" data-bs-toggle="modal" data-bs-target="#modal-confirmacion" id="boton-eliminar-curso"><i class="fa-solid fa-trash"></i> <span class="texto-eliminar-curso">Eliminar</span></button>
+            <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning boton-editar-curso" 
+              data-bs-toggle="modal" data-bs-target="#formulario-edicion" nombre="${
+                curso.nombre
+              }">
+              <i class="fa-regular fa-pen-to-square"></i><span class="texto-editar-curso">Editar</span>
+            </button>
+            <button title="Boton Eliminar" class="btn btn-danger boton-eliminar-curso" 
+              data-bs-toggle="modal" data-bs-target="#modal-confirmacion" id="boton-eliminar-curso">
+              <i class="fa-solid fa-trash"></i> <span class="texto-eliminar-curso">Eliminar</span>
+            </button>
           </div>
         </td>
       `;
       tabla.querySelector("tbody").appendChild(filaCurso);
       filaCurso.querySelector(".boton-editar-curso").classList.add("visible");
       filaCurso.querySelector(".boton-eliminar-curso").classList.add("visible");
-      estudiantesAFiltrar.forEach((est, index) => {
+      estudiantesAMostrar.forEach((est, index) => {
         if (index > 0) {
           const filaEstudiante = document.createElement("tr");
           filaEstudiante.innerHTML = `
