@@ -371,9 +371,10 @@ export function mostrarCursos(busqueda = "") {
     const minutos = ahora.getMinutes().toString().padStart(2, "0");
     const horaFormateada = `${horas}:${minutos}`;
     const fechaFormateada = `${fecha} ${horaFormateada}`;
+    localStorage.setItem("ultimaActualizacion", fechaFormateada);
     const ultimaActualizacion = document.getElementById("ultima-actualizacion");
     if (ultimaActualizacion) {
-      ultimaActualizacion.textContent = `* Última actualización de datos: ${fechaFormateada}`;
+      ultimaActualizacion.innerHTML = `<i class="fa-solid fa-calendar-days"></i> * Última actualización de datos: ${fechaFormateada}`;
     }
     tablaModificada = false;
   }
@@ -421,6 +422,7 @@ guardarEdicion.addEventListener("click", () => {
     mostrarMensaje("¡Curso actualizado correctamente!", "success");
     guardarDatos();
     tablaModificada = true;
+    mostrarCursos();
     const modal = bootstrap.Modal.getInstance(
       document.getElementById("formulario-edicion")
     );
@@ -664,4 +666,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   manejarScroll();
+});
+
+//-------------- Muestra última actualización si está guardada en localStorage -----------//
+
+window.addEventListener("load", () => {
+  const ultimaActualizacion = document.getElementById("ultima-actualizacion");
+  const fechaGuardada = localStorage.getItem("ultimaActualizacion");
+
+  if (ultimaActualizacion && fechaGuardada) {
+    ultimaActualizacion.innerHTML = `<i class="fa-solid fa-calendar-days"></i> * Última actualización de datos: ${fechaGuardada}`;
+  }
 });

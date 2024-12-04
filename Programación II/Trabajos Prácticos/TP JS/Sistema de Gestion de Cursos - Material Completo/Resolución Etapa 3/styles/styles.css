@@ -571,6 +571,8 @@ input:hover {
   color: yellow;
   margin-right: 8px;
 }
+.fa-calendar-days,
+.fa-circle-info,
 .fa-x,
 .fa-skull-crossbones {
   font-size: 12px;
