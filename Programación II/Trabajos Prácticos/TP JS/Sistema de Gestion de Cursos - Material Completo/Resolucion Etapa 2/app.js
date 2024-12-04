@@ -252,6 +252,7 @@ export function actualizarCursosSelect() {
 }
 //------------------- Función para mostrar los cursos y estudiantes -------------------//
 
+let tablaModificada = false;
 export function mostrarCursos(busqueda = "") {
   listaCursos.innerHTML = "";
   const tabla = document.createElement("table");
@@ -363,6 +364,19 @@ export function mostrarCursos(busqueda = "") {
     tabla.querySelector("tbody").appendChild(filaVacía);
   }
   listaCursos.appendChild(tabla);
+  if (tablaModificada) {
+    const ahora = new Date();
+    const fecha = ahora.toLocaleDateString("es-ES", { dateStyle: "short" });
+    const horas = ahora.getHours().toString().padStart(2, "0");
+    const minutos = ahora.getMinutes().toString().padStart(2, "0");
+    const horaFormateada = `${horas}:${minutos}`;
+    const fechaFormateada = `${fecha} ${horaFormateada}`;
+    const ultimaActualizacion = document.getElementById("ultima-actualizacion");
+    if (ultimaActualizacion) {
+      ultimaActualizacion.textContent = `* Última actualización de datos: ${fechaFormateada}`;
+    }
+    tablaModificada = false;
+  }
 }
 //---------------------- Eventos para filtrar estudiantes -------------------//
 
@@ -404,7 +418,9 @@ guardarEdicion.addEventListener("click", () => {
       primeraMayuscula(nuevoNombreCurso.value),
       primeraMayuscula(nuevoNombreProfesor.value)
     );
+    mostrarMensaje("¡Curso actualizado correctamente!", "success");
     guardarDatos();
+    tablaModificada = true;
     const modal = bootstrap.Modal.getInstance(
       document.getElementById("formulario-edicion")
     );
@@ -509,6 +525,7 @@ guardarEdicionEstudiante.addEventListener("click", () => {
       mostrarEstudiantes();
       mostrarMensaje("¡Estudiante actualizado correctamente!", "success");
       guardarDatos();
+      tablaModificada = true;
     } else {
       mostrarMensaje("¡Valores ingresados incorrectos!", "error");
     }
@@ -611,6 +628,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".texto-h2-estadisticas"),
     document.querySelector(".texto-h2-informacion"),
     document.querySelector("#link-empezar"),
+    document.querySelector("#ultima-actualizacion"),
+
     ...document.querySelectorAll(".boton-editar-curso"),
     ...document.querySelectorAll(".boton-eliminar-curso"),
     ...document.querySelectorAll(".h3-mis-redes"),

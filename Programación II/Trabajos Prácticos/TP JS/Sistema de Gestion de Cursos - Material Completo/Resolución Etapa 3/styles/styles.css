@@ -935,6 +935,7 @@ footer {
   transform: translateY(0);
 }
 /*-------------- Evento efecto aparicion Scroll ----------------*/
+
 .info-redes-cel,
 .footer-subredes,
 .texto-contacto,
@@ -956,6 +957,7 @@ footer {
   opacity: 1;
   transform: translateX(0);
 }
+#ultima-actualizacion,
 .texto-h2-informacion,
 .info-redes,
 .h3-mis-redes,
@@ -965,6 +967,7 @@ footer {
   transform: translateX(-24%);
   transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
+#ultima-actualizacion.visible,
 .texto-h2-informacion.visible,
 .info-redes.visible,
 .h3-mis-redes.visible,
@@ -1086,15 +1089,18 @@ footer {
     transform: translateY(0);
   }
 }
-
 .celda-verde:hover {
   transition: 0.3s;
   background-color: #198754;
   color: white;
 }
-
 .celda-roja:hover {
   transition: 0.3s;
   background-color: #dc3545;
   color: white;
+}
+#ultima-actualizacion {
+  text-align: center;
+  font-size: 10px;
+  font-style: oblique;
 }
