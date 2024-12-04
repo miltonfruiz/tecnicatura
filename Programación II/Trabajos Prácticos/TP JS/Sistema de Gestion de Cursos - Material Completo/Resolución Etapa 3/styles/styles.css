@@ -463,7 +463,7 @@ td {
 }
 input:hover {
   transition: background-color 1s, color 1s, text-shadow 1s, border 1s;
-  background-color: #c7c8cc;
+  background-color: #c7c8cc80;
   color: white;
 }
 #busqueda-ingresada {
@@ -1073,16 +1073,28 @@ footer {
 }
 .fade-in {
   opacity: 0;
-  transform: translateY(25px);
+  transform: translateY(20px);
   animation: fadeInAnimation 0.7s ease-out forwards;
 }
 @keyframes fadeInAnimation {
   0% {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.celda-verde:hover {
+  transition: 0.3s;
+  background-color: #198754;
+  color: white;
+}
+
+.celda-roja:hover {
+  transition: 0.3s;
+  background-color: #dc3545;
+  color: white;
 }

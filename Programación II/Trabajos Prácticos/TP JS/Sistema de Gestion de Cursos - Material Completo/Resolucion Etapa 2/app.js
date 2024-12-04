@@ -300,22 +300,28 @@ export function mostrarCursos(busqueda = "") {
       const filaCurso = document.createElement("tr");
       filaCurso.classList.add("fade-in");
       filaCurso.innerHTML = `
-        <td rowspan="${cantidadEstudiantes || 1}">${curso.nombre}</td>
-        <td rowspan="${cantidadEstudiantes || 1}">${curso.profesor}</td>
-        <td rowspan="${
-          cantidadEstudiantes || 1
-        }">${curso.obtenerPromedio()}</td>
-        <td>${
-          cantidadEstudiantes > 0
-            ? estudiantesAMostrar[0].nombre
-            : "No hay estudiantes"
-        }</td>
-        <td>${
-          cantidadEstudiantes > 0 ? estudiantesAMostrar[0].edad : "N/A"
-        }</td>
-        <td>${
-          cantidadEstudiantes > 0 ? estudiantesAMostrar[0].nota : "N/A"
-        }</td>
+        <td class="celda-verde" rowspan="${cantidadEstudiantes || 1}">${
+        curso.nombre
+      }</td>
+        <td class="celda-verde" rowspan="${cantidadEstudiantes || 1}">${
+        curso.profesor
+      }</td>
+        <td class="celda-verde ${
+          cantidadEstudiantes > 0 ? "" : "celda-roja"
+        }" rowspan="${cantidadEstudiantes || 1}">${curso.obtenerPromedio()}</td>
+        <td class="celda-verde ${
+          cantidadEstudiantes > 0 ? "" : "celda-roja"
+        }">${
+        cantidadEstudiantes > 0
+          ? estudiantesAMostrar[0].nombre
+          : "No hay estudiantes"
+      }</td>
+        <td class="celda-verde ${
+          cantidadEstudiantes > 0 ? "" : "celda-roja"
+        }">${cantidadEstudiantes > 0 ? estudiantesAMostrar[0].edad : "N/A"}</td>
+        <td class="celda-verde ${
+          cantidadEstudiantes > 0 ? "" : "celda-roja"
+        }">${cantidadEstudiantes > 0 ? estudiantesAMostrar[0].nota : "N/A"}</td>
         <td class="td-contenedor-botones" rowspan="${cantidadEstudiantes || 1}">
           <div class="botones-acciones">
             <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning boton-editar-curso" 
@@ -339,9 +345,9 @@ export function mostrarCursos(busqueda = "") {
           const filaEstudiante = document.createElement("tr");
           filaEstudiante.classList.add("fade-in");
           filaEstudiante.innerHTML = `
-            <td>${est.nombre}</td>
-            <td>${est.edad}</td>
-            <td>${est.nota}</td>
+            <td class="celda-verde">${est.nombre}</td>
+            <td class="celda-verde">${est.edad}</td>
+            <td class="celda-verde">${est.nota}</td>
           `;
           tabla.querySelector("tbody").appendChild(filaEstudiante);
         }
