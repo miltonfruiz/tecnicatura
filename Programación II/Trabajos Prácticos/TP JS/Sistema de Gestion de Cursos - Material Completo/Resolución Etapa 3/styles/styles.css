@@ -549,7 +549,6 @@ input:hover {
 .form-control {
   margin-right: 10px;
 }
-.fa-address-book,
 .fa-share-nodes,
 .fa-chart-simple,
 .fa-book-medical,
@@ -559,6 +558,7 @@ input:hover {
 .fa-users {
   font-size: 15px;
 }
+.fa-address-book,
 .fa-solid {
   font-size: 13px;
 }
@@ -571,6 +571,8 @@ input:hover {
   color: yellow;
   margin-right: 8px;
 }
+.fa-phone,
+.fa-envelope,
 .fa-calendar-days,
 .fa-circle-info,
 .fa-x,
@@ -730,7 +732,7 @@ input:hover {
 }
 .texto-contacto {
   letter-spacing: 5px;
-  font-size: 19px;
+  font-size: 14px;
   font-weight: 300;
   margin: 0px 0px 10px 0px;
 }
@@ -754,13 +756,13 @@ input:hover {
 .copyright {
   font-weight: 300;
   padding: 140px 0px 0px 0px;
-  font-size: 10px;
+  font-size: 9px;
   margin-top: auto;
   text-align: center;
 }
 .h3-mis-redes {
   letter-spacing: 5px;
-  font-size: 19px;
+  font-size: 14px;
   font-weight: 300;
 }
 label {
