@@ -58,6 +58,7 @@ const promedioGeneralElem = document.getElementById("promedio-general");
 const totalCursosElem = document.getElementById("total-cursos");
 const mejorCursoElem = document.getElementById("mejor-curso");
 const botonEmpezar = document.getElementById("boton-empezar");
+const botonArriba = document.getElementById("boton-arriba");
 //---------------------------- Clase Estudiante -------------------------------------//
 
 class Estudiante {
@@ -677,4 +678,19 @@ window.addEventListener("load", () => {
   if (ultimaActualizacion && fechaGuardada) {
     ultimaActualizacion.innerHTML = `<i class="fa-solid fa-calendar-days"></i> * Última actualización de datos: ${fechaGuardada}`;
   }
+});
+//--------------------------- Boton de Desplazamiento Vertical ---------------------------//
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 1500) {
+    botonArriba.style.display = "block";
+  } else {
+    botonArriba.style.display = "none";
+  }
+});
+botonArriba.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 });
