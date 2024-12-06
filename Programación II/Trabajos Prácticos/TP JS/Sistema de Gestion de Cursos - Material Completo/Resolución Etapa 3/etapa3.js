@@ -217,7 +217,7 @@ export function mostrarMensaje(mensaje, tipo) {
     setTimeout(() => {
       mensajeDiv.remove();
     }, 2000);
-  }, 4000);
+  }, 3000);
 }
 //------------------------------- Función validar cadena ----------------------------//
 

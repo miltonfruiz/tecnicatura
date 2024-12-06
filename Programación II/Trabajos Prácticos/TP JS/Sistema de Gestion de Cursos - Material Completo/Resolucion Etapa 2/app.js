@@ -223,7 +223,7 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
       mostrarEstudiantes();
       guardarDatos();
       mostrarMensaje(
-        `Se ha eliminado al estudiante ${estudiante.nombre}"`,
+        `Se ha eliminado al estudiante "${estudiante.nombre}"`,
         "success"
       );
       const cerrar = bootstrap.Modal.getInstance(
