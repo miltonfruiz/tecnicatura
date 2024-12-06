@@ -1,4 +1,4 @@
-//----------------------------- Importación de Funciones -----------------------------//
+//--------------------------------- Importación de Funciones ------------------------------//
 
 import {
   edicionEstudiantes,
@@ -11,7 +11,7 @@ import {
   actualizarEstadisticas,
 } from "../Resolución Etapa 3/etapa3.js";
 
-//---------------------------------- Captura de ID's --------------------------------//
+//-------------------------------------- Captura de ID's ----------------------------------//
 
 const formCurso = document.getElementById("form-curso");
 const formEstudiante = document.getElementById("form-estudiante");
@@ -58,7 +58,7 @@ const totalCursosElem = document.getElementById("total-cursos");
 const mejorCursoElem = document.getElementById("mejor-curso");
 const botonEmpezar = document.getElementById("boton-empezar");
 const botonArriba = document.getElementById("boton-arriba");
-//---------------------------- Clase Estudiante -------------------------------------//
+//------------------------------------ Clase Estudiante -----------------------------------//
 
 class Estudiante {
   constructor(nombre, edad, nota) {
@@ -71,7 +71,7 @@ class Estudiante {
     return `${this.nombre} (${this.edad} años) - Nota: ${this.nota}`;
   }
 }
-//----------------------------- Clase Curso ----------------------------------------//
+//-------------------------------------- Clase Curso --------------------------------------//
 
 class Curso {
   constructor(nombre, profesor) {
@@ -98,7 +98,7 @@ class Curso {
       : "N/A";
   }
 }
-//----------------------- Arreglo y Variables  -------------------------//
+//------------------------------------ Arreglo y Variables  -------------------------------//
 
 export let cursos = [];
 export let cursoActual = null;
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("formulario-edicion-estudiante").style.display =
     "none";
 });
-//------------------ Evento para agregar un curso ----------------------//
+//-------------------------------- Evento para agregar un curso ---------------------------//
 
 formCurso.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -152,7 +152,7 @@ formCurso.addEventListener("submit", (e) => {
     guardarDatos();
   }
 });
-//------------------ Evento para agregar un estudiante --------------------//
+//---------------------------- Evento para agregar un estudiante --------------------------//
 
 formEstudiante.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -204,7 +204,7 @@ formEstudiante.addEventListener("submit", (e) => {
     actualizarEstadisticas();
   }
 });
-//------------------------- Eventos de eliminar estudiante -----------------------//
+//----------------------------- Eventos de eliminar estudiante ----------------------------//
 
 listaEstudiantesEdicion.addEventListener("click", (e) => {
   const botonEliminar = e.target.closest("#boton-eliminar-estudiante");
@@ -239,7 +239,7 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
     };
   }
 });
-//------------------- Función para actualizar el select de cursos --------------//
+//------------------------ Función para actualizar el select de cursos --------------------//
 
 export function actualizarCursosSelect() {
   cursoEstudianteSelect.innerHTML = "";
@@ -250,7 +250,7 @@ export function actualizarCursosSelect() {
     cursoEstudianteSelect.appendChild(option);
   });
 }
-//------------------- Función para mostrar los cursos y estudiantes -------------------//
+//----------------------- Función para mostrar los cursos y estudiantes -------------------//
 
 let tablaModificada = false;
 export function mostrarCursos(busqueda = "") {
@@ -379,7 +379,7 @@ export function mostrarCursos(busqueda = "") {
     tablaModificada = false;
   }
 }
-//---------------------- Eventos para filtrar estudiantes -------------------//
+//------------------------------ Eventos para filtrar estudiantes -------------------------//
 
 let ordenarPorEdad = false;
 let ordenarPorNota = false;
@@ -405,12 +405,12 @@ filtroEstudiantes.addEventListener("change", () => {
   }
   mostrarCursos(busquedaIngresada.value.toLowerCase());
 });
-//----------------------------- Eventos de búsqueda -------------------------//
+//------------------------------------ Eventos de búsqueda --------------------------------//
 
 busquedaIngresada.addEventListener("input", () => {
   mostrarCursos(busquedaIngresada.value.toLowerCase());
 });
-//---------------------- Eventos de guardar curso ---------------------------//
+//---------------------------------- Eventos de guardar curso -----------------------------//
 
 guardarEdicion.addEventListener("click", () => {
   if (nuevoNombreCurso.value && nuevoNombreProfesor.value) {
@@ -431,7 +431,7 @@ guardarEdicion.addEventListener("click", () => {
     alert("Por favor, completa todos los campos antes de guardar.");
   }
 });
-//--------------------- Eventos de cancelación de edición -------------------//
+//---------------------------- Eventos de cancelación de edición --------------------------//
 
 cancelarEdicion.addEventListener("click", function () {
   const modal = bootstrap.Modal.getInstance(
@@ -440,7 +440,7 @@ cancelarEdicion.addEventListener("click", function () {
   modal.hide();
 });
 
-//------------------------- Eventos de eliminar curso -----------------------//
+//-------------------------------- Eventos de eliminar curso ------------------------------//
 
 listaCursos.addEventListener("click", (e) => {
   if (e.target.id === "boton-eliminar-curso") {
@@ -477,7 +477,7 @@ listaCursos.addEventListener("click", (e) => {
     };
   }
 });
-//------------------------ Eventos de edición de curso ---------------------//
+//-------------------------------- Eventos de edición de curso ----------------------------//
 
 listaCursos.addEventListener("click", (e) => {
   if (e.target.classList.contains("editar-curso")) {
@@ -490,7 +490,7 @@ listaCursos.addEventListener("click", (e) => {
     mostrarEstudiantes();
   }
 });
-//--------------------- Eventos de edición de estudiante -------------------//
+//------------------------------ Eventos de edición de estudiante -------------------------//
 
 let estudianteActualIndex = null;
 listaEstudiantesEdicion.addEventListener("click", (e) => {
@@ -664,7 +664,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   observer.observe(contenedorGrafica);
 });
-//------------------------------- Evento para desplazar a elemento -----------------------//
+//------------------------------- Evento para desplazar a elemento ------------------------//
 
 botonEmpezar.addEventListener("click", function (event) {
   event.preventDefault();
@@ -672,7 +672,7 @@ botonEmpezar.addEventListener("click", function (event) {
   target.scrollIntoView({ behavior: "smooth", block: "start" });
   target.focus();
 });
-//----------------------------- Evento efecto aparición Scroll ---------------------------//
+//------------------------------ Evento efecto aparición Scroll ---------------------------//
 
 document.addEventListener("DOMContentLoaded", () => {
   const elementos = [
@@ -728,7 +728,7 @@ document.addEventListener("DOMContentLoaded", () => {
   manejarScroll();
 });
 
-//-------------- Muestra última actualización si está guardada en localStorage -----------//
+//-------------- Muestra última actualización si está guardada en localStorage ------------//
 
 window.addEventListener("load", () => {
   const ultimaActualizacion = document.getElementById("ultima-actualizacion");
@@ -738,7 +738,7 @@ window.addEventListener("load", () => {
     ultimaActualizacion.innerHTML = `<i class="fa-solid fa-calendar-days"></i> * Última actualización de datos: ${fechaGuardada}`;
   }
 });
-//--------------------------- Boton de Desplazamiento Vertical ---------------------------//
+//---------------------------- Boton de Desplazamiento Vertical ---------------------------//
 
 window.addEventListener("scroll", () => {
   if (window.scrollY > 1500) {
