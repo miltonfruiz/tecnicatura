@@ -8,7 +8,6 @@ import {
   cadenaValida,
   guardarDatos,
   calcularEstadisticas,
-  mostrarEstudiantes,
   actualizarEstadisticas,
 } from "../Resolución Etapa 3/etapa3.js";
 
@@ -504,6 +503,66 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
     formEdicionEstudiante.style.display = "flex";
   }
 });
+//------------------ Función para mostrar lista de edicion de estudiantes -----------------//
+
+function mostrarEstudiantes() {
+  const listaEstudiantesEdicion = document.getElementById(
+    "lista-estudiantes-edicion"
+  );
+  listaEstudiantesEdicion.innerHTML = "";
+  if (cursoActual.estudiantes.length === 0) {
+    listaEstudiantesEdicion.innerHTML =
+      "<p>No hay estudiantes en este curso.</p>";
+    return;
+  }
+  const tablaEstudiantes = document.createElement("table");
+  tablaEstudiantes.classList.add("table", "tabla-estudiante");
+  tablaEstudiantes.innerHTML = `
+    <thead>
+      <tr>
+        <th class="bg-body-tertiary">Nombre</th>
+        <th class="bg-body-tertiary">Edad</th>
+        <th class="bg-body-tertiary">Nota</th>
+        <th class="bg-body-tertiary">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+  `;
+  cursoActual.estudiantes.forEach((estudiante, index) => {
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${estudiante.nombre}</td>
+      <td>${estudiante.edad}</td>
+      <td>${estudiante.nota}</td>
+      <td>
+        <button title="Boton Editar" class="btn btn-warning boton-editar-estudiante" id="boton-editar-estudiante" data-index="${index}">
+          <i class="fa-regular fa-pen-to-square"></i> <span class="texto-editar-estudiante">Editar</span>
+        </button>
+        <button title="Boton Eliminar" class="btn btn-danger" id="boton-eliminar-estudiante" data-index="${index}">
+          <i class="fa-solid fa-trash"></i> <span class="texto-eliminar-estudiante">Eliminar</span>
+        </button>
+      </td>
+    `;
+    tablaEstudiantes.querySelector("tbody").appendChild(fila);
+  });
+  listaEstudiantesEdicion.appendChild(tablaEstudiantes);
+  const botonesEditar = document.querySelectorAll(".boton-editar-estudiante");
+  botonesEditar.forEach((boton) => {
+    boton.addEventListener("click", function () {
+      const index = boton.getAttribute("data-index");
+      const estudiante = cursoActual.estudiantes[index];
+      document.getElementById("nombre-estudiante-editar").value =
+        estudiante.nombre;
+      document.getElementById("edad-estudiante-editar").value = estudiante.edad;
+      document.getElementById("nota-estudiante-editar").value = estudiante.nota;
+      estudianteActualIndex = index;
+      const modal = new bootstrap.Modal(
+        document.getElementById("formulario-edicion-estudiante")
+      );
+      modal.show();
+    });
+  });
+}
 //--------------------- Eventos para guardar los cambios del estudiante -------------------//
 
 guardarEdicionEstudiante.addEventListener("click", () => {
