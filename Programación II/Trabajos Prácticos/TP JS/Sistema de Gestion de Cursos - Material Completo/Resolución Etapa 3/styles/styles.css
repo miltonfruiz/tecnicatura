@@ -153,19 +153,19 @@ h2 {
   margin: 40px 0px 20px 0px;
 }
 .texto-h2 {
-  font-size: 17px;
+  font-size: 15px;
   margin: 90px 0px 20px 0px;
 }
 .texto-h2-edicion {
   font-size: 17px;
 }
 .texto-h2-estadisticas {
-  font-size: 17px;
+  font-size: 15px;
   margin: 90px 0px 20px 0px;
 }
 .texto-h2-informacion {
   font-weight: 600;
-  font-size: 12px;
+  font-size: 11px;
 }
 form {
   margin-bottom: 30px;
@@ -226,14 +226,14 @@ select {
 #curso-estudiante,
 #nuevo-nombre-curso,
 #nuevo-nombre-profesor {
-  font-size: 12px;
+  font-size: 11px;
   width: 100%;
   padding: 6px;
   border: 1px solid rgba(128, 128, 128, 0.5);
   border-radius: 2px;
 }
 #curso-estudiante {
-  font-size: 12px;
+  font-size: 11px;
 }
 #edad-estudiante-editar,
 #nota-estudiante-editar,
@@ -249,7 +249,7 @@ select {
   color: white;
   cursor: pointer;
   padding: 9px 1px 9px 1px;
-  width: 17%;
+  width: 15%;
   border-radius: 3px;
   margin-top: 18px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -293,7 +293,7 @@ select {
   color: white;
   cursor: pointer;
   padding: 9px 1px 9px 1px;
-  width: 21%;
+  width: 18%;
   border-radius: 3px;
   margin-top: 18px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -389,7 +389,7 @@ select {
 .tabla-cursos td,
 .tabla-estudiante th,
 .tabla-estudiante td {
-  font-size: 12px;
+  font-size: 11px;
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
@@ -402,9 +402,6 @@ select {
   max-height: calc(4 * 50px + 1px);
   overflow-y: auto;
 }
-label {
-  font-size: 13px;
-}
 #formulario-edicion-estudiante-label {
   font-size: 17px;
   display: flex;
@@ -413,7 +410,7 @@ label {
 }
 .texto-h4-curso,
 .texto-h4-estudiante {
-  font-size: 17px;
+  font-size: 15px;
   margin: auto;
 }
 .texto-h4-estudiante {
@@ -476,7 +473,7 @@ input:hover {
   border: 1px solid #23b37c;
 }
 #filtro-estudiantes {
-  font-size: 12px;
+  font-size: 11px;
   margin-left: auto;
   width: 70%;
 }
@@ -490,7 +487,7 @@ input:hover {
 #busqueda-ingresada {
   width: 100%;
   border-radius: 24px;
-  font-size: 12px;
+  font-size: 11px;
   padding: 7px 30px;
 }
 .fa-magnifying-glass {
@@ -553,7 +550,7 @@ input:hover {
 .fa-chart-simple,
 .fa-book-medical,
 .fa-user-plus,
-.fa-list,
+.fa-list-check,
 .fa-graduation-cap,
 .fa-users {
   font-size: 15px;
@@ -589,7 +586,7 @@ input:hover {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
 }
 #tabla-estadisticas th {
   background-color: #f2f2f2;
@@ -600,7 +597,7 @@ input:hover {
   background-color: #f9f9f9;
 }
 #tabla-estadisticas td {
-  font-size: 12px;
+  font-size: 11px;
 }
 #graficaEstudiantes {
   width: 100% !important;
@@ -612,7 +609,7 @@ input:hover {
 #exportar-json {
   font-size: 11px;
   border-radius: 4px;
-  padding: 7px 25px 7px 25px;
+  padding: 7px 20px 7px 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border: 1px solid transparent;
   transition: transform 1s ease;
@@ -766,7 +763,8 @@ input:hover {
   font-weight: 300;
 }
 label {
-  font-size: 12px;
+  font-weight: 600;
+  font-size: 11px;
 }
 .boton-whatsapp {
   position: fixed;
@@ -843,7 +841,7 @@ label {
 .texto-solucion,
 .texto-sistema {
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 300;
   color: white !important;
 }
 /* ------------------------ Diseño Responsive 442px ------------------------*/
