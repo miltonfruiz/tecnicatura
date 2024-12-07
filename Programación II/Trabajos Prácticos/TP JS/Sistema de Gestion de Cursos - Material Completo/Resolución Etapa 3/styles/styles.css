@@ -157,7 +157,7 @@ h2 {
   margin: 90px 0px 20px 0px;
 }
 .texto-h2-edicion {
-  font-size: 17px;
+  font-size: 15px;
 }
 .texto-h2-estadisticas {
   font-size: 15px;
@@ -319,7 +319,7 @@ select {
   padding: 7px 15px 7px 15px;
   color: white;
   border-radius: 3px;
-  width: 29%;
+  width: 27%;
   margin-right: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border: 1px solid transparent;
@@ -395,8 +395,15 @@ select {
   text-align: center;
   vertical-align: middle;
 }
+.tabla-estudiante td {
+  font-weight: 400;
+}
 .tabla-cursos th {
   background-color: #f2f2f2;
+}
+.tabla-cursos td {
+  color: black;
+  font-weight: 400;
 }
 .tabla-contenedor {
   max-height: calc(4 * 50px + 1px);
@@ -551,8 +558,7 @@ input:hover {
 .fa-book-medical,
 .fa-user-plus,
 .fa-list-check,
-.fa-graduation-cap,
-.fa-users {
+.fa-graduation-cap {
   font-size: 15px;
 }
 .fa-address-book,
@@ -568,6 +574,16 @@ input:hover {
   color: yellow;
   margin-right: 8px;
 }
+.fa-plus,
+.fa-download,
+.fa-trash,
+.fa-pen-to-square,
+.fa-users,
+.fa-graduation-cap,
+.fa-clipboard-check,
+.fa-face-smile,
+.fa-chalkboard-user,
+.fa-signature,
 .fa-phone,
 .fa-envelope,
 .fa-calendar-days,
