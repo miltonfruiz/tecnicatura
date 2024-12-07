@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("formulario-edicion-estudiante").style.display =
     "none";
 });
-//--- Conversión de primera letra Mayuscula ---//
+//--- Convertir primera letra Mayuscula ---//
 function primeraMayuscula(nombreCompleto) {
   return nombreCompleto
     .split(" ")
@@ -123,7 +123,7 @@ function primeraMayuscula(nombreCompleto) {
     )
     .join(" ");
 }
-//--- Mensaje de creado ---//
+//--- Mostrar mensaje de creado ---//
 function mostrarMensaje(mensaje, tipo) {
   const mensajeDiv = document.createElement("div");
   mensajeDiv.textContent = mensaje;
@@ -139,17 +139,17 @@ function mostrarMensaje(mensaje, tipo) {
     }, 2000);
   }, 3000);
 }
-//--- Validación de Cadena ---//
+//--- Validar Cadena ---//
 function cadenaValida(cadena) {
   return (
     typeof cadena === "string" && cadena.trim() !== "" && !/\d/.test(cadena)
   );
 }
-//--- Guardado en localStorage ---//
+//--- Guardar en localStorage ---//
 function guardarDatos() {
   localStorage.setItem("cursos", JSON.stringify(cursos));
 }
-//--- Cálculo de estadísticas ---//
+//--- Calcular estadísticas ---//
 function calcularEstadisticas() {
   let totalEstudiantes = 0;
   let sumaNotas = 0;
@@ -177,7 +177,7 @@ function calcularEstadisticas() {
 
   return { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso };
 }
-// --- Exportado de datos en archivo JSON ---//
+// --- Exportar datos en archivo JSON ---//
 function exportarDatosAJson() {
   const data = JSON.stringify(cursos, null, 2);
   const blob = new Blob([data], { type: "application/json" });
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("exportar-json")
     .addEventListener("click", exportarDatosAJson);
 });
-//--- Actualización de select en Cursos ---//
+//--- Actualizar select en Cursos ---//
 function actualizarCursosSelect() {
   cursoEstudianteSelect.innerHTML = "";
   cursos.forEach((curso, index) => {
@@ -205,7 +205,7 @@ function actualizarCursosSelect() {
     cursoEstudianteSelect.appendChild(option);
   });
 }
-//--- Muestra tabla de Cursos y Estudiantes ---//
+//--- Mostrar tabla de Cursos y Estudiantes ---//
 let tablaModificada = false;
 function mostrarCursos(busqueda = "") {
   listaCursos.innerHTML = "";
@@ -333,7 +333,7 @@ function mostrarCursos(busqueda = "") {
     tablaModificada = false;
   }
 }
-//--- Editación de Curso ---//
+//--- Editar Curso ---//
 function editarCurso(
   nombreCursoAntiguo,
   nuevoNombreCurso,
@@ -349,7 +349,7 @@ function editarCurso(
     mostrarCursos();
   }
 }
-//--- Listado de Estudiantes a Editar / Eliminar ---//
+//--- Listar de Estudiantes a Editar / Eliminar ---//
 function mostrarEstudiantes() {
   const listaEstudiantesEdicion = document.getElementById(
     "lista-estudiantes-edicion"
@@ -408,7 +408,7 @@ function mostrarEstudiantes() {
     });
   });
 }
-//--- Actualización de Estadísticas ---//
+//--- Actualizar Estadísticas ---//
 let graficaEstudiantes;
 function actualizarEstadisticas() {
   const { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso } =
@@ -457,7 +457,7 @@ function actualizarEstadisticas() {
 
   graficaCanvas.style.display = "block";
 }
-//--- Muestra estadísticas ---//
+//--- Mostrar estadísticas ---//
 let graficaEstudiantesInstance = null;
 document.addEventListener("DOMContentLoaded", () => {
   const graficaCanvas = document.getElementById("graficaEstudiantes");
@@ -772,32 +772,32 @@ guardarEdicionEstudiante.addEventListener("click", () => {
 });
 //---------------------------------- * Eventos Especiales * --------------------------------//
 
-//--- Eventos de búsqueda ---//
+//--- Buscar curso, estudiante, profesor ---//
 busquedaIngresada.addEventListener("input", () => {
   mostrarCursos(busquedaIngresada.value.toLowerCase());
 });
-//--- Eventos de cancelación de edición ---//
+//--- Cancelar edición curso---//
 cancelarEdicion.addEventListener("click", function () {
   const modal = bootstrap.Modal.getInstance(
     document.getElementById("formulario-edicion")
   );
   modal.hide();
 });
-//--- Evento para cancelar la edición ---//
+//--- Cancelar edición estudiante---//
 cancelarEdicionEstudiante.addEventListener("click", () => {
   formEdicionEstudiante.style.display = "none";
   nombreEstudianteEditar.value = "";
   edadEstudianteEditar.value = "";
   notaEstudianteEditar.value = "";
 });
-//--- Evento para desplazar a elemento ---//
+//--- Desplazar a elemento ---//
 botonEmpezar.addEventListener("click", function (event) {
   event.preventDefault();
   const target = document.getElementById("nombre-curso");
   target.scrollIntoView({ behavior: "smooth", block: "start" });
   target.focus();
 });
-//--- Evento efecto aparición Scroll ---//
+//--- Desplazar en scroll ---//
 document.addEventListener("DOMContentLoaded", () => {
   const elementos = [
     ...document.querySelectorAll(".oculto"),
@@ -851,7 +851,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   manejarScroll();
 });
-//--- Actualización de datos ---//
+//--- Actualizar fecha de datos ---//
 window.addEventListener("load", () => {
   const ultimaActualizacion = document.getElementById("ultima-actualizacion");
   const fechaGuardada = localStorage.getItem("ultimaActualizacion");
@@ -860,7 +860,7 @@ window.addEventListener("load", () => {
     ultimaActualizacion.innerHTML = `<i class="fa-solid fa-calendar-days"></i> * Última actualización de datos: ${fechaGuardada}`;
   }
 });
-//--- Boton de Desplazamiento Vertical ---//
+//--- Desplazar en Vertical ---//
 window.addEventListener("scroll", () => {
   if (window.scrollY > 1500) {
     botonArriba.style.display = "block";
