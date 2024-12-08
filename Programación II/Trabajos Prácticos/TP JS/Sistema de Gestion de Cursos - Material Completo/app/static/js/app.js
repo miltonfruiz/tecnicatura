@@ -649,49 +649,33 @@ formEstudiante.addEventListener("submit", (e) => {
   const edadEstudianteValor = parseInt(edadEstudiante.value);
   const notaEstudianteValor = parseFloat(notaEstudiante.value);
   const cursoIndex = cursoEstudianteSelect.value;
-  const nombreValido = cadenaValida(nombreEstudianteValor);
-  const cursoActual = cursos[cursoIndex];
-  const estudianteExistente = cursoActual.estudiantes.find(
-    (est) => est.nombre.toLowerCase() === nombreEstudianteValor.toLowerCase()
-  );
-  if (estudianteExistente) {
-    mostrarMensaje("¡Ese alumno ya existe!", "error");
-  } else if (
-    (!nombreValido && edadEstudianteValor <= 0 && notaEstudianteValor < 0) ||
-    notaEstudianteValor > 10
-  ) {
-    mostrarMensaje("¡Valores ingresados incorrectos!", "error");
-  } else if (!nombreValido && edadEstudianteValor <= 0) {
-    mostrarMensaje("¡Nombre y Edad ingresado Incorrectos!", "error");
-  } else if (
-    (!nombreValido && notaEstudianteValor < 0) ||
-    notaEstudianteValor > 10
-  ) {
-    mostrarMensaje("¡Nombre y Nota ingresado Incorrectos!", "error");
-  } else if (
-    (edadEstudianteValor <= 0 && notaEstudianteValor < 0) ||
-    notaEstudianteValor > 10
-  ) {
-    mostrarMensaje("¡Edad y Nota ingresadas Incorrectas!", "error");
-  } else if (!nombreValido) {
-    mostrarMensaje("Nombre ingresado Incorrecto!", "error");
-  } else if (edadEstudianteValor <= 0) {
-    mostrarMensaje("Edad ingresada Incorrecta!", "error");
-  } else if (notaEstudianteValor < 0 || notaEstudianteValor > 10) {
-    mostrarMensaje("¡Nota ingresada Incorrecta!", "error");
-  } else {
-    const nuevoEstudiante = new Estudiante(
-      nombreEstudianteValor,
-      edadEstudianteValor,
-      notaEstudianteValor
-    );
-    cursoActual.agregarEstudiante(nuevoEstudiante);
-    formEstudiante.reset();
-    mostrarCursos();
-    mostrarMensaje("¡Estudiante agregado correctamente!", "success");
-    guardarDatos();
-    actualizarEstadisticas();
-  }
+  const data = {
+    nombre: nombreEstudianteValor,
+    edad: edadEstudianteValor,
+    nota: notaEstudianteValor,
+    curso_id: cursoIndex,
+  };
+  fetch("/api/estudiantes", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.tipo === "success") {
+        mostrarMensaje(data.mensaje, "success");
+        mostrarCursos();
+        guardarDatos();
+      } else {
+        mostrarMensaje(data.mensaje, "error");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      mostrarMensaje("Error al agregar estudiante", "error");
+    });
 });
 //--- Eliminar estudiante ---//
 listaEstudiantesEdicion.addEventListener("click", (e) => {
@@ -699,32 +683,24 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
   if (botonEliminar) {
     const index = botonEliminar.dataset.index;
     const estudiante = cursoActual.estudiantes[index];
-    mensajeConfirmacion.innerHTML = `
-      <i class="fa-solid fa-triangle-exclamation"></i>
-      ¿Estás seguro de que deseas eliminar al estudiante "<strong>${estudiante.nombre}</strong>"? 
-      <i class="fa-solid fa-triangle-exclamation"></i>`;
-    const bootstrapModal = new bootstrap.Modal(modalConfirmacion);
-    bootstrapModal.show();
-    botonConfirmar.onclick = () => {
-      cursoActual.estudiantes.splice(index, 1);
-      mostrarEstudiantes();
-      guardarDatos();
-      mostrarMensaje(
-        `Se ha eliminado al estudiante "${estudiante.nombre}"`,
-        "success"
-      );
-      const cerrar = bootstrap.Modal.getInstance(
-        document.getElementById("modal-confirmacion")
-      );
-      cerrar?.hide();
-      actualizarEstadisticas();
-    };
-    botonCancelar.onclick = () => {
-      const cerrar = bootstrap.Modal.getInstance(
-        document.getElementById("modal-confirmacion")
-      );
-      cerrar?.hide();
-    };
+    const estudianteId = estudiante.id;
+    fetch(`/api/estudiantes/${estudianteId}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.tipo === "success") {
+          mostrarMensaje(data.mensaje, "success");
+          mostrarEstudiantes();
+          guardarDatos();
+        } else {
+          mostrarMensaje(data.mensaje, "error");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        mostrarMensaje("Error al eliminar estudiante", "error");
+      });
   }
 });
 //--- Filtrar estudiantes ---//
@@ -770,27 +746,32 @@ guardarEdicionEstudiante.addEventListener("click", () => {
     const nombreNuevo = nombreEstudianteEditar.value;
     const edadNueva = parseInt(edadEstudianteEditar.value);
     const notaNueva = parseFloat(notaEstudianteEditar.value);
-    if (
-      cadenaValida(nombreNuevo) &&
-      edadNueva > 0 &&
-      notaNueva >= 0 &&
-      notaNueva <= 10
-    ) {
-      cursoActual.estudiantes[estudianteActualIndex].nombre =
-        primeraMayuscula(nombreNuevo);
-      cursoActual.estudiantes[estudianteActualIndex].edad = edadNueva;
-      cursoActual.estudiantes[estudianteActualIndex].nota = notaNueva;
-      const modal = bootstrap.Modal.getInstance(
-        document.getElementById("formulario-edicion-estudiante")
-      );
-      modal.hide();
-      mostrarEstudiantes();
-      mostrarMensaje("¡Estudiante actualizado correctamente!", "success");
-      guardarDatos();
-      tablaModificada = true;
-    } else {
-      mostrarMensaje("¡Valores ingresados incorrectos!", "error");
-    }
+    const data = {
+      nombre: nombreNuevo,
+      edad: edadNueva,
+      nota: notaNueva,
+    };
+    fetch(`/api/estudiantes/${estudianteId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.tipo === "success") {
+          mostrarMensaje(data.mensaje, "success");
+          mostrarEstudiantes();
+          guardarDatos();
+        } else {
+          mostrarMensaje(data.mensaje, "error");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        mostrarMensaje("Error al actualizar estudiante", "error");
+      });
   }
 });
 //---------------------------------- * Eventos Especiales * --------------------------------//
