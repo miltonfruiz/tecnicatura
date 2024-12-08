@@ -10,7 +10,7 @@
   padding-bottom: 100px;
 }
 .contenedor-banner {
-  background: url(../images/banner2.png);
+  background: url(/app/static/images/banner2.png);
   background-size: cover;
   background-position: center;
   background-color: whitesmoke;
@@ -21,14 +21,14 @@
   padding: 0;
 }
 .contenedor-formularios {
-  background: url(../images/main.jpg);
+  background: url(/app/static/images/main.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 #form-estudiante,
 #form-curso {
-  background: url(../images/agregados.jpg);
+  background: url(/app/static/images/agregados.jpg);
   background-size: cover;
   background-position: center;
 }
@@ -36,7 +36,7 @@
 #form-edicion,
 #contenedor-estadisticas,
 #lista-cursos {
-  background: url(../images/edicion.jpg);
+  background: url(/app/static/images/edicion.jpg);
   background-size: cover;
   background-position: center;
 }
@@ -45,7 +45,7 @@
   border-radius: 3px;
 }
 #graficaEstudiantes {
-  background: url(../images/grafico.jpg);
+  background: url(/app/static/images/grafico.jpg);
   background-size: cover;
   background-position: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0px -30px 36px -28px inset;
@@ -529,7 +529,7 @@ input:hover {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 #contenedor-modal {
-  background: url(../images/precuacion.jpg);
+  background: url(/app/static/images/precuacion.jpg);
   background-size: cover;
   background-position: center;
 }
