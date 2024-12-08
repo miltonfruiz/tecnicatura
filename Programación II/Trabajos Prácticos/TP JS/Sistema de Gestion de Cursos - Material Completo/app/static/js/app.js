@@ -227,13 +227,17 @@ function mostrarCursos(busqueda = "") {
   `;
   let resultadosEncontrados = false;
   cursos.forEach((curso) => {
-    const coincideBusquedaCurso = curso.nombre.toLowerCase().includes(busqueda);
-    const coincideBusquedaProfesor = curso.profesor
-      .toLowerCase()
+    const coincideBusquedaCurso = curso.nombre
+      ?.toLowerCase()
       .includes(busqueda);
-    const estudiantesFiltrados = curso.estudiantes.filter((est) =>
-      est.nombre.toLowerCase().includes(busqueda)
-    );
+    const coincideBusquedaProfesor = curso.profesor
+      ?.toLowerCase()
+      .includes(busqueda);
+    const estudiantesFiltrados = Array.isArray(curso.estudiantes)
+      ? curso.estudiantes.filter((est) =>
+          est.nombre.toLowerCase().includes(busqueda)
+        )
+      : [];
     if (
       coincideBusquedaCurso ||
       coincideBusquedaProfesor ||
@@ -243,7 +247,9 @@ function mostrarCursos(busqueda = "") {
       const estudiantesAMostrar =
         estudiantesFiltrados.length > 0
           ? estudiantesFiltrados
-          : curso.estudiantes;
+          : Array.isArray(curso.estudiantes)
+          ? curso.estudiantes
+          : [];
       if (ordenarPorEdad) {
         estudiantesAMostrar.sort((a, b) => a.edad - b.edad);
       } else if (ordenarPorNota) {
@@ -251,32 +257,40 @@ function mostrarCursos(busqueda = "") {
       } else if (ordenarPorNombre) {
         estudiantesAMostrar.sort((a, b) => a.nombre.localeCompare(b.nombre));
       }
-      const cantidadEstudiantes = estudiantesAMostrar.length;
+      const cantidadEstudiantes = Array.isArray(estudiantesAMostrar)
+        ? estudiantesAMostrar.length
+        : 0;
       const filaCurso = document.createElement("tr");
       filaCurso.classList.add("fade-in");
       filaCurso.innerHTML = `
         <td class="celda-verde" rowspan="${cantidadEstudiantes || 1}">${
-        curso.nombre
+        curso.nombre || "N/A"
       }</td>
         <td class="celda-verde" rowspan="${cantidadEstudiantes || 1}">${
-        curso.profesor
+        curso.profesor || "N/A"
       }</td>
         <td class="celda-verde ${
           cantidadEstudiantes > 0 ? "" : "celda-roja"
-        }" rowspan="${cantidadEstudiantes || 1}">${curso.obtenerPromedio()}</td>
+        }" rowspan="${cantidadEstudiantes || 1}">${
+        curso.obtenerPromedio ? curso.obtenerPromedio() : "N/A"
+      }</td>
         <td class="celda-verde ${
           cantidadEstudiantes > 0 ? "" : "celda-roja"
         }">${
         cantidadEstudiantes > 0
-          ? estudiantesAMostrar[0].nombre
+          ? estudiantesAMostrar[0]?.nombre || "N/A"
           : "No hay estudiantes"
       }</td>
         <td class="celda-verde ${
           cantidadEstudiantes > 0 ? "" : "celda-roja"
-        }">${cantidadEstudiantes > 0 ? estudiantesAMostrar[0].edad : "N/A"}</td>
+        }">${
+        cantidadEstudiantes > 0 ? estudiantesAMostrar[0]?.edad || "N/A" : "N/A"
+      }</td>
         <td class="celda-verde ${
           cantidadEstudiantes > 0 ? "" : "celda-roja"
-        }">${cantidadEstudiantes > 0 ? estudiantesAMostrar[0].nota : "N/A"}</td>
+        }">${
+        cantidadEstudiantes > 0 ? estudiantesAMostrar[0]?.nota || "N/A" : "N/A"
+      }</td>
         <td class="td-contenedor-botones" rowspan="${cantidadEstudiantes || 1}">
           <div class="botones-acciones">
             <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning boton-editar-curso" 
@@ -300,9 +314,9 @@ function mostrarCursos(busqueda = "") {
           const filaEstudiante = document.createElement("tr");
           filaEstudiante.classList.add("fade-in");
           filaEstudiante.innerHTML = `
-            <td class="celda-verde">${est.nombre}</td>
-            <td class="celda-verde">${est.edad}</td>
-            <td class="celda-verde">${est.nota}</td>
+            <td class="celda-verde">${est.nombre || "N/A"}</td>
+            <td class="celda-verde">${est.edad || "N/A"}</td>
+            <td class="celda-verde">${est.nota || "N/A"}</td>
           `;
           tabla.querySelector("tbody").appendChild(filaEstudiante);
         }
