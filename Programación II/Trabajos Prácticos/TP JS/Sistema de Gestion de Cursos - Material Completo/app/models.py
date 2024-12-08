@@ -12,6 +12,14 @@ class Curso(db.Model):
     def obtener_promedio(self):
         total_notas = sum([est.nota for est in self.estudiantes])
         return total_notas / len(self.estudiantes) if len(self.estudiantes) > 0 else "N/A"
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nombre': self.nombre,
+            'profesor': self.profesor,
+            'estudiantes': [est.to_dict() for est in self.estudiantes],
+            'promedio': self.obtener_promedio()
+        }
 
 class Estudiante(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,4 +31,10 @@ class Estudiante(db.Model):
         return f'<Estudiante {self.nombre}>'
     def presentarse(self):
         return f'{self.nombre} ({self.edad} años) - Nota: {self.nota}'
-
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nombre': self.nombre,
+            'edad': self.edad,
+            'nota': self.nota
+        }

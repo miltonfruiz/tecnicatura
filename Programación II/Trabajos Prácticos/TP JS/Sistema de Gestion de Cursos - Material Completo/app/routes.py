@@ -89,3 +89,9 @@ def editar_estudiante(id):
     estudiante.nota = nota
     db.session.commit()
     return jsonify({"mensaje": "Estudiante actualizado correctamente", "tipo": "success", "estudiante": estudiante.to_dict()}), 200
+
+@routes.route('/cursos', methods=['GET'])
+def obtener_cursos():
+    cursos = Curso.query.all()
+    cursos_data = [curso.to_dict() for curso in cursos]
+    return jsonify(cursos_data)
