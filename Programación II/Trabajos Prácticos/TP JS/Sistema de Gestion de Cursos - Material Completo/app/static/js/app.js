@@ -157,24 +157,24 @@ function calcularEstadisticas() {
   let mejorCurso = null;
   let mejorPromedio = 0;
   cursos.forEach((curso) => {
-    totalEstudiantes += curso.estudiantes.length;
-    const promedioCurso = curso.obtenerPromedio();
-
-    if (promedioCurso !== "N/A") {
+    const estudiantes = Array.isArray(curso.estudiantes)
+      ? curso.estudiantes
+      : [];
+    totalEstudiantes += estudiantes.length;
+    const promedioCurso = curso.obtenerPromedio?.();
+    if (promedioCurso && promedioCurso !== "N/A") {
       const promedioNum = parseFloat(promedioCurso);
-      sumaNotas += curso.estudiantes.reduce(
-        (total, estudiante) => total + estudiante.nota,
-        0
-      );
+      sumaNotas += estudiantes.reduce((total, estudiante) => {
+        return total + (estudiante.nota || 0);
+      }, 0);
       if (promedioNum > mejorPromedio) {
         mejorPromedio = promedioNum;
-        mejorCurso = curso.nombre;
+        mejorCurso = curso.nombre || "Sin nombre";
       }
     }
   });
   const promedioGeneral =
     totalEstudiantes > 0 ? (sumaNotas / totalEstudiantes).toFixed(2) : "N/A";
-
   return { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso };
 }
 // --- Exportar datos en archivo JSON ---//
