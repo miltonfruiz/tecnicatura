@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, render_template
-from models import db, Curso
+from app.models import db, Curso
 
 routes = Blueprint('routes', __name__)
 
