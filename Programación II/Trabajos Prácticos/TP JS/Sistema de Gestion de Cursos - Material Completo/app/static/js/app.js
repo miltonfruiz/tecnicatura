@@ -522,75 +522,98 @@ document.addEventListener("DOMContentLoaded", () => {
 //----------------------------------- * Eventos para Curso * -------------------------------//
 
 //--- Agregar curso ---//
-formCurso.addEventListener("submit", (e) => {
+formCurso.addEventListener("submit", async (e) => {
   e.preventDefault();
   const cursoCorregido = primeraMayuscula(nombreCurso.value);
   const profesorCorregido = primeraMayuscula(profesorCurso.value);
-  const nombreValido = cadenaValida(cursoCorregido);
-  const profesorValido = cadenaValida(profesorCorregido);
-  const cursoExistente = cursos.find(
-    (curso) => curso.nombre.toLowerCase() === cursoCorregido.toLowerCase()
-  );
-  if (cursoExistente) {
-    mostrarMensaje("¡Ese curso ya existe!", "error");
-  } else if (!nombreValido && !profesorValido) {
-    mostrarMensaje("¡Valores ingresados incorrectos!", "error");
-  } else if (!nombreValido) {
-    mostrarMensaje("¡Nombre de curso incorrecto!", "error");
-  } else if (!profesorValido) {
-    mostrarMensaje("¡Nombre de profesor incorrecto!", "error");
-  } else {
-    const nuevoCurso = new Curso(cursoCorregido, profesorCorregido);
-    cursos.push(nuevoCurso);
+  try {
+    const response = await fetch("http://localhost:5000/api/cursos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nombre: cursoCorregido,
+        profesor: profesorCorregido,
+      }),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      mostrarMensaje(data.mensaje, data.tipo);
+      return;
+    }
+    mostrarMensaje(data.mensaje, data.tipo);
+    cursos.push({ nombre: cursoCorregido, profesor: profesorCorregido });
     formCurso.reset();
     actualizarCursosSelect();
     mostrarCursos();
-    mostrarMensaje("¡Curso creado correctamente!", "success");
-    guardarDatos();
+  } catch (error) {
+    mostrarMensaje("Error al conectar con el servidor.", "error");
+    console.error("Error:", error);
   }
 });
 //--- Guardar curso ---//
-guardarEdicion.addEventListener("click", () => {
+guardarEdicion.addEventListener("click", async () => {
   if (nuevoNombreCurso.value && nuevoNombreProfesor.value) {
-    editarCurso(
-      cursoActual.nombre,
-      primeraMayuscula(nuevoNombreCurso.value),
-      primeraMayuscula(nuevoNombreProfesor.value)
-    );
-    mostrarMensaje("¡Curso actualizado correctamente!", "success");
-    guardarDatos();
-    tablaModificada = true;
-    mostrarCursos();
-    const modal = bootstrap.Modal.getInstance(
-      document.getElementById("formulario-edicion")
-    );
-    modal.hide();
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/cursos/${cursoActual.nombre}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nombre: primeraMayuscula(nuevoNombreCurso.value),
+            profesor: primeraMayuscula(nuevoNombreProfesor.value),
+          }),
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        mostrarMensaje(data.mensaje, data.tipo);
+        return;
+      }
+      mostrarMensaje(data.mensaje, data.tipo);
+      guardarDatos();
+      tablaModificada = true;
+      mostrarCursos();
+      const modal = bootstrap.Modal.getInstance(
+        document.getElementById("formulario-edicion")
+      );
+      modal.hide();
+    } catch (error) {
+      mostrarMensaje("Error al conectar con el servidor.", "error");
+      console.error("Error:", error);
+    }
   } else {
     alert("Por favor, completa todos los campos antes de guardar.");
   }
 });
 //--- Eliminar curso ---//
-listaCursos.addEventListener("click", (e) => {
+listaCursos.addEventListener("click", async (e) => {
   if (e.target.id === "boton-eliminar-curso") {
     const cursoNombre = e.target.closest("tr").querySelector("td").textContent;
     mensajeConfirmacion.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 
     ¿Estás seguro de que deseas eliminar el curso "<strong>${cursoNombre}</strong>"? 
     <i class="fa-solid fa-triangle-exclamation"></i>`;
     modalConfirmacion.style.display = "block";
-    const cursoAEliminar = cursoNombre;
-    botonConfirmar.onclick = () => {
-      const indiceCurso = cursos.findIndex(
-        (curso) => curso.nombre === cursoAEliminar
-      );
-      if (indiceCurso !== -1) {
-        cursos.splice(indiceCurso, 1);
+    botonConfirmar.onclick = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/cursos/${cursoNombre}`,
+          {
+            method: "DELETE",
+          }
+        );
+        const data = await response.json();
+        if (!response.ok) {
+          mostrarMensaje(data.mensaje, data.tipo);
+          return;
+        }
+        mostrarMensaje(data.mensaje, data.tipo);
+        cursos = cursos.filter((curso) => curso.nombre !== cursoNombre);
         actualizarCursosSelect();
         mostrarCursos();
-        guardarDatos();
-        mostrarMensaje(
-          `Se ha eliminado el curso "${cursoAEliminar}"`,
-          "success"
-        );
+      } catch (error) {
+        mostrarMensaje("Error al conectar con el servidor.", "error");
+        console.error("Error:", error);
       }
       const cerrar = bootstrap.Modal.getInstance(
         document.getElementById("modal-confirmacion")
