@@ -366,13 +366,12 @@ function editarCurso(
   nuevoNombreProfesor
 ) {
   const indice = cursos.findIndex(
-    (curso) => curso.nombre === nombreCursoAntiguo
+    (curso) => curso.nombre.toLowerCase() === nombreCursoAntiguo.toLowerCase()
   );
   if (indice !== -1) {
     cursos[indice].nombre = nuevoNombreCurso;
     cursos[indice].profesor = nuevoNombreProfesor;
     actualizarCursosSelect();
-    mostrarCursos();
   }
 }
 //--- Listar de Estudiantes a Editar / Eliminar ---//
@@ -585,6 +584,8 @@ formCurso.addEventListener("submit", async (e) => {
 guardarEdicion.addEventListener("click", async () => {
   if (nuevoNombreCurso.value && nuevoNombreProfesor.value) {
     try {
+      const nuevoNombre = primeraMayuscula(nuevoNombreCurso.value.trim());
+      const nuevoProfesor = primeraMayuscula(nuevoNombreProfesor.value.trim());
       const response = await fetch(
         `http://localhost:5000/api/cursos/${encodeURIComponent(
           cursoActual.nombre
@@ -593,8 +594,8 @@ guardarEdicion.addEventListener("click", async () => {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            nombre: primeraMayuscula(nuevoNombreCurso.value.trim()),
-            profesor: primeraMayuscula(nuevoNombreProfesor.value.trim()),
+            nombre: nuevoNombre,
+            profesor: nuevoProfesor,
           }),
         }
       );
@@ -604,10 +605,11 @@ guardarEdicion.addEventListener("click", async () => {
         return;
       }
       const data = await response.json();
-      mostrarMensaje(data.mensaje, data.tipo);
+      editarCurso(cursoActual.nombre, nuevoNombre, nuevoProfesor);
       guardarDatos();
-      tablaModificada = true;
       mostrarCursos();
+      actualizarCursosSelect();
+      mostrarMensaje(data.mensaje, data.tipo);
       const modal = bootstrap.Modal.getInstance(
         document.getElementById("formulario-edicion")
       );
