@@ -409,13 +409,13 @@ td {
   opacity: 0;
 }
 .success {
-  font-size: 13px;
+  font-size: 12px;
   border-radius: 3px;
   background-color: #198754;
   color: white;
 }
 .error {
-  font-size: 13px;
+  font-size: 12px;
   border-radius: 3px;
   background-color: #dc3545;
   color: white;

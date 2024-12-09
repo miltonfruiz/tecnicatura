@@ -27,7 +27,7 @@ def agregar_curso():
         nuevo_curso = Curso(nombre=curso_corregido, profesor=profesor_corregido)
         db.session.add(nuevo_curso)
         db.session.commit()
-        return jsonify({"mensaje": "Curso agregado correctamente", "tipo": "success", "curso": nuevo_curso.to_dict()}), 201
+        return jsonify({"mensaje": "¡Curso agregado correctamente!", "tipo": "success", "curso": nuevo_curso.to_dict()}), 201
     cursos = [curso.to_dict() for curso in Curso.query.all()]
     return jsonify(cursos)
 

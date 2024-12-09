@@ -571,7 +571,7 @@ formCurso.addEventListener("submit", async (e) => {
       mostrarMensaje(data.mensaje, data.tipo);
       return;
     }
-    mostrarMensaje(data.mensaje, data.tipo);
+    mostrarMensaje(`¡Curso "${data.curso.nombre}" agregado!`, data.tipo);
     cursos.push({ nombre: cursoCorregido, profesor: profesorCorregido });
     formCurso.reset();
     actualizarCursosSelect();
@@ -661,7 +661,7 @@ listaCursos.addEventListener("click", async (e) => {
         guardarDatos();
         mostrarCursos();
         actualizarCursosSelect();
-        mostrarMensaje(data.mensaje, data.tipo);
+        mostrarMensaje(`¡Curso "${cursoNombre}" eliminado!`, "success");
       } catch (error) {
         mostrarMensaje("Error al conectar con el servidor.", "error");
         console.error("Error:", error);
