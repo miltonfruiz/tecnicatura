@@ -7,6 +7,14 @@ routes = Blueprint('routes', __name__)
 def index():
     return render_template('index.html')
 
+@routes.route('/api/cursos/<string:nombre>', methods=['OPTIONS'])
+def preflight(nombre):
+    response = jsonify({'message': 'Preflight request successful'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    return response, 200
+
 @routes.route('/api/cursos', methods=['GET', 'POST'])
 def manejar_cursos():
     if request.method == 'POST':
@@ -33,9 +41,9 @@ def editar_curso(id):
     db.session.commit()
     return jsonify({"mensaje": "Curso actualizado correctamente", "tipo": "success", "curso": curso.to_dict()}), 200
 
-@routes.route('/api/cursos/<int:id>', methods=['DELETE'])
-def eliminar_curso(id):
-    curso = Curso.query.get(id)
+@routes.route('/api/cursos/<string:nombre>', methods=['DELETE'])
+def eliminar_curso(nombre):
+    curso = Curso.query.filter_by(nombre=nombre).first()
     if not curso:
         return jsonify({"mensaje": "Curso no encontrado", "tipo": "error"}), 404
     db.session.delete(curso)

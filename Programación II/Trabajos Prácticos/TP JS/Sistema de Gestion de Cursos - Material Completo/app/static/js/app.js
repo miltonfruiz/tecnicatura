@@ -369,6 +369,11 @@ function mostrarEstudiantes() {
     "lista-estudiantes-edicion"
   );
   listaEstudiantesEdicion.innerHTML = "";
+  if (!cursoActual || !Array.isArray(cursoActual.estudiantes)) {
+    listaEstudiantesEdicion.innerHTML =
+      "<p>Error: No se puede mostrar la lista de estudiantes.</p>";
+    return;
+  }
   if (cursoActual.estudiantes.length === 0) {
     listaEstudiantesEdicion.innerHTML =
       "<p>No hay estudiantes en este curso.</p>";
@@ -564,26 +569,29 @@ formCurso.addEventListener("submit", async (e) => {
     console.error("Error:", error);
   }
 });
-//--- Guardar curso ---//
+// --- Guardar curso --- //
 guardarEdicion.addEventListener("click", async () => {
   if (nuevoNombreCurso.value && nuevoNombreProfesor.value) {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/cursos/${cursoActual.nombre}`,
+        `http://localhost:5000/api/cursos/${encodeURIComponent(
+          cursoActual.nombre
+        )}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            nombre: primeraMayuscula(nuevoNombreCurso.value),
-            profesor: primeraMayuscula(nuevoNombreProfesor.value),
+            nombre: primeraMayuscula(nuevoNombreCurso.value.trim()),
+            profesor: primeraMayuscula(nuevoNombreProfesor.value.trim()),
           }),
         }
       );
-      const data = await response.json();
       if (!response.ok) {
-        mostrarMensaje(data.mensaje, data.tipo);
+        const data = await response.json();
+        mostrarMensaje(data.mensaje, data.tipo || "error");
         return;
       }
+      const data = await response.json();
       mostrarMensaje(data.mensaje, data.tipo);
       guardarDatos();
       tablaModificada = true;
@@ -600,7 +608,7 @@ guardarEdicion.addEventListener("click", async () => {
     alert("Por favor, completa todos los campos antes de guardar.");
   }
 });
-//--- Eliminar curso ---//
+// --- Eliminar curso --- //
 listaCursos.addEventListener("click", async (e) => {
   if (e.target.id === "boton-eliminar-curso") {
     const cursoNombre = e.target.closest("tr").querySelector("td").textContent;
@@ -611,7 +619,7 @@ listaCursos.addEventListener("click", async (e) => {
     botonConfirmar.onclick = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/cursos/${cursoNombre}`,
+          `http://localhost:5000/api/cursos/${encodeURIComponent(cursoNombre)}`,
           {
             method: "DELETE",
           }
@@ -642,7 +650,7 @@ listaCursos.addEventListener("click", async (e) => {
     };
   }
 });
-//--- Editar curso ---//
+// --- Editar curso --- //
 listaCursos.addEventListener("click", (e) => {
   if (e.target.classList.contains("editar-curso")) {
     cursoActual = cursos.find(
