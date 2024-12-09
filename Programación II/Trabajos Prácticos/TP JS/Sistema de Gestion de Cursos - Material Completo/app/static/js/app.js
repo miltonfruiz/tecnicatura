@@ -96,20 +96,32 @@ let cursoActual = null;
 
 //--- Cargar datos desde localStorage al cargar la página ---//
 document.addEventListener("DOMContentLoaded", () => {
-  const cursosGuardados = JSON.parse(localStorage.getItem("cursos"));
-  if (cursosGuardados) {
-    cursos = cursosGuardados.map((curso) => {
-      const nuevoCurso = new Curso(curso.nombre, curso.profesor);
-      curso.estudiantes.forEach((est) => {
-        nuevoCurso.agregarEstudiante(
-          new Estudiante(est.nombre, est.edad, est.nota)
-        );
-      });
-      return nuevoCurso;
-    });
+  const cursosGuardados = JSON.parse(localStorage.getItem("cursos")) || [];
+  if (Array.isArray(cursosGuardados)) {
+    cursos = cursosGuardados
+      .map((curso) => {
+        if (!curso.nombre || !curso.profesor) return null;
+        const estudiantes = Array.isArray(curso.estudiantes)
+          ? curso.estudiantes
+          : [];
+        const nuevoCurso = new Curso(curso.nombre, curso.profesor);
+        estudiantes.forEach((est) => {
+          if (
+            est.nombre &&
+            typeof est.edad === "number" &&
+            typeof est.nota === "number"
+          ) {
+            nuevoCurso.agregarEstudiante(
+              new Estudiante(est.nombre, est.edad, est.nota)
+            );
+          }
+        });
+        return nuevoCurso;
+      })
+      .filter(Boolean);
   }
-  actualizarCursosSelect();
   mostrarCursos();
+  actualizarCursosSelect();
   document.getElementById("formulario-edicion-estudiante").style.display =
     "none";
 });
@@ -205,7 +217,7 @@ function actualizarCursosSelect() {
     cursoEstudianteSelect.appendChild(option);
   });
 }
-//--- Mostrar tabla de Cursos y Estudiantes ---//
+// --- Mostrar tabla de Cursos y Estudiantes ---//
 let tablaModificada = false;
 function mostrarCursos(busqueda = "") {
   listaCursos.innerHTML = "";
@@ -229,13 +241,13 @@ function mostrarCursos(busqueda = "") {
   cursos.forEach((curso) => {
     const coincideBusquedaCurso = curso.nombre
       ?.toLowerCase()
-      .includes(busqueda);
+      .includes(busqueda.toLowerCase());
     const coincideBusquedaProfesor = curso.profesor
       ?.toLowerCase()
-      .includes(busqueda);
+      .includes(busqueda.toLowerCase());
     const estudiantesFiltrados = Array.isArray(curso.estudiantes)
       ? curso.estudiantes.filter((est) =>
-          est.nombre.toLowerCase().includes(busqueda)
+          est.nombre.toLowerCase().includes(busqueda.toLowerCase())
         )
       : [];
     if (
@@ -257,9 +269,7 @@ function mostrarCursos(busqueda = "") {
       } else if (ordenarPorNombre) {
         estudiantesAMostrar.sort((a, b) => a.nombre.localeCompare(b.nombre));
       }
-      const cantidadEstudiantes = Array.isArray(estudiantesAMostrar)
-        ? estudiantesAMostrar.length
-        : 0;
+      const cantidadEstudiantes = estudiantesAMostrar.length;
       const filaCurso = document.createElement("tr");
       filaCurso.classList.add("fade-in");
       filaCurso.innerHTML = `
@@ -291,7 +301,9 @@ function mostrarCursos(busqueda = "") {
         }">${
         cantidadEstudiantes > 0 ? estudiantesAMostrar[0]?.nota || "N/A" : "N/A"
       }</td>
-        <td class="td-contenedor-botones" rowspan="${cantidadEstudiantes || 1}">
+        <td class="td-contenedor-botones" rowspan="${
+          cantidadEstudiantes || 1
+        }"> 
           <div class="botones-acciones">
             <button title="Boton Editar" id="boton-editar-curso" class="editar-curso btn btn-warning boton-editar-curso" 
               data-bs-toggle="modal" data-bs-target="#formulario-edicion" nombre="${
@@ -611,7 +623,11 @@ guardarEdicion.addEventListener("click", async () => {
 // --- Eliminar curso --- //
 listaCursos.addEventListener("click", async (e) => {
   if (e.target.id === "boton-eliminar-curso") {
-    const cursoNombre = e.target.closest("tr").querySelector("td").textContent;
+    const cursoNombre = e.target
+      .closest("tr")
+      .querySelector("td")
+      .textContent.trim()
+      .toLowerCase();
     mensajeConfirmacion.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 
     ¿Estás seguro de que deseas eliminar el curso "<strong>${cursoNombre}</strong>"? 
     <i class="fa-solid fa-triangle-exclamation"></i>`;
@@ -624,15 +640,28 @@ listaCursos.addEventListener("click", async (e) => {
             method: "DELETE",
           }
         );
-        const data = await response.json();
+        let data;
+        if (
+          response.headers.get("Content-Type")?.includes("application/json")
+        ) {
+          data = await response.json();
+        } else {
+          throw new Error("Respuesta no válida del servidor");
+        }
         if (!response.ok) {
-          mostrarMensaje(data.mensaje, data.tipo);
+          mostrarMensaje(
+            data.mensaje || "Error desconocido",
+            data.tipo || "error"
+          );
           return;
         }
-        mostrarMensaje(data.mensaje, data.tipo);
-        cursos = cursos.filter((curso) => curso.nombre !== cursoNombre);
-        actualizarCursosSelect();
+        cursos = cursos.filter(
+          (curso) => curso.nombre.toLowerCase() !== cursoNombre
+        );
+        guardarDatos();
         mostrarCursos();
+        actualizarCursosSelect();
+        mostrarMensaje(data.mensaje, data.tipo);
       } catch (error) {
         mostrarMensaje("Error al conectar con el servidor.", "error");
         console.error("Error:", error);

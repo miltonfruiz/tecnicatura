@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, render_template
 from app.models import db, Curso, Estudiante
+from sqlalchemy import func
 
 routes = Blueprint('routes', __name__)
 
@@ -16,7 +17,7 @@ def preflight(nombre):
     return response, 200
 
 @routes.route('/api/cursos', methods=['GET', 'POST'])
-def manejar_cursos():
+def agregar_curso():
     if request.method == 'POST':
         data = request.json
         curso_corregido = data.get('nombre', '').capitalize()
@@ -30,12 +31,12 @@ def manejar_cursos():
     cursos = [curso.to_dict() for curso in Curso.query.all()]
     return jsonify(cursos)
 
-@routes.route('/api/cursos/<int:id>', methods=['PUT'])
-def editar_curso(id):
-    datos_actualizados = request.json
-    curso = Curso.query.get(id)
+@routes.route('/api/cursos/<string:nombre>', methods=['PUT'])
+def editar_curso(nombre):
+    curso = Curso.query.filter_by(nombre=nombre).first()
     if not curso:
         return jsonify({"mensaje": "Curso no encontrado", "tipo": "error"}), 404
+    datos_actualizados = request.json
     curso.nombre = datos_actualizados.get('nombre', curso.nombre).capitalize()
     curso.profesor = datos_actualizados.get('profesor', curso.profesor).capitalize()
     db.session.commit()
@@ -43,7 +44,8 @@ def editar_curso(id):
 
 @routes.route('/api/cursos/<string:nombre>', methods=['DELETE'])
 def eliminar_curso(nombre):
-    curso = Curso.query.filter_by(nombre=nombre).first()
+    curso_nombre = nombre.strip().lower()
+    curso = Curso.query.filter(func.lower(Curso.nombre) == curso_nombre).first()
     if not curso:
         return jsonify({"mensaje": "Curso no encontrado", "tipo": "error"}), 404
     db.session.delete(curso)
