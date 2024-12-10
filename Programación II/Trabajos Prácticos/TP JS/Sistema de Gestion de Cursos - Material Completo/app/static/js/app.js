@@ -575,6 +575,7 @@ formCurso.addEventListener("submit", async (e) => {
     formCurso.reset();
     actualizarCursosSelect();
     mostrarCursos();
+    guardarDatos();
   } catch (error) {
     mostrarMensaje("Error al conectar con el servidor.", "error");
     console.error("Error:", error);
@@ -695,40 +696,100 @@ listaCursos.addEventListener("click", (e) => {
 });
 //-------------------------------- * Eventos para Estudiante * -----------------------------//
 
-//--- Agregar un estudiante ---//
-formEstudiante.addEventListener("submit", (e) => {
+//--- Agregar estudiante ---//
+formEstudiante.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const nombreEstudianteValor = primeraMayuscula(nombreEstudiante.value);
+  const nombreEstudianteValor = primeraMayuscula(nombreEstudiante.value.trim());
   const edadEstudianteValor = parseInt(edadEstudiante.value);
   const notaEstudianteValor = parseFloat(notaEstudiante.value);
-  const cursoIndex = cursoEstudianteSelect.value;
+  const cursoIndex = parseInt(cursoEstudianteSelect.value);
+  if (isNaN(cursoIndex) || cursoIndex < 0 || cursoIndex >= cursos.length) {
+    mostrarMensaje("Por favor selecciona un curso válido.", "error");
+    return;
+  }
+  const cursoActual = cursos[cursoIndex];
+  if (!cursoActual || !Array.isArray(cursoActual.estudiantes)) {
+    mostrarMensaje(
+      "El curso seleccionado no es válido o no tiene estudiantes.",
+      "error"
+    );
+    return;
+  }
+  const nombreValido = cadenaValida(nombreEstudianteValor);
+  const estudianteExistente = cursoActual.estudiantes.find(
+    (est) => est.nombre.toLowerCase() === nombreEstudianteValor.toLowerCase()
+  );
+  if (estudianteExistente) {
+    mostrarMensaje("¡Ese alumno ya existe!", "error");
+    return;
+  } else if (
+    (!nombreValido && edadEstudianteValor <= 0 && notaEstudianteValor < 0) ||
+    notaEstudianteValor > 10
+  ) {
+    mostrarMensaje("¡Valores ingresados incorrectos!", "error");
+    return;
+  } else if (!nombreValido && edadEstudianteValor <= 0) {
+    mostrarMensaje("¡Nombre y Edad ingresados Incorrectos!", "error");
+    return;
+  } else if (
+    (!nombreValido && notaEstudianteValor < 0) ||
+    notaEstudianteValor > 10
+  ) {
+    mostrarMensaje("¡Nombre y Nota ingresados Incorrectos!", "error");
+    return;
+  } else if (
+    (edadEstudianteValor <= 0 && notaEstudianteValor < 0) ||
+    notaEstudianteValor > 10
+  ) {
+    mostrarMensaje("¡Edad y Nota ingresadas Incorrectas!", "error");
+    return;
+  } else if (!nombreValido) {
+    mostrarMensaje("¡Nombre ingresado Incorrecto!", "error");
+    return;
+  } else if (edadEstudianteValor <= 0) {
+    mostrarMensaje("¡Edad ingresada Incorrecta!", "error");
+    return;
+  } else if (notaEstudianteValor < 0 || notaEstudianteValor > 10) {
+    mostrarMensaje("¡Nota ingresada Incorrecta!", "error");
+    return;
+  }
   const data = {
     nombre: nombreEstudianteValor,
     edad: edadEstudianteValor,
     nota: notaEstudianteValor,
     curso_id: cursoIndex,
   };
-  fetch("/api/estudiantes", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.tipo === "success") {
-        mostrarMensaje(data.mensaje, "success");
-        mostrarCursos();
-        guardarDatos();
-      } else {
-        mostrarMensaje(data.mensaje, "error");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      mostrarMensaje("Error al agregar estudiante", "error");
+  try {
+    const response = await fetch("/api/estudiantes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
+    const result = await response.json();
+    if (response.ok && result.tipo === "success") {
+      const nuevoEstudiante = new Estudiante(
+        nombreEstudianteValor,
+        edadEstudianteValor,
+        notaEstudianteValor
+      );
+      cursoActual.agregarEstudiante(nuevoEstudiante);
+      formEstudiante.reset();
+      mostrarCursos();
+      mostrarMensaje(
+        `¡Estudiante "${nuevoEstudiante.nombre}" agregado!`,
+        "success"
+      );
+      guardarDatos();
+      actualizarEstadisticas();
+    } else {
+      mostrarMensaje(result.mensaje || "Error al agregar estudiante.", "error");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    mostrarMensaje("Error al conectar con el servidor.", "error");
+  }
 });
 //--- Eliminar estudiante ---//
 listaEstudiantesEdicion.addEventListener("click", (e) => {

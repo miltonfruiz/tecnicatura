@@ -16,6 +16,7 @@ def preflight(nombre):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
     return response, 200
 
+#-------------------------------- * Rutas para Cursos * -----------------------------#
 @routes.route('/api/cursos', methods=['GET', 'POST'])
 def agregar_curso():
     if request.method == 'POST':
@@ -52,27 +53,44 @@ def eliminar_curso(nombre):
     db.session.commit()
     return jsonify({"mensaje": f"Curso '{curso.nombre}' eliminado correctamente", "tipo": "success"}), 200
 
+#------------------------------ * Rutas para Estudiantes * --------------------------#
 @routes.route('/api/estudiantes', methods=['POST'])
 def agregar_estudiante():
-    data = request.get_json()
-    nombre = data.get('nombre')
-    edad = data.get('edad')
-    nota = data.get('nota')
-    curso_id = data.get('curso_id')
-
-    if not nombre or edad <= 0 or nota < 0 or nota > 10:
-        return jsonify({"mensaje": "Datos incorrectos", "tipo": "error"}), 400
-    curso = Curso.query.get(curso_id)
-    if not curso:
-        return jsonify({"mensaje": "Curso no encontrado", "tipo": "error"}), 404
-    estudiante_existente = next(
-        (est for est in curso.estudiantes if est.nombre.lower() == nombre.lower()), None)
-    if estudiante_existente:
-        return jsonify({"mensaje": "El estudiante ya existe", "tipo": "error"}), 400
-    nuevo_estudiante = Estudiante(nombre=nombre, edad=edad, nota=nota)
-    curso.estudiantes.append(nuevo_estudiante)
-    db.session.commit()
-    return jsonify({"mensaje": "Estudiante agregado correctamente", "tipo": "success", "estudiante": nuevo_estudiante.to_dict()}), 201
+    try:
+        data = request.get_json()
+        nombre = data.get('nombre')
+        edad = data.get('edad')
+        nota = data.get('nota')
+        curso_index = data.get('curso_id')
+        if not nombre or not isinstance(nombre, str):
+            return jsonify({"mensaje": "Nombre inválido", "tipo": "error"}), 400
+        if not isinstance(edad, int) or edad <= 0:
+            return jsonify({"mensaje": "Edad inválida", "tipo": "error"}), 400
+        if not isinstance(nota, (int, float)) or nota < 0 or nota > 10:
+            return jsonify({"mensaje": "Nota inválida", "tipo": "error"}), 400
+        if not isinstance(curso_index, int):
+            return jsonify({"mensaje": "Curso no válido", "tipo": "error"}), 400
+        cursos = Curso.query.order_by(Curso.id).all()
+        if curso_index < 0 or curso_index >= len(cursos):
+            return jsonify({"mensaje": "Curso no encontrado", "tipo": "error"}), 404
+        curso = cursos[curso_index]
+        estudiante_existente = next(
+            (est for est in curso.estudiantes if est.nombre.lower() == nombre.lower()), None
+        )
+        if estudiante_existente:
+            return jsonify({"mensaje": "El estudiante ya existe", "tipo": "error"}), 400
+        nuevo_estudiante = Estudiante(nombre=nombre, edad=edad, nota=nota)
+        curso.estudiantes.append(nuevo_estudiante)
+        db.session.commit()
+        return jsonify({
+            "mensaje": "Estudiante agregado correctamente",
+            "tipo": "success",
+            "estudiante": nuevo_estudiante.to_dict()
+        }), 201
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error al agregar estudiante: {e}")
+        return jsonify({"mensaje": "Error interno del servidor", "tipo": "error"}), 500
 
 @routes.route('/api/estudiantes/<int:id>', methods=['DELETE'])
 def eliminar_estudiante(id):
