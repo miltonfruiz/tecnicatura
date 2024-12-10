@@ -609,7 +609,7 @@ guardarEdicion.addEventListener("click", async () => {
       guardarDatos();
       mostrarCursos();
       actualizarCursosSelect();
-      mostrarMensaje(data.mensaje, data.tipo);
+      mostrarMensaje(`¡Curso "${cursoActual.nombre}" editado!`, "success");
       const modal = bootstrap.Modal.getInstance(
         document.getElementById("formulario-edicion")
       );
