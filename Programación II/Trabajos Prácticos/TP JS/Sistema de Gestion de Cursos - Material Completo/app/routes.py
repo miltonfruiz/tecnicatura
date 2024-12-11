@@ -92,6 +92,7 @@ def agregar_estudiante():
         print(f"Error al agregar estudiante: {e}")
         return jsonify({"mensaje": "Error interno del servidor", "tipo": "error"}), 500
 
+
 @routes.route('/api/estudiantes/<int:id>', methods=['DELETE'])
 def eliminar_estudiante(id):
     estudiante = Estudiante.query.get(id)

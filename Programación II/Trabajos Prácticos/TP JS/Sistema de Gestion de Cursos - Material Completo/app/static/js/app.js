@@ -570,8 +570,8 @@ formCurso.addEventListener("submit", async (e) => {
       mostrarMensaje(data.mensaje, data.tipo);
       return;
     }
+    cursos.push(new Curso(cursoCorregido, profesorCorregido));
     mostrarMensaje(`¡Curso "${data.curso.nombre}" agregado!`, data.tipo);
-    cursos.push({ nombre: cursoCorregido, profesor: profesorCorregido });
     formCurso.reset();
     actualizarCursosSelect();
     mostrarCursos();
@@ -769,6 +769,7 @@ formEstudiante.addEventListener("submit", async (e) => {
     });
     const result = await response.json();
     if (response.ok && result.tipo === "success") {
+      mostrarMensaje(result.mensaje, "success");
       const nuevoEstudiante = new Estudiante(
         nombreEstudianteValor,
         edadEstudianteValor,
