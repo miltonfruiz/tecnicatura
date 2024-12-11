@@ -94,37 +94,6 @@ let cursoActual = null;
 
 //-------------------------------- * Funciones especiales * --------------------------------//
 
-//--- Cargar datos desde localStorage al cargar la página ---//
-document.addEventListener("DOMContentLoaded", () => {
-  const cursosGuardados = JSON.parse(localStorage.getItem("cursos")) || [];
-  if (Array.isArray(cursosGuardados)) {
-    cursos = cursosGuardados
-      .map((curso) => {
-        if (!curso.nombre || !curso.profesor) return null;
-        const estudiantes = Array.isArray(curso.estudiantes)
-          ? curso.estudiantes
-          : [];
-        const nuevoCurso = new Curso(curso.nombre, curso.profesor);
-        estudiantes.forEach((est) => {
-          if (
-            est.nombre &&
-            typeof est.edad === "number" &&
-            typeof est.nota === "number"
-          ) {
-            nuevoCurso.agregarEstudiante(
-              new Estudiante(est.nombre, est.edad, est.nota)
-            );
-          }
-        });
-        return nuevoCurso;
-      })
-      .filter(Boolean);
-  }
-  mostrarCursos();
-  actualizarCursosSelect();
-  document.getElementById("formulario-edicion-estudiante").style.display =
-    "none";
-});
 //--- Convertir primera letra Mayuscula ---//
 function primeraMayuscula(nombreCompleto) {
   return nombreCompleto
@@ -156,38 +125,6 @@ function cadenaValida(cadena) {
   return (
     typeof cadena === "string" && cadena.trim() !== "" && !/\d/.test(cadena)
   );
-}
-//--- Guardar en localStorage ---//
-function guardarDatos() {
-  localStorage.setItem("cursos", JSON.stringify(cursos));
-}
-//--- Calcular estadísticas ---//
-function calcularEstadisticas() {
-  let totalEstudiantes = 0;
-  let sumaNotas = 0;
-  let totalCursos = cursos.length;
-  let mejorCurso = null;
-  let mejorPromedio = 0;
-  cursos.forEach((curso) => {
-    const estudiantes = Array.isArray(curso.estudiantes)
-      ? curso.estudiantes
-      : [];
-    totalEstudiantes += estudiantes.length;
-    const promedioCurso = curso.obtenerPromedio?.();
-    if (promedioCurso && promedioCurso !== "N/A") {
-      const promedioNum = parseFloat(promedioCurso);
-      sumaNotas += estudiantes.reduce((total, estudiante) => {
-        return total + (estudiante.nota || 0);
-      }, 0);
-      if (promedioNum > mejorPromedio) {
-        mejorPromedio = promedioNum;
-        mejorCurso = curso.nombre || "Sin nombre";
-      }
-    }
-  });
-  const promedioGeneral =
-    totalEstudiantes > 0 ? (sumaNotas / totalEstudiantes).toFixed(2) : "N/A";
-  return { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso };
 }
 // --- Exportar datos en archivo JSON ---//
 function exportarDatosAJson() {
@@ -438,9 +375,86 @@ function mostrarEstudiantes() {
     });
   });
 }
-//--- Actualizar Estadísticas ---//
-let graficaEstudiantes;
+//--- Cargar datos desde localStorage al cargar la página ---//
+document.addEventListener("DOMContentLoaded", () => {
+  const cursosGuardados = JSON.parse(localStorage.getItem("cursos")) || [];
+  if (Array.isArray(cursosGuardados)) {
+    cursos = cursosGuardados
+      .map((curso) => {
+        if (!curso.nombre || !curso.profesor) return null;
+        const estudiantes = Array.isArray(curso.estudiantes)
+          ? curso.estudiantes
+          : [];
+        const nuevoCurso = new Curso(curso.nombre, curso.profesor);
+        estudiantes.forEach((est) => {
+          if (
+            est.nombre &&
+            typeof est.edad === "number" &&
+            typeof est.nota === "number"
+          ) {
+            nuevoCurso.agregarEstudiante(
+              new Estudiante(est.nombre, est.edad, est.nota)
+            );
+          }
+        });
+        return nuevoCurso;
+      })
+      .filter(Boolean);
+  }
+  mostrarCursos();
+  actualizarCursosSelect();
+  document.getElementById("formulario-edicion-estudiante").style.display =
+    "none";
+});
+//--- Guardar en localStorage ---//
+function guardarDatos() {
+  localStorage.setItem("cursos", JSON.stringify(cursos));
+}
+//--- Función para calcular estadísticas ---//
+function calcularEstadisticas() {
+  let totalEstudiantes = 0;
+  let sumaNotas = 0;
+  let totalCursos = cursos.length;
+  let mejorCurso = null;
+  let mejorPromedio = 0;
+  cursos.forEach((curso) => {
+    const estudiantes = Array.isArray(curso.estudiantes)
+      ? curso.estudiantes
+      : [];
+    totalEstudiantes += estudiantes.length;
+    const promedioCurso = curso.obtenerPromedio?.();
+    if (promedioCurso && promedioCurso !== "N/A") {
+      const promedioNum = parseFloat(promedioCurso);
+      sumaNotas += estudiantes.reduce((total, estudiante) => {
+        return total + (estudiante.nota || 0);
+      }, 0);
+      if (promedioNum > mejorPromedio) {
+        mejorPromedio = promedioNum;
+        mejorCurso = curso.nombre || "Sin nombre";
+      }
+    }
+  });
+  const promedioGeneral =
+    totalEstudiantes > 0 ? (sumaNotas / totalEstudiantes).toFixed(2) : "N/A";
+  return { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso };
+}
+//--- Función para actualizar estadísticas en el DOM ---//
 function actualizarEstadisticas() {
+  const { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso } =
+    calcularEstadisticas();
+  const totalEstudiantesElem = document.getElementById("totalEstudiantes");
+  const promedioGeneralElem = document.getElementById("promedioGeneral");
+  const totalCursosElem = document.getElementById("totalCursos");
+  const mejorCursoElem = document.getElementById("mejorCurso");
+  if (totalEstudiantesElem) totalEstudiantesElem.textContent = totalEstudiantes;
+  if (promedioGeneralElem) promedioGeneralElem.textContent = promedioGeneral;
+  if (totalCursosElem) totalCursosElem.textContent = totalCursos;
+  if (mejorCursoElem) mejorCursoElem.textContent = mejorCurso || "N/A";
+}
+//--- Cargar y actualizar gráfica ---//
+let graficaEstudiantesInstance = null;
+function cargarGrafica() {
+  const graficaCanvas = document.getElementById("graficaEstudiantes");
   const { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso } =
     calcularEstadisticas();
   totalEstudiantesElem.textContent = totalEstudiantes;
@@ -448,94 +462,45 @@ function actualizarEstadisticas() {
   totalCursosElem.textContent = totalCursos;
   mejorCursoElem.textContent = mejorCurso || "N/A";
   const ctx = graficaCanvas.getContext("2d");
-  if (graficaEstudiantes) {
-    graficaEstudiantes.data.datasets[0].data = [
-      totalEstudiantes,
-      promedioGeneral,
-      totalCursos,
-    ];
-    graficaEstudiantes.update();
-  } else {
-    graficaEstudiantes = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: ["Total de Estudiantes", "Promedio General", "Total de Cursos"],
-        datasets: [
-          {
-            label: "Estadísticas",
-            data: [totalEstudiantes, promedioGeneral, totalCursos],
-            backgroundColor: ["#36a2eb", "#ff6384", "#ffce56"],
-            hoverOffset: 4,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: "top",
-          },
-          title: {
-            display: true,
-            text: "Estadísticas de Estudiantes",
-          },
+  if (graficaEstudiantesInstance) {
+    graficaEstudiantesInstance.destroy();
+  }
+  graficaEstudiantesInstance = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: ["Total de Estudiantes", "Promedio General", "Total de Cursos"],
+      datasets: [
+        {
+          label: "Estadísticas",
+          data: [totalEstudiantes, promedioGeneral, totalCursos],
+          backgroundColor: ["#36a2eb", "#ff6384", "#ffce56"],
+          hoverOffset: 4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Estadísticas de Estudiantes",
         },
       },
-    });
-  }
-
+      animation: {
+        duration: 2000,
+        easing: "easeOutQuart",
+      },
+    },
+  });
   graficaCanvas.style.display = "block";
 }
-//--- Mostrar estadísticas ---//
-let graficaEstudiantesInstance = null;
+//--- Mostrar estadísticas y gestionar IntersectionObserver ---//
 document.addEventListener("DOMContentLoaded", () => {
-  const graficaCanvas = document.getElementById("graficaEstudiantes");
   const contenedorGrafica = document.getElementById("contenedor-grafica");
-  const cargarGrafica = () => {
-    const { totalEstudiantes, promedioGeneral, totalCursos, mejorCurso } =
-      calcularEstadisticas();
-    totalEstudiantesElem.textContent = totalEstudiantes;
-    promedioGeneralElem.textContent = promedioGeneral;
-    totalCursosElem.textContent = totalCursos;
-    mejorCursoElem.textContent = mejorCurso || "N/A";
-    const ctx = graficaCanvas.getContext("2d");
-    if (graficaEstudiantesInstance) {
-      graficaEstudiantesInstance.destroy();
-    }
-    graficaEstudiantesInstance = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: ["Total de Estudiantes", "Promedio General", "Total de Cursos"],
-        datasets: [
-          {
-            label: "Estadísticas",
-            data: [totalEstudiantes, promedioGeneral, totalCursos],
-            backgroundColor: ["#36a2eb", "#ff6384", "#ffce56"],
-            hoverOffset: 4,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: "top",
-          },
-          title: {
-            display: true,
-            text: "Estadísticas de Estudiantes",
-          },
-        },
-        animation: {
-          duration: 2000,
-          easing: "easeOutQuart",
-        },
-      },
-    });
-    graficaCanvas.style.display = "block";
-  };
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -778,10 +743,6 @@ formEstudiante.addEventListener("submit", async (e) => {
       cursoActual.agregarEstudiante(nuevoEstudiante);
       formEstudiante.reset();
       mostrarCursos();
-      mostrarMensaje(
-        `¡Estudiante "${nuevoEstudiante.nombre}" agregado!`,
-        "success"
-      );
       guardarDatos();
       actualizarEstadisticas();
     } else {
