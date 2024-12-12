@@ -78,12 +78,12 @@ def agregar_estudiante():
             (est for est in curso.estudiantes if est.nombre.lower() == nombre.lower()), None
         )
         if estudiante_existente:
-            return jsonify({"mensaje": "El estudiante ya existe", "tipo": "error"}), 400
+            return jsonify({"mensaje": "¡El estudiante ya existe!", "tipo": "error"}), 400
         nuevo_estudiante = Estudiante(nombre=nombre, edad=edad, nota=nota)
         curso.estudiantes.append(nuevo_estudiante)
         db.session.commit()
         return jsonify({
-            "mensaje": "Estudiante agregado correctamente",
+            "mensaje": f"¡Estudiante {nombre} agregado!",
             "tipo": "success",
             "estudiante": nuevo_estudiante.to_dict()
         }), 201
@@ -91,7 +91,6 @@ def agregar_estudiante():
         db.session.rollback()
         print(f"Error al agregar estudiante: {e}")
         return jsonify({"mensaje": "Error interno del servidor", "tipo": "error"}), 500
-
 
 @routes.route('/api/estudiantes/<int:id>', methods=['DELETE'])
 def eliminar_estudiante(id):
