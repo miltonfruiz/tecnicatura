@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, render_template
 from app.models import db, Curso, Estudiante
 from sqlalchemy import func
+from sqlalchemy.orm import joinedload
 
 routes = Blueprint('routes', __name__)
 
@@ -45,13 +46,17 @@ def editar_curso(nombre):
 
 @routes.route('/api/cursos/<string:nombre>', methods=['DELETE'])
 def eliminar_curso(nombre):
-    curso_nombre = nombre.strip().lower()
-    curso = Curso.query.filter(func.lower(Curso.nombre) == curso_nombre).first()
-    if not curso:
-        return jsonify({"mensaje": "Curso no encontrado", "tipo": "error"}), 404
-    db.session.delete(curso)
-    db.session.commit()
-    return jsonify({"mensaje": f"Curso '{curso.nombre}' eliminado correctamente", "tipo": "success"}), 200
+    try:
+        curso_nombre = nombre.strip().lower()
+        curso = Curso.query.filter(func.lower(Curso.nombre) == curso_nombre).first()
+        if not curso:
+            return jsonify({"mensaje": "Curso no encontrado", "tipo": "error"}), 404
+        db.session.delete(curso)
+        db.session.commit()
+        return jsonify({"mensaje": f"Curso '{curso.nombre}' eliminado correctamente", "tipo": "success"}), 200
+    except Exception as e:
+        print(f"Error al eliminar curso: {e}")
+        return jsonify({"mensaje": "Error interno del servidor", "tipo": "error"}), 500
 
 #------------------------------ * Rutas para Estudiantes * --------------------------#
 @routes.route('/api/estudiantes', methods=['POST'])

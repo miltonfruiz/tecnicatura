@@ -6,7 +6,12 @@ class Curso(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
     profesor = db.Column(db.String(100), nullable=False)
-    estudiantes = db.relationship('Estudiante', backref='curso', lazy=True)
+    estudiantes = db.relationship(
+        'Estudiante',
+        backref='curso',
+        lazy=True,
+        cascade='all, delete-orphan'
+    )
     def __repr__(self):
         return f'<Curso {self.nombre}>'
     def obtener_promedio(self):
