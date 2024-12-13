@@ -99,12 +99,33 @@ def agregar_estudiante():
 
 @routes.route('/api/estudiantes/<int:id>', methods=['DELETE'])
 def eliminar_estudiante(id):
-    estudiante = Estudiante.query.get(id)
-    if not estudiante:
-        return jsonify({"mensaje": "Estudiante no encontrado", "tipo": "error"}), 404
-    db.session.delete(estudiante)
-    db.session.commit()
-    return jsonify({"mensaje": f"Estudiante {estudiante.nombre} eliminado correctamente", "tipo": "success"}), 200
+    try:
+        if not isinstance(id, int) or id <= 0:
+            return jsonify({"mensaje": "ID no válido", "tipo": "error"}), 400
+        estudiante = Estudiante.query.get(id)
+        if not estudiante:
+            print(f"Estudiante con ID {id} no encontrado en la base de datos.")
+            return jsonify({"mensaje": f"Estudiante con ID {id} no encontrado", "tipo": "error"}), 404
+        curso = estudiante.curso
+        if not curso:
+            print(f"El estudiante con ID {id} no tiene un curso asociado.")
+            return jsonify({"mensaje": "El curso del estudiante no fue encontrado", "tipo": "error"}), 400
+        db.session.delete(estudiante)
+        db.session.commit()
+        nuevo_promedio = curso.obtener_promedio()
+        return jsonify({
+            "mensaje": f"Estudiante '{estudiante.nombre}' eliminado correctamente",
+            "tipo": "success",
+            "nuevo_promedio": nuevo_promedio
+        }), 200
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error al eliminar estudiante con ID {id}: {e}")
+        return jsonify({
+            "mensaje": "Error al eliminar estudiante",
+            "tipo": "error",
+            "detalles": str(e)
+        }), 500
 
 @routes.route('/api/estudiantes/<int:id>', methods=['PUT'])
 def editar_estudiante(id):

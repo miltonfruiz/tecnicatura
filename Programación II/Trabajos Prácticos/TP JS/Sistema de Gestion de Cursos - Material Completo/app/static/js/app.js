@@ -341,16 +341,19 @@ function mostrarEstudiantes() {
     <tbody>
   `;
   cursoActual.estudiantes.forEach((estudiante, index) => {
+    if (!estudiante.id) {
+      estudiante.id = index + 1;
+    }
     const fila = document.createElement("tr");
     fila.innerHTML = `
       <td>${estudiante.nombre}</td>
       <td>${estudiante.edad}</td>
       <td>${estudiante.nota}</td>
       <td>
-        <button title="Boton Editar" class="btn btn-warning boton-editar-estudiante" id="boton-editar-estudiante" data-index="${index}">
+        <button title="Boton Editar" class="btn btn-warning boton-editar-estudiante" id="boton-editar-estudiante" data-id="${estudiante.id}">
           <i class="fa-regular fa-pen-to-square"></i> <span class="texto-editar-estudiante">Editar</span>
         </button>
-        <button title="Boton Eliminar" class="btn btn-danger" id="boton-eliminar-estudiante" data-index="${index}">
+        <button title="Boton Eliminar" class="btn btn-danger boton-eliminar-estudiante" id="boton-eliminar-estudiante" data-id="${estudiante.id}">
           <i class="fa-solid fa-trash"></i> <span class="texto-eliminar-estudiante">Eliminar</span>
         </button>
       </td>
@@ -755,28 +758,57 @@ formEstudiante.addEventListener("submit", async (e) => {
 });
 //--- Eliminar estudiante ---//
 listaEstudiantesEdicion.addEventListener("click", (e) => {
-  const botonEliminar = e.target.closest("#boton-eliminar-estudiante");
+  const botonEliminar = e.target.closest(".boton-eliminar-estudiante");
   if (botonEliminar) {
-    const index = botonEliminar.dataset.index;
-    const estudiante = cursoActual.estudiantes[index];
-    const estudianteId = estudiante.id;
-    fetch(`/api/estudiantes/${estudianteId}`, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.tipo === "success") {
-          mostrarMensaje(data.mensaje, "success");
-          mostrarEstudiantes();
-          guardarDatos();
-        } else {
-          mostrarMensaje(data.mensaje, "error");
-        }
+    const estudianteId = parseInt(botonEliminar.dataset.id, 10);
+    if (isNaN(estudianteId)) {
+      console.error("ID del estudiante no válido:", estudianteId);
+      return;
+    }
+    const estudiante = cursoActual.estudiantes.find(
+      (est) => est.id === estudianteId
+    );
+    if (!estudiante) {
+      console.error("Estudiante no encontrado.");
+      return;
+    }
+    const mensajeConfirmacion = document.getElementById("mensaje-confirmacion");
+    const modalConfirmacion = new bootstrap.Modal(
+      document.getElementById("modal-confirmacion")
+    );
+    mensajeConfirmacion.textContent = `¿Estás seguro de que deseas eliminar al estudiante "${estudiante.nombre}"?`;
+    modalConfirmacion.show();
+    const botonConfirmar = document.getElementById("btn-confirmar");
+    const botonCancelar = document.getElementById("btn-cancelar");
+    botonConfirmar.onclick = () => {
+      fetch(`/api/estudiantes/${estudianteId}`, {
+        method: "DELETE",
       })
-      .catch((error) => {
-        console.error("Error:", error);
-        mostrarMensaje("Error al eliminar estudiante", "error");
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Respuesta del servidor:", data);
+          if (data.tipo === "success") {
+            cursoActual.estudiantes = cursoActual.estudiantes.filter(
+              (est) => est.id !== estudianteId
+            );
+            mostrarEstudiantes();
+            guardarDatos();
+            mostrarMensaje(data.mensaje, "success");
+          } else {
+            mostrarMensaje(data.mensaje, "error");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al eliminar estudiante:", error);
+          mostrarMensaje("Error al eliminar el estudiante", "error");
+        })
+        .finally(() => {
+          modalConfirmacion.hide();
+        });
+    };
+    botonCancelar.onclick = () => {
+      modalConfirmacion.hide();
+    };
   }
 });
 //--- Filtrar estudiantes ---//
