@@ -114,7 +114,7 @@ def eliminar_estudiante(id):
         db.session.commit()
         nuevo_promedio = curso.obtener_promedio()
         return jsonify({
-            "mensaje": f"Estudiante '{estudiante.nombre}' eliminado correctamente",
+            "mensaje": f"¡Estudiante '{estudiante.nombre}' eliminado!",
             "tipo": "success",
             "nuevo_promedio": nuevo_promedio
         }), 200

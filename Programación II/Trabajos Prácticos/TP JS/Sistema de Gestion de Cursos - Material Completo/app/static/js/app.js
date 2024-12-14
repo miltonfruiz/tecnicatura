@@ -773,7 +773,9 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
     const modalConfirmacion = new bootstrap.Modal(
       document.getElementById("modal-confirmacion")
     );
-    mensajeConfirmacion.textContent = `¿Estás seguro de que deseas eliminar al estudiante "${estudiante.nombre}"?`;
+    mensajeConfirmacion.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 
+    ¿Estás seguro de que deseas eliminar al estudiante "${estudiante.nombre}"? 
+    <i class="fa-solid fa-triangle-exclamation"></i>`;
     modalConfirmacion.show();
     const botonConfirmar = document.getElementById("btn-confirmar");
     const botonCancelar = document.getElementById("btn-cancelar");
