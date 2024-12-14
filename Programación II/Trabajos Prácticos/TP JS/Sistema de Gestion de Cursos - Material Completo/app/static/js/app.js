@@ -576,6 +576,7 @@ guardarEdicion.addEventListener("click", async () => {
       const data = await response.json();
       editarCurso(cursoActual.nombre, nuevoNombre, nuevoProfesor);
       guardarDatos();
+      tablaModificada = true;
       mostrarCursos();
       actualizarCursosSelect();
       mostrarMensaje(`¡Curso "${cursoActual.nombre}" editado!`, "success");
@@ -738,12 +739,8 @@ formEstudiante.addEventListener("submit", async (e) => {
     const result = await response.json();
     if (response.ok && result.tipo === "success") {
       mostrarMensaje(result.mensaje, "success");
-      const nuevoEstudiante = new Estudiante(
-        nombreEstudianteValor,
-        edadEstudianteValor,
-        notaEstudianteValor
-      );
-      cursoActual.agregarEstudiante(nuevoEstudiante);
+      const nuevoEstudiante = result.estudiante;
+      cursoActual.estudiantes.push(nuevoEstudiante);
       formEstudiante.reset();
       mostrarCursos();
       guardarDatos();
@@ -786,7 +783,6 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Respuesta del servidor:", data);
           if (data.tipo === "success") {
             cursoActual.estudiantes = cursoActual.estudiantes.filter(
               (est) => est.id !== estudianteId
@@ -872,6 +868,7 @@ guardarEdicionEstudiante.addEventListener("click", () => {
           mostrarMensaje(data.mensaje, "success");
           mostrarEstudiantes();
           guardarDatos();
+          tablaModificada = true;
         } else {
           mostrarMensaje(data.mensaje, "error");
         }

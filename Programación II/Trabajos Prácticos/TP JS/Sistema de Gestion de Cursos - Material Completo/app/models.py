@@ -27,7 +27,7 @@ class Curso(db.Model):
         }
 
 class Estudiante(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nombre = db.Column(db.String(100), nullable=False)
     edad = db.Column(db.Integer, nullable=False)
     nota = db.Column(db.Float, nullable=False)
