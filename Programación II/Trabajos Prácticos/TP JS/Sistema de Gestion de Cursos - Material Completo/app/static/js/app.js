@@ -91,6 +91,8 @@ class Curso {
 
 let cursos = [];
 let cursoActual = null;
+let estudiantesEliminadosTemporalmente = [];
+let estudiantesOriginales = [];
 
 //-------------------------------- * Funciones especiales * --------------------------------//
 
@@ -312,6 +314,7 @@ function editarCurso(
   }
 }
 //--- Listar de Estudiantes a Editar / Eliminar ---//
+let estudianteTemporal = null;
 function mostrarEstudiantes() {
   const listaEstudiantesEdicion = document.getElementById(
     "lista-estudiantes-edicion"
@@ -364,13 +367,13 @@ function mostrarEstudiantes() {
   const botonesEditar = document.querySelectorAll(".boton-editar-estudiante");
   botonesEditar.forEach((boton) => {
     boton.addEventListener("click", function () {
-      const index = boton.getAttribute("data-index");
-      const estudiante = cursoActual.estudiantes[index];
+      const index = boton.getAttribute("data-id");
+      const estudiante = cursoActual.estudiantes.find((est) => est.id == index);
+      estudianteTemporal = { ...estudiante };
       document.getElementById("nombre-estudiante-editar").value =
         estudiante.nombre;
       document.getElementById("edad-estudiante-editar").value = estudiante.edad;
       document.getElementById("nota-estudiante-editar").value = estudiante.nota;
-      estudianteActualIndex = index;
       const modal = new bootstrap.Modal(
         document.getElementById("formulario-edicion-estudiante")
       );
@@ -549,7 +552,7 @@ formCurso.addEventListener("submit", async (e) => {
     console.error("Error:", error);
   }
 });
-// --- Guardar curso --- //
+//--- Guardar Curso ---//
 guardarEdicion.addEventListener("click", async () => {
   if (nuevoNombreCurso.value && nuevoNombreProfesor.value) {
     try {
@@ -574,6 +577,41 @@ guardarEdicion.addEventListener("click", async () => {
         return;
       }
       const data = await response.json();
+      if (estudianteAEliminar) {
+        try {
+          const deleteResponse = await fetch(
+            `/api/estudiantes/${estudianteAEliminar}`,
+            { method: "DELETE" }
+          );
+          const deleteData = await deleteResponse.json();
+          if (deleteResponse.ok) {
+            cursoActual.estudiantes = cursoActual.estudiantes.filter(
+              (est) => est.id !== estudianteAEliminar
+            );
+            mostrarEstudiantes();
+            mostrarMensaje(
+              deleteData.mensaje || "Estudiante eliminado.",
+              "success"
+            );
+          } else {
+            mostrarMensaje(
+              deleteData.mensaje || "Error al eliminar estudiante.",
+              "error"
+            );
+          }
+        } catch (error) {
+          console.error(
+            "Error al eliminar estudiante de la base de datos:",
+            error
+          );
+          mostrarMensaje(
+            "Error al eliminar estudiante de la base de datos.",
+            "error"
+          );
+        } finally {
+          estudianteAEliminar = null;
+        }
+      }
       editarCurso(cursoActual.nombre, nuevoNombre, nuevoProfesor);
       guardarDatos();
       tablaModificada = true;
@@ -657,10 +695,11 @@ listaCursos.addEventListener("click", (e) => {
     cursoActual = cursos.find(
       (curso) => curso.nombre === e.target.getAttribute("nombre")
     );
+    estudiantesOriginales = [...cursoActual.estudiantes];
     nuevoNombreCurso.value = cursoActual.nombre;
     nuevoNombreProfesor.value = cursoActual.profesor;
-    formularioEdicion.style.display = "block";
     mostrarEstudiantes();
+    formularioEdicion.style.display = "block";
   }
 });
 //-------------------------------- * Eventos para Estudiante * -----------------------------//
@@ -754,6 +793,7 @@ formEstudiante.addEventListener("submit", async (e) => {
   }
 });
 //--- Eliminar estudiante ---//
+let estudianteAEliminar = null;
 listaEstudiantesEdicion.addEventListener("click", (e) => {
   const botonEliminar = e.target.closest(".boton-eliminar-estudiante");
   if (botonEliminar) {
@@ -774,37 +814,26 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
       document.getElementById("modal-confirmacion")
     );
     mensajeConfirmacion.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 
-    ¿Estás seguro de que deseas eliminar al estudiante "${estudiante.nombre}"? 
+    ¿Estás seguro de que deseas eliminar al estudiante "<strong>${estudiante.nombre}</strong>"? 
     <i class="fa-solid fa-triangle-exclamation"></i>`;
     modalConfirmacion.show();
     const botonConfirmar = document.getElementById("btn-confirmar");
     const botonCancelar = document.getElementById("btn-cancelar");
     botonConfirmar.onclick = () => {
-      fetch(`/api/estudiantes/${estudianteId}`, {
-        method: "DELETE",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.tipo === "success") {
-            cursoActual.estudiantes = cursoActual.estudiantes.filter(
-              (est) => est.id !== estudianteId
-            );
-            mostrarEstudiantes();
-            guardarDatos();
-            mostrarMensaje(data.mensaje, "success");
-          } else {
-            mostrarMensaje(data.mensaje, "error");
-          }
-        })
-        .catch((error) => {
-          console.error("Error al eliminar estudiante:", error);
-          mostrarMensaje("Error al eliminar el estudiante", "error");
-        })
-        .finally(() => {
-          modalConfirmacion.hide();
-        });
+      estudianteAEliminar = estudianteId;
+      cursoActual.estudiantes = cursoActual.estudiantes.filter(
+        (est) => est.id !== estudianteId
+      );
+      mostrarEstudiantes();
+      mostrarMensaje(
+        `¡Estudiante "${estudiante.nombre}" eliminado!`,
+        "success"
+      );
+      modalConfirmacion.hide();
     };
+
     botonCancelar.onclick = () => {
+      estudianteAEliminar = null;
       modalConfirmacion.hide();
     };
   }
@@ -888,18 +917,27 @@ busquedaIngresada.addEventListener("input", () => {
   mostrarCursos(busquedaIngresada.value.toLowerCase());
 });
 //--- Cancelar edición curso---//
-cancelarEdicion.addEventListener("click", function () {
-  const modal = bootstrap.Modal.getInstance(
-    document.getElementById("formulario-edicion")
-  );
-  modal.hide();
+cancelarEdicion.addEventListener("click", () => {
+  if (confirm("¿Estás seguro de que quieres cancelar los cambios?")) {
+    cursoActual.estudiantes = [...estudiantesOriginales];
+    mostrarEstudiantes();
+    const modal = bootstrap.Modal.getInstance(
+      document.getElementById("formulario-edicion")
+    );
+    modal.hide();
+  }
 });
 //--- Cancelar edición estudiante---//
 cancelarEdicionEstudiante.addEventListener("click", () => {
+  estudianteTemporal = null;
   formEdicionEstudiante.style.display = "none";
   nombreEstudianteEditar.value = "";
   edadEstudianteEditar.value = "";
   notaEstudianteEditar.value = "";
+  const modal = bootstrap.Modal.getInstance(
+    document.getElementById("formulario-edicion-estudiante")
+  );
+  modal.hide();
 });
 //--- Desplazar a elemento ---//
 botonEmpezar.addEventListener("click", function (event) {
