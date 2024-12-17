@@ -552,7 +552,7 @@ formCurso.addEventListener("submit", async (e) => {
     console.error("Error:", error);
   }
 });
-// --- Guardar Curso --- //
+//--- Guardar Curso ---//
 guardarEdicion.addEventListener("click", async () => {
   if (nuevoNombreCurso.value && nuevoNombreProfesor.value) {
     try {
@@ -578,6 +578,7 @@ guardarEdicion.addEventListener("click", async () => {
         return;
       }
       const data = await response.json();
+
       if (estudianteAEliminar) {
         try {
           const deleteResponse = await fetch(
@@ -594,6 +595,7 @@ guardarEdicion.addEventListener("click", async () => {
               deleteData.mensaje || "Estudiante eliminado.",
               "success"
             );
+            estudiantesModificados = true;
           } else {
             mostrarMensaje(
               deleteData.mensaje || "Error al eliminar estudiante.",
@@ -613,9 +615,12 @@ guardarEdicion.addEventListener("click", async () => {
           estudianteAEliminar = null;
         }
       }
+
       editarCurso(cursoActual.nombre, nuevoNombre, nuevoProfesor);
       guardarDatos();
       tablaModificada = true;
+      camposModificados = false;
+      estudiantesModificados = false;
       mostrarCursos();
       actualizarCursosSelect();
       mostrarMensaje(`¡Curso "${cursoActual.nombre}" editado!`, "success");
@@ -691,19 +696,26 @@ listaCursos.addEventListener("click", async (e) => {
   }
 });
 //--- Editar curso ---//
+let camposModificados = false;
+let estudiantesModificados = false;
+let mensajeMostrado = false;
 listaCursos.addEventListener("click", (e) => {
   if (e.target.classList.contains("editar-curso")) {
-    const nombreCurso = e.target.getAttribute("nombre");
-    cursoActual = cursos.find((curso) => curso.nombre === nombreCurso);
-    estudiantesOriginales = JSON.parse(JSON.stringify(cursoActual.estudiantes)); // Copia profunda
+    cursoActual = cursos.find(
+      (curso) => curso.nombre === e.target.getAttribute("nombre")
+    );
+    estudiantesOriginales = JSON.parse(JSON.stringify(cursoActual.estudiantes));
     nuevoNombreCurso.value = cursoActual.nombre;
     nuevoNombreProfesor.value = cursoActual.profesor;
     mostrarEstudiantes();
+    tablaModificada = false;
+    camposModificados = false;
+    estudiantesModificados = false;
+    mensajeMostrado = false;
     const modal = new bootstrap.Modal(
       document.getElementById("formulario-edicion")
     );
     modal.show();
-    tablaModificada = false; // Reinicia el estado al abrir el modal
   }
 });
 //--- Control de cambios ---//
@@ -711,14 +723,39 @@ let cambiosEstudiantes = false;
 function marcarCambioEstudiantes() {
   cambiosEstudiantes = true;
 }
-//--- Descartar cambios ---//
+//--- Descartar cambios al cerrar el modal ---//
 formularioEdicion.addEventListener("hide.bs.modal", () => {
-  if (!tablaModificada) {
-    cursoActual.estudiantes = [...estudiantesOriginales];
+  if ((camposModificados || estudiantesModificados) && !tablaModificada) {
+    cursoActual.estudiantes = JSON.parse(JSON.stringify(estudiantesOriginales));
     mostrarEstudiantes();
-    mostrarMensaje("Los cambios fueron descartados.", "error");
+    if (!mensajeMostrado) {
+      mostrarMensaje("Los cambios fueron descartados.", "error");
+      mensajeMostrado = true;
+    }
   }
 });
+//--- Detectar cambios en los campos del curso ---//
+[nuevoNombreCurso, nuevoNombreProfesor].forEach((campo) => {
+  campo.addEventListener("input", () => {
+    camposModificados =
+      nuevoNombreCurso.value.trim() !== cursoActual.nombre.trim() ||
+      nuevoNombreProfesor.value.trim() !== cursoActual.profesor.trim();
+  });
+});
+//--- Detectar eliminación o edición de estudiantes ---//
+document
+  .getElementById("guardar-edicion-estudiante")
+  .addEventListener("click", () => {
+    estudiantesModificados = true;
+    mensajeMostrado = false;
+  });
+
+document
+  .getElementById("cancelar-edicion-estudiante")
+  .addEventListener("click", () => {
+    estudiantesModificados = true;
+    mensajeMostrado = false;
+  });
 //-------------------------------- * Eventos para Estudiante * -----------------------------//
 
 //--- Agregar estudiante ---//
@@ -841,6 +878,7 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
       cursoActual.estudiantes = cursoActual.estudiantes.filter(
         (est) => est.id !== estudianteId
       );
+      estudiantesModificados = true;
       mostrarEstudiantes();
       marcarCambioEstudiantes();
       mostrarMensaje(
@@ -849,7 +887,6 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
       );
       modalConfirmacion.hide();
     };
-
     botonCancelar.onclick = () => {
       estudianteAEliminar = null;
       modalConfirmacion.hide();
