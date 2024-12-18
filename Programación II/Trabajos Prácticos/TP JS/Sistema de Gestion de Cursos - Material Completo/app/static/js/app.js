@@ -968,51 +968,60 @@ guardarEdicionEstudiante.addEventListener("click", () => {
 busquedaIngresada.addEventListener("input", () => {
   mostrarCursos(busquedaIngresada.value.toLowerCase());
 });
-//--- Cancelar edición curso---//
+//--- Cancelar edición curso ---//
 cancelarEdicion.addEventListener("click", () => {
-  const mensajeConfirmacion = document.getElementById("mensaje-confirmacion");
-  const modalConfirmacion = new bootstrap.Modal(
-    document.getElementById("modal-confirmacion")
-  );
-  if (mensajeConfirmacion && modalConfirmacion) {
-    mensajeConfirmacion.innerHTML = `
-      <i class="fa-solid fa-triangle-exclamation"></i> 
-      ¿Estás seguro de que deseas cancelar?  
-      <i class="fa-solid fa-triangle-exclamation"></i>
-    `;
-    modalConfirmacion.show();
-    const botonConfirmar = document.getElementById("btn-confirmar");
-    const botonCancelar = document.getElementById("btn-cancelar");
-    if (botonConfirmar && botonCancelar) {
-      botonConfirmar.onclick = () => {
-        if (cursoActual && estudiantesOriginales) {
-          cursoActual.estudiantes = [...estudiantesOriginales];
-          mostrarEstudiantes();
-          const modalEdicion = bootstrap.Modal.getInstance(
-            document.getElementById("formulario-edicion")
-          );
-          if (modalEdicion) {
-            modalEdicion.hide();
+  if (camposModificados || estudiantesModificados) {
+    const mensajeConfirmacion = document.getElementById("mensaje-confirmacion");
+    const modalConfirmacion = new bootstrap.Modal(
+      document.getElementById("modal-confirmacion")
+    );
+    if (mensajeConfirmacion && modalConfirmacion) {
+      mensajeConfirmacion.innerHTML = `
+        <i class="fa-solid fa-triangle-exclamation"></i> 
+        ¿Estás seguro de que deseas cancelar los cambios?  
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      `;
+      modalConfirmacion.show();
+      const botonConfirmar = document.getElementById("btn-confirmar");
+      const botonCancelar = document.getElementById("btn-cancelar");
+      if (botonConfirmar && botonCancelar) {
+        botonConfirmar.onclick = () => {
+          if (cursoActual && estudiantesOriginales) {
+            cursoActual.estudiantes = [...estudiantesOriginales];
+            mostrarEstudiantes();
+            const modalEdicion = bootstrap.Modal.getInstance(
+              document.getElementById("formulario-edicion")
+            );
+            if (modalEdicion) {
+              modalEdicion.hide();
+            }
+          } else {
+            console.error(
+              "Faltan datos esenciales (cursoActual o estudiantesOriginales)."
+            );
           }
-        } else {
-          console.error(
-            "Faltan datos esenciales (cursoActual o estudiantesOriginales)."
-          );
-        }
-        modalConfirmacion.hide();
-      };
-      botonCancelar.onclick = () => {
-        modalConfirmacion.hide();
-      };
+          modalConfirmacion.hide();
+        };
+        botonCancelar.onclick = () => {
+          modalConfirmacion.hide();
+        };
+      } else {
+        console.error(
+          "Los botones de confirmación y/o cancelación no fueron encontrados."
+        );
+      }
     } else {
       console.error(
-        "Los botones de confirmación y/o cancelación no fueron encontrados."
+        "El modal o el mensaje de confirmación no fueron encontrados."
       );
     }
   } else {
-    console.error(
-      "El modal o el mensaje de confirmación no fueron encontrados."
+    const modalEdicion = bootstrap.Modal.getInstance(
+      document.getElementById("formulario-edicion")
     );
+    if (modalEdicion) {
+      modalEdicion.hide();
+    }
   }
 });
 //--- Cancelar edición estudiante---//
