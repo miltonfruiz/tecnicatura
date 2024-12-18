@@ -552,12 +552,15 @@ formCurso.addEventListener("submit", async (e) => {
     console.error("Error:", error);
   }
 });
-//--- Guardar Curso ---//
+//--- Guardar curso ---//
 guardarEdicion.addEventListener("click", async () => {
   if (nuevoNombreCurso.value && nuevoNombreProfesor.value) {
     try {
       const nuevoNombre = primeraMayuscula(nuevoNombreCurso.value.trim());
       const nuevoProfesor = primeraMayuscula(nuevoNombreProfesor.value.trim());
+      camposModificados =
+        nuevoNombre !== cursoActual.nombre ||
+        nuevoProfesor !== cursoActual.profesor;
       const response = await fetch(
         `http://localhost:5000/api/cursos/${encodeURIComponent(
           cursoActual.nombre
@@ -571,14 +574,12 @@ guardarEdicion.addEventListener("click", async () => {
           }),
         }
       );
-
       if (!response.ok) {
         const data = await response.json();
         mostrarMensaje(data.mensaje, data.tipo || "error");
         return;
       }
       const data = await response.json();
-
       if (estudianteAEliminar) {
         try {
           const deleteResponse = await fetch(
@@ -615,15 +616,16 @@ guardarEdicion.addEventListener("click", async () => {
           estudianteAEliminar = null;
         }
       }
-
       editarCurso(cursoActual.nombre, nuevoNombre, nuevoProfesor);
       guardarDatos();
-      tablaModificada = true;
+      if (camposModificados || estudiantesModificados) {
+        mostrarMensaje(`¡Curso "${nuevoNombre}" editado!`, "success");
+      }
+      tablaModificada = false;
       camposModificados = false;
       estudiantesModificados = false;
       mostrarCursos();
       actualizarCursosSelect();
-      mostrarMensaje(`¡Curso "${cursoActual.nombre}" editado!`, "success");
       const modal = bootstrap.Modal.getInstance(
         document.getElementById("formulario-edicion")
       );
