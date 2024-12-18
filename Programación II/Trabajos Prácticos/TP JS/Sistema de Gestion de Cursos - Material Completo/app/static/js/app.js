@@ -712,10 +712,6 @@ listaCursos.addEventListener("click", (e) => {
     camposModificados = false;
     estudiantesModificados = false;
     mensajeMostrado = false;
-    const modal = new bootstrap.Modal(
-      document.getElementById("formulario-edicion")
-    );
-    modal.show();
   }
 });
 //--- Control de cambios ---//
@@ -974,13 +970,49 @@ busquedaIngresada.addEventListener("input", () => {
 });
 //--- Cancelar edición curso---//
 cancelarEdicion.addEventListener("click", () => {
-  if (confirm("¿Estás seguro de que quieres cancelar los cambios?")) {
-    cursoActual.estudiantes = [...estudiantesOriginales];
-    mostrarEstudiantes();
-    const modal = bootstrap.Modal.getInstance(
-      document.getElementById("formulario-edicion")
+  const mensajeConfirmacion = document.getElementById("mensaje-confirmacion");
+  const modalConfirmacion = new bootstrap.Modal(
+    document.getElementById("modal-confirmacion")
+  );
+  if (mensajeConfirmacion && modalConfirmacion) {
+    mensajeConfirmacion.innerHTML = `
+      <i class="fa-solid fa-triangle-exclamation"></i> 
+      ¿Estás seguro de que deseas cancelar?  
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    `;
+    modalConfirmacion.show();
+    const botonConfirmar = document.getElementById("btn-confirmar");
+    const botonCancelar = document.getElementById("btn-cancelar");
+    if (botonConfirmar && botonCancelar) {
+      botonConfirmar.onclick = () => {
+        if (cursoActual && estudiantesOriginales) {
+          cursoActual.estudiantes = [...estudiantesOriginales];
+          mostrarEstudiantes();
+          const modalEdicion = bootstrap.Modal.getInstance(
+            document.getElementById("formulario-edicion")
+          );
+          if (modalEdicion) {
+            modalEdicion.hide();
+          }
+        } else {
+          console.error(
+            "Faltan datos esenciales (cursoActual o estudiantesOriginales)."
+          );
+        }
+        modalConfirmacion.hide();
+      };
+      botonCancelar.onclick = () => {
+        modalConfirmacion.hide();
+      };
+    } else {
+      console.error(
+        "Los botones de confirmación y/o cancelación no fueron encontrados."
+      );
+    }
+  } else {
+    console.error(
+      "El modal o el mensaje de confirmación no fueron encontrados."
     );
-    modal.hide();
   }
 });
 //--- Cancelar edición estudiante---//
