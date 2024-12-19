@@ -726,6 +726,10 @@ formularioEdicion.addEventListener("hide.bs.modal", () => {
   if ((camposModificados || estudiantesModificados) && !tablaModificada) {
     cursoActual.estudiantes = JSON.parse(JSON.stringify(estudiantesOriginales));
     mostrarEstudiantes();
+    camposModificados = false;
+    estudiantesModificados = false;
+    tablaModificada = false;
+    estudianteAEliminar = null;
     if (!mensajeMostrado) {
       mostrarMensaje("Los cambios fueron descartados.", "error");
       mensajeMostrado = true;
@@ -741,19 +745,14 @@ formularioEdicion.addEventListener("hide.bs.modal", () => {
   });
 });
 //--- Detectar eliminación o edición de estudiantes ---//
-document
-  .getElementById("guardar-edicion-estudiante")
-  .addEventListener("click", () => {
-    estudiantesModificados = true;
-    mensajeMostrado = false;
-  });
-
-document
-  .getElementById("cancelar-edicion-estudiante")
-  .addEventListener("click", () => {
-    estudiantesModificados = true;
-    mensajeMostrado = false;
-  });
+guardarEdicionEstudiante.addEventListener("click", () => {
+  estudiantesModificados = true;
+  mensajeMostrado = false;
+});
+cancelarEdicionEstudiante.addEventListener("click", () => {
+  estudiantesModificados = true;
+  mensajeMostrado = false;
+});
 //-------------------------------- * Eventos para Estudiante * -----------------------------//
 
 //--- Agregar estudiante ---//
@@ -989,8 +988,14 @@ cancelarEdicion.addEventListener("click", () => {
       if (botonConfirmar && botonCancelar) {
         botonConfirmar.onclick = () => {
           if (cursoActual && estudiantesOriginales) {
-            cursoActual.estudiantes = [...estudiantesOriginales];
+            cursoActual.estudiantes = JSON.parse(
+              JSON.stringify(estudiantesOriginales)
+            );
             mostrarEstudiantes();
+            camposModificados = false;
+            estudiantesModificados = false;
+            tablaModificada = false;
+            estudianteAEliminar = null;
             const modalEdicion = bootstrap.Modal.getInstance(
               document.getElementById("formulario-edicion")
             );
