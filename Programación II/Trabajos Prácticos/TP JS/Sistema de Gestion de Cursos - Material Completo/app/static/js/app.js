@@ -369,15 +369,18 @@ function mostrarEstudiantes() {
     boton.addEventListener("click", function () {
       const index = boton.getAttribute("data-id");
       const estudiante = cursoActual.estudiantes.find((est) => est.id == index);
+      if (!estudiante) {
+        mostrarMensaje(
+          "No se pudo encontrar al estudiante seleccionado.",
+          "error"
+        );
+        return;
+      }
       estudianteTemporal = { ...estudiante };
       document.getElementById("nombre-estudiante-editar").value =
         estudiante.nombre;
       document.getElementById("edad-estudiante-editar").value = estudiante.edad;
       document.getElementById("nota-estudiante-editar").value = estudiante.nota;
-      const modal = new bootstrap.Modal(
-        document.getElementById("formulario-edicion-estudiante")
-      );
-      modal.show();
     });
   });
 }
@@ -916,23 +919,57 @@ filtroEstudiantes.addEventListener("change", () => {
   mostrarCursos(busquedaIngresada.value.toLowerCase());
 });
 //--- Editar estudiante ---//
-let estudianteActualIndex = null;
 listaEstudiantesEdicion.addEventListener("click", (e) => {
-  if (e.target.id === "boton-editar-estudiante") {
-    estudianteActualIndex = e.target.dataset.index;
-    const estudiante = cursoActual.estudiantes[estudianteActualIndex];
-    nombreEstudianteEditar.value = estudiante.nombre;
-    edadEstudianteEditar.value = estudiante.edad;
-    notaEstudianteEditar.value = estudiante.nota;
-    formEdicionEstudiante.style.display = "flex";
+  if (e.target.closest("#boton-editar-estudiante")) {
+    const boton = e.target.closest("#boton-editar-estudiante");
+    const estudianteId = boton.getAttribute("data-id");
+    if (!cursoActual || !Array.isArray(cursoActual.estudiantes)) {
+      console.error("cursoActual o sus estudiantes no están definidos");
+      mostrarMensaje("Error: El curso actual no tiene estudiantes.", "error");
+      return;
+    }
+    const estudiante = cursoActual.estudiantes.find(
+      (est) => est.id == estudianteId
+    );
+    if (!estudiante) {
+      console.error("Estudiante no encontrado con el ID:", estudianteId);
+      mostrarMensaje("Error: Estudiante no encontrado.", "error");
+      return;
+    }
+    estudianteTemporal = { ...estudiante };
+    document.getElementById("nombre-estudiante-editar").value =
+      estudiante.nombre;
+    document.getElementById("edad-estudiante-editar").value = estudiante.edad;
+    document.getElementById("nota-estudiante-editar").value = estudiante.nota;
+    const modal = new bootstrap.Modal(
+      document.getElementById("formulario-edicion-estudiante")
+    );
+    modal.show();
   }
 });
-//--- Guardar cambios de estudiante ---//
+//--- Guardar estudiante ---//
 guardarEdicionEstudiante.addEventListener("click", () => {
-  if (estudianteActualIndex !== null) {
-    const nombreNuevo = nombreEstudianteEditar.value;
-    const edadNueva = parseInt(edadEstudianteEditar.value);
-    const notaNueva = parseFloat(notaEstudianteEditar.value);
+  if (estudianteTemporal) {
+    const estudianteId = estudianteTemporal.id;
+    const nombreNuevo = document
+      .getElementById("nombre-estudiante-editar")
+      .value.trim();
+    const edadNueva = parseInt(
+      document.getElementById("edad-estudiante-editar").value
+    );
+    const notaNueva = parseFloat(
+      document.getElementById("nota-estudiante-editar").value
+    );
+    if (
+      !nombreNuevo ||
+      isNaN(edadNueva) ||
+      isNaN(notaNueva) ||
+      notaNueva < 0 ||
+      notaNueva > 10
+    ) {
+      mostrarMensaje("Por favor ingresa valores válidos.", "error");
+      return;
+    }
     const data = {
       nombre: nombreNuevo,
       edad: edadNueva,
@@ -948,11 +985,18 @@ guardarEdicionEstudiante.addEventListener("click", () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.tipo === "success") {
-          mostrarMensaje(data.mensaje, "success");
+          const estudianteIndex = cursoActual.estudiantes.findIndex(
+            (est) => est.id === estudianteId
+          );
+          if (estudianteIndex !== -1) {
+            cursoActual.estudiantes[estudianteIndex] = {
+              ...cursoActual.estudiantes[estudianteIndex],
+              ...data.estudiante,
+            };
+          }
           mostrarEstudiantes();
-          guardarDatos();
+          mostrarMensaje(data.mensaje, "success");
           tablaModificada = true;
-          marcarCambioEstudiantes();
         } else {
           mostrarMensaje(data.mensaje, "error");
         }
@@ -961,6 +1005,10 @@ guardarEdicionEstudiante.addEventListener("click", () => {
         console.error("Error:", error);
         mostrarMensaje("Error al actualizar estudiante", "error");
       });
+    const modal = bootstrap.Modal.getInstance(
+      document.getElementById("formulario-edicion-estudiante")
+    );
+    if (modal) modal.hide();
   }
 });
 //---------------------------------- * Eventos Especiales * --------------------------------//
