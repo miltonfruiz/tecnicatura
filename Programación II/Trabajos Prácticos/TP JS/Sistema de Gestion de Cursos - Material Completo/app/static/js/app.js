@@ -376,6 +376,7 @@ function mostrarEstudiantes() {
         );
         return;
       }
+
       estudianteTemporal = { ...estudiante };
       document.getElementById("nombre-estudiante-editar").value =
         estudiante.nombre;
