@@ -741,15 +741,15 @@ formularioEdicion.addEventListener("hide.bs.modal", () => {
   }
 });
 formEdicionEstudiante.addEventListener("hide.bs.modal", () => {
-  if (estudianteTemporal) {
-    document.getElementById("nombre-estudiante-editar").value =
-      estudianteTemporal.nombre;
-    document.getElementById("edad-estudiante-editar").value =
-      estudianteTemporal.edad;
-    document.getElementById("nota-estudiante-editar").value =
-      estudianteTemporal.nota;
-    estudianteTemporal = null;
+  if (cambiosDetectados) {
+    if (estudianteTemporal) {
+      nombreEstudianteEditar.value = estudianteTemporal.nombre;
+      edadEstudianteEditar.value = estudianteTemporal.edad;
+      notaEstudianteEditar.value = estudianteTemporal.nota;
+    }
     mostrarMensaje("Los cambios fueron descartados.", "error");
+    cambiosDetectados = false;
+    estudianteTemporal = null;
   }
 });
 //--- Detectar cambios en los campos del curso ---//
@@ -768,6 +768,16 @@ guardarEdicionEstudiante.addEventListener("click", () => {
 cancelarEdicionEstudiante.addEventListener("click", () => {
   estudiantesModificados = true;
   mensajeMostrado = false;
+});
+// Detectar si se modificaron los campos de edición
+nombreEstudianteEditar.addEventListener("input", () => {
+  cambiosDetectados = true;
+});
+edadEstudianteEditar.addEventListener("input", () => {
+  cambiosDetectados = true;
+});
+notaEstudianteEditar.addEventListener("input", () => {
+  cambiosDetectados = true;
 });
 //-------------------------------- * Eventos para Estudiante * -----------------------------//
 
@@ -932,6 +942,7 @@ filtroEstudiantes.addEventListener("change", () => {
   mostrarCursos(busquedaIngresada.value.toLowerCase());
 });
 //--- Editar estudiante ---//
+let cambiosDetectados = false;
 listaEstudiantesEdicion.addEventListener("click", (e) => {
   if (e.target.closest("#boton-editar-estudiante")) {
     const boton = e.target.closest("#boton-editar-estudiante");
@@ -950,13 +961,11 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
       return;
     }
     estudianteTemporal = { ...estudiante };
-    document.getElementById("nombre-estudiante-editar").value =
-      estudiante.nombre;
-    document.getElementById("edad-estudiante-editar").value = estudiante.edad;
-    document.getElementById("nota-estudiante-editar").value = estudiante.nota;
-    const modal = new bootstrap.Modal(
-      document.getElementById("formulario-edicion-estudiante")
-    );
+    cambiosDetectados = false;
+    nombreEstudianteEditar.value = estudiante.nombre;
+    edadEstudianteEditar.value = estudiante.edad;
+    notaEstudianteEditar.value = estudiante.nota;
+    const modal = new bootstrap.Modal(formEdicionEstudiante);
     modal.show();
   }
 });
@@ -973,6 +982,7 @@ guardarEdicionEstudiante.addEventListener("click", () => {
     const notaNueva = parseFloat(
       document.getElementById("nota-estudiante-editar").value
     );
+
     if (
       !nombreNuevo ||
       isNaN(edadNueva) ||
@@ -983,11 +993,13 @@ guardarEdicionEstudiante.addEventListener("click", () => {
       mostrarMensaje("Por favor ingresa valores válidos.", "error");
       return;
     }
+
     const data = {
       nombre: nombreNuevo,
       edad: edadNueva,
       nota: notaNueva,
     };
+
     fetch(`/api/estudiantes/${estudianteId}`, {
       method: "PUT",
       headers: {
@@ -1019,6 +1031,8 @@ guardarEdicionEstudiante.addEventListener("click", () => {
         console.error("Error:", error);
         mostrarMensaje("Error al actualizar estudiante", "error");
       });
+
+    // Ocultar el modal después de guardar los cambios
     const modal = bootstrap.Modal.getInstance(
       document.getElementById("formulario-edicion-estudiante")
     );
