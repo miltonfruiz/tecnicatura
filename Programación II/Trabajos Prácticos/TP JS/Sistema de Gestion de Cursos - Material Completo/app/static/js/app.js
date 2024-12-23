@@ -740,6 +740,18 @@ formularioEdicion.addEventListener("hide.bs.modal", () => {
     }
   }
 });
+formEdicionEstudiante.addEventListener("hide.bs.modal", () => {
+  if (estudianteTemporal) {
+    document.getElementById("nombre-estudiante-editar").value =
+      estudianteTemporal.nombre;
+    document.getElementById("edad-estudiante-editar").value =
+      estudianteTemporal.edad;
+    document.getElementById("nota-estudiante-editar").value =
+      estudianteTemporal.nota;
+    estudianteTemporal = null;
+    mostrarMensaje("Los cambios fueron descartados.", "error");
+  }
+});
 //--- Detectar cambios en los campos del curso ---//
 [nuevoNombreCurso, nuevoNombreProfesor].forEach((campo) => {
   campo.addEventListener("input", () => {
@@ -998,6 +1010,7 @@ guardarEdicionEstudiante.addEventListener("click", () => {
           mostrarEstudiantes();
           mostrarMensaje(data.mensaje, "success");
           tablaModificada = true;
+          estudianteTemporal = null;
         } else {
           mostrarMensaje(data.mensaje, "error");
         }
