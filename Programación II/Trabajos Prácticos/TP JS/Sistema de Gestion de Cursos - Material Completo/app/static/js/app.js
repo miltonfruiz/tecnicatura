@@ -742,14 +742,14 @@ formularioEdicion.addEventListener("hide.bs.modal", () => {
 });
 formEdicionEstudiante.addEventListener("hide.bs.modal", () => {
   if (cambiosDetectados) {
+    mostrarMensaje("Los cambios se han descartado.", "error");
+    cambiosDetectados = false;
     if (estudianteTemporal) {
       nombreEstudianteEditar.value = estudianteTemporal.nombre;
       edadEstudianteEditar.value = estudianteTemporal.edad;
       notaEstudianteEditar.value = estudianteTemporal.nota;
     }
-    mostrarMensaje("Los cambios fueron descartados.", "error");
-    cambiosDetectados = false;
-    estudianteTemporal = null;
+    estudianteTemporal = null; // Limpiar la referencia temporal
   }
 });
 //--- Detectar cambios en los campos del curso ---//
@@ -769,7 +769,7 @@ cancelarEdicionEstudiante.addEventListener("click", () => {
   estudiantesModificados = true;
   mensajeMostrado = false;
 });
-// Detectar si se modificaron los campos de edición
+// --- Detectar cambios en los campos del formulario ---
 nombreEstudianteEditar.addEventListener("input", () => {
   cambiosDetectados = true;
 });
@@ -973,16 +973,9 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
 guardarEdicionEstudiante.addEventListener("click", () => {
   if (estudianteTemporal) {
     const estudianteId = estudianteTemporal.id;
-    const nombreNuevo = document
-      .getElementById("nombre-estudiante-editar")
-      .value.trim();
-    const edadNueva = parseInt(
-      document.getElementById("edad-estudiante-editar").value
-    );
-    const notaNueva = parseFloat(
-      document.getElementById("nota-estudiante-editar").value
-    );
-
+    const nombreNuevo = nombreEstudianteEditar.value.trim();
+    const edadNueva = parseInt(edadEstudianteEditar.value);
+    const notaNueva = parseFloat(notaEstudianteEditar.value);
     if (
       !nombreNuevo ||
       isNaN(edadNueva) ||
@@ -993,13 +986,11 @@ guardarEdicionEstudiante.addEventListener("click", () => {
       mostrarMensaje("Por favor ingresa valores válidos.", "error");
       return;
     }
-
     const data = {
       nombre: nombreNuevo,
       edad: edadNueva,
       nota: notaNueva,
     };
-
     fetch(`/api/estudiantes/${estudianteId}`, {
       method: "PUT",
       headers: {
@@ -1023,6 +1014,7 @@ guardarEdicionEstudiante.addEventListener("click", () => {
           mostrarMensaje(data.mensaje, "success");
           tablaModificada = true;
           estudianteTemporal = null;
+          cambiosDetectados = false;
         } else {
           mostrarMensaje(data.mensaje, "error");
         }
@@ -1031,8 +1023,7 @@ guardarEdicionEstudiante.addEventListener("click", () => {
         console.error("Error:", error);
         mostrarMensaje("Error al actualizar estudiante", "error");
       });
-
-    // Ocultar el modal después de guardar los cambios
+    cambiosDetectados = false;
     const modal = bootstrap.Modal.getInstance(
       document.getElementById("formulario-edicion-estudiante")
     );
