@@ -741,7 +741,7 @@ formularioEdicion.addEventListener("hide.bs.modal", () => {
   }
 });
 formEdicionEstudiante.addEventListener("hide.bs.modal", () => {
-  if (cambiosDetectados) {
+  if (cambiosDetectados && !mensajeMostrado) {
     mostrarMensaje("Los cambios se han descartado.", "error");
     cambiosDetectados = false;
     if (estudianteTemporal) {
@@ -749,8 +749,9 @@ formEdicionEstudiante.addEventListener("hide.bs.modal", () => {
       edadEstudianteEditar.value = estudianteTemporal.edad;
       notaEstudianteEditar.value = estudianteTemporal.nota;
     }
-    estudianteTemporal = null; // Limpiar la referencia temporal
+    estudianteTemporal = null;
   }
+  mensajeMostrado = false;
 });
 //--- Detectar cambios en los campos del curso ---//
 [nuevoNombreCurso, nuevoNombreProfesor].forEach((campo) => {
@@ -962,6 +963,7 @@ listaEstudiantesEdicion.addEventListener("click", (e) => {
     }
     estudianteTemporal = { ...estudiante };
     cambiosDetectados = false;
+    mensajeMostrado = false;
     nombreEstudianteEditar.value = estudiante.nombre;
     edadEstudianteEditar.value = estudiante.edad;
     notaEstudianteEditar.value = estudiante.nota;
@@ -1015,6 +1017,11 @@ guardarEdicionEstudiante.addEventListener("click", () => {
           tablaModificada = true;
           estudianteTemporal = null;
           cambiosDetectados = false;
+          const modal = bootstrap.Modal.getInstance(
+            document.getElementById("formulario-edicion-estudiante")
+          );
+          if (modal) modal.hide();
+          mensajeMostrado = true;
         } else {
           mostrarMensaje(data.mensaje, "error");
         }
@@ -1023,11 +1030,6 @@ guardarEdicionEstudiante.addEventListener("click", () => {
         console.error("Error:", error);
         mostrarMensaje("Error al actualizar estudiante", "error");
       });
-    cambiosDetectados = false;
-    const modal = bootstrap.Modal.getInstance(
-      document.getElementById("formulario-edicion-estudiante")
-    );
-    if (modal) modal.hide();
   }
 });
 //---------------------------------- * Eventos Especiales * --------------------------------//
