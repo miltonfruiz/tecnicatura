@@ -117,18 +117,21 @@ h2 {
 }
 .texto-h2 {
   font-size: 15px;
-  margin: 90px 0px 20px 0px;
+  margin: 10px 0px 10px 0px;
 }
 .texto-h2-edicion {
   font-size: 15px;
 }
 .texto-h2-estadisticas {
   font-size: 15px;
-  margin: 90px 0px 20px 0px;
+  margin: 10px 0px 30px 0px;
 }
 .texto-h2-informacion {
   font-weight: 600;
   font-size: 11px;
+}
+.gestion-txt {
+  margin-top: 130px;
 }
 form {
   margin-bottom: 30px;
@@ -175,7 +178,17 @@ select {
   border: 1px solid #23b37c;
   transition: 1s;
 }
+#form-curso {
+  margin-top: 90px;
+}
+#form-estudiante {
+  margin-top: 110px;
+}
+#lista-cursos {
+  margin-top: 20px;
+}
 #contenedor-estadisticas {
+  margin-top: 130px;
   margin-bottom: 130px;
 }
 #form-edicion {
@@ -321,9 +334,6 @@ select {
 #modal-footer {
   display: flex;
   justify-content: start;
-}
-#lista-cursos {
-  margin-top: 20px;
 }
 .curso {
   margin-bottom: 20px;
