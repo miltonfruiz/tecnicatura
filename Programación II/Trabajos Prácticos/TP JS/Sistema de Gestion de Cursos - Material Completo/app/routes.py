@@ -35,7 +35,8 @@ def agregar_curso():
 
 @routes.route('/api/cursos/<string:nombre>', methods=['PUT'])
 def editar_curso(nombre):
-    curso = Curso.query.filter_by(nombre=nombre).first()
+    curso_nombre = nombre.strip().lower()
+    curso = Curso.query.filter(func.lower(Curso.nombre) == curso_nombre).first()
     if not curso:
         return jsonify({"mensaje": "Curso no encontrado", "tipo": "error"}), 404
     datos_actualizados = request.json
@@ -43,6 +44,7 @@ def editar_curso(nombre):
     curso.profesor = datos_actualizados.get('profesor', curso.profesor).capitalize()
     db.session.commit()
     return jsonify({"mensaje": "Curso actualizado correctamente", "tipo": "success", "curso": curso.to_dict()}), 200
+
 
 @routes.route('/api/cursos/<string:nombre>', methods=['DELETE'])
 def eliminar_curso(nombre):
