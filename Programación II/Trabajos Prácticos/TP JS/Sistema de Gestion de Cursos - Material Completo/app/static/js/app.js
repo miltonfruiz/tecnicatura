@@ -283,20 +283,6 @@ function mostrarCursos(busqueda = "") {
     tabla.querySelector("tbody").appendChild(filaVacía);
   }
   listaCursos.appendChild(tabla);
-  if (tablaModificada) {
-    const ahora = new Date();
-    const fecha = ahora.toLocaleDateString("es-ES", { dateStyle: "short" });
-    const horas = ahora.getHours().toString().padStart(2, "0");
-    const minutos = ahora.getMinutes().toString().padStart(2, "0");
-    const horaFormateada = `${horas}:${minutos}`;
-    const fechaFormateada = `${fecha} ${horaFormateada}`;
-    localStorage.setItem("ultimaActualizacion", fechaFormateada);
-    const ultimaActualizacion = document.getElementById("ultima-actualizacion");
-    if (ultimaActualizacion) {
-      ultimaActualizacion.innerHTML = `<i class="fa-solid fa-calendar-days"></i> * Última actualización de datos: ${fechaFormateada}`;
-    }
-    tablaModificada = false;
-  }
 }
 //--- Editar Curso ---//
 function editarCurso(
@@ -619,6 +605,22 @@ guardarEdicion.addEventListener("click", async () => {
         } finally {
           estudianteAEliminar = null;
         }
+      }
+      if (tablaModificada) {
+        const ahora = new Date();
+        const fecha = ahora.toLocaleDateString("es-ES", { dateStyle: "short" });
+        const horas = ahora.getHours().toString().padStart(2, "0");
+        const minutos = ahora.getMinutes().toString().padStart(2, "0");
+        const horaFormateada = `${horas}:${minutos}`;
+        const fechaFormateada = `${fecha} ${horaFormateada}`;
+        localStorage.setItem("ultimaActualizacion", fechaFormateada);
+        const ultimaActualizacion = document.getElementById(
+          "ultima-actualizacion"
+        );
+        if (ultimaActualizacion) {
+          ultimaActualizacion.innerHTML = `<i class="fa-solid fa-calendar-days"></i> * Última actualización de datos: ${fechaFormateada}`;
+        }
+        tablaModificada = false;
       }
       editarCurso(cursoActual.nombre, nuevoNombre, nuevoProfesor);
       guardarDatos();
