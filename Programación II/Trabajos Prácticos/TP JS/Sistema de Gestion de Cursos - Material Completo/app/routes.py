@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, render_template
-from app.models import db, Curso, Estudiante
+from app.models import db, Curso, Estudiante, Valoracion
 from sqlalchemy import func
 from sqlalchemy.orm import joinedload
 
@@ -151,3 +151,18 @@ def obtener_cursos():
     cursos = Curso.query.all()
     cursos_data = [curso.to_dict() for curso in cursos]
     return jsonify(cursos_data)
+
+@routes.route('/api/valoraciones', methods=['POST'])
+def enviar_valoracion():
+    data = request.json
+    correo = data.get('correo')
+    comentario = data.get('comentario')
+    puntaje = data.get('valoracion')
+    if not (correo and comentario and puntaje):
+        return jsonify({"mensaje": "Todos los campos son obligatorios.", "tipo": "error"}), 400
+    if Valoracion.query.filter_by(correo=correo).first():
+        return jsonify({"mensaje": "Este correo ya envió una valoración.", "tipo": "error"}), 400
+    nueva_valoracion = Valoracion(correo=correo, comentario=comentario, puntaje=puntaje)
+    db.session.add(nueva_valoracion)
+    db.session.commit()
+    return jsonify({"mensaje": "¡Gracias por tu valoración!", "tipo": "success"}), 201
