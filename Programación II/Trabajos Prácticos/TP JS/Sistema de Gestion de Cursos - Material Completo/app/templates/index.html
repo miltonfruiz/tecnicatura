@@ -582,15 +582,16 @@
               data-bs-toggle="modal"
               data-bs-target="#modalValoracion"
             >
-              <i class="fa-solid fa-star"></i> Experiencia de usuario
+              <i class="fa-solid fa-star"></i> Experiencia usuario
             </button>
             <button
+              id="mostrar-comentarios"
               type="button"
-              class="btn btn-primary"
+              class="btn btn-success"
               data-bs-toggle="modal"
               data-bs-target="#modalComentarios"
             >
-              <i class="fa-solid fa-comments"></i> Comentarios
+              <i class="fa-solid fa-comments"></i> Comentarios agregados
             </button>
 
             <!-- Modal Bootstrap -->
@@ -711,11 +712,9 @@
                   </div>
                   <div class="modal-body">
                     <div id="promedio-container" class="mb-4 text-center">
-                      <!-- Aquí se mostrará el promedio con estrellas -->
                       <p class="text-muted text-center">Cargando promedio...</p>
                     </div>
                     <div id="comentarios-container">
-                      <!-- Aquí se cargarán los comentarios -->
                       <p class="text-muted text-center">
                         Cargando comentarios...
                       </p>

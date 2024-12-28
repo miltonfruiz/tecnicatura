@@ -920,13 +920,16 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+#mostrar-comentarios,
 #abrir-modal {
+  width: 55%;
   font-size: 11px;
   border-radius: 3px;
-  padding: 9px 17px;
+  padding: 9px 10px;
   transition: transform 1s ease;
   transition: 1s;
   border: 1px solid transparent;
+  margin-bottom: 10px;
 }
 #enviar-valoracion:hover,
 #abrir-modal:hover {
@@ -1157,6 +1160,7 @@ footer {
   border-radius: 3px;
   font-size: 11px;
 }
+.fa-comments,
 .fa-paper-plane,
 .fa-star {
   margin-right: 3px;
@@ -1182,4 +1186,10 @@ footer {
   text-align: start;
   width: 100%;
   color: black;
+}
+.footer-valoracion {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
