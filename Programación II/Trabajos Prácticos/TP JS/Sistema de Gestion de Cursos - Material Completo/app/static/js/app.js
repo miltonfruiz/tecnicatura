@@ -46,6 +46,7 @@ const totalCursosElem = document.getElementById("total-cursos");
 const mejorCursoElem = document.getElementById("mejor-curso");
 const botonEmpezar = document.getElementById("boton-empezar");
 const botonArriba = document.getElementById("boton-arriba");
+const valoracionForm = document.getElementById("valoracion-form");
 
 //------------------------------------ Clase Estudiante -----------------------------------//
 
@@ -1196,5 +1197,45 @@ botonArriba.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
+  });
+});
+//--- Valorar página ---//
+valoracionForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const correo = document.getElementById("correo").value;
+  const comentario = document.getElementById("comentario").value;
+  const valoracion = document.getElementById("valoracion").value;
+  try {
+    const response = await fetch("http://localhost:5000/api/valoraciones", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ correo, comentario, valoracion }),
+    });
+    const data = await response.json();
+    alert(data.mensaje);
+    if (response.ok) {
+      document.getElementById("valoracion-form").reset();
+    }
+  } catch (error) {
+    console.error("Error al enviar la valoración:", error);
+    alert(
+      "Hubo un error al enviar tu valoración. Por favor, inténtalo de nuevo."
+    );
+  }
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modal-valoracion");
+  const abrirModal = document.getElementById("abrir-modal");
+  const cerrarModal = document.getElementById("cerrar-modal");
+  abrirModal.addEventListener("click", () => {
+    modal.style.display = "block";
+  });
+  cerrarModal.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
   });
 });
