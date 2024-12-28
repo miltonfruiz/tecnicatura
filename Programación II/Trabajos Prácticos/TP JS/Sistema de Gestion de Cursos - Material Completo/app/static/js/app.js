@@ -1200,32 +1200,9 @@ botonArriba.addEventListener("click", () => {
   });
 });
 //--- Valorar página ---//
-valoracionForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const correo = document.getElementById("correo").value;
-  const comentario = document.getElementById("comentario").value;
-  const valoracion = document.getElementById("valoracion").value;
-  try {
-    const response = await fetch("http://localhost:5000/api/valoraciones", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ correo, comentario, valoracion }),
-    });
-    const data = await response.json();
-    alert(data.mensaje);
-    if (response.ok) {
-      document.getElementById("valoracion-form").reset();
-    }
-  } catch (error) {
-    console.error("Error al enviar la valoración:", error);
-    alert(
-      "Hubo un error al enviar tu valoración. Por favor, inténtalo de nuevo."
-    );
-  }
-});
 document.addEventListener("DOMContentLoaded", () => {
   const formulario = document.getElementById("valoracion-form");
-  formulario.addEventListener("submit", (event) => {
+  formulario.addEventListener("submit", async (event) => {
     event.preventDefault();
     const correo = document.getElementById("correo").value;
     const comentario = document.getElementById("comentario").value;
@@ -1234,13 +1211,31 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Por favor, completa todos los campos.");
       return;
     }
-    console.log("Correo:", correo);
-    console.log("Comentario:", comentario);
-    console.log("Valoración:", valoracion);
-    const modalEl = document.getElementById("modalValoracion");
-    const modalInstance = bootstrap.Modal.getInstance(modalEl);
-    modalInstance.hide();
-    alert("¡Gracias por tu valoración!");
-    formulario.reset();
+    try {
+      const response = await fetch("http://localhost:5000/api/valoraciones", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ correo, comentario, valoracion }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        mostrarMensaje("¡Gracias por tu valoración!", "success");
+        const modalEl = document.getElementById("modalValoracion");
+        const modalInstance = bootstrap.Modal.getInstance(modalEl);
+        modalInstance.hide();
+        formulario.reset();
+      } else {
+        mostrarMensaje(
+          data.mensaje || "El correo ya está registrado.",
+          "error"
+        );
+      }
+    } catch (error) {
+      console.error("Error al enviar la valoración:", error);
+      mostrarMensaje(
+        "Hubo un error al enviar tu valoración. Por favor, inténtalo de nuevo.",
+        "error"
+      );
+    }
   });
 });
