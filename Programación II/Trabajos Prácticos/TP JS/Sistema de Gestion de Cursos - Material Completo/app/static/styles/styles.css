@@ -1043,6 +1043,7 @@ footer {
   opacity: 0;
   transform: translateY(-15px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  margin-bottom: 25px;
 }
 #contenedor-grafica.visible {
   opacity: 1;
