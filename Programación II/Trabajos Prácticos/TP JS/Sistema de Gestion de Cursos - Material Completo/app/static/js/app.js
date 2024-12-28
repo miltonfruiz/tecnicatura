@@ -1239,3 +1239,75 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const comentariosContainer = document.getElementById("comentarios-container");
+  const promedioContainer = document.getElementById("promedio-container");
+
+  // Función para generar estrellas según el promedio
+  const generarEstrellasPromedio = (promedio) => {
+    let estrellasHTML = "";
+    for (let i = 1; i <= 5; i++) {
+      if (i <= promedio) {
+        estrellasHTML += `<i class="fa-solid fa-star text-warning"></i>`;
+      } else if (i - promedio < 1) {
+        estrellasHTML += `<i class="fa-solid fa-star-half-stroke text-warning"></i>`;
+      } else {
+        estrellasHTML += `<i class="fa-regular fa-star text-muted"></i>`;
+      }
+    }
+    return estrellasHTML;
+  };
+
+  // Función para obtener y mostrar comentarios
+  const cargarComentarios = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/valoraciones");
+      if (response.ok) {
+        const data = await response.json();
+        const { promedio, valoraciones } = data;
+
+        // Mostrar promedio
+        promedioContainer.innerHTML = `
+          <h6 class="text-center mb-4">
+            <i class="fa-solid fa-star"></i> Promedio de Valoraciones: ${promedio.toFixed(
+              1
+            )}
+          </h6>
+          <div class="text-center">${generarEstrellasPromedio(promedio)}</div>
+        `;
+
+        // Mostrar comentarios
+        comentariosContainer.innerHTML = "";
+        if (valoraciones.length > 0) {
+          valoraciones.forEach((valoracion) => {
+            const comentarioHTML = `
+              <div class="mb-3">
+                <h6>
+                  <i class="fa-solid fa-envelope"></i> ${valoracion.correo}
+                </h6>
+                <p>${valoracion.comentario}</p>
+                <div>${generarEstrellasPromedio(valoracion.puntaje)}</div>
+                <hr />
+              </div>
+            `;
+            comentariosContainer.innerHTML += comentarioHTML;
+          });
+        } else {
+          comentariosContainer.innerHTML = `<p class="text-muted text-center">No hay comentarios aún.</p>`;
+        }
+      } else {
+        promedioContainer.innerHTML = `<p class="text-danger text-center">Error al cargar promedio.</p>`;
+        comentariosContainer.innerHTML = `<p class="text-danger text-center">Error al cargar comentarios.</p>`;
+        console.error("Error al obtener datos:", response.statusText);
+      }
+    } catch (error) {
+      promedioContainer.innerHTML = `<p class="text-danger text-center">Error al cargar promedio.</p>`;
+      comentariosContainer.innerHTML = `<p class="text-danger text-center">Error al cargar comentarios.</p>`;
+      console.error("Error al obtener datos:", error);
+    }
+  };
+
+  // Cargar comentarios cuando se abra el modal
+  const modalComentarios = document.getElementById("modalComentarios");
+  modalComentarios.addEventListener("show.bs.modal", cargarComentarios);
+});
