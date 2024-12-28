@@ -920,6 +920,20 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+#abrir-modal {
+  font-size: 11px;
+  border-radius: 3px;
+  padding: 9px 17px;
+  transition: transform 1s ease;
+  transition: 1s;
+  border: 1px solid transparent;
+}
+#enviar-valoracion:hover,
+#abrir-modal:hover {
+  transition: 1s;
+  animation: pulsar 1s ease infinite;
+  border: 1px solid white;
+}
 /*-------------- Evento efecto aparicion Scroll ----------------*/
 
 .info-redes-cel,
@@ -943,6 +957,7 @@ footer {
   opacity: 1;
   transform: translateX(0);
 }
+#abrir-modal,
 #ultima-actualizacion,
 .texto-h2-informacion,
 .info-redes,
@@ -953,6 +968,7 @@ footer {
   transform: translateX(-24%);
   transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
+#abrir-modal.visible,
 #ultima-actualizacion.visible,
 .texto-h2-informacion.visible,
 .info-redes.visible,
@@ -1140,20 +1156,6 @@ footer {
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 11px;
-}
-#abrir-modal {
-  font-size: 11px;
-  border-radius: 3px;
-  padding: 9px 17px;
-  transition: transform 1s ease;
-  transition: 1s;
-  border: 1px solid transparent;
-}
-#enviar-valoracion:hover,
-#abrir-modal:hover {
-  transition: 1s;
-  animation: pulsar 1s ease infinite;
-  border: 1px solid white;
 }
 .fa-paper-plane,
 .fa-star {
