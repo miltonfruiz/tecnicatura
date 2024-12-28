@@ -87,6 +87,12 @@
         background-size: cover;
         background-position: center;
       }
+      #valoracion-container {
+        background: url("{{ url_for('static', filename='images/valoracion.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        border-radius: 3px;
+      }
     </style>
   </head>
   <body>
@@ -563,46 +569,109 @@
               <i class="fa-solid fa-phone"></i> Celular: 341-3245896
             </p>
           </div>
-          <!-- Sección para Valorar la Página -->
           <div class="footer-valoracion col">
-            <button id="abrir-modal" class="h3-valoracion btn btn-success">
-              <i class="fa-solid fa-star"></i> Valora esta página
+            <button
+              id="abrir-modal"
+              class="h3-valoracion btn btn-success"
+              data-bs-toggle="modal"
+              data-bs-target="#modalValoracion"
+            >
+              <i class="fa-solid fa-star"></i> Experiencia de usuario
             </button>
 
-            <!-- Modal -->
-            <div id="modal-valoracion" class="modal">
-              <div class="modal-content">
-                <span id="cerrar-modal" class="close">&times;</span>
-                <h3>Valora esta página</h3>
-                <form id="valoracion-form">
-                  <input
-                    type="email"
-                    id="correo"
-                    name="correo"
-                    placeholder="tuemail@ejemplo.com"
-                    required
-                  />
-                  <textarea
-                    id="comentario"
-                    name="comentario"
-                    rows="4"
-                    placeholder="Escribe tu comentario aquí..."
-                    required
-                  ></textarea>
-                  <select id="valoracion" name="valoracion" required>
-                    <option value="" disabled selected>
-                      Selecciona una puntuación
-                    </option>
-                    <option value="1">1 - Muy Mala</option>
-                    <option value="2">2 - Mala</option>
-                    <option value="3">3 - Regular</option>
-                    <option value="4">4 - Buena</option>
-                    <option value="5">5 - Excelente</option>
-                  </select>
-                  <button type="submit" class="btn btn-success">
-                    Enviar Valoración
-                  </button>
-                </form>
+            <!-- Modal Bootstrap -->
+            <div
+              class="modal fade"
+              id="modalValoracion"
+              tabindex="-1"
+              aria-labelledby="modalValoracionLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div id="valoracion-container" class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalValoracionLabel">
+                      <i class="fa-solid fa-star-half-stroke"></i> Valoración de
+                      página
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="valoracion-form">
+                      <div class="mb-3">
+                        <label
+                          id="correo-valoracion"
+                          for="correo"
+                          class="form-label"
+                          ><i class="fa-solid fa-envelope"></i> Correo
+                          electrónico</label
+                        >
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="correo"
+                          name="correo"
+                          placeholder="tuemail@ejemplo.com"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label
+                          id="comentario-valoracion"
+                          for="comentario"
+                          class="form-label"
+                          ><i class="fa-solid fa-comments"></i>
+                          Comentario</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="comentario"
+                          name="comentario"
+                          rows="4"
+                          placeholder="Escribe tu comentario aquí..."
+                          required
+                        ></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label
+                          id="puntuacion-valoracion"
+                          for="valoracion"
+                          class="form-label"
+                          ><i class="fa-solid fa-wand-magic-sparkles"></i>
+                          Puntuación</label
+                        >
+                        <select
+                          class="form-select"
+                          id="valoracion"
+                          name="valoracion"
+                          required
+                        >
+                          <option value="" disabled selected>
+                            Selecciona una puntuación
+                          </option>
+                          <option value="1">1 - Muy Mala</option>
+                          <option value="2">2 - Mala</option>
+                          <option value="3">3 - Regular</option>
+                          <option value="4">4 - Buena</option>
+                          <option value="5">5 - Excelente</option>
+                        </select>
+                      </div>
+                      <button
+                        id="enviar-valoracion"
+                        type="submit"
+                        class="btn btn-success w-100"
+                      >
+                        <i class="fa-solid fa-paper-plane"></i> Enviar
+                        Valoración
+                      </button>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

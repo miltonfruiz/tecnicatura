@@ -1224,18 +1224,23 @@ valoracionForm.addEventListener("submit", async (event) => {
   }
 });
 document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("modal-valoracion");
-  const abrirModal = document.getElementById("abrir-modal");
-  const cerrarModal = document.getElementById("cerrar-modal");
-  abrirModal.addEventListener("click", () => {
-    modal.style.display = "block";
-  });
-  cerrarModal.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-  window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      modal.style.display = "none";
+  const formulario = document.getElementById("valoracion-form");
+  formulario.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const correo = document.getElementById("correo").value;
+    const comentario = document.getElementById("comentario").value;
+    const valoracion = document.getElementById("valoracion").value;
+    if (!correo || !comentario || !valoracion) {
+      alert("Por favor, completa todos los campos.");
+      return;
     }
+    console.log("Correo:", correo);
+    console.log("Comentario:", comentario);
+    console.log("Valoración:", valoracion);
+    const modalEl = document.getElementById("modalValoracion");
+    const modalInstance = bootstrap.Modal.getInstance(modalEl);
+    modalInstance.hide();
+    alert("¡Gracias por tu valoración!");
+    formulario.reset();
   });
 });
