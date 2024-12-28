@@ -166,3 +166,17 @@ def enviar_valoracion():
     db.session.add(nueva_valoracion)
     db.session.commit()
     return jsonify({"mensaje": "¡Gracias por tu valoración!", "tipo": "success"}), 201
+
+@routes.route('/api/valoraciones', methods=['GET'])
+def obtener_valoraciones():
+    valoraciones = Valoracion.query.all()
+    total_puntajes = sum(v.puntaje for v in valoraciones)
+    cantidad = len(valoraciones)
+    promedio = total_puntajes / cantidad if cantidad > 0 else 0
+
+    # Convertir a JSON las valoraciones
+    valoraciones_json = [
+        {"correo": v.correo, "comentario": v.comentario, "puntaje": v.puntaje}
+        for v in valoraciones
+    ]
+    return jsonify({"promedio": promedio, "valoraciones": valoraciones_json}), 200
