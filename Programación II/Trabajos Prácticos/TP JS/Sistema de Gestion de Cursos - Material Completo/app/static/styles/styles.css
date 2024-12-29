@@ -233,6 +233,7 @@ select {
   transition: transform 1s ease;
   transition: 1s;
 }
+#cerrar-comentarios:hover,
 #cancelar-edicion-estudiante:hover,
 #guardar-edicion-estudiante:hover,
 #cancelar-edicion:hover,
@@ -306,6 +307,7 @@ select {
   display: flex;
   gap: 10px;
 }
+#cerrar-comentarios,
 #guardar-edicion,
 #cancelar-edicion {
   color: white;
@@ -317,6 +319,9 @@ select {
   border: 1px solid transparent;
   transition: transform 1s ease;
   transition: 1s;
+}
+#cerrar-comentarios {
+  width: 30%;
 }
 #guardar-edicion-estudiante,
 #cancelar-edicion-estudiante {
@@ -555,10 +560,12 @@ input:hover {
 .fa-phone,
 .fa-envelope,
 .fa-calendar-days,
-.fa-circle-info,
-.fa-x,
-.fa-skull-crossbones {
+.fa-circle-info {
   font-size: 12px;
+}
+.fa-skull-crossbones,
+.fa-x {
+  font-size: 10px;
 }
 #tabla-estadisticas {
   width: 100%;
