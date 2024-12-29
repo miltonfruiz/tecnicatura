@@ -174,7 +174,13 @@ def obtener_valoraciones():
     cantidad = len(valoraciones)
     promedio = total_puntajes / cantidad if cantidad > 0 else 0
     valoraciones_json = [
-        {"correo": v.correo, "comentario": v.comentario, "puntaje": v.puntaje}
+        {
+            "correo": v.correo,
+            "comentario": v.comentario,
+            "puntaje": v.puntaje,
+            "fecha": v.fecha.strftime("%Y-%m-%d %H:%M")
+        }
         for v in valoraciones
     ]
     return jsonify({"promedio": promedio, "valoraciones": valoraciones_json}), 200
+

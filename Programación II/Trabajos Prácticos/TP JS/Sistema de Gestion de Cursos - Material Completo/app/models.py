@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -43,9 +44,10 @@ class Estudiante(db.Model):
             'edad': self.edad,
             'nota': self.nota
         }
-    
+
 class Valoracion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     correo = db.Column(db.String(120), unique=True, nullable=False)
     comentario = db.Column(db.Text, nullable=False)
     puntaje = db.Column(db.Integer, nullable=False)
+    fecha = db.Column(db.DateTime, default=datetime.utcnow)

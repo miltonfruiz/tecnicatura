@@ -1263,12 +1263,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await response.json();
         const { promedio, valoraciones } = data;
         promedioContainer.innerHTML = `
-        <div id="container-h6-comentarios" class="col">
-          <h6 id="h6-comentarios"><i class="fa-solid fa-thumbs-up"></i> Promedio de Valoraciones: ${promedio.toFixed(
-            1
-          )}
-          </h6>
-        </div>
+          <div id="container-h6-comentarios" class="col">
+            <h6 id="h6-comentarios"><i class="fa-solid fa-thumbs-up"></i> Promedio de Valoraciones: ${promedio.toFixed(
+              1
+            )}
+            </h6>
+          </div>
           <div id="estrellas-promedio" class="col">${generarEstrellasPromedio(
             promedio
           )}
@@ -1287,6 +1287,17 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
                   <div class="col">
                     ${generarEstrellasPromedio(valoracion.puntaje)}
+                  </div>
+                  <div class="col">
+                    <p id="fecha-comentario">
+                    ${new Date(valoracion.fecha).toLocaleString("es-AR", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                    </p>
                   </div>
                 </div>
                 <p id="p-comentario">${valoracion.comentario}</p>

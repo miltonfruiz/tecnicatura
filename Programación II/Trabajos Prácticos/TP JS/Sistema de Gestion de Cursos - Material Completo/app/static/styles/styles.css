@@ -1195,15 +1195,20 @@ footer {
   width: 100%;
   color: black;
 }
+#fecha-comentario,
 #p-comentario,
 #h6-correo,
 #h6-comentarios {
   font-size: 11px;
 }
+#fecha-comentario,
 #h6-comentarios,
 #h6-correo {
   margin: 0px;
   padding: 0px;
+}
+#fecha-comentario {
+  color: black;
 }
 #estrellas-promedio,
 #h6-comentarios {
