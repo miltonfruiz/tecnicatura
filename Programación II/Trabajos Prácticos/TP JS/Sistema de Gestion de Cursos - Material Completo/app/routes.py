@@ -173,8 +173,6 @@ def obtener_valoraciones():
     total_puntajes = sum(v.puntaje for v in valoraciones)
     cantidad = len(valoraciones)
     promedio = total_puntajes / cantidad if cantidad > 0 else 0
-
-    # Convertir a JSON las valoraciones
     valoraciones_json = [
         {"correo": v.correo, "comentario": v.comentario, "puntaje": v.puntaje}
         for v in valoraciones

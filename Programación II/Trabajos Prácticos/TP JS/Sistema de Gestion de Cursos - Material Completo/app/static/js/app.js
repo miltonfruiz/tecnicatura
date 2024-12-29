@@ -1243,8 +1243,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const comentariosContainer = document.getElementById("comentarios-container");
   const promedioContainer = document.getElementById("promedio-container");
-
-  // Función para generar estrellas según el promedio
   const generarEstrellasPromedio = (promedio) => {
     let estrellasHTML = "";
     for (let i = 1; i <= 5; i++) {
@@ -1258,36 +1256,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return estrellasHTML;
   };
-
-  // Función para obtener y mostrar comentarios
   const cargarComentarios = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/valoraciones");
       if (response.ok) {
         const data = await response.json();
         const { promedio, valoraciones } = data;
-
-        // Mostrar promedio
         promedioContainer.innerHTML = `
-          <h6 class="text-center mb-4">
-            <i class="fa-solid fa-star"></i> Promedio de Valoraciones: ${promedio.toFixed(
-              1
-            )}
+        <div id="container-h6-comentarios" class="col">
+          <h6 id="h6-comentarios"><i class="fa-solid fa-thumbs-up"></i> Promedio de Valoraciones: ${promedio.toFixed(
+            1
+          )}
           </h6>
-          <div class="text-center">${generarEstrellasPromedio(promedio)}</div>
+        </div>
+          <div id="estrellas-promedio" class="col">${generarEstrellasPromedio(
+            promedio
+          )}
+          </div>
         `;
-
-        // Mostrar comentarios
         comentariosContainer.innerHTML = "";
         if (valoraciones.length > 0) {
           valoraciones.forEach((valoracion) => {
             const comentarioHTML = `
               <div class="mb-3">
-                <h6>
-                  <i class="fa-solid fa-envelope"></i> ${valoracion.correo}
-                </h6>
-                <p>${valoracion.comentario}</p>
-                <div>${generarEstrellasPromedio(valoracion.puntaje)}</div>
+                <div id="container-correo-estrellas">
+                  <div id="container-h6-correo" class="col">
+                    <h6 id="h6-correo">
+                      ${valoracion.correo}
+                    </h6>
+                  </div>
+                  <div class="col">
+                    ${generarEstrellasPromedio(valoracion.puntaje)}
+                  </div>
+                </div>
+                <p id="p-comentario">${valoracion.comentario}</p>
                 <hr />
               </div>
             `;
@@ -1307,8 +1309,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error al obtener datos:", error);
     }
   };
-
-  // Cargar comentarios cuando se abra el modal
   const modalComentarios = document.getElementById("modalComentarios");
   modalComentarios.addEventListener("show.bs.modal", cargarComentarios);
 });

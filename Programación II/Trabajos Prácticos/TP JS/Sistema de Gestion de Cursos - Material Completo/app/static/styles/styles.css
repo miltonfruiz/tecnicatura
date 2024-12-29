@@ -1163,6 +1163,7 @@ footer {
   border-radius: 3px;
   font-size: 11px;
 }
+.fa-star-half-stroke,
 .fa-comments,
 .fa-paper-plane,
 .fa-star {
@@ -1175,6 +1176,7 @@ footer {
   border-radius: 3px;
   padding: 9px 17px;
 }
+#modalComentariosLabel,
 #modalValoracionLabel {
   font-size: 15px;
   padding: 15px;
@@ -1183,6 +1185,9 @@ footer {
 #comentario {
   resize: none;
 }
+#p-comentario,
+#h6-correo,
+#h6-comentarios,
 #puntuacion-valoracion,
 #comentario-valoracion,
 #correo-valoracion {
@@ -1190,9 +1195,41 @@ footer {
   width: 100%;
   color: black;
 }
+#p-comentario,
+#h6-correo,
+#h6-comentarios {
+  font-size: 11px;
+}
+#h6-comentarios,
+#h6-correo {
+  margin: 0px;
+  padding: 0px;
+}
+#estrellas-promedio,
+#h6-comentarios {
+  font-size: 13px;
+}
+#h6-comentarios {
+  font-style: oblique;
+}
 .footer-valoracion {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+#promedio-container,
+#container-correo-estrellas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#container-h6-correo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#container-h6-comentarios {
+  display: flex;
+  justify-content: baseline;
 }
