@@ -1278,7 +1278,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (valoraciones.length > 0) {
           valoraciones.forEach((valoracion) => {
             const comentarioHTML = `
-              <div class="mb-3">
+              <div id="sub-comentarios-container">
                 <div id="container-correo-estrellas">
                   <div id="container-h6-correo" class="col">
                     <h6 id="h6-correo">
@@ -1301,7 +1301,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
                 </div>
                 <p id="p-comentario">${valoracion.comentario}</p>
-                <hr />
               </div>
             `;
             comentariosContainer.innerHTML += comentarioHTML;

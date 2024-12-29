@@ -1208,6 +1208,9 @@ footer {
 #h6-comentarios {
   font-size: 11px;
 }
+#p-comentario {
+  padding-bottom: 10px;
+}
 #fecha-comentario,
 #h6-comentarios,
 #h6-correo {
@@ -1244,4 +1247,11 @@ footer {
 #container-h6-comentarios {
   display: flex;
   justify-content: baseline;
+}
+#sub-comentarios-container {
+  padding-top: 5px;
+  padding-left: 10px;
+  margin: 10px 0px;
+  border-left: 3px solid black;
+  background-color: white;
 }
