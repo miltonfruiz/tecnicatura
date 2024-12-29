@@ -1141,6 +1141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#link-empezar"),
     document.querySelector("#ultima-actualizacion"),
     document.querySelector("#abrir-modal"),
+    document.querySelector("#mostrar-comentarios"),
     ...document.querySelectorAll(".boton-editar-curso"),
     ...document.querySelectorAll(".boton-eliminar-curso"),
     ...document.querySelectorAll(".h3-mis-redes"),

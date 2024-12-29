@@ -922,15 +922,16 @@ footer {
 }
 #mostrar-comentarios,
 #abrir-modal {
-  width: 55%;
+  width: 45%;
   font-size: 11px;
   border-radius: 3px;
-  padding: 9px 10px;
+  padding: 7px 10px;
   transition: transform 1s ease;
   transition: 1s;
   border: 1px solid transparent;
   margin-bottom: 10px;
 }
+#mostrar-comentarios:hover,
 #enviar-valoracion:hover,
 #abrir-modal:hover {
   transition: 1s;
@@ -939,6 +940,7 @@ footer {
 }
 /*-------------- Evento efecto aparicion Scroll ----------------*/
 
+#mostrar-comentarios,
 .info-redes-cel,
 .footer-subredes,
 .texto-contacto,
@@ -950,6 +952,7 @@ footer {
   transform: translateX(23%);
   transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
+#mostrar-comentarios.visible,
 .info-redes-cel.visible,
 .footer-subredes.visible,
 .texto-contacto.visible,
