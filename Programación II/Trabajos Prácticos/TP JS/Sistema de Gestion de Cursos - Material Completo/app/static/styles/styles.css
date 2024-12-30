@@ -182,7 +182,7 @@ select {
   margin-top: 90px;
 }
 #form-estudiante {
-  margin-top: 110px;
+  margin-top: 130px;
 }
 #lista-cursos {
   margin-top: 20px;
@@ -451,6 +451,8 @@ input:hover {
 #busqueda-ingresada {
   color: black;
   transition: all 1s ease;
+  padding: 0px;
+  margin: 0px;
 }
 #busqueda-ingresada:hover {
   background-color: white;
@@ -470,14 +472,19 @@ input:hover {
   width: 50%;
 }
 #busqueda-ingresada {
-  width: 100%;
+  width: 95%;
   border-radius: 24px;
   font-size: 11px;
   padding: 7px 30px;
 }
+#busqueda-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .fa-magnifying-glass {
   position: absolute;
-  left: 250px;
+  left: 25px;
   top: 50%;
   transform: translateY(-50%);
   color: #999;
@@ -877,7 +884,6 @@ label {
   }
   #busqueda-ingresada {
     width: 180px;
-    padding-left: 30px;
   }
   .fa-magnifying-glass {
     left: 80%;
@@ -929,7 +935,7 @@ label {
 @media (max-width: 1199px) {
   .fa-magnifying-glass {
     position: absolute;
-    left: 107px;
+    left: 27px;
     top: 48%;
   }
   .texto-exportar-json {
