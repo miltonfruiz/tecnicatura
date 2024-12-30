@@ -903,14 +903,46 @@ label {
     padding: 70px 0px 0px 0px;
   }
 }
+/*------------------------ Diseño Responsive 767px ------------------------*/
+@media (max-width: 767px) {
+  .fa-magnifying-glass {
+    position: absolute;
+    left: 100px;
+    top: 50%;
+  }
+}
+/*------------------------ Diseño Responsive 991px ------------------------*/
+@media (max-width: 991px) {
+  .fa-magnifying-glass {
+    position: absolute;
+    left: 157px;
+    top: 50%;
+  }
+  .texto-comentarios,
+  .texto-experiencia-usuario,
+  .texto-agregar-estudiante,
+  .texto-agregar-curso {
+    display: none;
+  }
+}
 /*------------------------ Diseño Responsive 1199px ------------------------*/
 @media (max-width: 1199px) {
   .fa-magnifying-glass {
     position: absolute;
-    left: 210px;
-    top: 50%;
+    left: 107px;
+    top: 48%;
+  }
+  .texto-exportar-json {
+    display: none;
+  }
+  #exportar-json {
+    width: 60%;
+  }
+  .info-redes {
+    width: 110%;
   }
 }
+
 /*----------------------- Extras --------------------------*/
 .container {
   width: 100%;
