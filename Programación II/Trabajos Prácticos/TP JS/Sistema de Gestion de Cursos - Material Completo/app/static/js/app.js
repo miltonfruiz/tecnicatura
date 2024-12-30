@@ -1200,6 +1200,13 @@ botonArriba.addEventListener("click", () => {
     behavior: "smooth",
   });
 });
+window.addEventListener("load", () => {
+  if (window.scrollY > 1500) {
+    botonArriba.style.display = "block";
+  } else {
+    botonArriba.style.display = "none";
+  }
+});
 //--- Valorar página ---//
 document.addEventListener("DOMContentLoaded", () => {
   const formulario = document.getElementById("valoracion-form");
