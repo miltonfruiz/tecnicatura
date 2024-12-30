@@ -1255,3 +1255,7 @@ footer {
   border-left: 3px solid black;
   background-color: white;
 }
+#por-el-momento {
+  font-size: 11px;
+  color: black;
+}

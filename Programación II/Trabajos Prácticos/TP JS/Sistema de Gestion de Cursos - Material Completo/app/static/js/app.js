@@ -1306,7 +1306,7 @@ document.addEventListener("DOMContentLoaded", () => {
             comentariosContainer.innerHTML += comentarioHTML;
           });
         } else {
-          comentariosContainer.innerHTML = `<p class="text-muted text-center">No hay comentarios aún.</p>`;
+          comentariosContainer.innerHTML = `<p id="por-el-momento" class="text-muted text-center">No se han ingresado comentarios...</p>`;
         }
       } else {
         promedioContainer.innerHTML = `<p class="text-danger text-center">Error al cargar promedio.</p>`;
