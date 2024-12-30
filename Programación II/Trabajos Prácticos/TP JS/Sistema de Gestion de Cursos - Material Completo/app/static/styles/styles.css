@@ -850,6 +850,12 @@ label {
   #link-empezar {
     padding: 10px 30px;
   }
+  .texto-mis-redes,
+  .texto-contacto-span,
+  .texto-celular,
+  .texto-email,
+  .texto-comentarios,
+  .texto-experiencia-usuario,
   .texto-eliminar-estudiante,
   .texto-editar-estudiante,
   .texto-cancelar-edicion-estudiante,
@@ -886,6 +892,23 @@ label {
   }
   #boton-eliminar-estudiante .fa-trash {
     margin-right: 100px;
+  }
+  .footer-subredes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .copyright {
+    padding: 70px 0px 0px 0px;
+  }
+}
+/*------------------------ Diseño Responsive 1199px ------------------------*/
+@media (max-width: 1199px) {
+  .fa-magnifying-glass {
+    position: absolute;
+    left: 210px;
+    top: 50%;
   }
 }
 /*----------------------- Extras --------------------------*/
