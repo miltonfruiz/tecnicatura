@@ -32,6 +32,5 @@ export default function App() {
   const x = numbersX5.map((element) => element / 2);
   const y = numbersX5.filter((element) => element % 2);
   const z = numbersX5.reduce((acumulator, element) => acumulator + element, 0);
-  console.log(z);
   return <></>;
 }
