@@ -32,5 +32,10 @@ export default function App() {
   const x = numbersX5.map((element) => element / 2);
   const y = numbersX5.filter((element) => element % 2);
   const z = numbersX5.reduce((acumulator, element) => acumulator + element, 0);
+
+  //1. Crear un nuevo arreglo con los números multiplicado por 2
+  const multipliedArray = numbersX5.map((e) => e * 2);
+  console.log(multipliedArray);
+
   return <></>;
 }
