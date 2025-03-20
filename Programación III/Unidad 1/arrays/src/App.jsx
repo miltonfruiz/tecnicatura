@@ -42,5 +42,9 @@ export default function App() {
   //3. Devolver los mayores a 15
   const filterArray = numbersX5.filter((e) => e > 15);
   console.log(filterArray);
+  //4. Devolver los impares
+  const oddArray = numbersX5.filter((e) => e % 2 != 0);
+  console.log(oddArray);
+
   return <></>;
 }
