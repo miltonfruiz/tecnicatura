@@ -36,6 +36,9 @@ export default function App() {
   //1. Crear un nuevo arreglo con los números multiplicado por 2
   const multipliedArray = numbersX5.map((e) => e * 2);
   console.log(multipliedArray);
+  //2. Nuevo arreglo que haga interpolación que el resultado sea "Numero : Num"
+  const interpolationArray = numbersX5.map((e) => `Numero: ${e}`);
+  console.log(interpolationArray);
 
   return <></>;
 }
