@@ -11,5 +11,20 @@ export default function App() {
     return [star, ...ArraySP, end];
   }
   console.log(newArray(1, numbers, 51));
+
+  //3. Modificar el usuario
+  // (opcion 1)
+  const user = { nombre: "Carlos", age: 25, city: "Madrid" };
+  const modifiedUser = {
+    ...user,
+    age: 30,
+    country: "España",
+  };
+  console.log(modifiedUser);
+  // (opcion2)
+  function userModifier(usertest, newAge, newCountry) {
+    return { ...usertest, age: newAge, country: newCountry };
+  }
+  console.log(userModifier(user, 30, "Argentina"));
   return <></>;
 }
