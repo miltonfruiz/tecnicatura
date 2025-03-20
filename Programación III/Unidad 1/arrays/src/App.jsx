@@ -26,5 +26,12 @@ export default function App() {
     return { ...usertest, age: newAge, country: newCountry };
   }
   console.log(userModifier(user, 30, "Argentina"));
+
+  //Metodos - Ejemplos
+  const numbersX5 = [5, 10, 15, 20, 25];
+  const x = numbersX5.map((element) => element / 2);
+  const y = numbersX5.filter((element) => element % 2);
+  const z = numbersX5.reduce((acumulator, element) => acumulator + element, 0);
+  console.log(z);
   return <></>;
 }
