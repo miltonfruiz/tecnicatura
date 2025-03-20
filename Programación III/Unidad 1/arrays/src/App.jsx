@@ -51,6 +51,8 @@ export default function App() {
     0
   );
   console.log(maxNumber);
-
+  //6. Devolver la suma de todos los números
+  const total = numbersX5.reduce((accum, e) => accum + e, 0);
+  console.log(total);
   return <></>;
 }
