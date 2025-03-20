@@ -39,6 +39,8 @@ export default function App() {
   //2. Nuevo arreglo que haga interpolación que el resultado sea "Numero : Num"
   const interpolationArray = numbersX5.map((e) => `Numero: ${e}`);
   console.log(interpolationArray);
-
+  //3. Devolver los mayores a 15
+  const filterArray = numbersX5.filter((e) => e > 15);
+  console.log(filterArray);
   return <></>;
 }
