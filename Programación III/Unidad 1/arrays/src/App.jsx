@@ -45,6 +45,12 @@ export default function App() {
   //4. Devolver los impares
   const oddArray = numbersX5.filter((e) => e % 2 != 0);
   console.log(oddArray);
+  //5. Devolver el mayor de todos los números
+  const maxNumber = numbersX5.reduce(
+    (maximum, e) => (e > maximum ? e : maximum),
+    0
+  );
+  console.log(maxNumber);
 
   return <></>;
 }
