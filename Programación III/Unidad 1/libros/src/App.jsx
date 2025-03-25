@@ -5,7 +5,9 @@ import "./App.css";
 function App() {
   return (
     <>
-      <Libro
+      {
+        //Manual
+        /*<Libro
         image={libro1}
         author="Saint E"
         title="El Principito"
@@ -18,7 +20,11 @@ function App() {
         title={LIBROS[0].titulo}
         pages={LIBROS[0].paginas}
         description={LIBROS[0].descripcion}
-      ></Libro>
+      ></Libro>*/
+      }
+      {LIBROS.map((element, index) => (
+        <Libro key={index} librito={element}></Libro>
+      ))}
     </>
   );
 }
