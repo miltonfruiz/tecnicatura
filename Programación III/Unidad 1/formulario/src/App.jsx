@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Form from "./components/Form";
+import Validations from "./components/Validations";
+import { useRef, useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const [errores, setErrores] = useState({});
+
+  const manejarEnvio = (FormData) => {
+    const errores = Validations({ datos: FormData });
+
+    if (Object.keys(errores).length > 0) {
+      if (errores.name && nameRef.current) {
+        nameRef.current.focus();
+      } else if (errores.email && emailRef.current) {
+        emailRef.current.focus();
+      } else if (errores.password && passwordRef.current) {
+        passwordRef.current.focus();
+      }
+
+      setErrores(errores);
+    } else {
+      alert("Formulario enviado con éxito");
+      setErrores({});
+    }
+  };
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Formuario</h1>
+        <Form
+          onSubmit={manejarEnvio}
+          errores={errores}
+          refs={{ nameRef, emailRef, passwordRef }}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
