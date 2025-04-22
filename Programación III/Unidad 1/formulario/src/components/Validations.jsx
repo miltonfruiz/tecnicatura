@@ -18,7 +18,9 @@ const Validations = ({ datos }) => {
   } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(datos.password)) {
     errores.password = "Mínimo 8 caracteres, incluyendo letras y números";
   }
-
+  if (datos.password !== datos.confirmPassword) {
+    errores.confirmPassword = "La contraseña no coincide";
+  }
   return errores;
 };
 

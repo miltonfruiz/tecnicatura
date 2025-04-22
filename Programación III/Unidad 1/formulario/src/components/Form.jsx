@@ -5,6 +5,7 @@ const Form = ({ onSubmit, errores, refs }) => {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e) => {
@@ -53,6 +54,19 @@ const Form = ({ onSubmit, errores, refs }) => {
           ref={refs.passwordRef}
         />
         {errores.password && <p style={{ color: "red" }}>{errores.password}</p>}
+      </div>
+      <div>
+        <label>Confirmar Contraseña:</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          ref={refs.confirmPasswordRef}
+        />
+        {errores.confirmPassword && (
+          <p style={{ color: "red" }}>{errores.confirmPassword}</p>
+        )}
       </div>
       <button type="submit">Enviar</button>
     </form>

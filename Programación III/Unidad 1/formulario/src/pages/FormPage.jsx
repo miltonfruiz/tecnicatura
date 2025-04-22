@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Form from "../components/Form";
 import Validations from "../components/Validations";
 import { useRef, useState } from "react";
@@ -6,11 +7,12 @@ function FormPage() {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
   const [errores, setErrores] = useState({});
+  const navigate = useNavigate();
 
   const manejarEnvio = (FormData) => {
     const errores = Validations({ datos: FormData });
-
     if (Object.keys(errores).length > 0) {
       if (errores.name && nameRef.current) {
         nameRef.current.focus();
@@ -18,12 +20,16 @@ function FormPage() {
         emailRef.current.focus();
       } else if (errores.password && passwordRef.current) {
         passwordRef.current.focus();
+      } else if (errores.confirmPassword && confirmPasswordRef.current) {
+        confirmPasswordRef.current.focus();
       }
-
       setErrores(errores);
     } else {
-      alert("Formulario enviado con éxito");
       setErrores({});
+      alert("Formulario enviado con éxito");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     }
   };
 
@@ -34,7 +40,7 @@ function FormPage() {
         <Form
           onSubmit={manejarEnvio}
           errores={errores}
-          refs={{ nameRef, emailRef, passwordRef }}
+          refs={{ nameRef, emailRef, passwordRef, confirmPasswordRef }}
         />
       </div>
     </>
