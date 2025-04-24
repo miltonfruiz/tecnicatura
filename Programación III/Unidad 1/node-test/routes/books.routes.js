@@ -2,8 +2,9 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("/books", (req, res) => {
-  res.send("Obteniendo libros");
+router.get("/books/:id", (req, res) => {
+  const { id } = req.params;
+  res.send(`Obteniendo libros con id ${id}`);
 });
 
 export default router;

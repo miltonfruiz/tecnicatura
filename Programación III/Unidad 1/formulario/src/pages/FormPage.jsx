@@ -3,7 +3,7 @@ import Form from "../components/Form";
 import Validations from "../components/Validations";
 import { useRef, useState } from "react";
 
-function FormPage() {
+function FormPage({ setIsLoggedIn }) {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -25,10 +25,11 @@ function FormPage() {
       }
       setErrores(errores);
     } else {
-      setErrores({});
       alert("Formulario enviado con éxito");
+      setErrores({});
+      setIsLoggedIn(true);
       setTimeout(() => {
-        navigate("/");
+        navigate("/perfil");
       }, 2000);
     }
   };
