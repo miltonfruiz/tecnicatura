@@ -1,10 +1,11 @@
 import { Router } from "express";
+import { Book } from "../src/models/Book";
 
 const router = Router();
 
-router.get("/books/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(`Obteniendo libros con id ${id}`);
+router.get("/books", async (req, res) => {
+  const books = await Book.findAll();
+  res.json(books);
 });
 router.post("/books/:id", (req, res) => {
   const { id } = req.params;
